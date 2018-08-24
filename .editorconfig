@@ -1,0 +1,22 @@
+[*]
+end_of_line = lf
+charset = utf-8
+insert_final_newline = true
+
+[*.{py,js,vue,html,css,svg,yml,yaml,rst}]
+trim_trailing_whitespace = true
+
+indent_style = space
+indent_size = 2
+
+[*.js]
+max_line_width = 80
+
+[*.py]
+max_line_width = 79
+indent_size = 4
+
+[Makefile,*.mak]
+indent_style = tab
+indent_size = tab
+
