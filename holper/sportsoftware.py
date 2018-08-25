@@ -59,7 +59,9 @@ def read(input_file):
     file_type = _detect_type(input_file)
     input_file.seek(0)
 
-    csv_reader = CSVReader()
+    event = model.Event()
+
+    csv_reader = CSVReader(event)
     if file_type == 'OE11':
         yield from csv_reader.read_solo_v11(input_file)
     elif file_type == 'OS11':
@@ -73,13 +75,16 @@ def write(output_file, entries):
     raise NotImplementedError
 
 class CSVReader:
-    def __init__(self):
+    def __init__(self, event):
+        self.event = event
         self.clubs = {}
         self.categories = {}
         self.courses = {}
 
     def read_solo_v11(self, input_file, with_seconds = False):
         """Read a SportSoftware OE2010 csv export file"""
+        self.event.form = model.EventForm.INDIVIDUAL
+
         with _wrap_binary_stream(input_file) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter = ';', doublequote = False)
             #skip header:
@@ -128,7 +133,7 @@ class CSVReader:
             # 56: Bahn Posten
 
             for (row_nr, row) in enumerate(csv_reader):
-                entry = model.Entry()
+                entry = model.Entry(event=self.event)
 
                 try:
                     entry.number = int(row[1])
@@ -178,12 +183,14 @@ class CSVReader:
 
     def read_relay_v11(self, input_file, with_seconds = False):
         """Read a SportSoftware OS2010 csv export file"""
+        self.event.form = model.EventForm.RELAY
+
         with _wrap_binary_stream(input_file) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter = ';', doublequote = False)
             #skip header:
             next(csv_reader)
             for (row_nr, row) in enumerate(csv_reader):
-                entry = model.Entry()
+                entry = model.Entry(event=self.event)
 
                 try:
                     entry.number = int(row[1])
@@ -229,12 +236,14 @@ class CSVReader:
 
     def read_team_v10(self, input_file):
         """Read a SportSoftware OT2003 csv export file"""
+        self.event.form = model.EventForm.TEAM
+
         with _wrap_binary_stream(input_file) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter = ';', doublequote = False)
             #skip header:
             next(csv_reader)
             for (row_nr, row) in enumerate(csv_reader):
-                entry = model.Entry()
+                entry = model.Entry(event=self.event)
 
                 try:
                     entry.number = int(row[1])
@@ -274,13 +283,14 @@ class CSVReader:
             self.clubs[club_id] = club
             return club
 
-    def read_category(self, category_id, name, short_name, team_size=1):
+    def read_category(self, category_id, short_name, name, team_size=1):
         category_id = int(category_id)
         team_size = int(team_size)
         try:
             return self.categories[category_id]
         except KeyError:
             category = model.EventCategory(
+                    event=self.event,
                     name=name,
                     short_name=short_name,
                     status=model.EventCategoryStatus.NORMAL,
