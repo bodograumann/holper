@@ -2,7 +2,7 @@ from unittest import TestCase
 
 import sqlalchemy
 
-from holper import iofxml2, iofxml3, sportsoftware, model
+from holper import iofxml2, iofxml3, sportsoftware, model, tools
 
 class TestModel(TestCase):
     session = None
@@ -10,26 +10,12 @@ class TestModel(TestCase):
     @classmethod
     def setUpClass(cls):
         engine = sqlalchemy.create_engine('sqlite:///:memory:', echo=False)
-
-        ### Fix pysqlite
-        # see http://docs.sqlalchemy.org/en/latest/dialects/sqlite.html#serializable-isolation-savepoints-transactional-ddl
-        @sqlalchemy.event.listens_for(engine, 'connect')
-        def do_connect(dbapi_connection, connection_record):
-            # disable pysqlite's emitting of the BEGIN statement entirely.
-            # also stops it from emitting COMMIT before any DDL.
-            dbapi_connection.isolation_level = None
-
-        @sqlalchemy.event.listens_for(engine, 'begin')
-        def do_begin(conn):
-            # emit our own BEGIN
-            conn.execute('BEGIN')
-        ###
+        tools.fix_sqlite_engine(engine)
+        model.Base.metadata.create_all(engine)
 
         Session = sqlalchemy.orm.sessionmaker(bind=engine)
         session = Session()
         cls.session = session
-
-        model.Base.metadata.create_all(engine)
 
     def setUp(self):
         self.session.begin_nested()
