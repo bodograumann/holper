@@ -406,8 +406,8 @@ ResultStatus = AutoEnum('ResultStatus', [
 # * Fee
 # * AssignedFee
 # * Amount
-# * PersonEntry → Competitor / Team
-# * TeamEntry → Team
+# * PersonEntry → Competitor / Entry
+# * TeamEntry → Entry
 # * TeamEntryPerson → Competitor
 # * StartTimeAllocationRequest
 # * ClassStart

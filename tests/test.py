@@ -143,3 +143,17 @@ class TestImport(TestCase):
             entries = list(generator)
             for entry in entries:
                 self.assertIsInstance(entry, model.Entry)
+
+    def test_sportsoftware_os_entries(self):
+        with open('tests/SportSoftware/OS_11.0_EntryList1.csv', 'rb') as f:
+            generator = sportsoftware.read(f)
+            entries = list(generator)
+            for entry in entries:
+                self.assertIsInstance(entry, model.Entry)
+
+    def test_sportsoftware_ot_entries(self):
+        with open('tests/SportSoftware/OT_10.2_EntryList.csv', 'rb') as f:
+            generator = sportsoftware.read(f)
+            entries = list(generator)
+            for entry in entries:
+                self.assertIsInstance(entry, model.Entry)
