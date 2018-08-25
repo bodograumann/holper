@@ -112,7 +112,7 @@ class TestImport(TestCase):
                         self.assertFalse(f.closed)
                         f.seek(0)
 
-    def test_iofxmlv3_person_entry_list(self):
+    def test_iofxml3_person_entry_list(self):
         with open('tests/IOFv3/EntryList1.xml', 'rb') as f:
             generator = iofxml3.read(f)
             event = next(generator)
@@ -125,7 +125,7 @@ class TestImport(TestCase):
             self.assertIs(entries[0].category_requests[0], entries[1].category_requests[0])
             self.assertEqual(entries[0].competitors[0].organisation.country.ioc_code, 'GBR')
 
-    def test_iofxmlv3_team_entry_list(self):
+    def test_iofxml3_team_entry_list(self):
         with open('tests/IOFv3/EntryList2.xml', 'rb') as f:
             generator = iofxml3.read(f)
             event = next(generator)
@@ -136,3 +136,10 @@ class TestImport(TestCase):
                 self.assertIsInstance(entry, model.Entry)
 
             self.assertEqual(len(entries[0].competitors), 5)
+
+    def test_sportsoftware_oe_entries(self):
+        with open('tests/SportSoftware/OE_11.0_EntryList1.csv', 'rb') as f:
+            generator = sportsoftware.read(f)
+            entries = list(generator)
+            for entry in entries:
+                self.assertIsInstance(entry, model.Entry)
