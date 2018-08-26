@@ -130,7 +130,10 @@ class Event(Base):
     start_time = Column(DateTime)
     end_time = Column(DateTime)
     form = Column(Enum(EventForm), default=EventForm.INDIVIDUAL, nullable=False)
+
+    races = relationship('Race', back_populates='event')
     categories = relationship('EventCategory', back_populates='event')
+    entries = relationship('Entry', back_populates='event')
 
 
 class EventXID(Base):
@@ -194,7 +197,7 @@ class Race(Base):
     """Smallest organisational unit to assign entries to"""
     race_id = Column(Integer, Sequence('race_id_seq'), primary_key=True)
     event_id = Column(Integer, ForeignKey(Event.event_id), nullable=False)
-    event = relationship(Event, backref='races')
+    event = relationship(Event, back_populates='races')
 
 
 RaceCategoryStatus = AutoEnum('RaceCategoryStatus', [
@@ -299,7 +302,7 @@ class Entry(Base):
     entry_id = Column(Integer, Sequence('entry_id_seq'), primary_key=True)
 
     event_id = Column(Integer, ForeignKey(Event.event_id), nullable=False)
-    event = relationship(Event, backref='entries')
+    event = relationship(Event, back_populates='entries')
 
     number = Column(Integer, nullable=True)
     name = Column(String(255))
