@@ -170,8 +170,8 @@ class EventCategory(Base):
     event_id = Column(Integer, ForeignKey(Event.event_id))
     event = relationship(Event, back_populates='categories')
     name = Column(String(32), nullable = False)
-    short_name = Column(String(6))
-    status = Column(Enum(EventCategoryStatus))
+    short_name = Column(String(8))
+    status = Column(Enum(EventCategoryStatus), default=EventCategoryStatus.NORMAL)
 
     legs = relationship('Leg', back_populates='event_category')
 
@@ -198,6 +198,10 @@ class Race(Base):
     race_id = Column(Integer, Sequence('race_id_seq'), primary_key=True)
     event_id = Column(Integer, ForeignKey(Event.event_id), nullable=False)
     event = relationship(Event, back_populates='races')
+
+    categories = relationship('Category', back_populates='race')
+    courses = relationship('Course', back_populates='race')
+
 
 
 RaceCategoryStatus = AutoEnum('RaceCategoryStatus', [
@@ -228,6 +232,9 @@ class Control(Base):
 
 class Course(Base):
     course_id = Column(Integer, Sequence('course_id_seq'), primary_key=True)
+    race_id = Column(Integer, ForeignKey(Race.race_id), nullable=False)
+    race = relationship(Race, back_populates='courses')
+
     name = Column(String(16))
     length = Column(Float, doc='Course length in kilometers')
     climb = Column(Float, doc='Course climb in meters')
@@ -253,6 +260,11 @@ class CourseControl(Base):
 class Category(Base):
     """Realize an EventCategory for one specific race of that event"""
     category_id = Column(Integer, Sequence('category_id_seq'), primary_key=True)
+    race_id = Column(Integer, ForeignKey(Race.race_id), nullable=False)
+    race = relationship(Race, back_populates='categories')
+
+    status = Column(Enum(RaceCategoryStatus), default=RaceCategoryStatus.START_TIMES_NOT_ALLOCATED)
+
     course_id = Column(Integer, ForeignKey(Course.course_id))
     course = relationship(Course)
 
