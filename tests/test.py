@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 import sqlalchemy
+import io
 
 from holper import iofxml2, iofxml3, sportsoftware, model, tools
 
@@ -143,3 +144,37 @@ class TestImport(TestCase):
             entries = list(generator)
             for entry in entries:
                 self.assertIsInstance(entry, model.Entry)
+
+
+class TestExport(TestCase):
+    def setUp(self):
+        self.buffer = io.BytesIO()
+
+    def tearDown(self):
+        del self.buffer
+
+    def test_sportsoftware_oe_entries(self):
+        event = model.Event(form=model.EventForm.INDIVIDUAL)
+
+        sportsoftware.write(self.buffer, event)
+
+        self.buffer.seek(0)
+        self.assertEqual(sportsoftware._detect_type(self.buffer), 'OE11')
+
+    def test_sportsoftware_os_entries(self):
+        event = model.Event(form=model.EventForm.RELAY)
+
+        sportsoftware.write(self.buffer, event)
+
+        self.buffer.seek(0)
+        self.assertEqual(sportsoftware._detect_type(self.buffer), 'OS11')
+
+
+    def test_sportsoftware_ot_entries(self):
+        event = model.Event(form=model.EventForm.TEAM)
+
+        sportsoftware.write(self.buffer, event)
+
+        self.buffer.seek(0)
+        self.assertEqual(sportsoftware._detect_type(self.buffer), 'OT10')
+
