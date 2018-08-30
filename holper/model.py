@@ -202,6 +202,9 @@ class Race(Base):
     categories = relationship('Category', back_populates='race')
     courses = relationship('Course', back_populates='race')
 
+    @property
+    def entries(self):
+        return self.event.entries
 
 
 RaceCategoryStatus = AutoEnum('RaceCategoryStatus', [
@@ -325,6 +328,11 @@ class Entry(Base):
 
     category_requests = relationship('EntryCategoryRequest', doc='Requested categories with preference')
 
+    @property
+    def races(self):
+        # TODO: Allow participation in only some of the events races.
+        return self.event.races
+
 
 class EntryXID(Base):
     pass
@@ -415,9 +423,9 @@ ResultStatus = AutoEnum('ResultStatus', [
 # * EventURL
 # * Schedule
 # * InformationItem
-# * Class → Category
+# * Class → EventCategory
 # * ClassType
-# * RaceClass
+# * RaceClass → Category
 # * Fee
 # * AssignedFee
 # * Amount

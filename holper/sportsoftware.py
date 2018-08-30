@@ -64,8 +64,9 @@ def read(input_file):
     input_file.seek(0)
 
     event = model.Event()
+    race = model.Race(event=event)
 
-    csv_reader = CSVReader(event)
+    csv_reader = CSVReader(race)
     if file_type == 'OE11':
         yield from csv_reader.read_solo_v11(input_file)
     elif file_type == 'OS11':
@@ -75,29 +76,29 @@ def read(input_file):
     else:
         raise NotImplementedError
 
-def write(output_file, event):
-    csv_writer = CSVWriter(event)
+def write(output_file, race):
+    csv_writer = CSVWriter(race)
 
-    if event.form is model.EventForm.INDIVIDUAL:
+    if race.event.form is model.EventForm.INDIVIDUAL:
         csv_writer.write_solo_v11(output_file)
-    elif event.form is model.EventForm.RELAY:
+    elif race.event.form is model.EventForm.RELAY:
         csv_writer.write_relay_v11(output_file)
-    elif event.form is model.EventForm.TEAM:
+    elif race.event.form is model.EventForm.TEAM:
         csv_writer.write_team_v10(output_file)
     else:
-        raise ValueError
+        raise ValueError('Unsupported event form')
 
 
 class CSVReader:
-    def __init__(self, event):
-        self.event = event
+    def __init__(self, race):
+        self.race = race
         self.clubs = {}
         self.categories = {}
         self.courses = {}
 
     def read_solo_v11(self, input_file, with_seconds = False):
         """Read a SportSoftware OE2010 csv export file"""
-        self.event.form = model.EventForm.INDIVIDUAL
+        self.race.event.form = model.EventForm.INDIVIDUAL
 
         with _wrap_binary_stream(input_file) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter = ';', doublequote = False)
@@ -147,7 +148,7 @@ class CSVReader:
             # 56: Bahn Posten
 
             for row in csv_reader:
-                entry = model.Entry(event=self.event)
+                entry = model.Entry(event=self.race.event)
 
                 try:
                     entry.number = int(row[1])
@@ -197,14 +198,14 @@ class CSVReader:
 
     def read_relay_v11(self, input_file, with_seconds = False):
         """Read a SportSoftware OS2010 csv export file"""
-        self.event.form = model.EventForm.RELAY
+        self.race.event.form = model.EventForm.RELAY
 
         with _wrap_binary_stream(input_file) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter = ';', doublequote = False)
             #skip header:
             next(csv_reader)
             for row in csv_reader:
-                entry = model.Entry(event=self.event)
+                entry = model.Entry(event=self.race.event)
 
                 try:
                     entry.number = int(row[1])
@@ -250,14 +251,14 @@ class CSVReader:
 
     def read_team_v10(self, input_file):
         """Read a SportSoftware OT2003 csv export file"""
-        self.event.form = model.EventForm.TEAM
+        self.race.event.form = model.EventForm.TEAM
 
         with _wrap_binary_stream(input_file) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter = ';', doublequote = False)
             #skip header:
             next(csv_reader)
             for row in csv_reader:
-                entry = model.Entry(event=self.event)
+                entry = model.Entry(event=self.race.event)
 
                 try:
                     entry.number = int(row[1])
@@ -304,7 +305,7 @@ class CSVReader:
             return self.categories[category_id]
         except KeyError:
             category = model.EventCategory(
-                    event=self.event,
+                    event=self.race.event,
                     name=name,
                     short_name=short_name,
                     status=model.EventCategoryStatus.NORMAL,
@@ -334,8 +335,8 @@ class CSVReader:
 
 
 class CSVWriter:
-    def __init__(self, event):
-        self.event = event
+    def __init__(self, race):
+        self.race = race
 
     def write_solo_v11(self, output_file):
         with _wrap_binary_stream(output_file) as csvfile:

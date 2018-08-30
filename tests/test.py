@@ -155,16 +155,18 @@ class TestExport(TestCase):
 
     def test_sportsoftware_oe_entries(self):
         event = model.Event(form=model.EventForm.INDIVIDUAL)
+        race = model.Race(event=event)
 
-        sportsoftware.write(self.buffer, event)
+        sportsoftware.write(self.buffer, race)
 
         self.buffer.seek(0)
         self.assertEqual(sportsoftware._detect_type(self.buffer), 'OE11')
 
     def test_sportsoftware_os_entries(self):
         event = model.Event(form=model.EventForm.RELAY)
+        race = model.Race(event=event)
 
-        sportsoftware.write(self.buffer, event)
+        sportsoftware.write(self.buffer, race)
 
         self.buffer.seek(0)
         self.assertEqual(sportsoftware._detect_type(self.buffer), 'OS11')
@@ -172,8 +174,9 @@ class TestExport(TestCase):
 
     def test_sportsoftware_ot_entries(self):
         event = model.Event(form=model.EventForm.TEAM)
+        race = model.Race(event=event)
 
-        sportsoftware.write(self.buffer, event)
+        sportsoftware.write(self.buffer, race)
 
         self.buffer.seek(0)
         self.assertEqual(sportsoftware._detect_type(self.buffer), 'OT10')
