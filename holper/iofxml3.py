@@ -13,6 +13,7 @@ object model for the XML, which can be handled quite efficiently.
 
 from collections import defaultdict
 import datetime
+from pkg_resources import resource_stream
 
 import iso8601
 from lxml import etree
@@ -20,7 +21,7 @@ from lxml import etree
 from . import model
 from .tools import camelcase_to_snakecase
 
-_schema = etree.XMLSchema(etree.parse('IOF/IOF_3.0.xsd'))
+_schema = etree.XMLSchema(etree.parse(resource_stream('holper.resources.IOF', 'IOF_3.0.xsd')))
 _ns = 'http://www.orienteering.org/datastandard/3.0'
 
 

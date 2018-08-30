@@ -16,12 +16,13 @@ This will regarded as type *idManager / type*.
 
 from contextlib import contextmanager
 from collections import defaultdict
+from pkg_resources import resource_stream
 
 from lxml import etree
 
 from . import model
 
-_data_dtd = etree.DTD('IOF/IOFdata_2.0.3.dtd')
+_data_dtd = etree.DTD(resource_stream('holper.resources.IOF', 'IOFdata_2.0.3.dtd'))
 
 _top_level_elements = ('PersonList', 'CompetitorList', 'RankList', 'ClubList', 'EventList', 'ServiceRequestList', 'EntryList', 'StartList', 'ResultList', 'ClassData', 'CourseData')
 

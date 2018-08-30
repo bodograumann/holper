@@ -31,4 +31,4 @@ Toolkit
 - sphinx, for documentation generation
     see `<http://www.sphinx-doc.org>`_
 - sqlalchemy-migrate
-- pytest
+- setuptools
