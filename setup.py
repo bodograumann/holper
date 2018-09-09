@@ -2,8 +2,10 @@ from setuptools import setup, find_packages
 
 setup(
         name='hOLper',
-        version='0.0',
-        packages=['holper'],
+        version='0.0.1',
+        packages=find_packages(exclude=['tests']),
+        include_package_data=True,
+        use_scm_version=True,
 
         python_requires='>=3.4',
         install_requires=[
@@ -19,6 +21,10 @@ setup(
         extras_require={
             'postgres': 'psycopg'
         },
+
+        setup_requires=[
+            'setuptools_scm'
+        ],
 
         test_suite='tests',
 
