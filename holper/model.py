@@ -48,7 +48,7 @@ from sqlalchemy import Table, Column, Sequence, \
         ForeignKey, UniqueConstraint, \
         String, SmallInteger, Integer, Boolean, Float, Date, DateTime, Interval, Enum, \
         TIMESTAMP
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative \
         import declared_attr, declarative_base, DeclarativeMeta
 
@@ -280,6 +280,11 @@ class CourseControl(Base):
     score = Column(Float)
     order = Column(Integer, doc='If a course control has a higher `order` than another, \
             it has to be punched after it.')
+    after_course_control_id = Column(Integer, ForeignKey('CourseControl.course_control_id'))
+    after = relationship('CourseControl', back_populates='before', uselist=False,
+            doc='Control must be punched after this other control.')
+    before = relationship('CourseControl', remote_side='CourseControl.course_control_id',
+            back_populates='after', uselist=False, doc='Control must be punched before this other control.')
 
 
 class Category(Base):
