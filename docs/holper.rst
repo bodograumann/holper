@@ -40,6 +40,15 @@ holper.iofxml3 module
     :show-inheritance:
 
 
+holper.startlist module
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: holper.startlist
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
 holper.tools module
 ~~~~~~~~~~~~~~~~~~~
 

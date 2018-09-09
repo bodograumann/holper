@@ -31,17 +31,21 @@ __all__ = [
         'OrganisationXID',
         'Entry',
         'EntryCategoryRequest',
+        'StartTimeAllocationRequest',
         'StartTimeAllocationRequestType',
         'PunchingSystem',
         'ControlCard',
         'Competitor',
+        'Start',
+        'CompetitorStart',
         'ResultStatus'
         ]
 
 import enum
 
 from sqlalchemy import Table, Column, Sequence, ForeignKey, \
-        String, SmallInteger, Integer, Date, DateTime, Enum, Float
+        String, SmallInteger, Integer, Boolean, Float, Date, DateTime, Interval, Enum, \
+        TIMESTAMP
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative \
         import declared_attr, declarative_base, DeclarativeMeta
@@ -199,6 +203,8 @@ class Race(Base):
     event_id = Column(Integer, ForeignKey(Event.event_id), nullable=False)
     event = relationship(Event, back_populates='races')
 
+    first_start = Column(TIMESTAMP(timezone=True))
+
     categories = relationship('Category', back_populates='race')
     courses = relationship('Course', back_populates='race')
 
@@ -266,11 +272,21 @@ class Category(Base):
     race_id = Column(Integer, ForeignKey(Race.race_id), nullable=False)
     race = relationship(Race, back_populates='categories')
 
+    event_category_id = Column(Integer, ForeignKey(EventCategory.event_category_id), nullable=False)
+    event_category = relationship(EventCategory)
+
     status = Column(Enum(RaceCategoryStatus), default=RaceCategoryStatus.START_TIMES_NOT_ALLOCATED)
 
     course_id = Column(Integer, ForeignKey(Course.course_id))
     course = relationship(Course)
 
+    time_offset = Column(Interval, doc='Start time offset from race start time')
+    starts = relationship('Start', back_populates='category')
+    vacancies_before = Column(SmallInteger, default=0, nullable=False)
+    vacancies_after = Column(SmallInteger, default=0, nullable=False)
+
+
+### Entries ###
 
 class Person(Base):
     person_id = Column(Integer, Sequence('person_id_seq'), primary_key=True)
@@ -327,6 +343,8 @@ class Entry(Base):
     organisation = relationship(Organisation)
 
     category_requests = relationship('EntryCategoryRequest', doc='Requested categories with preference')
+    start_time_allocation_requests = relationship('StartTimeAllocationRequest')
+    starts = relationship('Start', back_populates='entry')
 
     @property
     def races(self):
@@ -345,6 +363,18 @@ class EntryCategoryRequest(Base):
                         doc='Lower number means higher preference')
     category_id = Column(Integer, ForeignKey(EventCategory.event_category_id), nullable=False)
     category = relationship(EventCategory)
+
+
+class StartTimeAllocationRequest(Base):
+    start_time_allocation_request_id = Column(Integer, Sequence('start_time_allocation_request_id_seq'), primary_key=True)
+    entry_id = Column(Integer, ForeignKey(Entry.entry_id), nullable=False)
+    entry = relationship(Entry, back_populates='start_time_allocation_requests')
+
+    type = Column(Enum('StartTimeAllocationRequestType'), default='StartTimeAllocationRequestType.NORMAL')
+    organisation_id = Column(Integer, ForeignKey(Organisation.organisation_id))
+    organisation = relationship(Organisation)
+    person_id = Column(Integer, ForeignKey(Person.person_id))
+    person = relationship(Person)
 
 
 StartTimeAllocationRequestType = AutoEnum('StartTimeAllocationRequestType', [
@@ -385,14 +415,47 @@ class Competitor(Base):
 
     control_cards = relationship('ControlCard',
             secondary=Table('CompetitorControlCards', Base.metadata,
-                Column('competitor_id', Integer, ForeignKey('Competitor.competitor_id')),
-                Column('control_card_id', Integer, ForeignKey(ControlCard.control_card_id))
+                Column('competitor_id', Integer, ForeignKey('Competitor.competitor_id'), nullable=False),
+                Column('control_card_id', Integer, ForeignKey(ControlCard.control_card_id), nullable=False)
                 ))
+
+    starts = relationship('CompetitorStart', back_populates='competitor')
 
 
 class CompetitorXID(Base):
     pass
 
+
+### Starts ###
+
+class Start(Base):
+    start_id = Column(Integer, Sequence('start_id_seq'), primary_key=True)
+
+    category_id = Column(Integer, ForeignKey(Category.category_id), nullable=False)
+    category = relationship(Category, back_populates='starts')
+    entry_id = Column(Integer, ForeignKey(Entry.entry_id), nullable=False)
+    entry = relationship(Entry, back_populates='starts')
+
+    competitive = Column(Boolean, default=True, doc='Whether the starter is to be consired for the official ranking. This can be set to `False` for example if the starter does not fulfill some entry requirement.')
+    time_offset = Column(Interval, doc='Start time offset from category start time')
+
+    competitor_starts = relationship('CompetitorStart', back_populates='start')
+
+
+class CompetitorStart(Base):
+    competitor_start_id = Column(Integer, Sequence('competitor_start_id_seq'), primary_key=True)
+
+    start_id = Column(Integer, ForeignKey(Start.start_id), nullable=False)
+    start = relationship(Start, back_populates='competitor_starts')
+    competitor_id = Column(Integer, ForeignKey(Competitor.competitor_id), nullable=False)
+    competitor = relationship(Competitor, back_populates='starts')
+
+    time_offset = Column(Interval, doc='Start time offset from entry start time')
+    control_card_id = Column(Integer, ForeignKey(ControlCard.control_card_id))
+    control_card = relationship(ControlCard)
+
+
+### Results ###
 
 ResultStatus = AutoEnum('ResultStatus', [
     'OK',
@@ -435,10 +498,10 @@ ResultStatus = AutoEnum('ResultStatus', [
 # * StartTimeAllocationRequest
 # * ClassStart
 # * StartName
-# * PersonStart
+# * PersonStart → Competitor / Entry
 # * PersonRaceStart
-# * TeamStart
-# * TeamMemberStart
+# * TeamStart → Entry
+# * TeamMemberStart → Competitor
 # * TeamMemberRaceStart
 # * ClassResult
 # * PersonResult

@@ -38,3 +38,23 @@ def normalize_year(year):
         year += 100 * (current_century - 1)
 
     return year
+
+def disjoin(lst, key):
+    """Disjoin similar elements of a list by reordering the list in a deterministic way."""
+    if len(lst) <= 2:
+        return
+
+    for _ in range(2):
+        for idx in reversed(range(len(lst) - 1)):
+            if key(lst[idx]) == key(lst[idx + 1]):
+                # found collision
+                for idx2 in reversed(range(0, idx)):
+                    if key(lst[idx]) != key(lst[idx2]):
+                        break
+                else:
+                    # nothing to move
+                    continue
+                # move
+                lst.insert(idx, lst.pop(idx2))
+        lst.reverse()
+
