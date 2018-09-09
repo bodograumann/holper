@@ -23,6 +23,7 @@ __all__ = [
         'Control',
         'Course',
         'CourseControl',
+        'ControlType',
         'Category',
         'Person',
         'PersonXID',
@@ -43,7 +44,8 @@ __all__ = [
 
 import enum
 
-from sqlalchemy import Table, Column, Sequence, ForeignKey, \
+from sqlalchemy import Table, Column, Sequence, \
+        ForeignKey, UniqueConstraint, \
         String, SmallInteger, Integer, Boolean, Float, Date, DateTime, Interval, Enum, \
         TIMESTAMP
 from sqlalchemy.orm import relationship
@@ -206,6 +208,7 @@ class Race(Base):
     first_start = Column(TIMESTAMP(timezone=True))
 
     categories = relationship('Category', back_populates='race')
+    controls = relationship('Control', back_populates='race')
     courses = relationship('Course', back_populates='race')
 
     @property
@@ -236,8 +239,11 @@ class Leg(Base):
 
 class Control(Base):
     control_id = Column(Integer, Sequence('control_id_seq'), primary_key=True)
+    race_id = Column(Integer, ForeignKey(Race.race_id), nullable=False)
+    race = relationship(Race, back_populates='controls')
     label = Column(String(16), nullable=False)
 
+    UniqueConstraint('race_id', 'label')
 
 class Course(Base):
     course_id = Column(Integer, Sequence('course_id_seq'), primary_key=True)
@@ -251,6 +257,15 @@ class Course(Base):
     controls = relationship('CourseControl', back_populates='course')
 
 
+ControlType = AutoEnum('ControlType', [
+    'CONTROL',
+    'START',
+    'FINISH',
+    'CROSSING_POINT',
+    'END_OF_MARKED_ROUTE'
+])
+
+
 class CourseControl(Base):
     course_control_id = Column(Integer, Sequence('course_control_id_seq'), primary_key=True)
     course_id = Column(Integer, ForeignKey(Course.course_id), nullable=False)
@@ -261,6 +276,7 @@ class CourseControl(Base):
     leg_length = Column(Float, doc='Leg length in kilometers')
     leg_climb = Column(Float, doc='Leg climb in meters')
 
+    type = Column(Enum(ControlType), default=ControlType.CONTROL, nullable=False)
     score = Column(Float)
     order = Column(Integer, doc='If a course control has a higher `order` than another, \
             it has to be punched after it.')
@@ -277,14 +293,19 @@ class Category(Base):
 
     status = Column(Enum(RaceCategoryStatus), default=RaceCategoryStatus.START_TIMES_NOT_ALLOCATED)
 
-    course_id = Column(Integer, ForeignKey(Course.course_id))
-    course = relationship(Course)
+    courses = relationship('CategoryCourseAssignment', back_populates='category')
 
     time_offset = Column(Interval, doc='Start time offset from race start time')
     starts = relationship('Start', back_populates='category')
     vacancies_before = Column(SmallInteger, default=0, nullable=False)
     vacancies_after = Column(SmallInteger, default=0, nullable=False)
 
+class CategoryCourseAssignment(Base):
+    category_id = Column(Integer, ForeignKey(Category.category_id), primary_key=True)
+    category = relationship(Category, back_populates='courses')
+    leg = Column(SmallInteger, default=1, primary_key=True)
+    course_id = Column(Integer, ForeignKey(Course.course_id), nullable=False)
+    course = relationship(Course)
 
 ### Entries ###
 

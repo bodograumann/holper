@@ -154,10 +154,13 @@ class _XMLReader:
 
         if self.tag(root, 'EntryList'):
             yield from self._read_entry_list(root)
+        elif self.tag(root, 'CourseData'):
+            yield from self._read_course_data(root)
         else:
             raise NotImplementedError(root.tag)
 
     def _read_entry_list(self, element):
+        event = None
         for child in element:
             if self.tag(child, 'Event'):
                 event = self._read_event(child)
@@ -170,10 +173,19 @@ class _XMLReader:
                 entry = self._read_person_entry(child)
                 entry.event = event
                 yield entry
-            elif self.tag(child, 'Extension'):
-                raise NotImplementedError(child.tag)
-            else:
-                raise TypeError(child.tag)
+
+    def _read_course_data(self, element):
+        event = None
+        for child in element:
+            if self.tag(child, 'Event'):
+                event = self._read_event(child)
+                yield event
+            elif self.tag(child, 'RaceCourseData'):
+                race = self._read_race_course_data(child)
+                race.event = event
+                for category in race.categories:
+                    category.event_category.event = race.event
+                yield race
 
     def _read_event(self, element):
         event = self.createObj(element, model.Event)
@@ -190,7 +202,7 @@ class _XMLReader:
                 event.form = child.text
             elif self.tag(child, 'Class'):
                 event.categories.append(self._read_class(child))
-            else:
+            elif self.tag(child, {'Status', 'Race'}):
                 raise NotImplementedError(child.tag)
         return event
 
@@ -219,9 +231,10 @@ class _XMLReader:
                 entry.competitors.append(competitor)
             elif self.tag(child, 'Class'):
                 entry.category_requests.append(self._read_class(child))
-            elif self.tag(child, 'EntryTime'):
-                pass # unused
-            else:
+            elif self.tags(child, {
+                'Race', 'AssignedFee', 'ServiceRequest',
+                'StartTimeAllocationRequest', 'ContactInformation'
+                }):
                 raise NotImplementedError(child.tag)
 
         return entry
@@ -234,13 +247,11 @@ class _XMLReader:
                 competitor.person = self._read_person(child)
             elif self.tag(child, 'Organisation'):
                 competitor.organisation = self._read_organisation(child)
-            elif self.tag(child, 'Leg'):
-                pass # ignored for now
-            elif self.tag(child, 'LegOrder'):
-                pass # ignored for now
             elif self.tag(child, 'ControlCard'):
                 competitor.control_cards.append(self._read_control_card(child))
-            else:
+            elif self.tags(child, {
+                'Leg', 'LegOrder', 'Score', 'AssignedFee'
+                }):
                 raise NotImplementedError(child.tag)
 
         return competitor
@@ -253,9 +264,7 @@ class _XMLReader:
         competitor.entry_sequence = 1
 
         for child in element:
-            if self.tag(child, 'Id'):
-                pass
-            elif self.tag(child, 'Person'):
+            if self.tag(child, 'Person'):
                 competitor.person = self._read_person(child)
             elif self.tag(child, 'Organisation'):
                 competitor.organisation = self._read_organisation(child)
@@ -263,9 +272,10 @@ class _XMLReader:
                 competitor.control_cards.append(self._read_control_card(child))
             elif self.tag(child, 'Class'):
                 entry.category_requests.append(self._read_class(child))
-            elif self.tag(child, 'EntryTime'):
-                pass # unused
-            else:
+            elif self.tags(child, {
+                'Score', 'RaceNumber', 'AssignedFee', 'ServiceRequest',
+                'StartTimeAllocationRequest'
+                }):
                 raise NotImplementedError(child.tag)
 
         return entry
@@ -278,9 +288,7 @@ class _XMLReader:
             person.sex = model.Sex(sex)
 
         for child in element:
-            if self.tag(child, 'Id'):
-                pass
-            elif self.tag(child, 'Name'):
+            if self.tag(child, 'Name'):
                 for name_part in child:
                     if self.tag(name_part, 'Family'):
                         person.family_name = name_part.text
@@ -290,10 +298,6 @@ class _XMLReader:
                 person.birth_date = iso8601.parse_date(child.text)
             elif self.tag(child, 'Nationality'):
                 person.nationality = self._read_country(child)
-            elif self.tag(child, 'Address'):
-                pass # unused
-            else:
-                raise NotImplementedError(child.tag)
 
         return person
 
@@ -308,15 +312,13 @@ class _XMLReader:
             organisation.type = model.OrganisationType(camelcase_to_snakecase(type))
 
         for child in element:
-            if self.tag(child, 'Id'):
-                pass
-            elif self.tag(child, 'Name'):
+            if self.tag(child, 'Name'):
                 organisation.name = child.text
             elif self.tag(child, 'ShortName'):
                 organisation.short_name = child.text
             elif self.tag(child, 'Country'):
                 organisation.country = self._read_country(child)
-            else:
+            elif self.tag(child, 'Address'):
                 raise NotImplementedError(child.tag)
 
         return organisation
@@ -330,6 +332,8 @@ class _XMLReader:
                 card.system = model.PunchingSystem.SportIdent
             elif system.lower() == 'emit':
                 card.system = model.PunchingSystem.Emit
+            else:
+                raise NotImplementedError(system)
 
         return card
 
@@ -352,7 +356,98 @@ class _XMLReader:
                         max_number_of_competitors=child.get('maxNumberOfCompetitors', 1)
                 )
                 event_category.legs.append(leg)
-            else:
+            elif self.tags(child, {
+                'TeamFee', 'Fee', 'Status', 'RaceClass',
+                'TooFewEntriesSubstituteClass',
+                'TooManyEntriesSubstituteClass'
+                }):
                 raise NotImplementedError(child.tag)
 
         return event_category
+
+    def _read_race_course_data(self, element):
+        race = model.Race()
+        if element.get('raceNumber'):
+            raise NotImplementedError('raceNumber')
+
+        for child in element:
+            if self.tag(child, 'Course'):
+                race.courses.append(self._read_course(child))
+            elif self.tag(child, 'ClassCourseAssignment'):
+                race.categories.append(
+                        self._read_class_course_assignment(child).category
+                        )
+            elif self.tags(child, {
+                'PersonCourseAssignment', 'TeamCourseAssignment',
+                }):
+                raise NotImplementedError(child.tag)
+
+        return race
+
+    def _read_course(self, element):
+        course = self.createObj(element, model.Course)
+
+        random_order = False
+        control_order = 0
+
+        for child in element:
+            if self.tag(child, 'Name'):
+                course.name = child.text
+            elif self.tag(child, 'Length'):
+                course.length = float(child.text)
+            elif self.tag(child, 'Climb'):
+                course.climb = float(child.text)
+            elif self.tag(child, 'CourseControl'):
+                course_control = self._read_course_control(child)
+                course_control.course = course
+                course_control.order = control_order
+                course.controls.append(course_control)
+
+                if not child.get('randomOrder') or not random_order:
+                    control_order += 1
+                random_order = child.get('randomOrder')
+            elif self.tag(child, 'Family'):
+                raise NotImplementedError(child.tag)
+
+        return course
+
+    def _read_course_control(self, element):
+        course_control = model.CourseControl()
+
+        type = element.get('type')
+        if type is not None:
+            course_control.type = model.ControlType(camelcase_to_snakecase(type))
+
+        for child in element:
+            if self.tag(child, 'Control'):
+                if course_control.control:
+                    raise NotImplementedError('Only one code per control allowed')
+                course_control.control = model.Control(label=child.text)
+            elif self.tag(child, 'LegLength'):
+                course_control.length = float(child.text)
+            elif self.tag(child, 'Score'):
+                course_control.score = float(child.text)
+
+        return course_control
+
+    def _read_class_course_assignment(self, element):
+        event_category = None
+        assignment = model.CategoryCourseAssignment()
+
+        for child in element:
+            if self.tag(child, 'ClassId'):
+                event_category = self.createObjFromId(child, model.EventCategory)
+            elif self.tag(child, 'ClassName'):
+                if not event_category:
+                    event_category = model.EventCategory()
+                if not event_category.name:
+                    event_category.name = child.text
+            elif self.tag(child, 'CourseName'):
+                assignment.course = model.Course(name=child.text)
+            elif self.tag(child, 'CourseFamily') \
+                    and not assignment.course \
+                    or self.tag(child, 'AllowedOnLeg'):
+                raise NotImplementedError(child.tag)
+
+        assignment.category = model.Category(event_category=event_category)
+        return assignment

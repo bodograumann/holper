@@ -124,6 +124,19 @@ class TestImport(TestCase):
 
             self.assertEqual(len(entries[0].competitors), 5)
 
+    def test_iofxml3_course_data(self):
+        with open('tests/IOFv3/CourseData_Individual_Step2.xml', 'rb') as f:
+            generator = iofxml3.read(f)
+            event = next(generator)
+            race = next(generator)
+            self.assertRaises(StopIteration, lambda: next(generator))
+
+            self.assertEqual(race.event, event)
+            self.assertEqual(len(race.courses), 2)
+            self.assertEqual(len(race.categories), 2)
+            self.assertEqual(race.categories[0].event_category, event.categories[0])
+            self.assertIn(race.categories[0].courses[0].course.name, [course.name for course in race.courses])
+
     def test_sportsoftware_oe_entries(self):
         with open('tests/SportSoftware/OE_11.0_EntryList1.csv', 'rb') as f:
             generator = sportsoftware.read(f)

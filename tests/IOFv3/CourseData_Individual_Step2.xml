@@ -218,19 +218,5 @@
       <CourseFamily>Open long</CourseFamily>
     </ClassCourseAssignment>
 
-    <!-- The course A in the Open long course family is assigned to Women Open -->
-    <ClassCourseAssignment>
-      <ClassName>Women Open</ClassName>
-      <CourseName>A</CourseName>
-      <CourseFamily>Open long</CourseFamily>
-    </ClassCourseAssignment>
-
-    <!-- The course B in the Open long course family is assigned to Women Open -->
-    <ClassCourseAssignment>
-      <ClassName>Women Open</ClassName>
-      <CourseName>B</CourseName>
-      <CourseFamily>Open long</CourseFamily>
-    </ClassCourseAssignment>
-
   </RaceCourseData>
 </CourseData>
