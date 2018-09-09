@@ -29,7 +29,7 @@ class CategoryOrder:
         self.order = defaultdict(list)
 
         for category in race.categories:
-            self.order[category.course.course_id].append(category)
+            self.order[category.courses[0].course.course_id].append(category)
 
     def setOrderEarly(self, course, categories):
         self.order[course.course_id] = categories + self.order[course.course_id].filter(
