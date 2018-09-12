@@ -411,8 +411,8 @@ class CSVWriter:
                 row[1] = entry.name
 
                 try:
-                    row[4] = format_time(next(entry.starts).time_offset)
-                except StopIteration:
+                    row[4] = format_time(entry.starts[0].time_offset)
+                except IndexError:
                     pass
 
                 if entry.organisation and entry.organisation.type == model.OrganisationType.CLUB:
@@ -453,7 +453,7 @@ class CSVWriter:
         competitor_row = [
                 person.family_name,
                 person.given_name,
-                str(person.birth_date.year),
+                str(person.birth_date.year) if person.birth_date else '',
                 'F' if person.sex is model.Sex.FEMALE else 'M'
                 ]
         if competitor.control_cards:

@@ -15,6 +15,7 @@ the order of the categories with the same course.
 
 import random
 from collections import Counter, defaultdict
+from datetime import timedelta
 
 from . import model
 from .affine_seq import AffineSeq
@@ -52,8 +53,9 @@ class CategoryOrder:
         for course_id, categories in self.order.items():
             counts[course_id] = len(categories) - 1 + sum(
                 len(category.starts)
-                + category.vacancies_before
-                + category.vacancies_after
+                + (category.vacancies_before or 0)
+                + (category.vacancies_after or 0)
+                for category in categories
             )
         return counts
 
@@ -160,21 +162,23 @@ class StartList:
 
         for start in sequence:
             if start.category.time_offset is None:
-                start.category.time_offset = next(slot_iter)
-                start.time_offset = 0
+                start.category.time_offset = timedelta(minutes=next(slot_iter))
+                start.time_offset = timedelta()
             else:
-                start.time_offset = next(slot_iter) - start.category.time_offset
+                start.time_offset = timedelta(minutes=next(slot_iter)) - start.category.time_offset
 
     def getStatistics(self):
-        total = len(self.race.starts)
-        last_slot = max(start.category.time_offset + start.time_offset for start in self.race.starts)
-        mean = total / (last_slot + 1)
-        counts = Counter(start.category.time_offset + start.time_offset for start in self.race.starts)
+        starts = sum((list(category.starts) for category in self.race.categories), [])
+        total = len(starts)
+        last_slot = max(start.category.time_offset + start.time_offset for start in starts)
+        mean = total / ((last_slot + timedelta(minutes=1)).total_seconds() / 60)
+        counts = Counter(start.category.time_offset + start.time_offset for start in starts)
         stats = Counter(counts.values())
 
         return {
                 'entries_total': total,
+                'last_start': (last_slot + timedelta(minutes=1)).total_seconds() / 60,
                 'entries_per_slot': stats,
                 'entries_per_slot_avg': mean,
-                'entries_per_slot_var': sum(counts[slot] ** 2 for slot in counts) / (last_slot + 1) - mean ** 2
+                'entries_per_slot_var': sum(counts[slot] ** 2 for slot in counts) / (last_slot.total_seconds() / 60 + 1) - mean ** 2
                 }
