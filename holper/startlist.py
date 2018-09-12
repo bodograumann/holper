@@ -144,9 +144,9 @@ class StartList:
         for start in starts:
             pref = 0
             for request in start.entry.start_time_allocation_requests:
-                if request.type is StartTimeAllocationRequestType.EARLY_START:
+                if request.type is model.StartTimeAllocationRequestType.EARLY_START:
                     pref = 1
-                elif request.type is StartTimeAllocationRequestType.LATE_START:
+                elif request.type is model.StartTimeAllocationRequestType.LATE_START:
                     pref = 2
                 else:
                     continue
