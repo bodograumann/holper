@@ -249,8 +249,12 @@ class _XMLReader:
                 competitor.organisation = self._read_organisation(child)
             elif self.tag(child, 'ControlCard'):
                 competitor.control_cards.append(self._read_control_card(child))
+            elif self.tag(child, 'Leg'):
+                competitor.leg_number = int(child.text)
+            elif self.tag(child, 'LegOrder'):
+                competitor.leg_order = int(child.text)
             elif self.tags(child, {
-                'Leg', 'LegOrder', 'Score', 'AssignedFee'
+                'Score', 'AssignedFee'
                 }):
                 raise NotImplementedError(child.tag)
 

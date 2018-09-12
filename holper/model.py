@@ -433,6 +433,8 @@ class Competitor(Base):
 
     entry_sequence = Column(SmallInteger, default=1,
                            doc='1-based position of the competitor in the team')
+    leg_number = Column(SmallInteger)
+    leg_order = Column(SmallInteger)
 
     person_id = Column(Integer, ForeignKey(Person.person_id), nullable=False)
     person = relationship(Person)
