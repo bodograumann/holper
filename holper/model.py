@@ -281,10 +281,11 @@ class CourseControl(Base):
     order = Column(Integer, doc='If a course control has a higher `order` than another, \
             it has to be punched after it.')
     after_course_control_id = Column(Integer, ForeignKey('CourseControl.course_control_id'))
-    after = relationship('CourseControl', back_populates='before', uselist=False,
+    after = relationship('CourseControl', foreign_keys=[after_course_control_id], remote_side=course_control_id,
             doc='Control must be punched after this other control.')
-    before = relationship('CourseControl', remote_side='CourseControl.course_control_id',
-            back_populates='after', uselist=False, doc='Control must be punched before this other control.')
+    before_course_control_id = Column(Integer, ForeignKey('CourseControl.course_control_id'))
+    before = relationship('CourseControl', foreign_keys=[before_course_control_id], remote_side=course_control_id,
+            doc='Control must be punched before this other control.')
 
 
 class Category(Base):
