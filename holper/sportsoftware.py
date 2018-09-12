@@ -321,7 +321,7 @@ class CSVReader:
             return self.clubs[club_id]
         except KeyError:
             club = model.Organisation(
-                    name=abbreviation + ' ' + city,
+                    name=(abbreviation + ' ' + city).strip(),
                     short_name=abbreviation,
                     type=model.OrganisationType.CLUB
                     )
