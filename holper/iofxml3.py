@@ -403,7 +403,6 @@ class _XMLReader:
                 course.climb = float(child.text)
             elif self.tag(child, 'CourseControl'):
                 course_control = self._read_course_control(child)
-                course_control.course = course
                 course_control.order = control_order
                 course.controls.append(course_control)
 
