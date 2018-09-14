@@ -411,7 +411,7 @@ class CSVWriter:
                 row[1] = entry.name
 
                 try:
-                    row[4] = format_time(entry.starts[0].time_offset)
+                    row[4] = format_time(entry.starts[0].category.time_offset + entry.starts[0].time_offset)
                 except IndexError:
                     pass
 
