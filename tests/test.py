@@ -2,6 +2,7 @@ from unittest import TestCase
 
 import sqlalchemy
 import io
+import datetime
 
 from holper import iofxml2, iofxml3, sportsoftware, model, tools
 
@@ -143,6 +144,15 @@ class TestImport(TestCase):
             entries = list(generator)
             for entry in entries:
                 self.assertIsInstance(entry, model.Entry)
+                self.assertEqual(len(entry.competitors), 1)
+
+            person = entries[0].competitors[0].person
+            self.assertEqual(person.given_name, 'Martin')
+            self.assertEqual(person.family_name, 'Ahlburg')
+            self.assertEqual(person.birth_date.year, 1988)
+
+            start = entries[0].starts[0]
+            self.assertEqual(start.time_offset + (start.category.time_offset or datetime.timedelta(0)), datetime.timedelta(hours=1, minutes=36))
 
     def test_sportsoftware_os_entries(self):
         with open('tests/SportSoftware/OS_11.0_EntryList1.csv', 'rb') as f:
@@ -151,6 +161,27 @@ class TestImport(TestCase):
             for entry in entries:
                 self.assertIsInstance(entry, model.Entry)
 
+            self.assertEqual(len(entries[0].competitors), 3)
+            self.assertEqual(entries[0].competitors[0].starts[0].control_card.label, '850705')
+
+            self.assertEqual(
+                    entries[0].starts[0].result.start_time,
+                    entries[0].competitors[0].starts[0].competitor_result.start_time
+                    )
+            self.assertEqual(
+                    entries[0].starts[0].result.time,
+                    sum((
+                        entries[0].competitors[idx].starts[0].competitor_result.time
+                        for idx in range(3)),
+                        datetime.timedelta()
+                        )
+                    )
+            for idx in (0, 1):
+                self.assertEqual(
+                        entries[0].competitors[idx].starts[0].competitor_result.finish_time,
+                        entries[0].competitors[idx+1].starts[0].competitor_result.start_time
+                        )
+
     def test_sportsoftware_ot_entries(self):
         with open('tests/SportSoftware/OT_10.2_EntryList.csv', 'rb') as f:
             generator = sportsoftware.read(f)
@@ -158,6 +189,7 @@ class TestImport(TestCase):
             for entry in entries:
                 self.assertIsInstance(entry, model.Entry)
 
+            self.assertEqual(len(entries[0].competitors), 3)
 
 class TestExport(TestCase):
     def setUp(self):

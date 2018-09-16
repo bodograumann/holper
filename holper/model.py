@@ -39,6 +39,8 @@ __all__ = [
         'Competitor',
         'Start',
         'CompetitorStart',
+        'Result',
+        'CompetitorResult',
         'ResultStatus'
         ]
 
@@ -459,6 +461,7 @@ class CompetitorXID(Base):
 
 class Start(Base):
     start_id = Column(Integer, Sequence('start_id_seq'), primary_key=True)
+    result = relationship('Result', uselist=False, back_populates='start')
 
     category_id = Column(Integer, ForeignKey(Category.category_id), nullable=False)
     category = relationship(Category, back_populates='starts')
@@ -473,6 +476,7 @@ class Start(Base):
 
 class CompetitorStart(Base):
     competitor_start_id = Column(Integer, Sequence('competitor_start_id_seq'), primary_key=True)
+    competitor_result = relationship('CompetitorResult', uselist=False, back_populates='competitor_start')
 
     start_id = Column(Integer, ForeignKey(Start.start_id), nullable=False)
     start = relationship(Start, back_populates='competitor_starts')
@@ -505,6 +509,32 @@ ResultStatus = AutoEnum('ResultStatus', [
 ])
 
 
+class Result(Base):
+    result_id = Column(Integer, ForeignKey(Start.start_id), primary_key=True)
+    start = relationship(Start, back_populates='result')
+
+    start_time = Column(DateTime, doc='Actual start time used for placement')
+    finish_time = Column(DateTime, doc='Actual finish time used for placement')
+
+    time_adjustment = Column(Interval, doc='Time bonus or penalty', nullable=False)
+    time = Column(Interval)
+
+    status = Column(Enum(ResultStatus))
+
+
+class CompetitorResult(Base):
+    competitor_result_id = Column(Integer, ForeignKey(CompetitorStart.competitor_start_id), primary_key=True)
+    competitor_start = relationship(CompetitorStart, back_populates='competitor_result')
+
+    start_time = Column(DateTime, doc='Actual start time used for placement')
+    finish_time = Column(DateTime, doc='Actual finish time used for placement')
+
+    time_adjustment = Column(Interval, doc='Time bonus or penalty', nullable=False)
+    time = Column(Interval)
+
+    status = Column(Enum(ResultStatus))
+
+
 # additional types in IOF XML:
 # * Id → <Table>XID
 # * PersonName → merged into Person
@@ -528,16 +558,16 @@ ResultStatus = AutoEnum('ResultStatus', [
 # * ClassStart
 # * StartName
 # * PersonStart → Competitor / Entry
-# * PersonRaceStart
+# * PersonRaceStart → Start
 # * TeamStart → Entry
 # * TeamMemberStart → Competitor
-# * TeamMemberRaceStart
+# * TeamMemberRaceStart → CompetitorStart
 # * ClassResult
 # * PersonResult
-# * PersonRaceResult
+# * PersonRaceResult → Result
 # * TeamResult
 # * TeamMemberResult
-# * TeamMemberRaceResult
+# * TeamMemberRaceResult → CompetitorResult
 # * OverallResult
 # * ControlAnswer
 # * SplitTime

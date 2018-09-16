@@ -2,7 +2,7 @@
 
 from io import TextIOWrapper
 from contextlib import contextmanager
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, MINYEAR
 import csv
 
 from . import model, tools
@@ -132,13 +132,6 @@ class CSVReader:
             # 2: XStnr
             # 4: Datenbank Id
             # 9: Block
-            # 10: AK
-            # 11: Start
-            # 12: Ziel
-            # 13: Zeit
-            # 14: Wertung
-            # 15: Gutschrift -
-            # 16: Zuschlag +
             # 17: Kommentar
             # 22: Sitz
             # 23: Region
@@ -179,29 +172,18 @@ class CSVReader:
 
                 entry.competitors.append(self.read_competitor(*row[5:9], row[3]))
 
-    #            solo['times'] = {
-    #                    'start':   parse_time(row[11], with_seconds),
-    #                    'finish':  parse_time(row[12], with_seconds),
-    #                    'adjust_plus': parse_time(row[16], with_seconds),
-    #                    'adjust_minus': parse_time(row[15], with_seconds)
-    #            }
-    #            solo['times']['elapsed'] = calculate_elapsed_time(
-    #                    compare_to=parse_time(row[13], with_seconds),
-    #                    label=solo['given_name'] + ' ' + solo['family_name'],
-    #                    **solo['times']
-    #            )
-
-                # entry.result.disqualified = model.ResultStatus.DISQUALIFIED if int(row[14]) > 0 else model.ResultStatus.OK
-
-                #entry.non_competitive = row[10].upper() == 'X'
+                start = self.read_start_and_result(*row[10:17])
+                start.entry = entry
 
                 if row[18]:
                     entry.organisation = self.read_club(*row[18:24])
 
                 if row[24]:
+                    category = self.read_category(*row[24:27])
                     entry.category_requests.append(model.EntryCategoryRequest(
-                        category=self.read_category(*row[24:27]).event_category
+                        category=category.event_category
                         ))
+                    start.category = category
 
                 #solo['fee'] = parse_float(row[49])
 
@@ -236,43 +218,49 @@ class CSVReader:
                 except ValueError:
                     pass
 
-                #relay['disqualified'] = int(row[8]) > 0
-                #relay['nc'] = row[5].upper() == 'X'
-
                 if row[13]:
                     entry.organisation = self.read_club(*row[13:19])
 
                     entry.name = ' '.join((entry.organisation.name, row[3]))
 
-                event_category = self.read_category(*row[19:23]).event_category
+                category = self.read_category(*row[19:23])
                 entry.category_requests.append(model.EntryCategoryRequest(
-                    category=event_category
+                    category=category.event_category
                     ))
 
                 #relay['fee'] = parse_float(row[29]) or 0)
 
-                for competitor_nr in range(event_category.maxNumberOfTeamMembers):
+                start = self.read_start_and_result(*row[5:7], '', *row[7:9], *row[10:12])
+                start.entry = entry
+                start.category = category
+
+                for competitor_nr in range(category.event_category.maxNumberOfTeamMembers):
                     offset = 31 + competitor_nr * 14
-                    entry.competitors.append(self.read_competitor(*row[offset+3:offset+7], row[offset+11]))
+                    competitor = self.read_competitor(*row[offset+3:offset+7], row[offset+11])
+                    entry.competitors.append(competitor)
 
-                #relay['times'] = {
-                #        'start':   parse_time(row[6], with_seconds),
-                #        'finish':  parse_time(row[31 + runner_count * 14 - 6], with_seconds),
-                #        'adjust_plus': parse_time(row[11], with_seconds),
-                #        'adjust_minus': parse_time(row[10], with_seconds)
-                #}
+                    if row[offset+7]:
+                        competitor_start = model.CompetitorStart(
+                                start=start,
+                                competitor=competitor,
+                                time_offset=parse_time(row[offset+7])
+                                )
+                        if competitor.control_cards:
+                            competitor_start.control_card = competitor.control_cards[0]
 
-                #relay['times']['elapsed'] = calculate_elapsed_time(
-                #        compare_to=parse_time(row[7], with_seconds),
-                #        label=' '.join((
-                #            str(relay['number']),
-                #            relay['club']['short'],
-                #            relay['club']['name'],
-                #            relay['category']['short'],
-                #            relay['name']
-                #        )),
-                #        **relay['times']
-                #)
+                    if any(row[offset+8:offset+11]):
+                        start_offset = parse_time(row[offset+7])
+                        finish_offset = parse_time(row[offset+8])
+                        competitor_start.competitor_result = model.CompetitorResult(
+                                start_time=datetime(MINYEAR, 1, 1) + start_offset if start_offset else None,
+                                finish_time=datetime(MINYEAR, 1, 1) + finish_offset if finish_offset else None,
+                                time=parse_time(row[offset+9]),
+                                status=self.read_result_status(row[offset+10])
+                                )
+
+                    #relay['times'] = {
+                    #        'finish':  parse_time(row[31 + runner_count * 14 - 6], with_seconds),
+                    #}
 
                 yield entry
 
@@ -300,12 +288,9 @@ class CSVReader:
                 category = self.read_category(*row[12:16])
                 entry.category_requests.append(category.event_category)
 
-                start = model.Start(
-                        entry=entry,
-                        category=category,
-                        competitive=row[3].upper() != 'X',
-                        time_offset=parse_time(row[4])
-                        )
+                start = self.read_start_and_result(*row[3:8])
+                start.entry = entry
+                start.category = category
 
                 #team['fee'] = parse_float(row[22].replace(',', '.') or 0)
 
@@ -384,6 +369,53 @@ class CSVReader:
                 label=control_card_label
                 ))
         return competitor
+
+    def read_start_and_result(self, non_competitive, start_offset, finish_offset='', result_time='', status='', time_bonus='', time_penalty=''):
+        """Read start and result columns
+
+        Note: The export data only contains relative time values, while
+        the model expects start and finish time to be proper `DateTime`
+        values. As a work-around, here we store these as `DateTime`
+        types, which still need to be shifted to the proper race start
+        time.
+        """
+        start = model.Start(
+                competitive=non_competitive.upper() != 'X',
+                time_offset=parse_time(start_offset)
+                )
+
+        if finish_offset or result_time:
+            start_offset = parse_time(start_offset)
+            finish_offset = parse_time(finish_offset)
+            result = model.Result(
+                    start=start,
+                    start_time=datetime(MINYEAR, 1, 1) + start_offset if start_offset else None,
+                    finish_time=datetime(MINYEAR, 1, 1) + finish_offset if finish_offset else None,
+                    time_adjustment=(parse_time(time_penalty) or timedelta())
+                        - (parse_time(time_bonus) or timedelta()),
+                    time=parse_time(result_time)
+                    )
+
+            if status:
+                result.status = self.read_result_status(status)
+
+        return start
+
+    def read_result_status(self, status):
+        if int(status) == 0:
+            return model.ResultStatus.OK
+        elif int(status) == 1:
+            return model.ResultStatus.DID_NOT_START
+        elif int(status) == 2:
+            return model.ResultStatus.DID_NOT_FINISH
+        elif int(status) == 3:
+            return model.ResultStatus.MISSING_PUNCH
+        elif int(status) == 4:
+            return model.ResultStatus.DISQUALIFIED
+        elif int(status) == 5:
+            return model.ResultStatus.OVER_TIME
+        else:
+            raise NotImplementedError('SportSoftware Wertung={}'.format(status))
 
 
 class CSVWriter:
