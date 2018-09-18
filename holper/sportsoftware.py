@@ -286,7 +286,9 @@ class CSVReader:
                     entry.organisation = self.read_club(*row[8:12])
 
                 category = self.read_category(*row[12:16])
-                entry.category_requests.append(category.event_category)
+                entry.category_requests.append(model.EntryCategoryRequest(
+                    category=category.event_category
+                    ))
 
                 start = self.read_start_and_result(*row[3:8])
                 start.entry = entry
@@ -294,7 +296,7 @@ class CSVReader:
 
                 #team['fee'] = parse_float(row[22].replace(',', '.') or 0)
 
-                for competitor_nr in range(entry.category_requests[0].maxNumberOfTeamMembers):
+                for competitor_nr in range(entry.category_requests[0].category.maxNumberOfTeamMembers):
                     offset = 24 + competitor_nr * 7
                     entry.competitors.append(self.read_competitor(*row[offset:offset+5]))
 
@@ -451,7 +453,7 @@ class CSVWriter:
                     row[8:12] = self.write_club(entry.organisation)[:4]
 
                 if entry.category_requests:
-                    row[12:16] = self.write_category(entry.category_requests[0])[:4]
+                    row[12:16] = self.write_category(entry.category_requests[0].category)[:4]
 
                 for (competitor_nr, competitor) in enumerate(entry.competitors):
                     offset = 24 + competitor_nr * 7
