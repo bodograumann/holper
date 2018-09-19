@@ -221,7 +221,7 @@ class CSVReader:
                 if row[13]:
                     entry.organisation = self.read_club(*row[13:19])
 
-                    entry.name = ' '.join((entry.organisation.name, row[3]))
+                    entry.name = row[3]
 
                 category = self.read_category(*row[19:23])
                 entry.category_requests.append(model.EntryCategoryRequest(
