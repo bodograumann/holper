@@ -230,7 +230,9 @@ class _XMLReader:
                 competitor.entry_sequence = entry_count
                 entry.competitors.append(competitor)
             elif self.tag(child, 'Class'):
-                entry.category_requests.append(self._read_class(child))
+                entry.category_requests.append(model.EntryCategoryRequest(
+                    category=self._read_class(child)
+                    ))
             elif self.tags(child, {
                 'Race', 'AssignedFee', 'ServiceRequest',
                 'StartTimeAllocationRequest', 'ContactInformation'
@@ -275,7 +277,9 @@ class _XMLReader:
             elif self.tag(child, 'ControlCard'):
                 competitor.control_cards.append(self._read_control_card(child))
             elif self.tag(child, 'Class'):
-                entry.category_requests.append(self._read_class(child))
+                entry.category_requests.append(model.EntryCategoryRequest(
+                    category=self._read_class(child)
+                    ))
             elif self.tags(child, {
                 'Score', 'RaceNumber', 'AssignedFee', 'ServiceRequest',
                 'StartTimeAllocationRequest'
