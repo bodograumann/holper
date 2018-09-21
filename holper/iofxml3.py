@@ -118,7 +118,7 @@ class _XMLReader:
     def createObj(self, element, cls):
         obj = None
         for child in element:
-            if not self.tag(child, 'Id'):
+            if not self.tag(child, 'Id') or not child.text:
                 break
 
             issuer = child.get('type')
@@ -131,7 +131,7 @@ class _XMLReader:
             obj = cls()
 
         for child in element:
-            if not self.tag(child, 'Id'):
+            if not self.tag(child, 'Id') or not child.text:
                 break
 
             issuer = child.get('type')
