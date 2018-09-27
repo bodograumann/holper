@@ -445,7 +445,11 @@ class CSVWriter:
                 row[1] = entry.name
 
                 try:
-                    row[4] = format_time(entry.starts[0].category.time_offset + entry.starts[0].time_offset)
+                    if entry.starts[0].time_offset is not None:
+                        row[4] = format_time(
+                                (entry.starts[0].category.time_offset or timedelta())
+                                + entry.starts[0].time_offset
+                                )
                 except IndexError:
                     pass
 
