@@ -386,7 +386,7 @@ class CSVReader:
                 time_offset=parse_time(start_offset)
                 )
 
-        if finish_offset or result_time:
+        if finish_offset or result_time or status:
             start_offset = parse_time(start_offset)
             finish_offset = parse_time(finish_offset)
             result = model.Result(
