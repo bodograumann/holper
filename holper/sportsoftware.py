@@ -428,8 +428,29 @@ class CSVWriter:
         with _wrap_binary_stream(output_file) as csvfile:
             csv_writer = csv.writer(csvfile, delimiter = ';', doublequote = False)
 
+            csv_writer.writerow(_csv_header_oe_de)
+
+            for entry in self.race.entries:
+                row = [''] * len(_csv_header_oe_de)
+
+                if entry.number:
+                    row[1] = str(entry.number)
+
+                *row[5:9], row[3] = self.write_competitor(entry.competitors[0])
+
+                if entry.starts:
+                    row[10:17] = self.write_start_and_result(entry.starts[0])[:7]
+
+                if entry.organisation and entry.organisation.type == model.OrganisationType.CLUB:
+                    row[18:24] = self.write_club(entry.organisation)[:6]
+
+                if entry.category_requests:
+                    row[24:27] = self.write_category(entry.category_requests[0].category)[:3]
+
+                csv_writer.writerow(row)
+
     def write_relay_v11(self, output_file):
-        pass
+        raise NotImplementedError
 
     def write_team_v10(self, output_file):
         with _wrap_binary_stream(output_file) as csvfile:
@@ -446,10 +467,7 @@ class CSVWriter:
 
                 try:
                     if entry.starts[0].time_offset is not None:
-                        row[4] = format_time(
-                                (entry.starts[0].category.time_offset or timedelta())
-                                + entry.starts[0].time_offset
-                                )
+                        row[4] = this.write_start_and_result(entry.starts[0])[1]
                 except IndexError:
                     pass
 
@@ -463,7 +481,7 @@ class CSVWriter:
                     offset = 24 + competitor_nr * 7
                     row[offset:offset+5] = self.write_competitor(competitor)[:5]
 
-                    # Only use the two digits for the birth year
+                    # Only use the last two digits of the birth year
                     row[offset+3] = row[offset+3][-2:]
 
                 csv_writer.writerow(row)
@@ -499,4 +517,18 @@ class CSVWriter:
         else:
             competitor_row.append('')
         return competitor_row
+
+    def write_start_and_result(self, start):
+        return [
+            '' if start.competitive else 'X',
+            format_time(
+                (start.category.time_offset or timedelta())
+                + start.time_offset
+            ) if start.time_offset is not None else '',
+            '',
+            '',
+            '',
+            '',
+            ''
+        ]
 
