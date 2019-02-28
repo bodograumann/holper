@@ -33,14 +33,16 @@ class CategoryOrder:
             self.order[category.courses[0].course.course_id].append(category)
 
     def setOrderEarly(self, course, categories):
-        self.order[course.course_id] = categories + self.order[course.course_id].filter(
-                lambda category: category not in categories
-                )
+        self.order[course.course_id] = categories + list(filter(
+            lambda category: category not in categories,
+            self.order[course.course_id]
+            ))
 
     def setOrderLate(self, course, categories):
-        self.order[course.course_id] = self.order[course.course_id].filter(
-                lambda category: category not in categories
-                ) + categories
+        self.order[course.course_id] = list(filter(
+            lambda category: category not in categories,
+            self.order[course.course_id]
+            )) + categories
 
     def getCategories(self, course):
         try:
