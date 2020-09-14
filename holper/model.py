@@ -185,16 +185,16 @@ class EventCategory(Base):
 
     ### restrictions ###
 
-    minAge = Column(SmallInteger)
-    maxAge = Column(SmallInteger)
+    min_age = Column(SmallInteger)
+    max_age = Column(SmallInteger)
     sex = Column(Enum(Sex))
 
-    minNumberOfTeamMembers = Column(SmallInteger, default=1)
-    maxNumberOfTeamMembers = Column(SmallInteger, default=1)
-    minTeamAge = Column(SmallInteger)
-    maxTeamAge = Column(SmallInteger)
+    min_number_of_team_members = Column(SmallInteger, default=1)
+    max_number_of_team_members = Column(SmallInteger, default=1)
+    min_team_age = Column(SmallInteger)
+    max_team_age = Column(SmallInteger)
 
-    maxNumberOfCompetitors = Column(SmallInteger)
+    max_number_of_competitors = Column(SmallInteger)
 
 
 class EventCategoryXID(Base):

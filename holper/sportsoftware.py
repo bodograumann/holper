@@ -234,7 +234,7 @@ class CSVReader:
                 start.entry = entry
                 start.category = category
 
-                for competitor_nr in range(category.event_category.maxNumberOfTeamMembers):
+                for competitor_nr in range(category.event_category.max_number_of_team_members):
                     offset = 31 + competitor_nr * 14
                     competitor = self.read_competitor(*row[offset+3:offset+7], row[offset+11])
                     entry.competitors.append(competitor)
@@ -296,7 +296,7 @@ class CSVReader:
 
                 #team['fee'] = parse_float(row[22].replace(',', '.') or 0)
 
-                for competitor_nr in range(entry.category_requests[0].category.maxNumberOfTeamMembers):
+                for competitor_nr in range(entry.category_requests[0].category.max_number_of_team_members):
                     offset = 24 + competitor_nr * 7
                     entry.competitors.append(self.read_competitor(*row[offset:offset+5]))
 
@@ -338,7 +338,7 @@ class CSVReader:
                     short_name=short_name,
                     status=model.EventCategoryStatus.NORMAL,
                     sex=parse_sex(short_name[0]),
-                    maxNumberOfTeamMembers=team_size
+                    max_number_of_team_members=team_size
                     )
             event_category.external_ids.append(model.EventCategoryXID(
                 event_category=event_category,
@@ -501,7 +501,7 @@ class CSVWriter:
                 next(external_id.external_id for external_id in category.external_ids if external_id.issuer == 'SportSoftware'),
                 category.short_name,
                 category.name,
-                category.maxNumberOfTeamMembers
+                category.max_number_of_team_members
                 ]
 
     def write_competitor(self, competitor):
