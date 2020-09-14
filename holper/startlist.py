@@ -34,16 +34,14 @@ class CategoryOrder:
             self.order[category.courses[0].course.course_id].append(category)
 
     def set_order_early(self, course, categories):
-        self.order[course.course_id] = categories + list(filter(
-            lambda category: category not in categories,
-            self.order[course.course_id]
-            ))
+        self.order[course.course_id] = categories + list(
+            filter(lambda category: category not in categories, self.order[course.course_id])
+        )
 
     def set_order_late(self, course, categories):
-        self.order[course.course_id] = list(filter(
-            lambda category: category not in categories,
-            self.order[course.course_id]
-            )) + categories
+        self.order[course.course_id] = (
+            list(filter(lambda category: category not in categories, self.order[course.course_id])) + categories
+        )
 
     def get_categories(self, course):
         try:
@@ -54,23 +52,25 @@ class CategoryOrder:
     def get_course_slot_counts(self):
         counts = {}
         for course_id, categories in self.order.items():
-            counts[course_id] = len(categories) - 1 + sum(
-                len(category.starts)
-                + (category.vacancies_before or 0)
-                + (category.vacancies_after or 0)
-                for category in categories
+            counts[course_id] = (
+                len(categories)
+                - 1
+                + sum(
+                    len(category.starts) + (category.vacancies_before or 0) + (category.vacancies_after or 0)
+                    for category in categories
+                )
             )
         return counts
 
 
 class StartSlots:
-    def __init__(self, start_window = 12 * 60):
+    def __init__(self, start_window=12 * 60):
         self.start_window = start_window
         self.slot_sets = {}
         self.box_sizes = defaultdict(int)
 
     @staticmethod
-    def generate(slot_counts, box_count, interval, groups = None):
+    def generate(slot_counts, box_count, interval, groups=None):
         slots = StartSlots()
         for course_id, count in sorted(slot_counts.items(), key=operator.itemgetter(1), reverse=True):
             try:
@@ -95,7 +95,7 @@ class StartSlots:
     def get_slots(self, course_id):
         yield from self.slot_sets[course_id]
 
-    def get_free_slot(self, box_count = 1, group = []):
+    def get_free_slot(self, box_count=1, group=[]):
         for slot in range(self.start_window):
             if self.box_sizes[slot] >= box_count:
                 continue
@@ -178,9 +178,10 @@ class StartList:
         stats = Counter(counts.values())
 
         return {
-                'entries_total': total,
-                'last_start': (last_slot + timedelta(minutes=1)).total_seconds() / 60,
-                'entries_per_slot': stats,
-                'entries_per_slot_avg': mean,
-                'entries_per_slot_var': sum(counts[slot] ** 2 for slot in counts) / (last_slot.total_seconds() / 60 + 1) - mean ** 2
-                }
+            'entries_total': total,
+            'last_start': (last_slot + timedelta(minutes=1)).total_seconds() / 60,
+            'entries_per_slot': stats,
+            'entries_per_slot_avg': mean,
+            'entries_per_slot_var': sum(counts[slot] ** 2 for slot in counts) / (last_slot.total_seconds() / 60 + 1)
+            - mean ** 2,
+        }

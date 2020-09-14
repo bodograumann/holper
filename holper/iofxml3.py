@@ -25,6 +25,7 @@ _logger = logging.getLogger(__name__)
 _schema = etree.XMLSchema(etree.parse(resource_stream('holper.resources.IOF', 'IOF_3.0.xsd')))
 _NS = 'http://www.orienteering.org/datastandard/3.0'
 
+
 def detect(input_file):
     try:
         document = etree.parse(input_file)
@@ -85,12 +86,8 @@ class IDRegistry:
         self.objects[id_type][id_value] = obj
 
         if existing is None:
-            obj.external_ids.append(
-                    getattr(model, id_type + 'XID')(
-                        issuer=issuer,
-                        external_id=id_value
-                    )
-            )
+            obj.external_ids.append(getattr(model, id_type + 'XID')(issuer=issuer, external_id=id_value))
+
 
 class _XMLReader:
     def __init__(self, namespace):
@@ -233,13 +230,10 @@ class _XMLReader:
                 competitor.entry_sequence = entry_count
                 entry.competitors.append(competitor)
             elif self.tag(child, 'Class'):
-                entry.category_requests.append(model.EntryCategoryRequest(
-                    category=self._read_class(child)
-                    ))
-            elif self.tags(child, {
-                'Race', 'AssignedFee', 'ServiceRequest',
-                'StartTimeAllocationRequest', 'ContactInformation'
-                }):
+                entry.category_requests.append(model.EntryCategoryRequest(category=self._read_class(child)))
+            elif self.tags(
+                child, {'Race', 'AssignedFee', 'ServiceRequest', 'StartTimeAllocationRequest', 'ContactInformation'}
+            ):
                 _logger.warning('Skipping unknown tag <%s>', child.tag)
 
         return entry
@@ -258,9 +252,7 @@ class _XMLReader:
                 competitor.leg_number = int(child.text)
             elif self.tag(child, 'LegOrder'):
                 competitor.leg_order = int(child.text)
-            elif self.tags(child, {
-                'Score', 'AssignedFee'
-                }):
+            elif self.tags(child, {'Score', 'AssignedFee'}):
                 _logger.warning('Skipping unknown tag <%s>', child.tag)
 
         return competitor
@@ -280,13 +272,10 @@ class _XMLReader:
             elif self.tag(child, 'ControlCard'):
                 competitor.control_cards.append(self._read_control_card(child))
             elif self.tag(child, 'Class'):
-                entry.category_requests.append(model.EntryCategoryRequest(
-                    category=self._read_class(child)
-                    ))
-            elif self.tags(child, {
-                'Score', 'RaceNumber', 'AssignedFee', 'ServiceRequest',
-                'StartTimeAllocationRequest'
-                }):
+                entry.category_requests.append(model.EntryCategoryRequest(category=self._read_class(child)))
+            elif self.tags(
+                child, {'Score', 'RaceNumber', 'AssignedFee', 'ServiceRequest', 'StartTimeAllocationRequest'}
+            ):
                 _logger.warning('Skipping unknown tag <%s>', child.tag)
 
         return entry
@@ -374,16 +363,22 @@ class _XMLReader:
             elif self.tag(child, 'Leg'):
                 leg_count += 1
                 leg = model.Leg(
-                        leg_number = leg_count,
-                        min_number_of_competitors=child.get('minNumberOfCompetitors', 1),
-                        max_number_of_competitors=child.get('maxNumberOfCompetitors', 1)
+                    leg_number=leg_count,
+                    min_number_of_competitors=child.get('minNumberOfCompetitors', 1),
+                    max_number_of_competitors=child.get('maxNumberOfCompetitors', 1),
                 )
                 event_category.legs.append(leg)
-            elif self.tags(child, {
-                'TeamFee', 'Fee', 'Status', 'RaceClass',
-                'TooFewEntriesSubstituteClass',
-                'TooManyEntriesSubstituteClass'
-                }):
+            elif self.tags(
+                child,
+                {
+                    'TeamFee',
+                    'Fee',
+                    'Status',
+                    'RaceClass',
+                    'TooFewEntriesSubstituteClass',
+                    'TooManyEntriesSubstituteClass',
+                },
+            ):
                 _logger.warning('Skipping unknown tag <%s>', child.tag)
 
         return event_category
@@ -397,12 +392,14 @@ class _XMLReader:
             if self.tag(child, 'Course'):
                 race.courses.append(self._read_course(child))
             elif self.tag(child, 'ClassCourseAssignment'):
-                race.categories.append(
-                        self._read_class_course_assignment(child).category
-                        )
-            elif self.tags(child, {
-                'PersonCourseAssignment', 'TeamCourseAssignment',
-                }):
+                race.categories.append(self._read_class_course_assignment(child).category)
+            elif self.tags(
+                child,
+                {
+                    'PersonCourseAssignment',
+                    'TeamCourseAssignment',
+                },
+            ):
                 _logger.warning('Skipping unknown tag <%s>', child.tag)
 
         return race
@@ -466,9 +463,7 @@ class _XMLReader:
                     event_category.name = child.text
             elif self.tag(child, 'CourseName'):
                 assignment.course = model.Course(name=child.text)
-            elif self.tag(child, 'CourseFamily') \
-                    and not assignment.course \
-                    or self.tag(child, 'AllowedOnLeg'):
+            elif self.tag(child, 'CourseFamily') and not assignment.course or self.tag(child, 'AllowedOnLeg'):
                 _logger.warning('Skipping unknown tag <%s>', child.tag)
 
         assignment.category = model.Category(event_category=event_category)

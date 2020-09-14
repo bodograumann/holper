@@ -3,6 +3,7 @@
 import re
 from math import gcd
 
+
 def lcm(int1, int2):
     """Calculate the least common multiple of two integers"""
     if not int1 or not int2:
@@ -13,10 +14,11 @@ def lcm(int1, int2):
 # Affine sequences are described by strings of the form '5n+7', similar to nth-child in css
 affine_sequence_re = re.compile(r'(?P<interval>[0-9]*)n(?:\+(?P<offset>[0-9]+))?')
 
+
 class AffineSeq:
     __slots__ = ['start', 'stop', 'step']
 
-    def __init__(self, start, stop, step = 1):
+    def __init__(self, start, stop, step=1):
         if isinstance(start, str):
             match = affine_sequence_re.match(start)
             self.start = int(match.group('offset') or 0)
@@ -50,8 +52,7 @@ class AffineSeq:
         return reversed(self.to_range())
 
     def __contains__(self, item):
-        return (self.start <= item < self.stop
-                and (item - self.start) % self.step == 0)
+        return self.start <= item < self.stop and (item - self.start) % self.step == 0
 
     def __add__(self, other):
         return AffineSeq(self.start + other.start, self.stop + other.stop, self.step + other.step)

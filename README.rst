@@ -42,3 +42,5 @@ Setup an virtual enviroment with::
     source env/bin/activate
 
 Run tests with ``pytest tests/test.py`` and the linter with ``python -m pylint holper tests``.
+
+The code can be auto-formatted with ``black -S -l 120 holper tests``.

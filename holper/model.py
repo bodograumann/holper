@@ -8,51 +8,63 @@ Use SQLAlchemy as database library.
 """
 
 __all__ = [
-        'Base',
-        'Country',
-        'EventForm',
-        'Event',
-        'EventXID',
-        'Sex',
-        'EventCategoryStatus',
-        'EventCategory',
-        'EventCategoryXID',
-        'Race',
-        'RaceCategoryStatus',
-        'Leg',
-        'Control',
-        'Course',
-        'CourseControl',
-        'ControlType',
-        'Category',
-        'Person',
-        'PersonXID',
-        'OrganisationType',
-        'Organisation',
-        'OrganisationXID',
-        'Entry',
-        'EntryCategoryRequest',
-        'StartTimeAllocationRequest',
-        'StartTimeAllocationRequestType',
-        'PunchingSystem',
-        'ControlCard',
-        'Competitor',
-        'Start',
-        'CompetitorStart',
-        'Result',
-        'CompetitorResult',
-        'ResultStatus'
-        ]
+    'Base',
+    'Country',
+    'EventForm',
+    'Event',
+    'EventXID',
+    'Sex',
+    'EventCategoryStatus',
+    'EventCategory',
+    'EventCategoryXID',
+    'Race',
+    'RaceCategoryStatus',
+    'Leg',
+    'Control',
+    'Course',
+    'CourseControl',
+    'ControlType',
+    'Category',
+    'Person',
+    'PersonXID',
+    'OrganisationType',
+    'Organisation',
+    'OrganisationXID',
+    'Entry',
+    'EntryCategoryRequest',
+    'StartTimeAllocationRequest',
+    'StartTimeAllocationRequestType',
+    'PunchingSystem',
+    'ControlCard',
+    'Competitor',
+    'Start',
+    'CompetitorStart',
+    'Result',
+    'CompetitorResult',
+    'ResultStatus',
+]
 
 import enum
 
-from sqlalchemy import Table, Column, Sequence, \
-        ForeignKey, UniqueConstraint, \
-        String, SmallInteger, Integer, Boolean, Float, Date, DateTime, Interval, Enum, \
-        TIMESTAMP
+from sqlalchemy import (
+    Table,
+    Column,
+    Sequence,
+    ForeignKey,
+    UniqueConstraint,
+    String,
+    SmallInteger,
+    Integer,
+    Boolean,
+    Float,
+    Date,
+    DateTime,
+    Interval,
+    Enum,
+    TIMESTAMP,
+)
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative \
-        import declared_attr, declarative_base, DeclarativeMeta
+from sqlalchemy.ext.declarative import declared_attr, declarative_base, DeclarativeMeta
 
 from .tools import camelcase_to_snakecase
 
@@ -78,8 +90,11 @@ class _ExternalObject(DeclarativeMeta):
             namespace[attr_id] = Column(Integer, ForeignKey('%s.%s' % (parent_model, attr_id)))
             namespace[attr_rel] = relationship(parent_model, backref='external_ids')
 
-            namespace['__repr__'] = (lambda self:
-                    '<%s(%s: %s)>' % (self.__class__.__name__, self.issuer, self.external_id))
+            namespace['__repr__'] = lambda self: '<%s(%s: %s)>' % (
+                self.__class__.__name__,
+                self.issuer,
+                self.external_id,
+            )
 
         return namespace
 
@@ -107,11 +122,7 @@ Base = declarative_base(cls=_ModelBase, metaclass=_ExternalObject)
 
 class Country(Base):
     country_id = Column(
-        Integer,
-        Sequence('country_id_seq'),
-        primary_key=True,
-        autoincrement=False,
-        doc='ISO-3166 numeric code'
+        Integer, Sequence('country_id_seq'), primary_key=True, autoincrement=False, doc='ISO-3166 numeric code'
     )
     name = Column(String(63), nullable=False)
     iso_alpha_2 = Column(String(2), doc='ISO-3166 alpha-2 code', nullable=False)
@@ -123,11 +134,7 @@ class Country(Base):
 #
 # Custom types should be added with an X_ prefix.
 # E.g. X_CUSTOM = ()
-EventForm = auto_enum('EventForm', [
-    'INDIVIDUAL',
-    'TEAM',
-    'RELAY'
-])
+EventForm = auto_enum('EventForm', ['INDIVIDUAL', 'TEAM', 'RELAY'])
 
 
 class Event(Base):
@@ -139,6 +146,7 @@ class Event(Base):
     individual or relay) and offer the same categories defined by
     :py:class:`~.EventCategory`.
     """
+
     event_id = Column(Integer, Sequence('event_id_seq'), primary_key=True)
     name = Column(String(255))
     start_time = Column(DateTime)
@@ -156,16 +164,19 @@ class EventXID(Base):
 
 class Sex(enum.Enum):
     FEMALE = 'F'
-    MALE   = 'M'
+    MALE = 'M'
 
 
-EventCategoryStatus = auto_enum('EventCategoryStatus', [
-    'NORMAL',
-    'DIVIDED',
-    'JOINED',
-    'INVALIDATED',
-    'INVALIDATED_NO_FEE',
-])
+EventCategoryStatus = auto_enum(
+    'EventCategoryStatus',
+    [
+        'NORMAL',
+        'DIVIDED',
+        'JOINED',
+        'INVALIDATED',
+        'INVALIDATED_NO_FEE',
+    ],
+)
 
 
 class EventCategory(Base):
@@ -179,11 +190,12 @@ class EventCategory(Base):
     several courses, such that the total time is used for the final
     ranking.
     """
+
     event_category_id = Column(Integer, Sequence('event_category_id_seq'), primary_key=True)
 
     event_id = Column(Integer, ForeignKey(Event.event_id))
     event = relationship(Event, back_populates='categories')
-    name = Column(String(32), nullable = False)
+    name = Column(String(32), nullable=False)
     short_name = Column(String(8))
     status = Column(Enum(EventCategoryStatus), default=EventCategoryStatus.NORMAL)
 
@@ -209,6 +221,7 @@ class EventCategoryXID(Base):
 
 class Race(Base):
     """Smallest organisational unit to assign entries to"""
+
     race_id = Column(Integer, Sequence('race_id_seq'), primary_key=True)
     event_id = Column(Integer, ForeignKey(Event.event_id), nullable=False)
     event = relationship(Event, back_populates='races')
@@ -224,14 +237,17 @@ class Race(Base):
         return self.event.entries
 
 
-RaceCategoryStatus = auto_enum('RaceCategoryStatus', [
-    'START_TIMES_NOT_ALLOCATED',
-    'START_TIMES_ALLOCATED',
-    'NOT_USED',
-    'COMPLETED',
-    'INVALIDATED',
-    'INVALIDATED_NO_FEE',
-])
+RaceCategoryStatus = auto_enum(
+    'RaceCategoryStatus',
+    [
+        'START_TIMES_NOT_ALLOCATED',
+        'START_TIMES_ALLOCATED',
+        'NOT_USED',
+        'COMPLETED',
+        'INVALIDATED',
+        'INVALIDATED_NO_FEE',
+    ],
+)
 
 
 class Leg(Base):
@@ -253,6 +269,7 @@ class Control(Base):
 
     UniqueConstraint('race_id', 'label')
 
+
 class Course(Base):
     course_id = Column(Integer, Sequence('course_id_seq'), primary_key=True)
     race_id = Column(Integer, ForeignKey(Race.race_id), nullable=False)
@@ -265,13 +282,7 @@ class Course(Base):
     controls = relationship('CourseControl', back_populates='course')
 
 
-ControlType = auto_enum('ControlType', [
-    'CONTROL',
-    'START',
-    'FINISH',
-    'CROSSING_POINT',
-    'END_OF_MARKED_ROUTE'
-])
+ControlType = auto_enum('ControlType', ['CONTROL', 'START', 'FINISH', 'CROSSING_POINT', 'END_OF_MARKED_ROUTE'])
 
 
 class CourseControl(Base):
@@ -286,18 +297,30 @@ class CourseControl(Base):
 
     type = Column(Enum(ControlType), default=ControlType.CONTROL, nullable=False)
     score = Column(Float)
-    order = Column(Integer, doc='If a course control has a higher `order` than another, \
-            it has to be punched after it.')
+    order = Column(
+        Integer,
+        doc='If a course control has a higher `order` than another, \
+            it has to be punched after it.',
+    )
     after_course_control_id = Column(Integer, ForeignKey('CourseControl.course_control_id'))
-    after = relationship('CourseControl', foreign_keys=[after_course_control_id], remote_side=course_control_id,
-            doc='Control must be punched after this other control.')
+    after = relationship(
+        'CourseControl',
+        foreign_keys=[after_course_control_id],
+        remote_side=course_control_id,
+        doc='Control must be punched after this other control.',
+    )
     before_course_control_id = Column(Integer, ForeignKey('CourseControl.course_control_id'))
-    before = relationship('CourseControl', foreign_keys=[before_course_control_id], remote_side=course_control_id,
-            doc='Control must be punched before this other control.')
+    before = relationship(
+        'CourseControl',
+        foreign_keys=[before_course_control_id],
+        remote_side=course_control_id,
+        doc='Control must be punched before this other control.',
+    )
 
 
 class Category(Base):
     """Realize an EventCategory for one specific race of that event"""
+
     category_id = Column(Integer, Sequence('category_id_seq'), primary_key=True)
     race_id = Column(Integer, ForeignKey(Race.race_id), nullable=False)
     race = relationship(Race, back_populates='categories')
@@ -314,6 +337,7 @@ class Category(Base):
     vacancies_before = Column(SmallInteger, default=0, nullable=False)
     vacancies_after = Column(SmallInteger, default=0, nullable=False)
 
+
 class CategoryCourseAssignment(Base):
     category_id = Column(Integer, ForeignKey(Category.category_id), primary_key=True)
     category = relationship(Category, back_populates='courses')
@@ -321,7 +345,9 @@ class CategoryCourseAssignment(Base):
     course_id = Column(Integer, ForeignKey(Course.course_id), nullable=False)
     course = relationship(Course)
 
+
 ### Entries ###
+
 
 class Person(Base):
     person_id = Column(Integer, Sequence('person_id_seq'), primary_key=True)
@@ -338,17 +364,20 @@ class PersonXID(Base):
     pass
 
 
-OrganisationType = auto_enum('OrganisationType', [
-    'IOF',
-    'IOF_REGION',
-    'NATIONAL_FEDERATION',
-    'NATIONAL_REGION',
-    'CLUB',
-    'SCHOOL',
-    'COMPANY',
-    'MILITARY',
-    'OTHER',
-])
+OrganisationType = auto_enum(
+    'OrganisationType',
+    [
+        'IOF',
+        'IOF_REGION',
+        'NATIONAL_FEDERATION',
+        'NATIONAL_REGION',
+        'CLUB',
+        'SCHOOL',
+        'COMPANY',
+        'MILITARY',
+        'OTHER',
+    ],
+)
 
 
 class Organisation(Base):
@@ -394,17 +423,14 @@ class EntryXID(Base):
 class EntryCategoryRequest(Base):
     entry_id = Column(Integer, ForeignKey(Entry.entry_id), primary_key=True)
     entry = relationship(Entry)
-    preference = Column(SmallInteger, primary_key=True, default=0,
-                        doc='Lower number means higher preference')
+    preference = Column(SmallInteger, primary_key=True, default=0, doc='Lower number means higher preference')
     category_id = Column(Integer, ForeignKey(EventCategory.event_category_id), nullable=False)
     category = relationship(EventCategory)
 
 
 class StartTimeAllocationRequest(Base):
     start_time_allocation_request_id = Column(
-        Integer,
-        Sequence('start_time_allocation_request_id_seq'),
-        primary_key=True
+        Integer, Sequence('start_time_allocation_request_id_seq'), primary_key=True
     )
     entry_id = Column(Integer, ForeignKey(Entry.entry_id), nullable=False)
     entry = relationship(Entry, back_populates='start_time_allocation_requests')
@@ -416,19 +442,19 @@ class StartTimeAllocationRequest(Base):
     person = relationship(Person)
 
 
-StartTimeAllocationRequestType = auto_enum('StartTimeAllocationRequestType', [
-    'NORMAL',
-    'EARLY_START',
-    'LATE_START',
-    'SEPARATED_FROM',
-    'GROUPED_WITH',
-])
+StartTimeAllocationRequestType = auto_enum(
+    'StartTimeAllocationRequestType',
+    [
+        'NORMAL',
+        'EARLY_START',
+        'LATE_START',
+        'SEPARATED_FROM',
+        'GROUPED_WITH',
+    ],
+)
 
 
-PunchingSystem = auto_enum('PunchingSystem', [
-    'SportIdent',
-    'Emit'
-    ])
+PunchingSystem = auto_enum('PunchingSystem', ['SportIdent', 'Emit'])
 
 
 class ControlCard(Base):
@@ -443,8 +469,7 @@ class Competitor(Base):
     entry_id = Column(Integer, ForeignKey(Entry.entry_id), nullable=False)
     entry = relationship(Entry, back_populates='competitors')
 
-    entry_sequence = Column(SmallInteger, default=1,
-                           doc='1-based position of the competitor in the team')
+    entry_sequence = Column(SmallInteger, default=1, doc='1-based position of the competitor in the team')
     leg_number = Column(SmallInteger)
     leg_order = Column(SmallInteger)
 
@@ -454,11 +479,15 @@ class Competitor(Base):
     organisation_id = Column(Integer, ForeignKey(Organisation.organisation_id))
     organisation = relationship(Organisation)
 
-    control_cards = relationship('ControlCard',
-            secondary=Table('CompetitorControlCards', Base.metadata,
-                Column('competitor_id', Integer, ForeignKey('Competitor.competitor_id'), nullable=False),
-                Column('control_card_id', Integer, ForeignKey(ControlCard.control_card_id), nullable=False)
-                ))
+    control_cards = relationship(
+        'ControlCard',
+        secondary=Table(
+            'CompetitorControlCards',
+            Base.metadata,
+            Column('competitor_id', Integer, ForeignKey('Competitor.competitor_id'), nullable=False),
+            Column('control_card_id', Integer, ForeignKey(ControlCard.control_card_id), nullable=False),
+        ),
+    )
 
     starts = relationship('CompetitorStart', back_populates='competitor')
 
@@ -468,6 +497,7 @@ class CompetitorXID(Base):
 
 
 ### Starts ###
+
 
 class Start(Base):
     start_id = Column(Integer, Sequence('start_id_seq'), primary_key=True)
@@ -481,7 +511,8 @@ class Start(Base):
     competitive = Column(
         Boolean,
         default=True,
-        doc='Whether the starter is to be consired for the official ranking. This can be set to `False` for example if the starter does not fulfill some entry requirement.'
+        doc='Whether the starter is to be considered for the official ranking. \
+        This can be set to `False` for example if the starter does not fulfill some entry requirement.',
     )
     time_offset = Column(Interval, doc='Start time offset from category start time')
 
@@ -504,23 +535,26 @@ class CompetitorStart(Base):
 
 ### Results ###
 
-ResultStatus = auto_enum('ResultStatus', [
-    'OK',
-    'FINISHED',
-    'MISSING_PUNCH',
-    'DISQUALIFIED',
-    'DID_NOT_FINISH',
-    'ACTIVE',
-    'INACTIVE',
-    'OVER_TIME',
-    'SPORTING_WITHDRAWAL',
-    'NOT_COMPETING',
-    'MOVED',
-    'MOVED_UP',
-    'DID_NOT_START',
-    'DID_NOT_ENTER',
-    'CANCELLED',
-])
+ResultStatus = auto_enum(
+    'ResultStatus',
+    [
+        'OK',
+        'FINISHED',
+        'MISSING_PUNCH',
+        'DISQUALIFIED',
+        'DID_NOT_FINISH',
+        'ACTIVE',
+        'INACTIVE',
+        'OVER_TIME',
+        'SPORTING_WITHDRAWAL',
+        'NOT_COMPETING',
+        'MOVED',
+        'MOVED_UP',
+        'DID_NOT_START',
+        'DID_NOT_ENTER',
+        'CANCELLED',
+    ],
+)
 
 
 class Result(Base):

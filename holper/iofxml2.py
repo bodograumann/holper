@@ -23,7 +23,19 @@ from . import model
 
 _data_dtd = etree.DTD(resource_stream('holper.resources.IOF', 'IOFdata_2.0.3.dtd'))
 
-_top_level_elements = ('PersonList', 'CompetitorList', 'RankList', 'ClubList', 'EventList', 'ServiceRequestList', 'EntryList', 'StartList', 'ResultList', 'ClassData', 'CourseData')
+_top_level_elements = (
+    'PersonList',
+    'CompetitorList',
+    'RankList',
+    'ClubList',
+    'EventList',
+    'ServiceRequestList',
+    'EntryList',
+    'StartList',
+    'ResultList',
+    'ClassData',
+    'CourseData',
+)
 
 
 @contextmanager
@@ -51,9 +63,11 @@ def detect_fast(input_file):
             _, second_element = next(iterator)
         except StopIteration:
             return False
-        return (first_element.tag in _top_level_elements and
-                second_element.tag == 'IOFVersion' and
-                second_element.get('version') == '2.0.3')
+        return (
+            first_element.tag in _top_level_elements
+            and second_element.tag == 'IOFVersion'
+            and second_element.get('version') == '2.0.3'
+        )
 
 
 def detect(input_file):
@@ -100,6 +114,7 @@ def _read_club(element):
 
     return obj
 
+
 def _iter_club_entry(element):
     for child in element:
         if child.tag in {'ClubId', 'Club'}:
@@ -111,18 +126,17 @@ def _iter_club_entry(element):
             entry = _read_entry(child)
             entry.club = club
 
+
 def _read_club_id(element):
     id_type = [value for value in map(element.get, ['idManager', 'type']) if value is not None]
-    return model.OrganisationXID(
-            id_type='/'.join(id_type) if len(id_type) > 0 else None,
-            external_id=element.text
-            )
+    return model.OrganisationXID(id_type='/'.join(id_type) if len(id_type) > 0 else None, external_id=element.text)
+
 
 def _read_country(element):
     country = model.Country()
     if element.tag == 'CountryID':
         country.ioc_code = _read_ioc_code(element)
-    else: # element.tag == 'Country':
+    else:  # element.tag == 'Country':
         for child in element:
             if child.tag == 'CountryId':
                 country.ioc_code = _read_ioc_code(element)
@@ -130,11 +144,12 @@ def _read_country(element):
                 if country.ioc_code is None and country.name is None:
                     country.name = child.text
                 else:
-                    pass # ignore given country name
+                    pass  # ignore given country name
             elif child.tag == 'ModifyDate':
                 raise NotImplementedError
 
     return country
+
 
 def _read_ioc_code(element):
     value = element.get('value')
@@ -145,6 +160,7 @@ def _read_ioc_code(element):
     if value == 'other':
         return None
     return value
+
 
 def _read_entry(element):
     entry = model.Entry()
@@ -157,7 +173,7 @@ def _read_entry(element):
         elif child.tag == 'TeamName':
             entry.name = child.text
         elif child.tag in {'PersonID', 'Person'}:
-            competitor = model.Competitor(person = _read_person(child))
+            competitor = model.Competitor(person=_read_person(child))
             entry.competitors.append(competitor)
         elif child.tag == 'CCard':
             raise NotImplementedError
@@ -177,6 +193,7 @@ def _read_entry(element):
             raise NotImplementedError
 
     return entry
+
 
 def _read_person(element):
     raise NotImplementedError

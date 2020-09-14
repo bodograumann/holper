@@ -7,11 +7,441 @@ import csv
 
 from . import model, tools
 
-_csv_header_oe_de = ('OE0001', 'Stnr', 'XStnr', 'Chipnr', 'Datenbank Id', 'Nachname', 'Vorname', 'Jg', 'G', 'Block', 'AK', 'Start', 'Ziel', 'Zeit', 'Wertung', 'Gutschrift -', 'Zuschlag +', 'Kommentar', 'Club-Nr.', 'Abk', 'Ort', 'Nat', 'Sitz', 'Region', 'Katnr', 'Kurz', 'Lang', 'MeldeKat. Nr', 'MeldeKat. (kurz)', 'MeldeKat. (lang)', 'Rang', 'Ranglistenpunkte', 'Num1', 'Num2', 'Num3', 'Text1', 'Text2', 'Text3', 'Adr. Nachname', 'Adr. Vorname', 'Straße', 'Zeile2', 'PLZ', 'Adr. Ort', 'Tel', 'Mobil', 'Fax', 'EMail', 'Gemietet', 'Startgeld', 'Bezahlt', 'Mannschaft', 'Bahnnummer', 'Bahn', 'km', 'Hm', 'Bahn Posten', '')
-_csv_header_os_de = ('OS0001', 'Stnr', 'Melde Id', 'Bez', 'Block', 'AK', 'Start', 'Zeit', 'Wertung', 'Pl', 'Gutschrift -', 'Zuschlag +', 'Kommentar', 'Club-Nr.', 'Abk', 'Ort', 'Nat', 'Sitz', 'Region', 'Katnr', 'Kurz', 'Lang', 'Läufer', 'Num1', 'Num2', 'Num3', 'Text1', 'Text2', 'Text3', 'Startgeld', 'Bezahlt',\
-        'Xtra1', 'Lnr1', 'Xtranr1', 'Nachname1', 'Vorname1', 'Jg1', 'G1', 'Start1', 'Ziel1', 'Zeit1', 'Wertung1', 'Chipnr1', 'Gemietet1', 'Datenbank Id1', 'Xtra2', 'Lnr2', 'Xtranr2', 'Nachname2', 'Vorname2', 'Jg2', 'G2', 'Start2', 'Ziel2', 'Zeit2', 'Wertung2', 'Chipnr2', 'Gemietet2', 'Datenbank Id2', 'Xtra3', 'Lnr3', 'Xtranr3', 'Nachname3', 'Vorname3', 'Jg3', 'G3', 'Start3', 'Ziel3', 'Zeit3', 'Wertung3', 'Chipnr3', 'Gemietet3', 'Datenbank Id3', 'Xtra4', 'Lnr4', 'Xtranr4', 'Nachname4', 'Vorname4', 'Jg4', 'G4', 'Start4', 'Ziel4', 'Zeit4', 'Wertung4', 'Chipnr4', 'Gemietet4', 'Datenbank Id4', 'Xtra5', 'Lnr5', 'Xtranr5', 'Nachname5', 'Vorname5', 'Jg5', 'G5', 'Start5', 'Ziel5', 'Zeit5', 'Wertung5', 'Chipnr5', 'Gemietet5', 'Datenbank Id5', 'Xtra6', 'Lnr6', 'Xtranr6', 'Nachname6', 'Vorname6', 'Jg6', 'G6', 'Start6', 'Ziel6', 'Zeit6', 'Wertung6', 'Chipnr6', 'Gemietet6', 'Datenbank Id6', 'Xtra7', 'Lnr7', 'Xtranr7', 'Nachname7', 'Vorname7', 'Jg7', 'G7', 'Start7', 'Ziel7', 'Zeit7', 'Wertung7', 'Chipnr7', 'Gemietet7', 'Datenbank Id7', 'Xtra8', 'Lnr8', 'Xtranr8', 'Nachname8', 'Vorname8', 'Jg8', 'G8', 'Start8', 'Ziel8', 'Zeit8', 'Wertung8', 'Chipnr8', 'Gemietet8', 'Datenbank Id8', 'Xtra9', 'Lnr9', 'Xtranr9', 'Nachname9', 'Vorname9', 'Jg9', 'G9', 'Start9', 'Ziel9', 'Zeit9', 'Wertung9', 'Chipnr9', 'Gemietet9', 'Datenbank Id9', 'Xtra10', 'Lnr10', 'Xtranr10', 'Nachname10', 'Vorname10', 'Jg10', 'G10', 'Start10', 'Ziel10', 'Zeit10', 'Wertung10', 'Chipnr10', 'Gemietet10', 'Datenbank Id10',\
-        'Xtra11', 'Lnr11', 'Xtranr11', 'Nachname11', 'Vorname11', 'Jg11', 'G11', 'Start11', 'Ziel11', 'Zeit11', 'Wertung11', 'Chipnr11', 'Gemietet11', 'Datenbank Id11', 'Xtra12', 'Lnr12', 'Xtranr12', 'Nachname12', 'Vorname12', 'Jg12', 'G12', 'Start12', 'Ziel12', 'Zeit12', 'Wertung12', 'Chipnr12', 'Gemietet12', 'Datenbank Id12', 'Xtra13', 'Lnr13', 'Xtranr13', 'Nachname13', 'Vorname13', 'Jg13', 'G13', 'Start13', 'Ziel13', 'Zeit13', 'Wertung13', 'Chipnr13', 'Gemietet13', 'Datenbank Id13', 'Xtra14', 'Lnr14', 'Xtranr14', 'Nachname14', 'Vorname14', 'Jg14', 'G14', 'Start14', 'Ziel14', 'Zeit14', 'Wertung14', 'Chipnr14', 'Gemietet14', 'Datenbank Id14', 'Xtra15', 'Lnr15', 'Xtranr15', 'Nachname15', 'Vorname15', 'Jg15', 'G15', 'Start15', 'Ziel15', 'Zeit15', 'Wertung15', 'Chipnr15', 'Gemietet15', 'Datenbank Id15', 'Xtra16', 'Lnr16', 'Xtranr16', 'Nachname16', 'Vorname16', 'Jg16', 'G16', 'Start16', 'Ziel16', 'Zeit16', 'Wertung16', 'Chipnr16', 'Gemietet16', 'Datenbank Id16', 'Xtra17', 'Lnr17', 'Xtranr17', 'Nachname17', 'Vorname17', 'Jg17', 'G17', 'Start17', 'Ziel17', 'Zeit17', 'Wertung17', 'Chipnr17', 'Gemietet17', 'Datenbank Id17', 'Xtra18', 'Lnr18', 'Xtranr18', 'Nachname18', 'Vorname18', 'Jg18', 'G18', 'Start18', 'Ziel18', 'Zeit18', 'Wertung18', 'Chipnr18', 'Gemietet18', 'Datenbank Id18', 'Xtra19', 'Lnr19', 'Xtranr19', 'Nachname19', 'Vorname19', 'Jg19', 'G19', 'Start19', 'Ziel19', 'Zeit19', 'Wertung19', 'Chipnr19', 'Gemietet19', 'Datenbank Id19', 'Xtra20', 'Lnr20', 'Xtranr20', 'Nachname20', 'Vorname20', 'Jg20', 'G20', 'Start20', 'Ziel20', 'Zeit20', 'Wertung20', 'Chipnr20', 'Gemietet20', 'Datenbank Id20', '')
-_csv_header_ot_de = ('Stnr', 'Mannschaft', 'Block', 'AK', 'Start', 'Ziel', 'Zeit', 'Wertung', 'Club-Nr.', 'Abk', 'Ort', 'Nat', 'Katnr', 'Kurz', 'Lang', 'Läufer', 'Num1', 'Num2', 'Num3', 'Text1', 'Text2', 'Text3', 'Startgeld', 'Bezahlt', 'Nachname', 'Vorname', 'Jg', 'G', 'SI-Karte', 'Gemietet', 'Datenbank Id', 'Nachname', 'Vorname', 'Jg', 'G', 'SI-Karte', 'Gemietet', 'Datenbank Id', 'Nachname', 'Vorname', 'Jg', 'G', 'SI-Karte', 'Gemietet', 'Datenbank Id', 'Nachname', 'Vorname', 'Jg', 'G', 'SI-Karte', 'Gemietet', 'Datenbank Id', 'Nachname', 'Vorname', 'Jg', 'G', 'SI-Karte', 'Gemietet', 'Datenbank Id')
+_csv_header_oe_de = (
+    'OE0001',
+    'Stnr',
+    'XStnr',
+    'Chipnr',
+    'Datenbank Id',
+    'Nachname',
+    'Vorname',
+    'Jg',
+    'G',
+    'Block',
+    'AK',
+    'Start',
+    'Ziel',
+    'Zeit',
+    'Wertung',
+    'Gutschrift -',
+    'Zuschlag +',
+    'Kommentar',
+    'Club-Nr.',
+    'Abk',
+    'Ort',
+    'Nat',
+    'Sitz',
+    'Region',
+    'Katnr',
+    'Kurz',
+    'Lang',
+    'MeldeKat. Nr',
+    'MeldeKat. (kurz)',
+    'MeldeKat. (lang)',
+    'Rang',
+    'Ranglistenpunkte',
+    'Num1',
+    'Num2',
+    'Num3',
+    'Text1',
+    'Text2',
+    'Text3',
+    'Adr. Nachname',
+    'Adr. Vorname',
+    'Straße',
+    'Zeile2',
+    'PLZ',
+    'Adr. Ort',
+    'Tel',
+    'Mobil',
+    'Fax',
+    'EMail',
+    'Gemietet',
+    'Startgeld',
+    'Bezahlt',
+    'Mannschaft',
+    'Bahnnummer',
+    'Bahn',
+    'km',
+    'Hm',
+    'Bahn Posten',
+    '',
+)
+_csv_header_os_de = (
+    'OS0001',
+    'Stnr',
+    'Melde Id',
+    'Bez',
+    'Block',
+    'AK',
+    'Start',
+    'Zeit',
+    'Wertung',
+    'Pl',
+    'Gutschrift -',
+    'Zuschlag +',
+    'Kommentar',
+    'Club-Nr.',
+    'Abk',
+    'Ort',
+    'Nat',
+    'Sitz',
+    'Region',
+    'Katnr',
+    'Kurz',
+    'Lang',
+    'Läufer',
+    'Num1',
+    'Num2',
+    'Num3',
+    'Text1',
+    'Text2',
+    'Text3',
+    'Startgeld',
+    'Bezahlt',
+    'Xtra1',
+    'Lnr1',
+    'Xtranr1',
+    'Nachname1',
+    'Vorname1',
+    'Jg1',
+    'G1',
+    'Start1',
+    'Ziel1',
+    'Zeit1',
+    'Wertung1',
+    'Chipnr1',
+    'Gemietet1',
+    'Datenbank Id1',
+    'Xtra2',
+    'Lnr2',
+    'Xtranr2',
+    'Nachname2',
+    'Vorname2',
+    'Jg2',
+    'G2',
+    'Start2',
+    'Ziel2',
+    'Zeit2',
+    'Wertung2',
+    'Chipnr2',
+    'Gemietet2',
+    'Datenbank Id2',
+    'Xtra3',
+    'Lnr3',
+    'Xtranr3',
+    'Nachname3',
+    'Vorname3',
+    'Jg3',
+    'G3',
+    'Start3',
+    'Ziel3',
+    'Zeit3',
+    'Wertung3',
+    'Chipnr3',
+    'Gemietet3',
+    'Datenbank Id3',
+    'Xtra4',
+    'Lnr4',
+    'Xtranr4',
+    'Nachname4',
+    'Vorname4',
+    'Jg4',
+    'G4',
+    'Start4',
+    'Ziel4',
+    'Zeit4',
+    'Wertung4',
+    'Chipnr4',
+    'Gemietet4',
+    'Datenbank Id4',
+    'Xtra5',
+    'Lnr5',
+    'Xtranr5',
+    'Nachname5',
+    'Vorname5',
+    'Jg5',
+    'G5',
+    'Start5',
+    'Ziel5',
+    'Zeit5',
+    'Wertung5',
+    'Chipnr5',
+    'Gemietet5',
+    'Datenbank Id5',
+    'Xtra6',
+    'Lnr6',
+    'Xtranr6',
+    'Nachname6',
+    'Vorname6',
+    'Jg6',
+    'G6',
+    'Start6',
+    'Ziel6',
+    'Zeit6',
+    'Wertung6',
+    'Chipnr6',
+    'Gemietet6',
+    'Datenbank Id6',
+    'Xtra7',
+    'Lnr7',
+    'Xtranr7',
+    'Nachname7',
+    'Vorname7',
+    'Jg7',
+    'G7',
+    'Start7',
+    'Ziel7',
+    'Zeit7',
+    'Wertung7',
+    'Chipnr7',
+    'Gemietet7',
+    'Datenbank Id7',
+    'Xtra8',
+    'Lnr8',
+    'Xtranr8',
+    'Nachname8',
+    'Vorname8',
+    'Jg8',
+    'G8',
+    'Start8',
+    'Ziel8',
+    'Zeit8',
+    'Wertung8',
+    'Chipnr8',
+    'Gemietet8',
+    'Datenbank Id8',
+    'Xtra9',
+    'Lnr9',
+    'Xtranr9',
+    'Nachname9',
+    'Vorname9',
+    'Jg9',
+    'G9',
+    'Start9',
+    'Ziel9',
+    'Zeit9',
+    'Wertung9',
+    'Chipnr9',
+    'Gemietet9',
+    'Datenbank Id9',
+    'Xtra10',
+    'Lnr10',
+    'Xtranr10',
+    'Nachname10',
+    'Vorname10',
+    'Jg10',
+    'G10',
+    'Start10',
+    'Ziel10',
+    'Zeit10',
+    'Wertung10',
+    'Chipnr10',
+    'Gemietet10',
+    'Datenbank Id10',
+    'Xtra11',
+    'Lnr11',
+    'Xtranr11',
+    'Nachname11',
+    'Vorname11',
+    'Jg11',
+    'G11',
+    'Start11',
+    'Ziel11',
+    'Zeit11',
+    'Wertung11',
+    'Chipnr11',
+    'Gemietet11',
+    'Datenbank Id11',
+    'Xtra12',
+    'Lnr12',
+    'Xtranr12',
+    'Nachname12',
+    'Vorname12',
+    'Jg12',
+    'G12',
+    'Start12',
+    'Ziel12',
+    'Zeit12',
+    'Wertung12',
+    'Chipnr12',
+    'Gemietet12',
+    'Datenbank Id12',
+    'Xtra13',
+    'Lnr13',
+    'Xtranr13',
+    'Nachname13',
+    'Vorname13',
+    'Jg13',
+    'G13',
+    'Start13',
+    'Ziel13',
+    'Zeit13',
+    'Wertung13',
+    'Chipnr13',
+    'Gemietet13',
+    'Datenbank Id13',
+    'Xtra14',
+    'Lnr14',
+    'Xtranr14',
+    'Nachname14',
+    'Vorname14',
+    'Jg14',
+    'G14',
+    'Start14',
+    'Ziel14',
+    'Zeit14',
+    'Wertung14',
+    'Chipnr14',
+    'Gemietet14',
+    'Datenbank Id14',
+    'Xtra15',
+    'Lnr15',
+    'Xtranr15',
+    'Nachname15',
+    'Vorname15',
+    'Jg15',
+    'G15',
+    'Start15',
+    'Ziel15',
+    'Zeit15',
+    'Wertung15',
+    'Chipnr15',
+    'Gemietet15',
+    'Datenbank Id15',
+    'Xtra16',
+    'Lnr16',
+    'Xtranr16',
+    'Nachname16',
+    'Vorname16',
+    'Jg16',
+    'G16',
+    'Start16',
+    'Ziel16',
+    'Zeit16',
+    'Wertung16',
+    'Chipnr16',
+    'Gemietet16',
+    'Datenbank Id16',
+    'Xtra17',
+    'Lnr17',
+    'Xtranr17',
+    'Nachname17',
+    'Vorname17',
+    'Jg17',
+    'G17',
+    'Start17',
+    'Ziel17',
+    'Zeit17',
+    'Wertung17',
+    'Chipnr17',
+    'Gemietet17',
+    'Datenbank Id17',
+    'Xtra18',
+    'Lnr18',
+    'Xtranr18',
+    'Nachname18',
+    'Vorname18',
+    'Jg18',
+    'G18',
+    'Start18',
+    'Ziel18',
+    'Zeit18',
+    'Wertung18',
+    'Chipnr18',
+    'Gemietet18',
+    'Datenbank Id18',
+    'Xtra19',
+    'Lnr19',
+    'Xtranr19',
+    'Nachname19',
+    'Vorname19',
+    'Jg19',
+    'G19',
+    'Start19',
+    'Ziel19',
+    'Zeit19',
+    'Wertung19',
+    'Chipnr19',
+    'Gemietet19',
+    'Datenbank Id19',
+    'Xtra20',
+    'Lnr20',
+    'Xtranr20',
+    'Nachname20',
+    'Vorname20',
+    'Jg20',
+    'G20',
+    'Start20',
+    'Ziel20',
+    'Zeit20',
+    'Wertung20',
+    'Chipnr20',
+    'Gemietet20',
+    'Datenbank Id20',
+    '',
+)
+_csv_header_ot_de = (
+    'Stnr',
+    'Mannschaft',
+    'Block',
+    'AK',
+    'Start',
+    'Ziel',
+    'Zeit',
+    'Wertung',
+    'Club-Nr.',
+    'Abk',
+    'Ort',
+    'Nat',
+    'Katnr',
+    'Kurz',
+    'Lang',
+    'Läufer',
+    'Num1',
+    'Num2',
+    'Num3',
+    'Text1',
+    'Text2',
+    'Text3',
+    'Startgeld',
+    'Bezahlt',
+    'Nachname',
+    'Vorname',
+    'Jg',
+    'G',
+    'SI-Karte',
+    'Gemietet',
+    'Datenbank Id',
+    'Nachname',
+    'Vorname',
+    'Jg',
+    'G',
+    'SI-Karte',
+    'Gemietet',
+    'Datenbank Id',
+    'Nachname',
+    'Vorname',
+    'Jg',
+    'G',
+    'SI-Karte',
+    'Gemietet',
+    'Datenbank Id',
+    'Nachname',
+    'Vorname',
+    'Jg',
+    'G',
+    'SI-Karte',
+    'Gemietet',
+    'Datenbank Id',
+    'Nachname',
+    'Vorname',
+    'Jg',
+    'G',
+    'SI-Karte',
+    'Gemietet',
+    'Datenbank Id',
+)
 
 
 def parse_float(string):
@@ -19,12 +449,14 @@ def parse_float(string):
         return None
     return float(string.replace(',', '.'))
 
+
 def parse_sex(string):
     if string in ('W', 'D', 'F'):
         return model.Sex.FEMALE
     if string in ('M', 'H'):
         return model.Sex.MALE
     return None
+
 
 def parse_time(string, with_seconds=True):
     if string == '':
@@ -34,6 +466,7 @@ def parse_time(string, with_seconds=True):
     minutes = values.pop() if values else 0
     hours = values.pop() if values else 0
     return timedelta(seconds=seconds, minutes=minutes, hours=hours)
+
 
 def format_time(value, with_seconds=True):
     if value is None:
@@ -45,8 +478,10 @@ def format_time(value, with_seconds=True):
         string = string[:-3]
     return string
 
+
 def detect(input_file):
     return bool(_detect_type(input_file))
+
 
 @contextmanager
 def _wrap_binary_stream(io_buffer):
@@ -55,12 +490,13 @@ def _wrap_binary_stream(io_buffer):
     Usually when a `io.TextIOWrapper` is destroyed, the underlying stream is
     closed. We prevent this here, because we do not control the given stream.
     """
-    wrapper = TextIOWrapper(io_buffer, encoding = 'latin1', newline = '')
+    wrapper = TextIOWrapper(io_buffer, encoding='latin1', newline='')
     try:
         yield wrapper
     finally:
         wrapper.detach()
         del wrapper
+
 
 def _detect_type(input_file):
     with _wrap_binary_stream(input_file) as input_stream:
@@ -73,10 +509,10 @@ def _detect_type(input_file):
             return 'OE11'
         if header.startswith('OS0001'):
             return 'OS11'
-        if sum(1 for c in header if c == ';') == 58 and \
-                header.startswith('Stnr;Mannschaft;'):
+        if sum(1 for c in header if c == ';') == 58 and header.startswith('Stnr;Mannschaft;'):
             return 'OT10'
         return None
+
 
 def read(input_file):
     file_type = _detect_type(input_file)
@@ -94,6 +530,7 @@ def read(input_file):
         yield from csv_reader.read_team_v10(input_file)
     else:
         raise NotImplementedError
+
 
 def write(output_file, race):
     csv_writer = CSVWriter(race)
@@ -115,13 +552,13 @@ class CSVReader:
         self.categories = {}
         self.courses = {}
 
-    def read_solo_v11(self, input_file, with_seconds = False):
+    def read_solo_v11(self, input_file, with_seconds=False):
         """Read a SportSoftware OE2010 csv export file"""
         self.race.event.form = model.EventForm.INDIVIDUAL
 
         with _wrap_binary_stream(input_file) as csvfile:
-            csv_reader = csv.reader(csvfile, delimiter = ';', doublequote = False)
-            #skip header:
+            csv_reader = csv.reader(csvfile, delimiter=';', doublequote=False)
+            # skip header:
             next(csv_reader, None)
 
             # Currently unmapped fields:
@@ -177,35 +614,29 @@ class CSVReader:
 
                 if row[24]:
                     category = self.read_category(*row[24:27])
-                    entry.category_requests.append(model.EntryCategoryRequest(
-                        category=category.event_category
-                        ))
+                    entry.category_requests.append(model.EntryCategoryRequest(category=category.event_category))
                     start.category = category
 
-                #solo['fee'] = parse_float(row[49])
+                # solo['fee'] = parse_float(row[49])
 
                 if row[52]:
                     course_id = int(row[52])
                     try:
                         course = self.courses[course_id]
                     except KeyError:
-                        course = model.Course(
-                                name=row[53],
-                                length=parse_float(row[54]),
-                                climb=parse_float(row[55])
-                                )
+                        course = model.Course(name=row[53], length=parse_float(row[54]), climb=parse_float(row[55]))
                         self.courses[course_id] = course
                     entry.course = course
 
                 yield entry
 
-    def read_relay_v11(self, input_file, with_seconds = False):
+    def read_relay_v11(self, input_file, with_seconds=False):
         """Read a SportSoftware OS2010 csv export file"""
         self.race.event.form = model.EventForm.RELAY
 
         with _wrap_binary_stream(input_file) as csvfile:
-            csv_reader = csv.reader(csvfile, delimiter = ';', doublequote = False)
-            #skip header:
+            csv_reader = csv.reader(csvfile, delimiter=';', doublequote=False)
+            # skip header:
             next(csv_reader, None)
             for row in csv_reader:
                 entry = model.Entry(event=self.race.event)
@@ -221,11 +652,9 @@ class CSVReader:
                     entry.name = row[3]
 
                 category = self.read_category(*row[19:23])
-                entry.category_requests.append(model.EntryCategoryRequest(
-                    category=category.event_category
-                    ))
+                entry.category_requests.append(model.EntryCategoryRequest(category=category.event_category))
 
-                #relay['fee'] = parse_float(row[29]) or 0)
+                # relay['fee'] = parse_float(row[29]) or 0)
 
                 start = self.read_start_and_result(*row[5:7], '', *row[7:9], *row[10:12])
                 start.entry = entry
@@ -233,31 +662,29 @@ class CSVReader:
 
                 for competitor_nr in range(category.event_category.max_number_of_team_members):
                     offset = 31 + competitor_nr * 14
-                    competitor = self.read_competitor(*row[offset+3:offset+7], row[offset+11])
+                    competitor = self.read_competitor(*row[offset + 3 : offset + 7], row[offset + 11])
                     entry.competitors.append(competitor)
 
-                    if row[offset+7]:
+                    if row[offset + 7]:
                         competitor_start = model.CompetitorStart(
-                                start=start,
-                                competitor=competitor,
-                                time_offset=parse_time(row[offset+7])
-                                )
+                            start=start, competitor=competitor, time_offset=parse_time(row[offset + 7])
+                        )
                         if competitor.control_cards:
                             competitor_start.control_card = competitor.control_cards[0]
 
-                    if any(row[offset+8:offset+11]):
-                        start_offset = parse_time(row[offset+7])
-                        finish_offset = parse_time(row[offset+8])
+                    if any(row[offset + 8 : offset + 11]):
+                        start_offset = parse_time(row[offset + 7])
+                        finish_offset = parse_time(row[offset + 8])
                         competitor_start.competitor_result = model.CompetitorResult(
-                                start_time=datetime(MINYEAR, 1, 1) + start_offset if start_offset else None,
-                                finish_time=datetime(MINYEAR, 1, 1) + finish_offset if finish_offset else None,
-                                time=parse_time(row[offset+9]),
-                                status=self.read_result_status(row[offset+10])
-                                )
+                            start_time=datetime(MINYEAR, 1, 1) + start_offset if start_offset else None,
+                            finish_time=datetime(MINYEAR, 1, 1) + finish_offset if finish_offset else None,
+                            time=parse_time(row[offset + 9]),
+                            status=self.read_result_status(row[offset + 10]),
+                        )
 
-                    #relay['times'] = {
+                    # relay['times'] = {
                     #        'finish':  parse_time(row[31 + runner_count * 14 - 6], with_seconds),
-                    #}
+                    # }
 
                 yield entry
 
@@ -266,8 +693,8 @@ class CSVReader:
         self.race.event.form = model.EventForm.TEAM
 
         with _wrap_binary_stream(input_file) as csvfile:
-            csv_reader = csv.reader(csvfile, delimiter = ';', doublequote = False)
-            #skip header:
+            csv_reader = csv.reader(csvfile, delimiter=';', doublequote=False)
+            # skip header:
             next(csv_reader, None)
             for row in csv_reader:
                 entry = model.Entry(event=self.race.event)
@@ -283,19 +710,17 @@ class CSVReader:
                     entry.organisation = self.read_club(*row[8:12])
 
                 category = self.read_category(*row[12:16])
-                entry.category_requests.append(model.EntryCategoryRequest(
-                    category=category.event_category
-                    ))
+                entry.category_requests.append(model.EntryCategoryRequest(category=category.event_category))
 
                 start = self.read_start_and_result(*row[3:8])
                 start.entry = entry
                 start.category = category
 
-                #team['fee'] = parse_float(row[22].replace(',', '.') or 0)
+                # team['fee'] = parse_float(row[22].replace(',', '.') or 0)
 
                 for competitor_nr in range(entry.category_requests[0].category.max_number_of_team_members):
                     offset = 24 + competitor_nr * 7
-                    entry.competitors.append(self.read_competitor(*row[offset:offset+5]))
+                    entry.competitors.append(self.read_competitor(*row[offset : offset + 5]))
 
                 yield entry
 
@@ -305,15 +730,11 @@ class CSVReader:
             return self.clubs[club_id]
         except KeyError:
             club = model.Organisation(
-                    name=(abbreviation + ' ' + city).strip(),
-                    short_name=abbreviation,
-                    type=model.OrganisationType.CLUB
-                    )
-            club.external_ids.append(model.OrganisationXID(
-                organisation=club,
-                issuer='SportSoftware',
-                external_id=str(club_id)
-                ))
+                name=(abbreviation + ' ' + city).strip(), short_name=abbreviation, type=model.OrganisationType.CLUB
+            )
+            club.external_ids.append(
+                model.OrganisationXID(organisation=club, issuer='SportSoftware', external_id=str(club_id))
+            )
 
             if len(country) == 2:
                 club.country = model.Country(iso_alpha_2=country)
@@ -330,23 +751,20 @@ class CSVReader:
             return self.categories[category_id]
         except KeyError:
             event_category = model.EventCategory(
-                    event=self.race.event,
-                    name=name,
-                    short_name=short_name,
-                    status=model.EventCategoryStatus.NORMAL,
-                    sex=parse_sex(short_name[0]),
-                    max_number_of_team_members=team_size
-                    )
-            event_category.external_ids.append(model.EventCategoryXID(
-                event_category=event_category,
-                issuer='SportSoftware',
-                external_id=str(category_id)
-                ))
-            category = model.Category(
-                    race=self.race,
-                    event_category=event_category
-                    )
-            for leg_number in range(1, team_size+1):
+                event=self.race.event,
+                name=name,
+                short_name=short_name,
+                status=model.EventCategoryStatus.NORMAL,
+                sex=parse_sex(short_name[0]),
+                max_number_of_team_members=team_size,
+            )
+            event_category.external_ids.append(
+                model.EventCategoryXID(
+                    event_category=event_category, issuer='SportSoftware', external_id=str(category_id)
+                )
+            )
+            category = model.Category(race=self.race, event_category=event_category)
+            for leg_number in range(1, team_size + 1):
                 event_category.legs.append(model.Leg(leg_number=leg_number))
 
             self.categories[category_id] = category
@@ -356,20 +774,21 @@ class CSVReader:
         birth_year = tools.normalize_year(birth_year)
 
         person = model.Person(
-                family_name=family_name,
-                given_name=given_name,
-                birth_date=date(year=birth_year, month=1, day=1) if birth_year else None,
-                sex=parse_sex(sex)
-                )
+            family_name=family_name,
+            given_name=given_name,
+            birth_date=date(year=birth_year, month=1, day=1) if birth_year else None,
+            sex=parse_sex(sex),
+        )
         competitor = model.Competitor(person=person)
         if control_card_label:
-            competitor.control_cards.append(model.ControlCard(
-                system=model.PunchingSystem.SportIdent,
-                label=control_card_label
-                ))
+            competitor.control_cards.append(
+                model.ControlCard(system=model.PunchingSystem.SportIdent, label=control_card_label)
+            )
         return competitor
 
-    def read_start_and_result(self, non_competitive, start_offset, finish_offset='', result_time='', status='', time_bonus='', time_penalty=''):
+    def read_start_and_result(
+        self, non_competitive, start_offset, finish_offset='', result_time='', status='', time_bonus='', time_penalty=''
+    ):
         """Read start and result columns
 
         Note: The export data only contains relative time values, while
@@ -378,22 +797,18 @@ class CSVReader:
         types, which still need to be shifted to the proper race start
         time.
         """
-        start = model.Start(
-                competitive=non_competitive.upper() != 'X',
-                time_offset=parse_time(start_offset)
-                )
+        start = model.Start(competitive=non_competitive.upper() != 'X', time_offset=parse_time(start_offset))
 
         if finish_offset or result_time or status:
             start_offset = parse_time(start_offset)
             finish_offset = parse_time(finish_offset)
             result = model.Result(
-                    start=start,
-                    start_time=datetime(MINYEAR, 1, 1) + start_offset if start_offset else None,
-                    finish_time=datetime(MINYEAR, 1, 1) + finish_offset if finish_offset else None,
-                    time_adjustment=(parse_time(time_penalty) or timedelta())
-                        - (parse_time(time_bonus) or timedelta()),
-                    time=parse_time(result_time)
-                    )
+                start=start,
+                start_time=datetime(MINYEAR, 1, 1) + start_offset if start_offset else None,
+                finish_time=datetime(MINYEAR, 1, 1) + finish_offset if finish_offset else None,
+                time_adjustment=(parse_time(time_penalty) or timedelta()) - (parse_time(time_bonus) or timedelta()),
+                time=parse_time(result_time),
+            )
 
             if status:
                 result.status = self.read_result_status(status)
@@ -422,7 +837,7 @@ class CSVWriter:
 
     def write_solo_v11(self, output_file):
         with _wrap_binary_stream(output_file) as csvfile:
-            csv_writer = csv.writer(csvfile, delimiter = ';', doublequote = False)
+            csv_writer = csv.writer(csvfile, delimiter=';', doublequote=False)
 
             csv_writer.writerow(_csv_header_oe_de)
 
@@ -450,7 +865,7 @@ class CSVWriter:
 
     def write_team_v10(self, output_file):
         with _wrap_binary_stream(output_file) as csvfile:
-            csv_writer = csv.writer(csvfile, delimiter = ';', doublequote = False)
+            csv_writer = csv.writer(csvfile, delimiter=';', doublequote=False)
 
             csv_writer.writerow(_csv_header_ot_de)
 
@@ -475,39 +890,45 @@ class CSVWriter:
 
                 for (competitor_nr, competitor) in enumerate(entry.competitors):
                     offset = 24 + competitor_nr * 7
-                    row[offset:offset+5] = self.write_competitor(competitor)[:5]
+                    row[offset : offset + 5] = self.write_competitor(competitor)[:5]
 
                     # Only use the last two digits of the birth year
-                    row[offset+3] = row[offset+3][-2:]
+                    row[offset + 3] = row[offset + 3][-2:]
 
                 csv_writer.writerow(row)
 
     def write_club(self, club):
         return [
-                next(external_id.external_id for external_id in club.external_ids if external_id.issuer == 'SportSoftware'),
-                club.short_name,
-                club.name[len(club.short_name)+1:] if club.short_name and club.name.startswith(club.short_name + ' ') else club.name,
-                club.country.ioc_code if club.country else '',
-                '',
-                ''
-                ]
+            next(external_id.external_id for external_id in club.external_ids if external_id.issuer == 'SportSoftware'),
+            club.short_name,
+            club.name[len(club.short_name) + 1 :]
+            if club.short_name and club.name.startswith(club.short_name + ' ')
+            else club.name,
+            club.country.ioc_code if club.country else '',
+            '',
+            '',
+        ]
 
     def write_category(self, category):
         return [
-                next(external_id.external_id for external_id in category.external_ids if external_id.issuer == 'SportSoftware'),
-                category.short_name,
-                category.name,
-                category.max_number_of_team_members
-                ]
+            next(
+                external_id.external_id
+                for external_id in category.external_ids
+                if external_id.issuer == 'SportSoftware'
+            ),
+            category.short_name,
+            category.name,
+            category.max_number_of_team_members,
+        ]
 
     def write_competitor(self, competitor):
         person = competitor.person
         competitor_row = [
-                person.family_name,
-                person.given_name,
-                str(person.birth_date.year) if person.birth_date else '',
-                'F' if person.sex is model.Sex.FEMALE else 'M'
-                ]
+            person.family_name,
+            person.given_name,
+            str(person.birth_date.year) if person.birth_date else '',
+            'F' if person.sex is model.Sex.FEMALE else 'M',
+        ]
         if competitor.control_cards:
             competitor_row.append(competitor.control_cards[0].label)
         else:
@@ -517,13 +938,12 @@ class CSVWriter:
     def write_start_and_result(self, start):
         return [
             '' if start.competitive else 'X',
-            format_time(
-                (start.category.time_offset or timedelta())
-                + start.time_offset
-            ) if start.time_offset is not None else '',
+            format_time((start.category.time_offset or timedelta()) + start.time_offset)
+            if start.time_offset is not None
+            else '',
             '',
             '',
             '',
             '',
-            ''
+            '',
         ]
