@@ -12,7 +12,6 @@ object model for the XML, which can be handled quite efficiently.
 """
 
 from collections import defaultdict
-import datetime
 import logging
 from pkg_resources import resource_stream
 
@@ -24,7 +23,7 @@ from .tools import camelcase_to_snakecase
 
 _logger = logging.getLogger(__name__)
 _schema = etree.XMLSchema(etree.parse(resource_stream('holper.resources.IOF', 'IOF_3.0.xsd')))
-_ns = 'http://www.orienteering.org/datastandard/3.0'
+_NS = 'http://www.orienteering.org/datastandard/3.0'
 
 def detect(input_file):
     try:
@@ -38,7 +37,7 @@ def read(input_file):
     parser = etree.XMLParser(remove_comments=True, remove_pis=True, collect_ids=False)
     document = etree.parse(input_file, parser)
 
-    reader = _XMLReader(_ns)
+    reader = _XMLReader(_NS)
     yield from reader.read_document(document)
 
 
@@ -98,25 +97,25 @@ class _XMLReader:
         self.namespace = namespace
         self.id_registries = defaultdict(IDRegistry)
 
-    def tags(self, element, tags, ns=None):
-        if ns is None:
-            ns = self.namespace
+    def tags(self, element, tags, namespace=None):
+        if namespace is None:
+            namespace = self.namespace
         name = etree.QName(element.tag)
-        return name.namespace == ns and name.localname in tags
+        return name.namespace == namespace and name.localname in tags
 
-    def tag(self, element, tag, ns=None):
-        return self.tags(element, {tag}, ns)
+    def tag(self, element, tag, namespace=None):
+        return self.tags(element, {tag}, namespace)
 
-    """Factory method for model objects
+    def create_obj(self, element, cls):
+        """Factory method for model objects
 
-    If the element has Id-tags, those will be used to register and later
-    lookup the object in the :py:class:`~.IDRegistry` of the associated
-    Id issuer.
+        If the element has Id-tags, those will be used to register and later
+        lookup the object in the :py:class:`~.IDRegistry` of the associated Id
+        issuer.
 
-    Some elements like <Class> might occur multiple times in a document
-    instead of only being referenced through an Id.
-    """
-    def createObj(self, element, cls):
+        Some elements like <Class> might occur multiple times in a document
+        instead of only being referenced through an Id.
+        """
         obj = None
         for child in element:
             if not self.tag(child, 'Id') or not child.text:
@@ -141,7 +140,7 @@ class _XMLReader:
 
         return obj
 
-    def createObjFromId(self, id_element, cls):
+    def create_obj_from_id(self, id_element, cls):
         issuer = id_element.get('type')
         obj = self.id_registries[issuer].get(cls.__name__, id_element.text)
         if not obj:
@@ -149,6 +148,7 @@ class _XMLReader:
             registry = self.id_registries[issuer]
             registry.put(issuer, cls.__name__, id_element.text, obj)
 
+        return obj
 
     def read_document(self, document):
         root = document.getroot()
@@ -191,7 +191,7 @@ class _XMLReader:
                 yield race
 
     def _read_event(self, element):
-        event = self.createObj(element, model.Event)
+        event = self.create_obj(element, model.Event)
         for child in element:
             if self.tag(child, 'Id'):
                 pass
@@ -217,7 +217,7 @@ class _XMLReader:
         return iso8601.parse_date(element[0].text + 'T' + time)
 
     def _read_team_entry(self, element):
-        entry = self.createObj(element, model.Entry)
+        entry = self.create_obj(element, model.Entry)
         entry_count = 0
 
         for child in element:
@@ -266,7 +266,7 @@ class _XMLReader:
         return competitor
 
     def _read_person_entry(self, element):
-        competitor = self.createObj(element, model.Competitor)
+        competitor = self.create_obj(element, model.Competitor)
         if competitor.entry is None:
             entry = model.Entry()
             competitor.entry = entry
@@ -292,7 +292,7 @@ class _XMLReader:
         return entry
 
     def _read_person(self, element):
-        person = self.createObj(element, model.Person)
+        person = self.create_obj(element, model.Person)
 
         sex = element.get('sex')
         if sex is not None:
@@ -316,11 +316,11 @@ class _XMLReader:
         return model.Country(ioc_code=element.get('code'))
 
     def _read_organisation(self, element):
-        organisation = self.createObj(element, model.Organisation)
+        organisation = self.create_obj(element, model.Organisation)
 
-        type = element.get('type')
-        if type is not None:
-            organisation.type = model.OrganisationType(camelcase_to_snakecase(type))
+        org_type = element.get('type')
+        if org_type is not None:
+            organisation.type = model.OrganisationType(camelcase_to_snakecase(org_type))
 
         for child in element:
             if self.tag(child, 'Name'):
@@ -349,7 +349,7 @@ class _XMLReader:
         return card
 
     def _read_class(self, element):
-        event_category = self.createObj(element, model.EventCategory)
+        event_category = self.create_obj(element, model.EventCategory)
 
         min_age = element.get('minAge')
         if min_age is not None:
@@ -360,7 +360,7 @@ class _XMLReader:
             event_category.max_age = int(max_age)
 
         sex = element.get('sex')
-        if sex is not None and sex is not 'B':
+        if sex is not None and sex != 'B':
             event_category.sex = model.Sex(sex)
 
         for child in element:
@@ -408,7 +408,7 @@ class _XMLReader:
         return race
 
     def _read_course(self, element):
-        course = self.createObj(element, model.Course)
+        course = self.create_obj(element, model.Course)
 
         random_order = False
         control_order = 0
@@ -436,9 +436,9 @@ class _XMLReader:
     def _read_course_control(self, element):
         course_control = model.CourseControl()
 
-        type = element.get('type')
-        if type is not None:
-            course_control.type = model.ControlType(camelcase_to_snakecase(type))
+        course_type = element.get('type')
+        if course_type is not None:
+            course_control.type = model.ControlType(camelcase_to_snakecase(course_type))
 
         for child in element:
             if self.tag(child, 'Control'):
@@ -458,7 +458,7 @@ class _XMLReader:
 
         for child in element:
             if self.tag(child, 'ClassId'):
-                event_category = self.createObjFromId(child, model.EventCategory)
+                event_category = self.create_obj_from_id(child, model.EventCategory)
             elif self.tag(child, 'ClassName'):
                 if not event_category:
                     event_category = model.EventCategory()

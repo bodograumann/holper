@@ -16,6 +16,7 @@ the order of the categories with the same course.
 import random
 from collections import Counter, defaultdict
 from datetime import timedelta
+import operator
 
 from . import model
 from .affine_seq import AffineSeq
@@ -32,25 +33,25 @@ class CategoryOrder:
         for category in race.categories:
             self.order[category.courses[0].course.course_id].append(category)
 
-    def setOrderEarly(self, course, categories):
+    def set_order_early(self, course, categories):
         self.order[course.course_id] = categories + list(filter(
             lambda category: category not in categories,
             self.order[course.course_id]
             ))
 
-    def setOrderLate(self, course, categories):
+    def set_order_late(self, course, categories):
         self.order[course.course_id] = list(filter(
             lambda category: category not in categories,
             self.order[course.course_id]
             )) + categories
 
-    def getCategories(self, course):
+    def get_categories(self, course):
         try:
             return self.order[course.course_id]
         except KeyError:
             return []
 
-    def getCourseSlotCounts(self):
+    def get_course_slot_counts(self):
         counts = {}
         for course_id, categories in self.order.items():
             counts[course_id] = len(categories) - 1 + sum(
@@ -71,7 +72,6 @@ class StartSlots:
     @staticmethod
     def generate(slot_counts, box_count, interval, groups = None):
         slots = StartSlots()
-        import operator
         for course_id, count in sorted(slot_counts.items(), key=operator.itemgetter(1), reverse=True):
             try:
                 group = next(groups[key] for key in groups if course_id in groups[key])
@@ -79,12 +79,12 @@ class StartSlots:
                 print('No first control for course %s found' % course_id)
                 raise exc
 
-            start = slots.getFreeSlot(box_count, group)
-            slots.setSlots(course_id, AffineSeq(start, start + interval * count, interval))
+            start = slots.get_free_slot(box_count, group)
+            slots.set_slots(course_id, AffineSeq(start, start + interval * count, interval))
 
         return slots
 
-    def setSlots(self, course_id, slots):
+    def set_slots(self, course_id, slots):
         if course_id in self.slot_sets:
             for slot in self.slot_sets[course_id]:
                 self.box_sizes[slot] -= 1
@@ -92,10 +92,10 @@ class StartSlots:
         for slot in slots:
             self.box_sizes[slot] += 1
 
-    def getSlots(self, course_id):
+    def get_slots(self, course_id):
         yield from self.slot_sets[course_id]
 
-    def getFreeSlot(self, box_count = 1, group = []):
+    def get_free_slot(self, box_count = 1, group = []):
         for slot in range(self.start_window):
             if self.box_sizes[slot] >= box_count:
                 continue
@@ -123,12 +123,12 @@ class StartList:
         for category in race.categories:
             category.time_offset = None
 
-    def assignRandom(self):
+    def assign_random(self):
         """Assign start slots randomly"""
         for course in self.race.courses:
             slots = self.start_slots.getSlots(course.course_id)
 
-            for category in self.category_order.getCategories(course):
+            for category in self.category_order.get_categories(course):
                 # Non-competitive entries after competitive ones
                 starts = defaultdict(list)
                 for start in category.starts:
@@ -136,12 +136,12 @@ class StartList:
 
                 for competitive in [True, False]:
                     if starts[competitive]:
-                        self._assignEntriesRandom(starts[competitive], slots)
+                        self._assign_entries_random(starts[competitive], slots)
 
                         # After each category there has to be one slot left empty
                         next(slots)
 
-    def _assignEntriesRandom(self, starts, slot_iter):
+    def _assign_entries_random(self, starts, slot_iter):
         preferences = defaultdict(list)
         for start in starts:
             pref = 0
@@ -169,7 +169,7 @@ class StartList:
             else:
                 start.time_offset = timedelta(minutes=next(slot_iter)) - start.category.time_offset
 
-    def getStatistics(self):
+    def get_statistics(self):
         starts = sum((list(category.starts) for category in self.race.categories), [])
         total = len(starts)
         last_slot = max(start.category.time_offset + start.time_offset for start in starts)

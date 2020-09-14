@@ -50,14 +50,14 @@ from sqlalchemy import Table, Column, Sequence, \
         ForeignKey, UniqueConstraint, \
         String, SmallInteger, Integer, Boolean, Float, Date, DateTime, Interval, Enum, \
         TIMESTAMP
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative \
         import declared_attr, declarative_base, DeclarativeMeta
 
 from .tools import camelcase_to_snakecase
 
 
-def AutoEnum(name, members):
+def auto_enum(name, members):
     """Auto generate enum values as UPPER_CASE => upper_case"""
     return enum.Enum(name, ((label, label.lower()) for label in members))
 
@@ -95,18 +95,24 @@ class _ModelBase:
 
     def __repr__(self):
         try:
-            id = getattr(self, self.id_column)
+            primary_key = getattr(self, self.id_column)
         except AttributeError:
-            id = 'No id'
+            primary_key = 'No id'
 
-        return '<%s(%s)>' % (self.__class__.__name__, repr(id))
+        return '<%s(%s)>' % (self.__class__.__name__, repr(primary_key))
 
 
 Base = declarative_base(cls=_ModelBase, metaclass=_ExternalObject)
 
 
 class Country(Base):
-    country_id = Column(Integer, Sequence('country_id_seq'), primary_key=True, autoincrement=False, doc='ISO-3166 numeric code')
+    country_id = Column(
+        Integer,
+        Sequence('country_id_seq'),
+        primary_key=True,
+        autoincrement=False,
+        doc='ISO-3166 numeric code'
+    )
     name = Column(String(63), nullable=False)
     iso_alpha_2 = Column(String(2), doc='ISO-3166 alpha-2 code', nullable=False)
     iso_alpha_3 = Column(String(3), doc='ISO-3166 alpha-3 code', nullable=False)
@@ -117,7 +123,7 @@ class Country(Base):
 #
 # Custom types should be added with an X_ prefix.
 # E.g. X_CUSTOM = ()
-EventForm = AutoEnum('EventForm', [
+EventForm = auto_enum('EventForm', [
     'INDIVIDUAL',
     'TEAM',
     'RELAY'
@@ -153,7 +159,7 @@ class Sex(enum.Enum):
     MALE   = 'M'
 
 
-EventCategoryStatus = AutoEnum('EventCategoryStatus', [
+EventCategoryStatus = auto_enum('EventCategoryStatus', [
     'NORMAL',
     'DIVIDED',
     'JOINED',
@@ -218,7 +224,7 @@ class Race(Base):
         return self.event.entries
 
 
-RaceCategoryStatus = AutoEnum('RaceCategoryStatus', [
+RaceCategoryStatus = auto_enum('RaceCategoryStatus', [
     'START_TIMES_NOT_ALLOCATED',
     'START_TIMES_ALLOCATED',
     'NOT_USED',
@@ -259,7 +265,7 @@ class Course(Base):
     controls = relationship('CourseControl', back_populates='course')
 
 
-ControlType = AutoEnum('ControlType', [
+ControlType = auto_enum('ControlType', [
     'CONTROL',
     'START',
     'FINISH',
@@ -332,7 +338,7 @@ class PersonXID(Base):
     pass
 
 
-OrganisationType = AutoEnum('OrganisationType', [
+OrganisationType = auto_enum('OrganisationType', [
     'IOF',
     'IOF_REGION',
     'NATIONAL_FEDERATION',
@@ -395,7 +401,11 @@ class EntryCategoryRequest(Base):
 
 
 class StartTimeAllocationRequest(Base):
-    start_time_allocation_request_id = Column(Integer, Sequence('start_time_allocation_request_id_seq'), primary_key=True)
+    start_time_allocation_request_id = Column(
+        Integer,
+        Sequence('start_time_allocation_request_id_seq'),
+        primary_key=True
+    )
     entry_id = Column(Integer, ForeignKey(Entry.entry_id), nullable=False)
     entry = relationship(Entry, back_populates='start_time_allocation_requests')
 
@@ -406,7 +416,7 @@ class StartTimeAllocationRequest(Base):
     person = relationship(Person)
 
 
-StartTimeAllocationRequestType = AutoEnum('StartTimeAllocationRequestType', [
+StartTimeAllocationRequestType = auto_enum('StartTimeAllocationRequestType', [
     'NORMAL',
     'EARLY_START',
     'LATE_START',
@@ -415,7 +425,7 @@ StartTimeAllocationRequestType = AutoEnum('StartTimeAllocationRequestType', [
 ])
 
 
-PunchingSystem = AutoEnum('PunchingSystem', [
+PunchingSystem = auto_enum('PunchingSystem', [
     'SportIdent',
     'Emit'
     ])
@@ -468,7 +478,11 @@ class Start(Base):
     entry_id = Column(Integer, ForeignKey(Entry.entry_id), nullable=False)
     entry = relationship(Entry, back_populates='starts')
 
-    competitive = Column(Boolean, default=True, doc='Whether the starter is to be consired for the official ranking. This can be set to `False` for example if the starter does not fulfill some entry requirement.')
+    competitive = Column(
+        Boolean,
+        default=True,
+        doc='Whether the starter is to be consired for the official ranking. This can be set to `False` for example if the starter does not fulfill some entry requirement.'
+    )
     time_offset = Column(Interval, doc='Start time offset from category start time')
 
     competitor_starts = relationship('CompetitorStart', back_populates='start')
@@ -490,7 +504,7 @@ class CompetitorStart(Base):
 
 ### Results ###
 
-ResultStatus = AutoEnum('ResultStatus', [
+ResultStatus = auto_enum('ResultStatus', [
     'OK',
     'FINISHED',
     'MISSING_PUNCH',

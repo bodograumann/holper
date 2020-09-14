@@ -15,18 +15,16 @@ _csv_header_ot_de = ('Stnr', 'Mannschaft', 'Block', 'AK', 'Start', 'Ziel', 'Zeit
 
 
 def parse_float(string):
-    if string:
-        return float(string.replace(',', '.'))
-    else:
+    if not string:
         return None
+    return float(string.replace(',', '.'))
 
 def parse_sex(string):
     if string in ('W', 'D', 'F'):
         return model.Sex.FEMALE
-    elif string in ('M', 'H'):
+    if string in ('M', 'H'):
         return model.Sex.MALE
-    else:
-        return None
+    return None
 
 def parse_time(string, with_seconds=True):
     if string == '':
@@ -48,7 +46,7 @@ def format_time(value, with_seconds=True):
     return string
 
 def detect(input_file):
-	return bool(_detect_type(input_file))
+    return bool(_detect_type(input_file))
 
 @contextmanager
 def _wrap_binary_stream(io_buffer):
@@ -73,13 +71,12 @@ def _detect_type(input_file):
 
         if header.startswith('OE0001;'):
             return 'OE11'
-        elif header.startswith('OS0001'):
+        if header.startswith('OS0001'):
             return 'OS11'
-        elif sum(1 for c in header if c == ';') == 58 and \
+        if sum(1 for c in header if c == ';') == 58 and \
                 header.startswith('Stnr;Mannschaft;'):
             return 'OT10'
-        else:
-            return None
+        return None
 
 def read(input_file):
     file_type = _detect_type(input_file)
@@ -125,7 +122,7 @@ class CSVReader:
         with _wrap_binary_stream(input_file) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter = ';', doublequote = False)
             #skip header:
-            next(csv_reader)
+            next(csv_reader, None)
 
             # Currently unmapped fields:
             # 0: OE0001
@@ -209,7 +206,7 @@ class CSVReader:
         with _wrap_binary_stream(input_file) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter = ';', doublequote = False)
             #skip header:
-            next(csv_reader)
+            next(csv_reader, None)
             for row in csv_reader:
                 entry = model.Entry(event=self.race.event)
 
@@ -271,7 +268,7 @@ class CSVReader:
         with _wrap_binary_stream(input_file) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter = ';', doublequote = False)
             #skip header:
-            next(csv_reader)
+            next(csv_reader, None)
             for row in csv_reader:
                 entry = model.Entry(event=self.race.event)
 
@@ -406,18 +403,17 @@ class CSVReader:
     def read_result_status(self, status):
         if int(status) == 0:
             return model.ResultStatus.OK
-        elif int(status) == 1:
+        if int(status) == 1:
             return model.ResultStatus.DID_NOT_START
-        elif int(status) == 2:
+        if int(status) == 2:
             return model.ResultStatus.DID_NOT_FINISH
-        elif int(status) == 3:
+        if int(status) == 3:
             return model.ResultStatus.MISSING_PUNCH
-        elif int(status) == 4:
+        if int(status) == 4:
             return model.ResultStatus.DISQUALIFIED
-        elif int(status) == 5:
+        if int(status) == 5:
             return model.ResultStatus.OVER_TIME
-        else:
-            raise NotImplementedError('SportSoftware Wertung={}'.format(status))
+        raise NotImplementedError('SportSoftware Wertung={}'.format(status))
 
 
 class CSVWriter:
@@ -467,7 +463,7 @@ class CSVWriter:
 
                 try:
                     if entry.starts[0].time_offset is not None:
-                        row[4] = this.write_start_and_result(entry.starts[0])[1]
+                        row[4] = self.write_start_and_result(entry.starts[0])[1]
                 except IndexError:
                     pass
 
@@ -531,4 +527,3 @@ class CSVWriter:
             '',
             ''
         ]
-

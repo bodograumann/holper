@@ -1,13 +1,14 @@
 """Miscellaneous helper functions"""
+from datetime import date
+import re
+import sqlalchemy
 
 # Taken from http://stackoverflow.com/a/1176023
 def camelcase_to_snakecase(name_camel):
-    import re
     name_tmp = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name_camel)
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', name_tmp).lower()
 
 def fix_sqlite_engine(engine):
-    import sqlalchemy
     ### Fix pysqlite
     # see http://docs.sqlalchemy.org/en/latest/dialects/sqlite.html#serializable-isolation-savepoints-transactional-ddl
     @sqlalchemy.event.listens_for(engine, 'connect')
@@ -24,7 +25,6 @@ def fix_sqlite_engine(engine):
 
 def normalize_year(year):
     """Convert a possible two-digit year into a four-digit year"""
-    from datetime import date
 
     if year == '':
         return None
@@ -57,4 +57,3 @@ def disjoin(lst, key):
                 # move
                 lst.insert(idx, lst.pop(idx2))
         lst.reverse()
-

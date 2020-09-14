@@ -1,3 +1,5 @@
+"""Classes to manage invoices"""
+
 import datetime
 import decimal
 
@@ -6,23 +8,23 @@ from collections import OrderedDict
 import pystache
 
 precision = decimal.Decimal('0.01')
-def round(number):
+def round_amount(number):
     return number.quantize(precision)
 
 class Prices:
     def __init__(self):
         self.items = OrderedDict()
 
-    def addPrice(self, item_id, price, description, group = None):
-        self.items[item_id] = (round(decimal.Decimal(price)), description, group)
+    def add_price(self, item_id, price, description, group = None):
+        self.items[item_id] = (round_amount(decimal.Decimal(price)), description, group)
 
-    def getPrice(self, item_id):
+    def get_price(self, item_id):
         return self.items[item_id][0]
 
-    def getDescription(self, item_id):
+    def get_description(self, item_id):
         return self.items[item_id][1]
 
-    def getGroupName(self, item_id):
+    def get_group_name(self, item_id):
         return self.items[item_id][2]
 
 class Invoice:
@@ -34,40 +36,40 @@ class Invoice:
         self.paid_amount = 0
         self.remark = ''
 
-    def addItems(self, item_id, amount = 1):
+    def add_items(self, item_id, amount = 1):
         if not amount:
             return
 
-        group = self.prices.getGroupName(item_id)
+        group = self.prices.get_group_name(item_id)
         if group not in self.groups:
             self.groups[group] = {}
 
-        price = self.prices.getPrice(item_id)
+        price = self.prices.get_price(item_id)
         if item_id in self.groups[group]:
             self.groups[group][item_id]['amount'] += amount
             self.groups[group][item_id]['total'] += round(price * amount)
         else:
             self.groups[group][item_id] = {
-                'description': self.prices.getDescription(item_id),
+                'description': self.prices.get_description(item_id),
                 'price': price,
                 'amount': amount,
                 'total': price * amount
             }
 
-    def setPaid(self, amount):
+    def set_paid(self, amount):
         self.paid_amount = decimal.Decimal(amount)
 
-    def setRemark(self, remark):
+    def set_remark(self, remark):
         self.remark = remark
 
-    def getTotal(self):
+    def get_total(self):
         return sum(item['total'] for group in self.groups.values() for item in group.values())
 
-    def checkTotal(self, total):
-        return round(decimal.Decimal(total)) == round(self.getTotal())
+    def check_total(self, total):
+        return round(decimal.Decimal(total)) == round(self.get_total())
 
-    def fillTemplate(self, template_file, target_file, labels, reserve_space = False):
-        subtotal = self.getTotal()
+    def fill_template(self, template_file, target_file, labels, reserve_space = False):
+        subtotal = self.get_total()
         data = {
             'date': datetime.date.today().strftime(self.date_format),
             'recipient': self.recipient,

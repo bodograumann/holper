@@ -1,8 +1,13 @@
-import re
-from fractions import gcd
+"""Affine Sequences with convenience operators"""
 
-def lcm(a, b):
-    return int(abs(a * b) / gcd(a,b)) if a and b else 0
+import re
+from math import gcd
+
+def lcm(int1, int2):
+    """Calculate the least common multiple of two integers"""
+    if not int1 or not int2:
+        return 0
+    return int(abs(int1 * int2) / gcd(int1, int2))
 
 
 # Affine sequences are described by strings of the form '5n+7', similar to nth-child in css
@@ -12,7 +17,7 @@ class AffineSeq:
     __slots__ = ['start', 'stop', 'step']
 
     def __init__(self, start, stop, step = 1):
-        if type(start) is str:
+        if isinstance(start, str):
             match = affine_sequence_re.match(start)
             self.start = int(match.group('offset') or 0)
             self.step = int(match.group('interval') or 1)
@@ -22,28 +27,27 @@ class AffineSeq:
 
         self.stop = stop
 
-        assert(self.step > 0)
+        assert self.step > 0
 
     def pretty(self):
         return (str(self.step) if self.step != 1 else '') + 'n' + ('+' + str(self.start) if self.start else '')
 
-    def toRange(self):
+    def to_range(self):
         return range(self.start, self.stop, self.step)
 
     def __len__(self):
-        return len(self.toRange())
+        return len(self.to_range())
 
     def __getitem__(self, key):
-        if type(key) is AffineSeq:
+        if isinstance(key, AffineSeq):
             return AffineSeq(self[key.start], self[key.stop], self.step * key.step)
-        else:
-            return self.start + self.step * key
+        return self.start + self.step * key
 
     def __iter__(self):
-        return iter(self.toRange())
+        return iter(self.to_range())
 
     def __reversed__(self):
-        return reversed(self.toRange())
+        return reversed(self.to_range())
 
     def __contains__(self, item):
         return (self.start <= item < self.stop
@@ -79,16 +83,16 @@ class AffineSeq:
         return 'AffineSeq({}, {}, {})'.format(self.start, self.stop, self.step)
 
     def __str__(self):
-        l = len(self)
-        s = '('
-        if l > 0:
-            s += str(self.start)
-        if l > 1:
-            s += ', ' + str(self.start + self.step)
-        if l > 3:
-            s += ', …'
-        if l > 2:
-            s += ', ' + str(next(reversed(self)))
-        s += ')'
+        length = len(self)
+        string = '('
+        if length > 0:
+            string += str(self.start)
+        if length > 1:
+            string += ', ' + str(self.start + self.step)
+        if length > 3:
+            string += ', …'
+        if length > 2:
+            string += ', ' + str(next(reversed(self)))
+        string += ')'
 
-        return s
+        return string
