@@ -351,6 +351,18 @@ class _XMLReader:
     def _read_class(self, element):
         event_category = self.createObj(element, model.EventCategory)
 
+        min_age = element.get('minAge')
+        if min_age is not None:
+            event_category.min_age = int(min_age)
+
+        max_age = element.get('maxAge')
+        if max_age is not None:
+            event_category.max_age = int(max_age)
+
+        sex = element.get('sex')
+        if sex is not None and sex is not 'B':
+            event_category.sex = model.Sex(sex)
+
         for child in element:
             leg_count = 0
             if self.tag(child, 'Id'):
