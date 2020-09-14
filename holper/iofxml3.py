@@ -13,6 +13,7 @@ object model for the XML, which can be handled quite efficiently.
 
 from collections import defaultdict
 import datetime
+import logging
 from pkg_resources import resource_stream
 
 import iso8601
@@ -21,9 +22,9 @@ from lxml import etree
 from . import model
 from .tools import camelcase_to_snakecase
 
+_logger = logging.getLogger(__name__)
 _schema = etree.XMLSchema(etree.parse(resource_stream('holper.resources.IOF', 'IOF_3.0.xsd')))
 _ns = 'http://www.orienteering.org/datastandard/3.0'
-
 
 def detect(input_file):
     try:
@@ -159,7 +160,7 @@ class _XMLReader:
         elif self.tag(root, 'ClassList'):
             yield from self._read_class_list(root)
         else:
-            raise NotImplementedError(root.tag)
+            _logger.warning('Skipping unknown tag <%s>', root.tag)
 
     def _read_entry_list(self, element):
         event = None
@@ -205,7 +206,7 @@ class _XMLReader:
             elif self.tag(child, 'Class'):
                 event.categories.append(self._read_class(child))
             elif self.tag(child, {'Status', 'Race'}):
-                raise NotImplementedError(child.tag)
+                _logger.warning('Skipping unknown tag <%s>', child.tag)
         return event
 
     def _read_date_and_optional_time(self, element):
@@ -239,7 +240,7 @@ class _XMLReader:
                 'Race', 'AssignedFee', 'ServiceRequest',
                 'StartTimeAllocationRequest', 'ContactInformation'
                 }):
-                raise NotImplementedError(child.tag)
+                _logger.warning('Skipping unknown tag <%s>', child.tag)
 
         return entry
 
@@ -260,7 +261,7 @@ class _XMLReader:
             elif self.tags(child, {
                 'Score', 'AssignedFee'
                 }):
-                raise NotImplementedError(child.tag)
+                _logger.warning('Skipping unknown tag <%s>', child.tag)
 
         return competitor
 
@@ -286,7 +287,7 @@ class _XMLReader:
                 'Score', 'RaceNumber', 'AssignedFee', 'ServiceRequest',
                 'StartTimeAllocationRequest'
                 }):
-                raise NotImplementedError(child.tag)
+                _logger.warning('Skipping unknown tag <%s>', child.tag)
 
         return entry
 
@@ -329,7 +330,7 @@ class _XMLReader:
             elif self.tag(child, 'Country'):
                 organisation.country = self._read_country(child)
             elif self.tag(child, 'Address'):
-                raise NotImplementedError(child.tag)
+                _logger.warning('Skipping unknown tag <%s>', child.tag)
 
         return organisation
 
@@ -371,14 +372,14 @@ class _XMLReader:
                 'TooFewEntriesSubstituteClass',
                 'TooManyEntriesSubstituteClass'
                 }):
-                raise NotImplementedError(child.tag)
+                _logger.warning('Skipping unknown tag <%s>', child.tag)
 
         return event_category
 
     def _read_race_course_data(self, element):
         race = model.Race()
         if element.get('raceNumber'):
-            raise NotImplementedError('raceNumber')
+            _logger.warning('Ignoring unknown attribute %s', 'raceNumber')
 
         for child in element:
             if self.tag(child, 'Course'):
@@ -390,7 +391,7 @@ class _XMLReader:
             elif self.tags(child, {
                 'PersonCourseAssignment', 'TeamCourseAssignment',
                 }):
-                raise NotImplementedError(child.tag)
+                _logger.warning('Skipping unknown tag <%s>', child.tag)
 
         return race
 
@@ -416,7 +417,7 @@ class _XMLReader:
                     control_order += 1
                 random_order = child.get('randomOrder')
             elif self.tag(child, 'Family'):
-                raise NotImplementedError(child.tag)
+                _logger.warning('Skipping unknown tag <%s>', child.tag)
 
         return course
 
@@ -456,7 +457,7 @@ class _XMLReader:
             elif self.tag(child, 'CourseFamily') \
                     and not assignment.course \
                     or self.tag(child, 'AllowedOnLeg'):
-                raise NotImplementedError(child.tag)
+                _logger.warning('Skipping unknown tag <%s>', child.tag)
 
         assignment.category = model.Category(event_category=event_category)
         return assignment
