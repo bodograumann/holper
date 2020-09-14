@@ -156,6 +156,8 @@ class _XMLReader:
             yield from self._read_entry_list(root)
         elif self.tag(root, 'CourseData'):
             yield from self._read_course_data(root)
+        elif self.tag(root, 'ClassList'):
+            yield from self._read_class_list(root)
         else:
             raise NotImplementedError(root.tag)
 
@@ -458,3 +460,9 @@ class _XMLReader:
 
         assignment.category = model.Category(event_category=event_category)
         return assignment
+
+    def _read_class_list(self, element):
+        for child in element:
+            if self.tag(child, 'Class'):
+                category = self._read_class(child)
+                yield category
