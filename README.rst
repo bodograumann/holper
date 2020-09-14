@@ -32,3 +32,13 @@ Toolkit
     see `<http://www.sphinx-doc.org>`_
 - sqlalchemy-migrate
 - setuptools
+
+Development
+-----------
+
+Setup an virtual enviroment with::
+
+    python -m venv env
+    source env/bin/activate
+
+Run tests with ``pytest tests/test.py`` and the linter with ``python -m pylint holper tests``.
