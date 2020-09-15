@@ -626,7 +626,7 @@ class CompetitorResult(Base):
 # * Image
 # * MapPosition
 # * RaceCourseData
-# * ClassCourseAssignment
+# * ClassCourseAssignment → CategoryCourseAssignment
 # * PersonCourseAssignment
 # * TeamCourseAssignment
 # * TeamMemberCourseAssignment

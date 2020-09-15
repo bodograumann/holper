@@ -126,7 +126,7 @@ class StartList:
     def assign_random(self):
         """Assign start slots randomly"""
         for course in self.race.courses:
-            slots = self.start_slots.getSlots(course.course_id)
+            slots = self.start_slots.get_slots(course.course_id)
 
             for category in self.category_order.get_categories(course):
                 # Non-competitive entries after competitive ones

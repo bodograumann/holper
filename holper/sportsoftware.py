@@ -912,9 +912,12 @@ class CSVWriter:
     def write_category(self, category):
         return [
             next(
-                external_id.external_id
-                for external_id in category.external_ids
-                if external_id.issuer == 'SportSoftware'
+                (
+                    external_id.external_id
+                    for external_id in category.external_ids
+                    if external_id.issuer == 'SportSoftware'
+                ),
+                category.event_category_id,
             ),
             category.short_name,
             category.name,
