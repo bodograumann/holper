@@ -4,6 +4,7 @@ from io import TextIOWrapper
 from contextlib import contextmanager
 from datetime import date, datetime, timedelta, MINYEAR
 import csv
+import iconvcodec
 
 from . import model, tools
 
@@ -490,7 +491,7 @@ def _wrap_binary_stream(io_buffer):
     Usually when a `io.TextIOWrapper` is destroyed, the underlying stream is
     closed. We prevent this here, because we do not control the given stream.
     """
-    wrapper = TextIOWrapper(io_buffer, encoding='latin1', newline='')
+    wrapper = TextIOWrapper(io_buffer, encoding='latin1//TRANSLIT', newline='')
     try:
         yield wrapper
     finally:

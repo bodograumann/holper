@@ -15,7 +15,8 @@ setup(
             'Flask-GraphQL',
             'sqlalchemy >= 1.1',
             'iso8601',
-            'graphene_sqlalchemy'
+            'graphene_sqlalchemy',
+            'python-iconv >= 1.1',
         ],
 
         extras_require={
