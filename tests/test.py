@@ -108,7 +108,7 @@ class TestImport(TestCase):
             for entry in entries:
                 self.assertIsInstance(entry, model.Entry)
 
-            self.assertIs(entries[0].category_requests[0], entries[1].category_requests[0])
+            self.assertIs(entries[0].category_requests[0].category, entries[1].category_requests[0].category)
             self.assertEqual(entries[0].competitors[0].organisation.country.ioc_code, 'GBR')
 
     def test_iofxml3_team_entry_list(self):
