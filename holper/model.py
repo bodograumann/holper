@@ -63,8 +63,8 @@ from sqlalchemy import (
     Enum,
     TIMESTAMP,
 )
-from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declared_attr, declarative_base, DeclarativeMeta
+from sqlalchemy.orm import relationship, declarative_base
+from sqlalchemy.ext.declarative import declared_attr, DeclarativeMeta
 
 from .tools import camelcase_to_snakecase
 

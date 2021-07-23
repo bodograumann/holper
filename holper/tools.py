@@ -21,7 +21,7 @@ def fix_sqlite_engine(engine):
     @sqlalchemy.event.listens_for(engine, 'begin')
     def do_begin(conn):
         # emit our own BEGIN
-        conn.execute('BEGIN')
+        conn.execute(sqlalchemy.text('BEGIN'))
 
     ###
 
