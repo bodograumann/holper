@@ -406,7 +406,7 @@ class Entry(Base):
     organisation_id = Column(Integer, ForeignKey(Organisation.organisation_id))
     organisation = relationship(Organisation)
 
-    category_requests = relationship('EntryCategoryRequest', doc='Requested categories with preference')
+    category_requests = relationship('EntryCategoryRequest', back_populates='entry', doc='Requested categories with preference')
     start_time_allocation_requests = relationship('StartTimeAllocationRequest')
     starts = relationship('Start', back_populates='entry')
 
