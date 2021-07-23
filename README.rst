@@ -40,6 +40,7 @@ Setup an virtual enviroment with::
 
     python -m venv env
     source env/bin/activate
+    pip install -r requirements.txt
 
 Run tests with ``pytest tests/test.py`` and the linter with ``pylint holper tests``.
 

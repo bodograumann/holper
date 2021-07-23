@@ -92,7 +92,7 @@ class TestImport(TestCase):
                 for module in modules:
                     with self.subTest(filename=filename, module=module.__name__):
                         if module is files[filename]:
-                            self.assertTrue(module.detect(f))
+                            self.assertTrue(module.detect(f), f"{filename} is not recognized by {module.__name__}.")
                         else:
                             self.assertFalse(module.detect(f))
                         self.assertFalse(f.closed)
