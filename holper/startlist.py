@@ -35,12 +35,21 @@ class CategoryOrder:
 
     def set_order_early(self, course, categories):
         self.order[course.course_id] = categories + list(
-            filter(lambda category: category not in categories, self.order[course.course_id])
+            filter(
+                lambda category: category not in categories,
+                self.order[course.course_id],
+            )
         )
 
     def set_order_late(self, course, categories):
         self.order[course.course_id] = (
-            list(filter(lambda category: category not in categories, self.order[course.course_id])) + categories
+            list(
+                filter(
+                    lambda category: category not in categories,
+                    self.order[course.course_id],
+                )
+            )
+            + categories
         )
 
     def get_categories(self, course):
@@ -56,7 +65,9 @@ class CategoryOrder:
                 len(categories)
                 - 1
                 + sum(
-                    len(category.starts) + (category.vacancies_before or 0) + (category.vacancies_after or 0)
+                    len(category.starts)
+                    + (category.vacancies_before or 0)
+                    + (category.vacancies_after or 0)
                     for category in categories
                 )
             )
@@ -72,15 +83,19 @@ class StartSlots:
     @staticmethod
     def generate(slot_counts, box_count, interval, groups=None):
         slots = StartSlots()
-        for course_id, count in sorted(slot_counts.items(), key=operator.itemgetter(1), reverse=True):
+        for course_id, count in sorted(
+            slot_counts.items(), key=operator.itemgetter(1), reverse=True
+        ):
             try:
                 group = next(groups[key] for key in groups if course_id in groups[key])
             except StopIteration as exc:
-                print('No first control for course %s found' % course_id)
+                print("No first control for course %s found" % course_id)
                 raise exc
 
             start = slots.get_free_slot(box_count, group)
-            slots.set_slots(course_id, AffineSeq(start, start + interval * count, interval))
+            slots.set_slots(
+                course_id, AffineSeq(start, start + interval * count, interval)
+            )
 
         return slots
 
@@ -105,7 +120,7 @@ class StartSlots:
             else:
                 return slot
 
-        raise KeyError('No free slot found')
+        raise KeyError("No free slot found")
 
 
 class StartList:
@@ -167,21 +182,28 @@ class StartList:
                 start.category.time_offset = timedelta(minutes=next(slot_iter))
                 start.time_offset = timedelta()
             else:
-                start.time_offset = timedelta(minutes=next(slot_iter)) - start.category.time_offset
+                start.time_offset = (
+                    timedelta(minutes=next(slot_iter)) - start.category.time_offset
+                )
 
     def get_statistics(self):
         starts = sum((list(category.starts) for category in self.race.categories), [])
         total = len(starts)
-        last_slot = max(start.category.time_offset + start.time_offset for start in starts)
+        last_slot = max(
+            start.category.time_offset + start.time_offset for start in starts
+        )
         mean = total / ((last_slot + timedelta(minutes=1)).total_seconds() / 60)
-        counts = Counter(start.category.time_offset + start.time_offset for start in starts)
+        counts = Counter(
+            start.category.time_offset + start.time_offset for start in starts
+        )
         stats = Counter(counts.values())
 
         return {
-            'entries_total': total,
-            'last_start': (last_slot + timedelta(minutes=1)).total_seconds() / 60,
-            'entries_per_slot': stats,
-            'entries_per_slot_avg': mean,
-            'entries_per_slot_var': sum(counts[slot] ** 2 for slot in counts) / (last_slot.total_seconds() / 60 + 1)
+            "entries_total": total,
+            "last_start": (last_slot + timedelta(minutes=1)).total_seconds() / 60,
+            "entries_per_slot": stats,
+            "entries_per_slot_avg": mean,
+            "entries_per_slot_var": sum(counts[slot] ** 2 for slot in counts)
+            / (last_slot.total_seconds() / 60 + 1)
             - mean ** 2,
         }

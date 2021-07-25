@@ -12,17 +12,17 @@ def lcm(int1, int2):
 
 
 # Affine sequences are described by strings of the form '5n+7', similar to nth-child in css
-affine_sequence_re = re.compile(r'(?P<interval>[0-9]*)n(?:\+(?P<offset>[0-9]+))?')
+affine_sequence_re = re.compile(r"(?P<interval>[0-9]*)n(?:\+(?P<offset>[0-9]+))?")
 
 
 class AffineSeq:
-    __slots__ = ['start', 'stop', 'step']
+    __slots__ = ["start", "stop", "step"]
 
     def __init__(self, start, stop, step=1):
         if isinstance(start, str):
             match = affine_sequence_re.match(start)
-            self.start = int(match.group('offset') or 0)
-            self.step = int(match.group('interval') or 1)
+            self.start = int(match.group("offset") or 0)
+            self.step = int(match.group("interval") or 1)
         else:
             self.start = start
             self.step = step
@@ -32,7 +32,11 @@ class AffineSeq:
         assert self.step > 0
 
     def pretty(self):
-        return (str(self.step) if self.step != 1 else '') + 'n' + ('+' + str(self.start) if self.start else '')
+        return (
+            (str(self.step) if self.step != 1 else "")
+            + "n"
+            + ("+" + str(self.start) if self.start else "")
+        )
 
     def to_range(self):
         return range(self.start, self.stop, self.step)
@@ -55,13 +59,19 @@ class AffineSeq:
         return self.start <= item < self.stop and (item - self.start) % self.step == 0
 
     def __add__(self, other):
-        return AffineSeq(self.start + other.start, self.stop + other.stop, self.step + other.step)
+        return AffineSeq(
+            self.start + other.start, self.stop + other.stop, self.step + other.step
+        )
 
     def __lshift__(self, steps):
-        return AffineSeq(self.start - steps * self.step, self.stop - steps * self.step, self.step)
+        return AffineSeq(
+            self.start - steps * self.step, self.stop - steps * self.step, self.step
+        )
 
     def __rshift__(self, steps):
-        return AffineSeq(self.start + steps * self.step, self.stop + steps * self.step, self.step)
+        return AffineSeq(
+            self.start + steps * self.step, self.stop + steps * self.step, self.step
+        )
 
     def __and__(self, other):
         start = max(self.start, other.start)
@@ -81,19 +91,19 @@ class AffineSeq:
         return AffineSeq(start, stop, step)
 
     def __repr__(self):
-        return 'AffineSeq({}, {}, {})'.format(self.start, self.stop, self.step)
+        return "AffineSeq({}, {}, {})".format(self.start, self.stop, self.step)
 
     def __str__(self):
         length = len(self)
-        string = '('
+        string = "("
         if length > 0:
             string += str(self.start)
         if length > 1:
-            string += ', ' + str(self.start + self.step)
+            string += ", " + str(self.start + self.step)
         if length > 3:
-            string += ', …'
+            string += ", …"
         if length > 2:
-            string += ', ' + str(next(reversed(self)))
-        string += ')'
+            string += ", " + str(next(reversed(self)))
+        string += ")"
 
         return string
