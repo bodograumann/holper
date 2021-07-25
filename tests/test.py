@@ -4,7 +4,7 @@ import sqlalchemy
 import io
 import datetime
 
-from holper import iofxml2, iofxml3, sportsoftware, model, tools
+from holper import iofxml2, iofxml3, sportsoftware, model, tools, core
 
 
 class TestModel(TestCase):
@@ -12,13 +12,7 @@ class TestModel(TestCase):
 
     @classmethod
     def setUpClass(cls):
-        engine = sqlalchemy.create_engine('sqlite:///:memory:', echo=False)
-        tools.fix_sqlite_engine(engine)
-        model.Base.metadata.create_all(engine)
-
-        Session = sqlalchemy.orm.sessionmaker(bind=engine)
-        session = Session()
-        cls.session = session
+        cls.session = core.open_session("sqlite:///:memory:")
 
     def setUp(self):
         self.session.begin_nested()

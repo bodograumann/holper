@@ -7,16 +7,14 @@ setup(
         include_package_data=True,
         use_scm_version=True,
 
-        python_requires='>=3.5',
+        python_requires='>=3.6',
         install_requires=[
             'lxml',
             'PyYAML',
-            'Flask',
-            'Flask-GraphQL',
-            'sqlalchemy >= 1.1',
+            'sqlalchemy >= 1.4',
             'iso8601',
-            'graphene_sqlalchemy',
             'python-iconv >= 1.1',
+            'typer',
         ],
 
         extras_require={
