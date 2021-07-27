@@ -40,7 +40,9 @@ def read(input_file):
     parser = etree.XMLParser(remove_comments=True, remove_pis=True, collect_ids=False)
     document = etree.parse(input_file, parser)
 
-    reader = _XMLReader(_NS)
+    reader = _XMLReader(
+        _NS, default_registry=document.getroot().get("creator", "unknown")
+    )
     yield from reader.read_document(document)
 
 
@@ -96,8 +98,9 @@ class IDRegistry:
 
 
 class _XMLReader:
-    def __init__(self, namespace):
+    def __init__(self, namespace, default_registry):
         self.namespace = namespace
+        self.default_registry = default_registry
         self.id_registries = defaultdict(IDRegistry)
 
     def tags(self, element, tags, namespace=None):
@@ -124,7 +127,7 @@ class _XMLReader:
             if not self.tag(child, "Id") or not child.text:
                 continue
 
-            issuer = child.get("type")
+            issuer = child.get("type", self.default_registry)
             registry = self.id_registries[issuer]
             obj = registry.get(cls.__name__, child.text)
             if obj:
@@ -137,14 +140,14 @@ class _XMLReader:
             if not self.tag(child, "Id") or not child.text:
                 continue
 
-            issuer = child.get("type")
+            issuer = child.get("type", self.default_registry)
             registry = self.id_registries[issuer]
             registry.put(issuer, cls.__name__, child.text, obj)
 
         return obj
 
     def create_obj_from_id(self, id_element, cls):
-        issuer = id_element.get("type")
+        issuer = id_element.get("type", self.default_registry)
         obj = self.id_registries[issuer].get(cls.__name__, id_element.text)
         if not obj:
             obj = cls()
