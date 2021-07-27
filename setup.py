@@ -15,6 +15,7 @@ setup(
             'iso8601',
             'python-iconv >= 1.1',
             'typer',
+            'xdg',
         ],
 
         extras_require={
@@ -26,6 +27,12 @@ setup(
         ],
 
         test_suite='tests',
+
+        entry_points = {
+            'console_scripts': [
+                'holper = holper.cli:app'
+            ],
+        },
 
         description='orienteering competition management',
         url='https://grmnn.de/hOLper',
