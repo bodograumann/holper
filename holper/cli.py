@@ -40,21 +40,60 @@ def events(db_file: str = db_file_opt):
 
 
 @app.command()
+def event(event_id: int, db_file: str = db_file_opt):
+    """Show details of an event"""
+    with core.open_session(f"sqlite:///{db_file}") as session:
+        event_obj = core.get_event(session, event_id)
+        if not event_obj:
+            typer.echo("Event could not be found.")
+            return
+
+        typer.echo(f"Name: {event_obj.name}")
+        typer.echo(f"Period: {event_obj.start_time} - {event_obj.end_time}")
+        typer.echo(f"Form: {event_obj.form}")
+        if event_obj.races:
+            typer.echo(
+                f"{len(event_obj.races)} Races: "
+                + ", ".join(
+                    f"{race.first_start}" for race in event_obj.races
+                )
+            )
+        else:
+            typer.echo("No races yet")
+        if event_obj.categories:
+            typer.echo(
+                f"{len(event_obj.categories)} Categories: "
+                + ", ".join(category.short_name for category in event_obj.categories)
+            )
+        else:
+            typer.echo("No categories yet")
+        if event_obj.entries:
+            typer.echo(
+                f"{len(event_obj.entries)} Entries: "
+                + ", ".join(
+                    f"#{entry.event_category_id}" for entry in event_obj.entries
+                )
+            )
+        else:
+            typer.echo("No entries yet")
+
+
+@app.command()
 def new_event(name: str, date: datetime, db_file: str = db_file_opt):
     """Create a new single-race solo event"""
     Path(db_file).parent.mkdir(parents=True, exist_ok=True)
     with core.open_session(f"sqlite:///{db_file}") as session:
-        event = model.Event(
+        event_obj = model.Event(
             name=name, start_time=date, end_time=date + timedelta(days=1)
         )
         race = model.Race(first_start=date)
-        event.races.append(race)
+        event_obj.races.append(race)
 
-        session.add(event)
+        session.add(event_obj)
         session.commit()
 
         typer.echo(
-            f"A new event “{name}” was created successfully with number #{event.event_id}."
+            f"A new event “{name}” was created successfully with number #{event_obj.event_id}."
         )
 
 
@@ -62,25 +101,18 @@ def new_event(name: str, date: datetime, db_file: str = db_file_opt):
 def import_categories(event_id: int, category_file: Path, db_file: str = db_file_opt):
     """Import event categories in IOF XML v3 format"""
     with core.open_session(f"sqlite:///{db_file}") as session:
-        try:
-            (event,) = next(
-                session.execute(
-                    sqlalchemy.select(model.Event).where(
-                        model.Event.event_id == event_id
-                    )
-                )
-            )
-        except StopIteration:
+        event_obj = core.get_event(session, event_id)
+        if not event_obj:
             typer.echo("Event could not be found.")
             return
 
-        if event.categories:
+        if event_obj.categories:
             typer.echo(f"Event #{event_id} already contains categories.")
             return
 
         with open(category_file) as stream:
             categories = list(iofxml3.read(stream))
-        event.categories.extend(categories)
+        event_obj.categories.extend(categories)
         session.commit()
 
         typer.echo(f"Imported {len(categories)} categories")
