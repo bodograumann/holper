@@ -8,7 +8,7 @@ import sqlalchemy
 import typer
 from xdg import xdg_data_home
 
-from holper import core, model
+from holper import core, model, iofxml3
 
 app = typer.Typer()
 
@@ -19,10 +19,10 @@ db_file_opt = typer.Option(xdg_data_home() / "holper" / "data.sqlite")
 
 
 @app.command()
-def events(file: str = db_file_opt):
+def events(db_file: str = db_file_opt):
     """Show list of all events"""
-    Path(file).parent.mkdir(parents=True, exist_ok=True)
-    session = core.open_session(f"sqlite:///{file}")
+    Path(db_file).parent.mkdir(parents=True, exist_ok=True)
+    session = core.open_session(f"sqlite:///{db_file}")
 
     event_list = [event for (event,) in session.execute(sqlalchemy.select(model.Event))]
 
@@ -40,10 +40,10 @@ def events(file: str = db_file_opt):
 
 
 @app.command()
-def new_event(name: str, date: datetime, file: str = db_file_opt):
+def new_event(name: str, date: datetime, db_file: str = db_file_opt):
     """Create a new single-race solo event"""
-    Path(file).parent.mkdir(parents=True, exist_ok=True)
-    session = core.open_session(f"sqlite:///{file}")
+    Path(db_file).parent.mkdir(parents=True, exist_ok=True)
+    session = core.open_session(f"sqlite:///{db_file}")
     event = model.Event(name=name, start_time=date, end_time=date + timedelta(days=1))
     race = model.Race(first_start=date)
     event.races.append(race)
@@ -51,7 +51,39 @@ def new_event(name: str, date: datetime, file: str = db_file_opt):
     session.add(event)
     session.commit()
 
-    typer.echo(f"A new event “{name}” was created successfully with number #{event.event_id}.")
+    typer.echo(
+        f"A new event “{name}” was created successfully with number #{event.event_id}."
+    )
+
+    session.close()
+
+
+@app.command()
+def import_categories(event_id: int, category_file: Path, db_file: str = db_file_opt):
+    """Import event categories in IOF XML v3 format"""
+    session = core.open_session(f"sqlite:///{db_file}")
+    try:
+        (event,) = next(
+            session.execute(
+                sqlalchemy.select(model.Event).where(model.Event.event_id == event_id)
+            )
+        )
+    except StopIteration:
+        typer.echo("Event could not be found.")
+        session.close()
+        return
+
+    if event.categories:
+        typer.echo(f"Event #{event_id} already contains categories.")
+        session.close()
+        return
+
+    with open(category_file) as stream:
+        categories = list(iofxml3.read(stream))
+    event.categories.extend(categories)
+    session.commit()
+
+    typer.echo(f"Imported {len(categories)} categories")
 
     session.close()
 
