@@ -82,22 +82,27 @@ class TestImport(TestCase):
             "tests/SportSoftware/OT_10.2_EntryList.csv": sportsoftware,
         }
         for filename in files:
-            with open(filename, "rb") as f:
+            with open(filename, "rb") as file:
                 for module in modules:
                     with self.subTest(filename=filename, module=module.__name__):
                         if module is files[filename]:
                             self.assertTrue(
-                                module.detect(f),
+                                module.detect(file),
                                 f"{filename} is not recognized by {module.__name__}.",
                             )
                         else:
-                            self.assertFalse(module.detect(f))
-                        self.assertFalse(f.closed)
-                        f.seek(0)
+                            self.assertFalse(module.detect(file))
+                        self.assertFalse(file.closed)
+                        file.seek(0)
+
+    def test_iofxml3_category_list(self):
+        with open("tests/IOFv3/ClassList_Individual_Step1.xml", "rb") as file:
+            categories = list(iofxml3.read(file))
+            self.assertEqual(len(categories), 2)
 
     def test_iofxml3_person_entry_list(self):
-        with open("tests/IOFv3/EntryList1.xml", "rb") as f:
-            generator = iofxml3.read(f)
+        with open("tests/IOFv3/EntryList1.xml", "rb") as file:
+            generator = iofxml3.read(file)
             event = next(generator)
             entries = list(generator)
             self.assertEqual(len(entries), 3)
@@ -114,8 +119,8 @@ class TestImport(TestCase):
             )
 
     def test_iofxml3_team_entry_list(self):
-        with open("tests/IOFv3/EntryList2.xml", "rb") as f:
-            generator = iofxml3.read(f)
+        with open("tests/IOFv3/EntryList2.xml", "rb") as file:
+            generator = iofxml3.read(file)
             event = next(generator)
             entries = list(generator)
             self.assertEqual(len(entries), 2)
@@ -126,8 +131,8 @@ class TestImport(TestCase):
             self.assertEqual(len(entries[0].competitors), 5)
 
     def test_iofxml3_course_data(self):
-        with open("tests/IOFv3/CourseData_Individual_Step2.xml", "rb") as f:
-            generator = iofxml3.read(f)
+        with open("tests/IOFv3/CourseData_Individual_Step2.xml", "rb") as file:
+            generator = iofxml3.read(file)
             event = next(generator)
             race = next(generator)
             self.assertRaises(StopIteration, lambda: next(generator))
@@ -142,8 +147,8 @@ class TestImport(TestCase):
             )
 
     def test_sportsoftware_oe_entries(self):
-        with open("tests/SportSoftware/OE_11.0_EntryList1.csv", "rb") as f:
-            generator = sportsoftware.read(f)
+        with open("tests/SportSoftware/OE_11.0_EntryList1.csv", "rb") as file:
+            generator = sportsoftware.read(file)
             entries = list(generator)
             for entry in entries:
                 self.assertIsInstance(entry, model.Entry)
@@ -162,8 +167,8 @@ class TestImport(TestCase):
             )
 
     def test_sportsoftware_os_entries(self):
-        with open("tests/SportSoftware/OS_11.0_EntryList1.csv", "rb") as f:
-            generator = sportsoftware.read(f)
+        with open("tests/SportSoftware/OS_11.0_EntryList1.csv", "rb") as file:
+            generator = sportsoftware.read(file)
             entries = list(generator)
             for entry in entries:
                 self.assertIsInstance(entry, model.Entry)
@@ -197,8 +202,8 @@ class TestImport(TestCase):
                 )
 
     def test_sportsoftware_ot_entries(self):
-        with open("tests/SportSoftware/OT_10.2_EntryList.csv", "rb") as f:
-            generator = sportsoftware.read(f)
+        with open("tests/SportSoftware/OT_10.2_EntryList.csv", "rb") as file:
+            generator = sportsoftware.read(file)
             entries = list(generator)
             for entry in entries:
                 self.assertIsInstance(entry, model.Entry)
