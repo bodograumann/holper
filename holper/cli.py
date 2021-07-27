@@ -31,6 +31,7 @@ def events(file: str = db_file_opt):
 
     for event in event_list:
         typer.echo(
+            f"#{event.event_id} "
             f"{event.start_time} - {event.end_time}: "
             f"{event.name}, {len(event.races)} races, {len(event.categories)} categories, {len(event.entries)} entries"
         )
@@ -50,7 +51,7 @@ def new_event(name: str, date: datetime, file: str = db_file_opt):
     session.add(event)
     session.commit()
 
-    typer.echo(f"A new event “{name}” was created successfully.")
+    typer.echo(f"A new event “{name}” was created successfully with number #{event.event_id}.")
 
     session.close()
 
