@@ -24,8 +24,13 @@ def events(file: str = db_file_opt):
     Path(file).parent.mkdir(parents=True, exist_ok=True)
     session = core.open_session(f"sqlite:///{file}")
 
-    for (event,) in session.execute(sqlalchemy.select(model.Event)):
-        print(
+    event_list = [event for (event,) in session.execute(sqlalchemy.select(model.Event))]
+
+    if not event_list:
+        typer.echo("There are no existing events.")
+
+    for event in event_list:
+        typer.echo(
             f"{event.start_time} - {event.end_time}: "
             f"{event.name}, {len(event.races)} races, {len(event.categories)} categories, {len(event.entries)} entries"
         )
@@ -42,10 +47,10 @@ def new_event(name: str, date: datetime, file: str = db_file_opt):
     race = model.Race(first_start=date)
     event.races.append(race)
 
-    print(event)
-
     session.add(event)
     session.commit()
+
+    typer.echo(f"A new event “{name}” was created successfully.")
 
     session.close()
 
