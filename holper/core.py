@@ -1,8 +1,11 @@
 """Core functionality"""
 
 from typing import Optional
+import logging
 import sqlalchemy
 from . import tools, model
+
+_logger = logging.getLogger(__name__)
 
 
 def open_session(source: str) -> sqlalchemy.orm.Session:
@@ -25,3 +28,40 @@ def get_event(session: sqlalchemy.orm.Session, event_id: int) -> Optional[model.
         return event
     except StopIteration:
         return None
+
+
+def hydrate_country_by_ioc_code(session, entity):
+    if not entity or not entity.country:
+        return
+
+    ioc_code = entity.country.ioc_code
+    result = session.execute(
+        sqlalchemy.select(model.Country).where(model.Country.ioc_code == ioc_code)
+    )
+    try:
+        (country,) = next(result)
+    except StopIteration:
+        _logger.warning(
+            "Could not find country with ioc_code “%s” — Clearing.", ioc_code
+        )
+        entity.country = None
+        return
+
+    entity.country = country
+
+
+def shadow_entity_by_xid(session, entity):
+    cls = entity.__class__
+    xid_cls = getattr(model, cls.__name__ + "XID")
+    for xid in entity.external_ids:
+        result = session.execute(
+            sqlalchemy.select(xid_cls).where(
+                xid_cls.issuer == xid.issuer and xid_cls.external_id == xid.external_id
+            )
+        )
+        try:
+            (saved_xid,) = next(result)
+        except StopIteration:
+            continue
+        return getattr(saved_xid, tools.camelcase_to_snakecase(cls.__name__))
+    return entity
