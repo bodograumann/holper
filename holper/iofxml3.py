@@ -122,7 +122,7 @@ class _XMLReader:
         obj = None
         for child in element:
             if not self.tag(child, "Id") or not child.text:
-                break
+                continue
 
             issuer = child.get("type")
             registry = self.id_registries[issuer]
@@ -135,7 +135,7 @@ class _XMLReader:
 
         for child in element:
             if not self.tag(child, "Id") or not child.text:
-                break
+                continue
 
             issuer = child.get("type")
             registry = self.id_registries[issuer]
