@@ -56,6 +56,7 @@ def event(event_id: int, db_file: str = db_file_opt):
             )
         else:
             typer.echo("No races yet")
+
         if evt.categories:
             typer.echo(
                 f"{len(evt.categories)} Categories: "
@@ -63,11 +64,9 @@ def event(event_id: int, db_file: str = db_file_opt):
             )
         else:
             typer.echo("No categories yet")
+
         if evt.entries:
-            typer.echo(
-                f"{len(evt.entries)} Entries: "
-                + ", ".join(f"#{entry.event_category_id}" for entry in evt.entries)
-            )
+            typer.echo(f"{len(evt.entries)} Entries")
         else:
             typer.echo("No entries yet")
 
