@@ -390,7 +390,7 @@ class Person(Base):
     given_name = Column(String(160))
     birth_date = Column(Date)
     country_id = Column(Integer, ForeignKey(Country.country_id))
-    nationality = relationship(Country)
+    country = relationship(Country)
     sex = Column(Enum(Sex))
 
 

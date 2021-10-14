@@ -310,7 +310,7 @@ class _XMLReader:
             elif self.tag(child, "BirthDate"):
                 person.birth_date = iso8601.parse_date(child.text)
             elif self.tag(child, "Nationality"):
-                person.nationality = self._read_country(child)
+                person.country = self._read_country(child)
 
         return person
 
