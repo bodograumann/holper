@@ -67,9 +67,9 @@ def shadow_entity_by_xid(session, entity):
     xid_cls = getattr(model, cls.__name__ + "XID")
     for xid in entity.external_ids:
         result = session.execute(
-            sqlalchemy.select(xid_cls).where(
-                xid_cls.issuer == xid.issuer and xid_cls.external_id == xid.external_id
-            )
+            sqlalchemy.select(xid_cls)
+            .where(xid_cls.issuer == xid.issuer)
+            .where(xid_cls.external_id == xid.external_id)
         )
         try:
             (saved_xid,) = next(result)
