@@ -360,6 +360,14 @@ class Category(Base):
     vacancies_before = Column(SmallInteger, default=0, nullable=False)
     vacancies_after = Column(SmallInteger, default=0, nullable=False)
 
+    @property
+    def name(self):
+        return self.event_category.name
+
+    @property
+    def short_name(self):
+        return self.event_category.short_name
+
 
 class CategoryCourseAssignment(Base):
     category_id = Column(Integer, ForeignKey(Category.category_id), primary_key=True)

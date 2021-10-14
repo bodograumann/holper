@@ -30,6 +30,18 @@ def get_event(session: sqlalchemy.orm.Session, event_id: int) -> Optional[model.
         return None
 
 
+def get_race(session: sqlalchemy.orm.Session, race_id: int) -> Optional[model.Race]:
+    try:
+        (race,) = next(
+            session.execute(
+                sqlalchemy.select(model.Race).where(model.Race.race_id == race_id)
+            )
+        )
+        return race
+    except StopIteration:
+        return None
+
+
 def hydrate_country_by_ioc_code(session, entity):
     if not entity or not entity.country:
         return

@@ -118,6 +118,54 @@ def import_categories(event_id: int, category_file: Path, db_file: str = db_file
 
 
 @app.command()
+def import_courses(
+    race_id: int,
+    course_file: Path,
+    short_category_name: bool = typer.Option(
+        False, "-s", help="Use the short category name to match category assignments."
+    ),
+    db_file: str = db_file_opt,
+):
+    """Import race courses in IOF XML v3 format"""
+    with core.open_session(f"sqlite:///{db_file}") as session:
+        race = core.get_race(session, race_id)
+        if not race:
+            typer.echo("Race could not be found.")
+            return
+
+        if race.courses:
+            typer.echo(f"Race #{race_id} already contains courses.")
+            return
+
+        with open(course_file) as stream:
+            _evt, race_update = list(iofxml3.read(stream))
+
+        with session.no_autoflush:
+            race.courses = race_update.courses
+            race.controls = race_update.controls
+
+            # Link courses with existing categories
+            for update_category in race_update.categories:
+                name = update_category.name
+                try:
+                    category = next(
+                        category
+                        for category in race.categories
+                        if category.name == name
+                        or short_category_name
+                        and category.short_name == name
+                    )
+                except StopIteration:
+                    typer.echo(f"Could not find category {name}.")
+                    continue
+                category.courses = update_category.courses
+
+        session.commit()
+
+        typer.echo(f"Imported {len(race.courses)} courses")
+
+
+@app.command()
 def import_entries(event_id: int, entry_file: Path, db_file: str = db_file_opt):
     """Import race entries in IOF XML v3 format"""
     with core.open_session(f"sqlite:///{db_file}") as session:
