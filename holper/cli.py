@@ -33,7 +33,7 @@ def events(db_file: str = db_file_opt):
                 f"#{evt.event_id} "
                 f"{evt.start_time} - {evt.end_time}: "
                 f"{evt.name}, "
-                f"{len(evt.races)} races, {len(evt.categories)} categories, {len(evt.entries)} entries"
+                f"{len(evt.races)} races, {len(evt.event_categories)} categories, {len(evt.entries)} entries"
             )
 
 
@@ -57,10 +57,10 @@ def event(event_id: int, db_file: str = db_file_opt):
         else:
             typer.echo("No races yet")
 
-        if evt.categories:
+        if evt.event_categories:
             typer.echo(
-                f"{len(evt.categories)} Categories: "
-                + ", ".join(category.short_name for category in evt.categories)
+                f"{len(evt.event_categories)} Categories: "
+                + ", ".join(category.short_name for category in evt.event_categories)
             )
         else:
             typer.echo("No categories yet")
@@ -97,24 +97,24 @@ def import_categories(event_id: int, category_file: Path, db_file: str = db_file
             typer.echo("Event could not be found.")
             return
 
-        if evt.categories:
+        if evt.event_categories:
             typer.echo(f"Event #{event_id} already contains categories.")
             return
 
         with open(category_file) as stream:
-            categories = list(iofxml3.read(stream))
+            event_categories = list(iofxml3.read(stream))
 
-        evt.categories.extend(categories)
+        evt.event_categories.extend(event_categories)
         # Create race categories
         for race in evt.races:
             race.categories = [
                 model.Category(event_category=event_category)
-                for event_category in evt.categories
+                for event_category in evt.event_categories
             ]
 
         session.commit()
 
-        typer.echo(f"Imported {len(categories)} categories")
+        typer.echo(f"Imported {len(event_categories)} categories")
 
 
 @app.command()
@@ -181,14 +181,19 @@ def import_entries(event_id: int, entry_file: Path, db_file: str = db_file_opt):
         with open(entry_file) as stream:
             _, *entries = iofxml3.read(stream)
 
-        for entry in entries:
-            core.hydrate_country_by_ioc_code(session, entry.organisation)
-            for competitor in entry.competitors:
-                core.hydrate_country_by_ioc_code(session, competitor.organisation)
-            for request in entry.category_requests:
-                request.category = core.shadow_entity_by_xid(session, request.category)
+        with session.no_autoflush:
+            for entry in entries:
+                core.hydrate_country_by_ioc_code(session, entry.organisation)
+                for competitor in entry.competitors:
+                    core.hydrate_country_by_ioc_code(session, competitor.person)
+                    core.hydrate_country_by_ioc_code(session, competitor.organisation)
+                for request in entry.category_requests:
+                    request.event_category = core.shadow_entity_by_xid(
+                        session, request.event_category
+                    )
 
-        evt.entries.extend(entries)
+            evt.entries = entries
+
         session.commit()
 
         typer.echo(f"Imported {len(entries)} entries")

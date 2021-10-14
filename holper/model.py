@@ -160,7 +160,7 @@ class Event(Base):
     form = Column(Enum(EventForm), default=EventForm.INDIVIDUAL, nullable=False)
 
     races = relationship("Race", back_populates="event")
-    categories = relationship("EventCategory", back_populates="event")
+    event_categories = relationship("EventCategory", back_populates="event")
     entries = relationship("Entry", back_populates="event")
 
 
@@ -202,12 +202,15 @@ class EventCategory(Base):
     )
 
     event_id = Column(Integer, ForeignKey(Event.event_id))
-    event = relationship(Event, back_populates="categories")
+    event = relationship(Event, back_populates="event_categories")
     name = Column(String(32), nullable=False)
     short_name = Column(String(8))
     status = Column(Enum(EventCategoryStatus), default=EventCategoryStatus.NORMAL)
 
     legs = relationship("Leg", back_populates="event_category")
+    entry_requests = relationship(
+        "EntryCategoryRequest", back_populates="event_category"
+    )
 
     ### restrictions ###
 
@@ -464,10 +467,10 @@ class EntryCategoryRequest(Base):
         default=0,
         doc="Lower number means higher preference",
     )
-    category_id = Column(
+    event_category_id = Column(
         Integer, ForeignKey(EventCategory.event_category_id), nullable=False
     )
-    category = relationship(EventCategory)
+    event_category = relationship(EventCategory, back_populates="entry_requests")
 
 
 class StartTimeAllocationRequest(Base):
@@ -651,7 +654,6 @@ class CompetitorResult(Base):
 # additional types in IOF XML:
 # * Id → <Table>XID
 # * PersonName → merged into Person
-# * Competitor
 # * Score
 # * Role
 # * EntryReceiver
@@ -667,7 +669,6 @@ class CompetitorResult(Base):
 # * PersonEntry → Competitor / Entry
 # * TeamEntry → Entry
 # * TeamEntryPerson → Competitor
-# * StartTimeAllocationRequest
 # * ClassStart
 # * StartName
 # * PersonStart → Competitor / Entry
@@ -685,7 +686,6 @@ class CompetitorResult(Base):
 # * ControlAnswer
 # * SplitTime
 # * Route
-# * Control
 # * GeoPosition
 # * Map
 # * Image

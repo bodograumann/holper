@@ -140,7 +140,9 @@ class TestImport(TestCase):
             self.assertEqual(race.event, event)
             self.assertEqual(len(race.courses), 2)
             self.assertEqual(len(race.categories), 2)
-            self.assertEqual(race.categories[0].event_category, event.categories[0])
+            self.assertEqual(
+                race.categories[0].event_category, event.event_categories[0]
+            )
             self.assertIn(
                 race.categories[0].courses[0].course.name,
                 [course.name for course in race.courses],

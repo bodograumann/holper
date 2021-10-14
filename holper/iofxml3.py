@@ -210,7 +210,7 @@ class _XMLReader:
             elif self.tag(child, "Form"):
                 event.form = child.text
             elif self.tag(child, "Class"):
-                event.categories.append(self._read_class(child))
+                event.event_categories.append(self._read_class(child))
             elif not self.tag(child, "Id"):
                 # Status, Race
                 _logger.warning("Skipping unimplemented tag <%s>", child.tag)
@@ -241,7 +241,7 @@ class _XMLReader:
                 entry.competitors.append(competitor)
             elif self.tag(child, "Class"):
                 entry.category_requests.append(
-                    model.EntryCategoryRequest(category=self._read_class(child))
+                    model.EntryCategoryRequest(event_category=self._read_class(child))
                 )
             elif not self.tag(child, "Id"):
                 # Race, AssignedFee, ServiceRequest, StartTimeAllocationRequest, ContactInformation
@@ -285,7 +285,7 @@ class _XMLReader:
                 competitor.control_cards.append(self._read_control_card(child))
             elif self.tag(child, "Class"):
                 entry.category_requests.append(
-                    model.EntryCategoryRequest(category=self._read_class(child))
+                    model.EntryCategoryRequest(event_category=self._read_class(child))
                 )
             elif not self.tag(child, "Id"):
                 # Score, RaceNumber, AssignedFee, ServiceRequest, StartTimeAllocationRequest
