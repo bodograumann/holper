@@ -399,9 +399,15 @@ class _XMLReader:
             elif self.tag(child, "Course"):
                 race.courses.append(self._read_course(child))
             elif self.tag(child, "ClassCourseAssignment"):
-                race.categories.append(
-                    self._read_class_course_assignment(child).category
-                )
+                category = self._read_class_course_assignment(child).category
+                # Match courses via their name
+                for assignment in category.courses:
+                    assignment.course = next(
+                        course
+                        for course in race.courses
+                        if course.name == assignment.course.name
+                    )
+                race.categories.append(category)
             else:
                 # Map, Control, PersonCourseAssignment, TeamCourseAssignment
                 _logger.warning("Skipping unimplemented tag <%s>", child.tag)
