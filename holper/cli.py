@@ -103,7 +103,15 @@ def import_categories(event_id: int, category_file: Path, db_file: str = db_file
 
         with open(category_file) as stream:
             categories = list(iofxml3.read(stream))
+
         evt.categories.extend(categories)
+        # Create race categories
+        for race in evt.races:
+            race.categories = [
+                model.Category(event_category=event_category)
+                for event_category in evt.categories
+            ]
+
         session.commit()
 
         typer.echo(f"Imported {len(categories)} categories")
