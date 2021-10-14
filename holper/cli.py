@@ -118,6 +118,33 @@ def import_categories(event_id: int, category_file: Path, db_file: str = db_file
 
 
 @app.command()
+def courses(race_id: int, db_file: str = db_file_opt):
+    """Show courses for a race"""
+    with core.open_session(f"sqlite:///{db_file}") as session:
+        race = core.get_race(session, race_id)
+        if not race:
+            typer.echo("Race could not be found.")
+            return
+
+        for course in race.courses:
+            typer.echo(
+                f"- {course.name}: "
+                + str(
+                    sum(
+                        (
+                            len(assignment.category.event_category.entry_requests)
+                            for assignment in course.categories
+                        ),
+                        0,
+                    )
+                )
+            )
+            for assignment in course.categories:
+                cat = assignment.category.event_category
+                typer.echo(f"  - {cat.short_name}: {len(cat.entry_requests)}")
+
+
+@app.command()
 def import_courses(
     race_id: int,
     course_file: Path,
