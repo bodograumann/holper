@@ -3,6 +3,7 @@
 
 from datetime import datetime, timedelta
 from pathlib import Path
+from collections import defaultdict
 
 import sqlalchemy
 import typer
@@ -126,22 +127,36 @@ def courses(race_id: int, db_file: str = db_file_opt):
             typer.echo("Race could not be found.")
             return
 
+        first_control = defaultdict(list)
+
         for course in race.courses:
+            first_control[course.controls[1].control.label].append(course)
+
+            typer.echo(f"{course.name}: ", nl=False)
             typer.echo(
-                f"- {course.name}: "
-                + str(
-                    sum(
-                        (
-                            len(assignment.category.event_category.entry_requests)
-                            for assignment in course.categories
-                        ),
-                        0,
+                sum(
+                    (
+                        len(assignment.category.event_category.entry_requests)
+                        for assignment in course.categories
+                    ),
+                    0,
+                ),
+                nl=False,
+            )
+            typer.echo(
+                " = "
+                + " + ".join(
+                    f"{len(cat.entry_requests)}·{cat.short_name}"
+                    for cat in (
+                        assignment.category.event_category
+                        for assignment in course.categories
                     )
                 )
             )
-            for assignment in course.categories:
-                cat = assignment.category.event_category
-                typer.echo(f"  - {cat.short_name}: {len(cat.entry_requests)}")
+
+        typer.echo("\nFirst controls:")
+        for control in sorted(first_control):
+            typer.echo(f"{control}: " + ", ".join(course.name for course in first_control[control]))
 
 
 @app.command()
