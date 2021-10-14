@@ -91,7 +91,7 @@ class IDRegistry:
 
         self.objects[id_type][id_value] = obj
 
-        if existing is None:
+        if existing is None and hasattr(obj, "external_ids"):
             obj.external_ids.append(
                 getattr(model, id_type + "XID")(issuer=issuer, external_id=id_value)
             )
@@ -166,7 +166,7 @@ class _XMLReader:
         elif self.tag(root, "ClassList"):
             yield from self._read_class_list(root)
         else:
-            _logger.warning("Skipping unknown tag <%s>", root.tag)
+            _logger.warning("Skipping unimplemented tag <%s>", root.tag)
 
     def _read_entry_list(self, element):
         event = None
@@ -211,8 +211,9 @@ class _XMLReader:
                 event.form = child.text
             elif self.tag(child, "Class"):
                 event.categories.append(self._read_class(child))
-            elif self.tag(child, {"Status", "Race"}):
-                _logger.warning("Skipping unknown tag <%s>", child.tag)
+            elif not self.tag(child, "Id"):
+                # Status, Race
+                _logger.warning("Skipping unimplemented tag <%s>", child.tag)
         return event
 
     def _read_date_and_optional_time(self, element):
@@ -242,17 +243,9 @@ class _XMLReader:
                 entry.category_requests.append(
                     model.EntryCategoryRequest(category=self._read_class(child))
                 )
-            elif self.tags(
-                child,
-                {
-                    "Race",
-                    "AssignedFee",
-                    "ServiceRequest",
-                    "StartTimeAllocationRequest",
-                    "ContactInformation",
-                },
-            ):
-                _logger.warning("Skipping unknown tag <%s>", child.tag)
+            elif not self.tag(child, "Id"):
+                # Race, AssignedFee, ServiceRequest, StartTimeAllocationRequest, ContactInformation
+                _logger.warning("Skipping unimplemented tag <%s>", child.tag)
 
         return entry
 
@@ -270,8 +263,9 @@ class _XMLReader:
                 competitor.leg_number = int(child.text)
             elif self.tag(child, "LegOrder"):
                 competitor.leg_order = int(child.text)
-            elif self.tags(child, {"Score", "AssignedFee"}):
-                _logger.warning("Skipping unknown tag <%s>", child.tag)
+            else:
+                # Score, AssignedFee
+                _logger.warning("Skipping unimplemented tag <%s>", child.tag)
 
         return competitor
 
@@ -293,17 +287,9 @@ class _XMLReader:
                 entry.category_requests.append(
                     model.EntryCategoryRequest(category=self._read_class(child))
                 )
-            elif self.tags(
-                child,
-                {
-                    "Score",
-                    "RaceNumber",
-                    "AssignedFee",
-                    "ServiceRequest",
-                    "StartTimeAllocationRequest",
-                },
-            ):
-                _logger.warning("Skipping unknown tag <%s>", child.tag)
+            elif not self.tag(child, "Id"):
+                # Score, RaceNumber, AssignedFee, ServiceRequest, StartTimeAllocationRequest
+                _logger.warning("Skipping unimplemented tag <%s>", child.tag)
 
         return entry
 
@@ -345,8 +331,9 @@ class _XMLReader:
                 organisation.short_name = child.text
             elif self.tag(child, "Country"):
                 organisation.country = self._read_country(child)
-            elif self.tag(child, "Address"):
-                _logger.warning("Skipping unknown tag <%s>", child.tag)
+            elif not self.tag(child, "Id"):
+                # Address
+                _logger.warning("Skipping unimplemented tag <%s>", child.tag)
 
         return organisation
 
@@ -395,43 +382,45 @@ class _XMLReader:
                     max_number_of_competitors=child.get("maxNumberOfCompetitors", 1),
                 )
                 event_category.legs.append(leg)
-            elif self.tags(
-                child,
-                {
-                    "TeamFee",
-                    "Fee",
-                    "Status",
-                    "RaceClass",
-                    "TooFewEntriesSubstituteClass",
-                    "TooManyEntriesSubstituteClass",
-                },
-            ):
-                _logger.warning("Skipping unknown tag <%s>", child.tag)
+            elif not self.tag(child, "Id"):
+                # TeamFee, Fee, Status, RaceClass, TooFewEntriesSubstituteClass, TooManyEntriesSubstituteClass,
+                _logger.warning("Skipping unimplemented tag <%s>", child.tag)
 
         return event_category
 
     def _read_race_course_data(self, element):
         race = model.Race()
         if element.get("raceNumber"):
-            _logger.warning("Ignoring unknown attribute %s", "raceNumber")
+            _logger.warning("Ignoring unimplemented attribute %s", "raceNumber")
 
         for child in element:
-            if self.tag(child, "Course"):
+            if self.tag(child, "Control"):
+                race.controls.append(self._read_control(child))
+            elif self.tag(child, "Course"):
                 race.courses.append(self._read_course(child))
             elif self.tag(child, "ClassCourseAssignment"):
                 race.categories.append(
                     self._read_class_course_assignment(child).category
                 )
-            elif self.tags(
-                child,
-                {
-                    "PersonCourseAssignment",
-                    "TeamCourseAssignment",
-                },
-            ):
-                _logger.warning("Skipping unknown tag <%s>", child.tag)
+            else:
+                # Map, Control, PersonCourseAssignment, TeamCourseAssignment
+                _logger.warning("Skipping unimplemented tag <%s>", child.tag)
 
         return race
+
+    def _read_control(self, element):
+        control = self.create_obj(element, model.Control)
+        if element.get("type"):
+            _logger.warning("Ignoring unimplemented attribute %s", "type")
+
+        for child in element:
+            if self.tag(child, "Id"):
+                control.label = child.text
+            elif not self.tag(child, "Id"):
+                # PunchingUnitId, Name, Position, MapPosition
+                _logger.warning("Skipping unimplemented tag <%s>", child.tag)
+
+        return control
 
     def _read_course(self, element):
         course = self.create_obj(element, model.Course)
@@ -454,8 +443,9 @@ class _XMLReader:
                 if not child.get("randomOrder") or not random_order:
                     control_order += 1
                 random_order = child.get("randomOrder")
-            elif self.tag(child, "Family"):
-                _logger.warning("Skipping unknown tag <%s>", child.tag)
+            elif not self.tag(child, "Id"):
+                # Family
+                _logger.warning("Skipping unimplemented tag <%s>", child.tag)
 
         return course
 
@@ -470,7 +460,7 @@ class _XMLReader:
             if self.tag(child, "Control"):
                 if course_control.control:
                     raise NotImplementedError("Only one code per control allowed")
-                course_control.control = model.Control(label=child.text)
+                course_control.control = self.create_obj_from_id(child, model.Control)
             elif self.tag(child, "LegLength"):
                 course_control.length = float(child.text)
             elif self.tag(child, "Score"):
@@ -492,12 +482,9 @@ class _XMLReader:
                     event_category.name = child.text
             elif self.tag(child, "CourseName"):
                 assignment.course = model.Course(name=child.text)
-            elif (
-                self.tag(child, "CourseFamily")
-                and not assignment.course
-                or self.tag(child, "AllowedOnLeg")
-            ):
-                _logger.warning("Skipping unknown tag <%s>", child.tag)
+            else:
+                # CourseFamily, AllowedOnLeg
+                _logger.warning("Skipping unimplemented tag <%s>", child.tag)
 
         assignment.category = model.Category(event_category=event_category)
         return assignment
