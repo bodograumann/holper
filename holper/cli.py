@@ -193,6 +193,22 @@ def import_courses(
 
 
 @app.command()
+def entries(event_id: int, db_file: str = db_file_opt):
+    """Show all entries of an event"""
+    with core.open_session(f"sqlite:///{db_file}") as session:
+        evt = core.get_event(session, event_id)
+        if not evt:
+            typer.echo("Event could not be found.")
+            return
+
+        for entry in evt.entries:
+            person = entry.competitors[0].person
+            typer.echo(
+                f"{person.given_name} {person.family_name}: {entry.category_requests[0].event_category.short_name}"
+            )
+
+
+@app.command()
 def import_entries(event_id: int, entry_file: Path, db_file: str = db_file_opt):
     """Import race entries in IOF XML v3 format"""
     with core.open_session(f"sqlite:///{db_file}") as session:
