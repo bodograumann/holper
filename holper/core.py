@@ -15,7 +15,7 @@ def open_session(source: str) -> sqlalchemy.orm.Session:
     model.Base.metadata.create_all(engine)
 
     Session = sqlalchemy.orm.sessionmaker(bind=engine)
-    return Session()
+    return Session(future=True)
 
 
 def get_event(session: sqlalchemy.orm.Session, event_id: int) -> Optional[model.Event]:

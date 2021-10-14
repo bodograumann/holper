@@ -293,6 +293,7 @@ class Course(Base):
     climb = Column(Float, doc="Course climb in meters")
 
     controls = relationship("CourseControl", back_populates="course")
+    categories = relationship("CategoryCourseAssignment", back_populates="course")
 
 
 ControlType = auto_enum(
@@ -377,7 +378,7 @@ class CategoryCourseAssignment(Base):
     category = relationship(Category, back_populates="courses")
     leg = Column(SmallInteger, default=1, primary_key=True)
     course_id = Column(Integer, ForeignKey(Course.course_id), nullable=False)
-    course = relationship(Course)
+    course = relationship(Course, back_populates="categories")
 
 
 ### Entries ###
