@@ -914,7 +914,7 @@ class CSVWriter:
 
                 if entry.category_requests:
                     row[24:27] = self.write_category(
-                        entry.category_requests[0].category
+                        entry.category_requests[0].event_category
                     )[:3]
 
                 csv_writer.writerow(row)
@@ -962,6 +962,10 @@ class CSVWriter:
                 csv_writer.writerow(row)
 
     def write_club(self, club):
+        """Convert club to cells
+
+        A club id and name is required.
+        """
         return [
             next(
                 external_id.external_id
@@ -977,7 +981,7 @@ class CSVWriter:
             "",
         ]
 
-    def write_category(self, category):
+    def write_category(self, category: model.EventCategory):
         return [
             next(
                 (

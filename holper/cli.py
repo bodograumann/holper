@@ -331,5 +331,33 @@ def startlist(
             )
 
 
+@app.command()
+def export(
+    race_id: int,
+    target: Path,
+    db_file: str = db_file_opt,
+):
+    with core.open_session(f"sqlite:///{db_file}") as session:
+        race = core.get_race(session, race_id)
+        if not race:
+            typer.echo("Race could not be found.")
+            return
+
+        # Make sure clubs have ids
+        club_id = 1
+        for entry in race.entries:
+            if entry.organisation is not None and not any(
+                external_id.issuer == "SportSoftware"
+                for external_id in entry.organisation.external_ids
+            ):
+                entry.organisation.external_ids.append(
+                    model.OrganisationXID(external_id=club_id, issuer="SportSoftware")
+                )
+                club_id += 1
+
+        with open(target, "wb") as output_file:
+            sportsoftware.write(output_file, race)
+
+
 if __name__ == "__main__":
     app()
