@@ -3,13 +3,13 @@
 
 from datetime import datetime, timedelta
 from pathlib import Path
-from collections import defaultdict
+from typing import Optional
 
 import sqlalchemy
 import typer
 from xdg import xdg_data_home
 
-from holper import core, model, iofxml3
+from holper import core, model, iofxml3, start, sportsoftware
 
 app = typer.Typer()
 
@@ -127,11 +127,7 @@ def courses(race_id: int, db_file: str = db_file_opt):
             typer.echo("Race could not be found.")
             return
 
-        first_control = defaultdict(list)
-
         for course in race.courses:
-            first_control[course.controls[1].control.label].append(course)
-
             typer.echo(f"{course.name}: ", nl=False)
             typer.echo(
                 sum(
@@ -154,9 +150,14 @@ def courses(race_id: int, db_file: str = db_file_opt):
                 )
             )
 
+        courses_by_first_control = core.group_courses_by_first_control(race)
+
         typer.echo("\nFirst controls:")
-        for control in sorted(first_control):
-            typer.echo(f"{control}: " + ", ".join(course.name for course in first_control[control]))
+        for control in sorted(courses_by_first_control):
+            typer.echo(
+                f"{control}: "
+                + ", ".join(course.name for course in courses_by_first_control[control])
+            )
 
 
 @app.command()
@@ -255,6 +256,79 @@ def import_entries(event_id: int, entry_file: Path, db_file: str = db_file_opt):
         session.commit()
 
         typer.echo(f"Imported {len(entries)} entries")
+
+
+@app.command()
+def startlist(
+    race_id: int,
+    interval: int,
+    parallel_max: Optional[int] = None,
+    db_file: str = db_file_opt,
+):
+    with core.open_session(f"sqlite:///{db_file}") as session:
+        race = core.get_race(session, race_id)
+        if not race:
+            typer.echo("Race could not be found.")
+            return
+
+        # generate starts in race
+        for category in race.categories:
+            for request in category.event_category.entry_requests:
+                entry_start = model.Start(
+                    category=category,
+                    entry=request.entry,
+                    competitive=True,
+                )
+                session.add(entry_start)
+
+                for competitor in request.entry.competitors:
+                    name = f"{competitor.person.given_name} {competitor.person.family_name}"
+                    competitor_start = model.CompetitorStart(
+                        start=entry_start,
+                        competitor=competitor,
+                    )
+                    session.add(competitor_start)
+                    if competitor.control_cards:
+                        competitor_start.control_card = competitor.control_cards[0]
+                    else:
+                        typer.echo(
+                            f"Competitor {name} has not provided a control card",
+                        )
+
+        courses_by_first_control = core.group_courses_by_first_control(race)
+        constraints = start.StartConstraints(
+            interval=interval,
+            parallel_max=parallel_max,
+            conflicts=[
+                [course.course_id for course in course_group]
+                for course_group in courses_by_first_control.values()
+            ],
+        )
+        constraints.add_race_courses(race)
+
+        typer.echo("Finding optimal start list. This can take some time...")
+        start_scheme = start.generate_slots_optimal(constraints, 60)
+
+        start_slots = {course_id: iter(seq) for course_id, seq in start_scheme.items()}
+        start.fill_slots(race, constraints, start_slots)
+
+        session.commit()
+
+        for course_id in sorted(start_scheme):
+            typer.echo(
+                f"Course {course_id}: {start_scheme[course_id].pretty()} {list(start_scheme[course_id])}"
+            )
+
+        stats = start.statistics(race)
+        typer.echo(f"Starter number: {stats['entries_total']}")
+        typer.echo(f"Last start: {stats['last_start']}")
+        typer.echo(
+            f"Starters per start time: {stats['entries_per_slot_avg']:.2f} ±{stats['entries_per_slot_var']:.2f}"
+        )
+        for count in sorted(stats["entries_per_slot"]):
+            typer.echo(
+                f"{count} parallel starters: {stats['entries_per_slot'][count]} times"
+            )
 
 
 if __name__ == "__main__":

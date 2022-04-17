@@ -1,6 +1,7 @@
 """Core functionality"""
 
-from typing import Optional
+from itertools import groupby
+from typing import Callable, Optional
 import logging
 import sqlalchemy
 from . import tools, model
@@ -77,3 +78,16 @@ def shadow_entity_by_xid(session, entity):
             continue
         return getattr(saved_xid, tools.camelcase_to_snakecase(cls.__name__))
     return entity
+
+
+def group_courses_by_first_control(race: model.Race) -> dict[str, list[model.Course]]:
+    get_first_control: Callable[[model.Course], str] = lambda course: course.controls[
+        1
+    ].control.label
+
+    return {
+        control_label: list(course_group)
+        for control_label, course_group in groupby(
+            sorted(race.courses, key=get_first_control), get_first_control
+        )
+    }

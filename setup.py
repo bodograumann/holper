@@ -7,13 +7,15 @@ setup(
         include_package_data=True,
         use_scm_version=True,
 
-        python_requires='>=3.6',
+        python_requires='>=3.9',
         install_requires=[
-            'lxml',
             'PyYAML',
-            'sqlalchemy >= 1.4',
             'iso8601',
+            'lxml',
+            'more-itertools',
+            'ortools',
             'python-iconv >= 1.1',
+            'sqlalchemy >= 1.4',
             'typer',
             'xdg',
         ],
@@ -35,7 +37,7 @@ setup(
         },
 
         description='orienteering competition management',
-        url='https://grmnn.de/hOLper',
+        url='https://github.com/bodograumann/holper',
         author='Bodo Graumann',
         author_email='mail@bodograumann.de',
         license='GPLv3',
