@@ -1,10 +1,9 @@
 from unittest import TestCase, expectedFailure
 
-import sqlalchemy
 import io
 import datetime
 
-from holper import iofxml2, iofxml3, sportsoftware, model, tools, core
+from holper import iofxml2, iofxml3, sportsoftware, model, core
 
 
 class TestModel(TestCase):
@@ -59,8 +58,6 @@ class TestImport(TestCase):
             "tests/IOFv3/CourseData_Relay_Step2.xml": iofxml3,
             "tests/IOFv3/CourseData_Relay_Step4.xml": iofxml3,
             "tests/IOFv3/EntryList1.xml": iofxml3,
-            "tests/IOFv3/EntryList1.xml": iofxml3,
-            "tests/IOFv3/EntryList2.xml": iofxml3,
             "tests/IOFv3/EntryList2.xml": iofxml3,
             "tests/IOFv3/Event_name_and_start_time.xml": iofxml3,
             "tests/IOFv3/OrganisationList.xml": iofxml3,

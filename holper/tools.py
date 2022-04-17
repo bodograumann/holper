@@ -52,12 +52,11 @@ def disjoin(lst, key):
         for idx in reversed(range(len(lst) - 1)):
             if key(lst[idx]) == key(lst[idx + 1]):
                 # found collision
-                for idx2 in reversed(range(0, idx)):
-                    if key(lst[idx]) != key(lst[idx2]):
-                        break
-                else:
+                try:
+                    idx2 = next(idx2 for idx2 in reversed(range(0, idx)) if key(lst[idx]) != key(lst[idx2]))
+                    # move
+                    lst.insert(idx, lst.pop(idx2))
+                except StopIteration:
                     # nothing to move
                     continue
-                # move
-                lst.insert(idx, lst.pop(idx2))
         lst.reverse()

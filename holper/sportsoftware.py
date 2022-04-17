@@ -4,7 +4,6 @@ from io import TextIOWrapper
 from contextlib import contextmanager
 from datetime import date, datetime, timedelta, MINYEAR
 import csv
-import iconvcodec
 
 from . import model, tools
 
@@ -849,7 +848,7 @@ class CSVReader:
             return model.ResultStatus.DISQUALIFIED
         if int(status) == 5:
             return model.ResultStatus.OVER_TIME
-        raise NotImplementedError("SportSoftware Wertung={}".format(status))
+        raise NotImplementedError(f"SportSoftware Wertung={status}")
 
 
 class CSVWriter:
