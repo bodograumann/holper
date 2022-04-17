@@ -22,9 +22,7 @@ from . import model
 from .tools import camelcase_to_snakecase
 
 _logger = logging.getLogger(__name__)
-_schema = etree.XMLSchema(
-    etree.parse(resource_stream("holper.resources.IOF", "IOF_3.0.xsd"))
-)
+_schema = etree.XMLSchema(etree.parse(resource_stream("holper.resources.IOF", "IOF_3.0.xsd")))
 _NS = "http://www.orienteering.org/datastandard/3.0"
 
 
@@ -40,9 +38,7 @@ def read(input_file):
     parser = etree.XMLParser(remove_comments=True, remove_pis=True, collect_ids=False)
     document = etree.parse(input_file, parser)
 
-    reader = _XMLReader(
-        _NS, default_registry=document.getroot().get("creator", "unknown")
-    )
+    reader = _XMLReader(_NS, default_registry=document.getroot().get("creator", "unknown"))
     yield from reader.read_document(document)
 
 
@@ -85,16 +81,12 @@ class IDRegistry:
     def put(self, issuer, id_type, id_value, obj):
         existing = self.get(id_type, id_value)
         if existing is not None and existing is not obj:
-            raise KeyError(
-                "There is already a different element registered under this Id"
-            )
+            raise KeyError("There is already a different element registered under this Id")
 
         self.objects[id_type][id_value] = obj
 
         if existing is None and hasattr(obj, "external_ids"):
-            obj.external_ids.append(
-                getattr(model, id_type + "XID")(issuer=issuer, external_id=id_value)
-            )
+            obj.external_ids.append(getattr(model, id_type + "XID")(issuer=issuer, external_id=id_value))
 
 
 class _XMLReader:
@@ -240,9 +232,7 @@ class _XMLReader:
                 competitor.entry_sequence = entry_count
                 entry.competitors.append(competitor)
             elif self.tag(child, "Class"):
-                entry.category_requests.append(
-                    model.EntryCategoryRequest(event_category=self._read_class(child))
-                )
+                entry.category_requests.append(model.EntryCategoryRequest(event_category=self._read_class(child)))
             elif not self.tag(child, "Id"):
                 # Race, AssignedFee, ServiceRequest, StartTimeAllocationRequest, ContactInformation
                 _logger.warning("Skipping unimplemented tag <%s>", child.tag)
@@ -280,15 +270,11 @@ class _XMLReader:
             if self.tag(child, "Person"):
                 competitor.person = self._read_person(child)
             elif self.tag(child, "Organisation"):
-                competitor.entry.organisation = (
-                    competitor.organisation
-                ) = self._read_organisation(child)
+                competitor.entry.organisation = competitor.organisation = self._read_organisation(child)
             elif self.tag(child, "ControlCard"):
                 competitor.control_cards.append(self._read_control_card(child))
             elif self.tag(child, "Class"):
-                entry.category_requests.append(
-                    model.EntryCategoryRequest(event_category=self._read_class(child))
-                )
+                entry.category_requests.append(model.EntryCategoryRequest(event_category=self._read_class(child)))
             elif not self.tag(child, "Id"):
                 # Score, RaceNumber, AssignedFee, ServiceRequest, StartTimeAllocationRequest
                 _logger.warning("Skipping unimplemented tag <%s>", child.tag)
@@ -404,11 +390,7 @@ class _XMLReader:
                 category = self._read_class_course_assignment(child).category
                 # Match courses via their name
                 for assignment in category.courses:
-                    assignment.course = next(
-                        course
-                        for course in race.courses
-                        if course.name == assignment.course.name
-                    )
+                    assignment.course = next(course for course in race.courses if course.name == assignment.course.name)
                 race.categories.append(category)
             else:
                 # Map, Control, PersonCourseAssignment, TeamCourseAssignment

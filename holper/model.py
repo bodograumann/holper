@@ -87,9 +87,7 @@ class _ExternalObject(DeclarativeMeta):
 
             namespace["issuer"] = Column(String(32), primary_key=True)
             namespace["external_id"] = Column(String(16), primary_key=True)
-            namespace[attr_id] = Column(
-                Integer, ForeignKey("%s.%s" % (parent_model, attr_id))
-            )
+            namespace[attr_id] = Column(Integer, ForeignKey("%s.%s" % (parent_model, attr_id)))
             namespace[attr_rel] = relationship(parent_model, backref="external_ids")
 
             namespace["__repr__"] = lambda self: "<%s(%s: %s)>" % (
@@ -197,9 +195,7 @@ class EventCategory(Base):
     ranking.
     """
 
-    event_category_id = Column(
-        Integer, Sequence("event_category_id_seq"), primary_key=True
-    )
+    event_category_id = Column(Integer, Sequence("event_category_id_seq"), primary_key=True)
 
     event_id = Column(Integer, ForeignKey(Event.event_id))
     event = relationship(Event, back_populates="event_categories")
@@ -208,9 +204,7 @@ class EventCategory(Base):
     status = Column(Enum(EventCategoryStatus), default=EventCategoryStatus.NORMAL)
 
     legs = relationship("Leg", back_populates="event_category")
-    entry_requests = relationship(
-        "EntryCategoryRequest", back_populates="event_category"
-    )
+    entry_requests = relationship("EntryCategoryRequest", back_populates="event_category")
 
     ### restrictions ###
 
@@ -263,9 +257,7 @@ RaceCategoryStatus = auto_enum(
 
 class Leg(Base):
     leg_id = Column(Integer, Sequence("leg_id_seq"), primary_key=True)
-    event_category_id = Column(
-        Integer, ForeignKey(EventCategory.event_category_id), nullable=False
-    )
+    event_category_id = Column(Integer, ForeignKey(EventCategory.event_category_id), nullable=False)
     event_category = relationship(EventCategory, back_populates="legs")
 
     leg_number = Column(SmallInteger)
@@ -303,9 +295,7 @@ ControlType = auto_enum(
 
 
 class CourseControl(Base):
-    course_control_id = Column(
-        Integer, Sequence("course_control_id_seq"), primary_key=True
-    )
+    course_control_id = Column(Integer, Sequence("course_control_id_seq"), primary_key=True)
     course_id = Column(Integer, ForeignKey(Course.course_id), nullable=False)
     course = relationship(Course, back_populates="controls")
     control_id = Column(Integer, ForeignKey(Control.control_id), nullable=False)
@@ -321,18 +311,14 @@ class CourseControl(Base):
         doc="If a course control has a higher `order` than another, \
             it has to be punched after it.",
     )
-    after_course_control_id = Column(
-        Integer, ForeignKey("CourseControl.course_control_id")
-    )
+    after_course_control_id = Column(Integer, ForeignKey("CourseControl.course_control_id"))
     after = relationship(
         "CourseControl",
         foreign_keys=[after_course_control_id],
         remote_side=course_control_id,
         doc="Control must be punched after this other control.",
     )
-    before_course_control_id = Column(
-        Integer, ForeignKey("CourseControl.course_control_id")
-    )
+    before_course_control_id = Column(Integer, ForeignKey("CourseControl.course_control_id"))
     before = relationship(
         "CourseControl",
         foreign_keys=[before_course_control_id],
@@ -348,14 +334,10 @@ class Category(Base):
     race_id = Column(Integer, ForeignKey(Race.race_id), nullable=False)
     race = relationship(Race, back_populates="categories")
 
-    event_category_id = Column(
-        Integer, ForeignKey(EventCategory.event_category_id), nullable=False
-    )
+    event_category_id = Column(Integer, ForeignKey(EventCategory.event_category_id), nullable=False)
     event_category = relationship(EventCategory)
 
-    status = Column(
-        Enum(RaceCategoryStatus), default=RaceCategoryStatus.START_TIMES_NOT_ALLOCATED
-    )
+    status = Column(Enum(RaceCategoryStatus), default=RaceCategoryStatus.START_TIMES_NOT_ALLOCATED)
 
     courses = relationship("CategoryCourseAssignment", back_populates="category")
 
@@ -468,9 +450,7 @@ class EntryCategoryRequest(Base):
         default=0,
         doc="Lower number means higher preference",
     )
-    event_category_id = Column(
-        Integer, ForeignKey(EventCategory.event_category_id), nullable=False
-    )
+    event_category_id = Column(Integer, ForeignKey(EventCategory.event_category_id), nullable=False)
     event_category = relationship(EventCategory, back_populates="entry_requests")
 
 
@@ -518,9 +498,7 @@ class Competitor(Base):
     entry_id = Column(Integer, ForeignKey(Entry.entry_id), nullable=False)
     entry = relationship(Entry, back_populates="competitors")
 
-    entry_sequence = Column(
-        SmallInteger, default=1, doc="1-based position of the competitor in the team"
-    )
+    entry_sequence = Column(SmallInteger, default=1, doc="1-based position of the competitor in the team")
     leg_number = Column(SmallInteger)
     leg_order = Column(SmallInteger)
 
@@ -581,18 +559,12 @@ class Start(Base):
 
 
 class CompetitorStart(Base):
-    competitor_start_id = Column(
-        Integer, Sequence("competitor_start_id_seq"), primary_key=True
-    )
-    competitor_result = relationship(
-        "CompetitorResult", uselist=False, back_populates="competitor_start"
-    )
+    competitor_start_id = Column(Integer, Sequence("competitor_start_id_seq"), primary_key=True)
+    competitor_result = relationship("CompetitorResult", uselist=False, back_populates="competitor_start")
 
     start_id = Column(Integer, ForeignKey(Start.start_id), nullable=False)
     start = relationship(Start, back_populates="competitor_starts")
-    competitor_id = Column(
-        Integer, ForeignKey(Competitor.competitor_id), nullable=False
-    )
+    competitor_id = Column(Integer, ForeignKey(Competitor.competitor_id), nullable=False)
     competitor = relationship(Competitor, back_populates="starts")
 
     time_offset = Column(Interval, doc="Start time offset from entry start time")
@@ -638,9 +610,7 @@ class Result(Base):
 
 
 class CompetitorResult(Base):
-    competitor_result_id = Column(
-        Integer, ForeignKey(CompetitorStart.competitor_start_id), primary_key=True
-    )
+    competitor_result_id = Column(Integer, ForeignKey(CompetitorStart.competitor_start_id), primary_key=True)
     competitor_start = relationship(CompetitorStart, back_populates="competitor_result")
 
     start_time = Column(DateTime, doc="Actual start time used for placement")

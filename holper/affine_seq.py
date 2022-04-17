@@ -32,11 +32,7 @@ class AffineSeq:
         assert self.step > 0
 
     def pretty(self):
-        return (
-            (str(self.step) if self.step != 1 else "")
-            + "n"
-            + ("+" + str(self.start) if self.start else "")
-        )
+        return (str(self.step) if self.step != 1 else "") + "n" + ("+" + str(self.start) if self.start else "")
 
     def to_range(self):
         return range(self.start, self.stop, self.step)
@@ -59,19 +55,13 @@ class AffineSeq:
         return self.start <= item < self.stop and (item - self.start) % self.step == 0
 
     def __add__(self, other):
-        return AffineSeq(
-            self.start + other.start, self.stop + other.stop, self.step + other.step
-        )
+        return AffineSeq(self.start + other.start, self.stop + other.stop, self.step + other.step)
 
     def __lshift__(self, steps):
-        return AffineSeq(
-            self.start - steps * self.step, self.stop - steps * self.step, self.step
-        )
+        return AffineSeq(self.start - steps * self.step, self.stop - steps * self.step, self.step)
 
     def __rshift__(self, steps):
-        return AffineSeq(
-            self.start + steps * self.step, self.stop + steps * self.step, self.step
-        )
+        return AffineSeq(self.start + steps * self.step, self.stop + steps * self.step, self.step)
 
     def __and__(self, other):
         start = max(self.start, other.start)

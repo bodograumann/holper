@@ -128,9 +128,7 @@ def _iter_club_entry(element):
 
 
 def _read_club_id(element):
-    id_type = [
-        value for value in map(element.get, ["idManager", "type"]) if value is not None
-    ]
+    id_type = [value for value in map(element.get, ["idManager", "type"]) if value is not None]
     return model.OrganisationXID(
         id_type="/".join(id_type) if len(id_type) > 0 else None,
         external_id=element.text,

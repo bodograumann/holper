@@ -30,11 +30,7 @@ from .tools import disjoin
 
 
 def _category_request_counts(category: Category):
-    return Counter(
-        request.type
-        for start in category.starts
-        for request in start.entry.start_time_allocation_requests
-    )
+    return Counter(request.type for start in category.starts for request in start.entry.start_time_allocation_requests)
 
 
 EARLY = StartTimeAllocationRequestType.EARLY_START
@@ -102,18 +98,14 @@ class StartConstraints:
             course_id: len(categories)
             - 1
             + sum(
-                len(category.starts)
-                + (category.vacancies_before or 0)
-                + (category.vacancies_after or 0)
+                len(category.starts) + (category.vacancies_before or 0) + (category.vacancies_after or 0)
                 for category in categories
             )
             for course_id, categories in self.order.items()
         }
 
 
-def generate_slots_greedily(
-    constraints: StartConstraints, time_max=12 * 60
-) -> dict[int, AffineSeq]:
+def generate_slots_greedily(constraints: StartConstraints, time_max=12 * 60) -> dict[int, AffineSeq]:
     """Greedily finds a start slot scheme under the given constraints
 
     :param constraints: Conditions that the resulting start list must follow.
@@ -128,16 +120,11 @@ def generate_slots_greedily(
     parallel = defaultdict(int)
 
     # Assign start slots to courses, starting from the course with the most entries
-    for course_id, count in sorted(
-        constraints.course_slot_counts.items(), key=operator.itemgetter(1), reverse=True
-    ):
+    for course_id, count in sorted(constraints.course_slot_counts.items(), key=operator.itemgetter(1), reverse=True):
         # Find first free slot
         for first_slot in range(time_max):
             # Check number of parallel starters
-            if (
-                constraints.parallel_max
-                and parallel[first_slot] >= constraints.parallel_max
-            ):
+            if constraints.parallel_max and parallel[first_slot] >= constraints.parallel_max:
                 continue
 
             # Check conflicts with already assigned slots
@@ -156,9 +143,7 @@ def generate_slots_greedily(
         else:
             raise KeyError("No free slots found")
 
-        slots[course_id] = AffineSeq(
-            first_slot, first_slot + constraints.interval * count, constraints.interval
-        )
+        slots[course_id] = AffineSeq(first_slot, first_slot + constraints.interval * count, constraints.interval)
 
         for slot in slots[course_id]:
             parallel[slot] += 1
@@ -166,9 +151,7 @@ def generate_slots_greedily(
     return slots
 
 
-def generate_slots_optimal(
-    constraints: StartConstraints, timeout: int = 30
-) -> dict[int, AffineSeq]:
+def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> dict[int, AffineSeq]:
     """Tries to find the optimal compact start slot scheme
 
     :param constraints: Conditions that the resulting start list must follow.
@@ -186,15 +169,9 @@ def generate_slots_optimal(
     course_starters = list(enumerate(course_slot_counts))
     course_ids = list(constraints.course_slot_counts.keys())
 
-    course_idx_by_id = dict(
-        (course_id, idx) for idx, course_id in enumerate(course_ids)
-    )
+    course_idx_by_id = dict((course_id, idx) for idx, course_id in enumerate(course_ids))
     no_common_slots = [
-        [
-            course_idx_by_id[course_id]
-            for course_id in course_group
-            if course_id in course_idx_by_id
-        ]
+        [course_idx_by_id[course_id] for course_id in course_group if course_id in course_idx_by_id]
         for course_group in constraints.conflicts
     ]
 
@@ -208,8 +185,7 @@ def generate_slots_optimal(
     intervals = [
         model.NewIntVar(
             interval_min,
-            min(interval_max, time_max // (starters - 1) if starters > 1 else time_max)
-            // interval_common_factor,
+            min(interval_max, time_max // (starters - 1) if starters > 1 else time_max) // interval_common_factor,
             f"interval_{idx}",
         )
         for (idx, starters) in course_starters
@@ -223,18 +199,12 @@ def generate_slots_optimal(
 
     # variables for each starter
     slot_variables = [
-        [
-            model.NewIntVar(0, time_max, f"slot_{idx}_{starter}")
-            for starter in range(starters)
-        ]
+        [model.NewIntVar(0, time_max, f"slot_{idx}_{starter}") for starter in range(starters)]
         for idx, starters in course_starters
     ]
     for idx, starters in course_starters:
         for starter in range(starters):
-            model.Add(
-                offsets[idx] + intervals[idx] * interval_common_factor * starter
-                == slot_variables[idx][starter]
-            )
+            model.Add(offsets[idx] + intervals[idx] * interval_common_factor * starter == slot_variables[idx][starter])
 
     # Limit total start length
     last_start = model.NewIntVar(0, time_max, "last_start")
@@ -242,17 +212,12 @@ def generate_slots_optimal(
 
     # Forbid conflicting courses to start at the same time. E.g. when they have the same first control.
     for course_group in no_common_slots:
-        model.AddAllDifferent(
-            [slot for idx in course_group for slot in slot_variables[idx]]
-        )
+        model.AddAllDifferent([slot for idx in course_group for slot in slot_variables[idx]])
 
     # Limit number of starts at the same time using indicator variables for each start time.
     indicators = [
         [
-            [
-                model.NewBoolVar(f"assign_{idx}_{starter}_{time}")
-                for time in range(time_max + 1)
-            ]
+            [model.NewBoolVar(f"assign_{idx}_{starter}_{time}") for time in range(time_max + 1)]
             for starter in range(starters)
         ]
         for idx, starters in course_starters
@@ -263,11 +228,7 @@ def generate_slots_optimal(
             model.AddMapDomain(slot_variables[idx][starter], indicators[idx][starter])
 
     parallel = [
-        sum(
-            indicators[idx][starter][time]
-            for idx, starters in course_starters
-            for starter in range(starters)
-        )
+        sum(indicators[idx][starter][time] for idx, starters in course_starters for starter in range(starters))
         for time in range(time_max + 1)
     ]
 
@@ -289,9 +250,7 @@ def generate_slots_optimal(
 
     # Step 2: Find the optimal solution
     model.Maximize(
-        sum(
-            (starters - 1) * intervals[idx] for idx, starters in course_starters
-        )  # Maximize intervals
+        sum((starters - 1) * intervals[idx] for idx, starters in course_starters)  # Maximize intervals
         - sum(offsets)  # Minimize offsets
     )
 
@@ -306,9 +265,7 @@ def generate_slots_optimal(
         course_id: AffineSeq(
             solver.Value(offsets[idx]),
             solver.Value(offsets[idx])
-            + solver.Value(intervals[idx])
-            * interval_common_factor
-            * course_slot_counts[idx],
+            + solver.Value(intervals[idx]) * interval_common_factor * course_slot_counts[idx],
             solver.Value(intervals[idx]) * interval_common_factor,
         )
         for idx, course_id in enumerate(course_ids)
@@ -383,9 +340,7 @@ def _assign_entries_randomly(starts: Iterable[Start], slot_iter: Iterable[int]):
     disjoin(sequence, lambda start: start.entry.organisation)
 
     for start in sequence:
-        start.time_offset = (
-            timedelta(minutes=next(slot_iter)) - start.category.time_offset
-        )
+        start.time_offset = timedelta(minutes=next(slot_iter)) - start.category.time_offset
 
 
 def statistics(race: Race):
@@ -401,7 +356,6 @@ def statistics(race: Race):
         "last_start": last_slot.total_seconds() / 60,
         "entries_per_slot": stats,
         "entries_per_slot_avg": mean,
-        "entries_per_slot_var": sum(counts[slot] ** 2 for slot in counts)
-        / (last_slot.total_seconds() / 60 + 1)
+        "entries_per_slot_var": sum(counts[slot] ** 2 for slot in counts) / (last_slot.total_seconds() / 60 + 1)
         - mean**2,
     }

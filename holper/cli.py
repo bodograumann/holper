@@ -51,10 +51,7 @@ def event(event_id: int, db_file: str = db_file_opt):
         typer.echo(f"Period: {evt.start_time} - {evt.end_time}")
         typer.echo(f"Form: {evt.form}")
         if evt.races:
-            typer.echo(
-                f"{len(evt.races)} Races: "
-                + ", ".join(f"{race.first_start}" for race in evt.races)
-            )
+            typer.echo(f"{len(evt.races)} Races: " + ", ".join(f"{race.first_start}" for race in evt.races))
         else:
             typer.echo("No races yet")
 
@@ -84,9 +81,7 @@ def new_event(name: str, date: datetime, db_file: str = db_file_opt):
         session.add(evt)
         session.commit()
 
-        typer.echo(
-            f"A new event “{name}” was created successfully with number #{evt.event_id}."
-        )
+        typer.echo(f"A new event “{name}” was created successfully with number #{evt.event_id}.")
 
 
 @app.command()
@@ -108,10 +103,7 @@ def import_categories(event_id: int, category_file: Path, db_file: str = db_file
         evt.event_categories.extend(event_categories)
         # Create race categories
         for race in evt.races:
-            race.categories = [
-                model.Category(event_category=event_category)
-                for event_category in evt.event_categories
-            ]
+            race.categories = [model.Category(event_category=event_category) for event_category in evt.event_categories]
 
         session.commit()
 
@@ -131,10 +123,7 @@ def courses(race_id: int, db_file: str = db_file_opt):
             typer.echo(f"{course.name}: ", nl=False)
             typer.echo(
                 sum(
-                    (
-                        len(assignment.category.event_category.entry_requests)
-                        for assignment in course.categories
-                    ),
+                    (len(assignment.category.event_category.entry_requests) for assignment in course.categories),
                     0,
                 ),
                 nl=False,
@@ -143,10 +132,7 @@ def courses(race_id: int, db_file: str = db_file_opt):
                 " = "
                 + " + ".join(
                     f"{len(cat.entry_requests)}·{cat.short_name}"
-                    for cat in (
-                        assignment.category.event_category
-                        for assignment in course.categories
-                    )
+                    for cat in (assignment.category.event_category for assignment in course.categories)
                 )
             )
 
@@ -154,10 +140,7 @@ def courses(race_id: int, db_file: str = db_file_opt):
 
         typer.echo("\nFirst controls:")
         for control in sorted(courses_by_first_control):
-            typer.echo(
-                f"{control}: "
-                + ", ".join(course.name for course in courses_by_first_control[control])
-            )
+            typer.echo(f"{control}: " + ", ".join(course.name for course in courses_by_first_control[control]))
 
 
 @app.command()
@@ -194,9 +177,7 @@ def import_courses(
                     category = next(
                         category
                         for category in race.categories
-                        if category.name == name
-                        or short_category_name
-                        and category.short_name == name
+                        if category.name == name or short_category_name and category.short_name == name
                     )
                 except StopIteration:
                     typer.echo(f"Could not find category {name}.")
@@ -247,9 +228,7 @@ def import_entries(event_id: int, entry_file: Path, db_file: str = db_file_opt):
                     core.hydrate_country_by_ioc_code(session, competitor.person)
                     core.hydrate_country_by_ioc_code(session, competitor.organisation)
                 for request in entry.category_requests:
-                    request.event_category = core.shadow_entity_by_xid(
-                        session, request.event_category
-                    )
+                    request.event_category = core.shadow_entity_by_xid(session, request.event_category)
 
             evt.entries = entries
 
@@ -300,8 +279,7 @@ def startlist(
             interval=interval,
             parallel_max=parallel_max,
             conflicts=[
-                [course.course_id for course in course_group]
-                for course_group in courses_by_first_control.values()
+                [course.course_id for course in course_group] for course_group in courses_by_first_control.values()
             ],
         )
         constraints.add_race_courses(race)
@@ -315,20 +293,14 @@ def startlist(
         session.commit()
 
         for course_id in sorted(start_scheme):
-            typer.echo(
-                f"Course {course_id}: {start_scheme[course_id].pretty()} {list(start_scheme[course_id])}"
-            )
+            typer.echo(f"Course {course_id}: {start_scheme[course_id].pretty()} {list(start_scheme[course_id])}")
 
         stats = start.statistics(race)
         typer.echo(f"Starter number: {stats['entries_total']}")
         typer.echo(f"Last start: {stats['last_start']}")
-        typer.echo(
-            f"Starters per start time: {stats['entries_per_slot_avg']:.2f} ±{stats['entries_per_slot_var']:.2f}"
-        )
+        typer.echo(f"Starters per start time: {stats['entries_per_slot_avg']:.2f} ±{stats['entries_per_slot_var']:.2f}")
         for count in sorted(stats["entries_per_slot"]):
-            typer.echo(
-                f"{count} parallel starters: {stats['entries_per_slot'][count]} times"
-            )
+            typer.echo(f"{count} parallel starters: {stats['entries_per_slot'][count]} times")
 
 
 @app.command()
@@ -347,8 +319,7 @@ def export(
         club_id = 1
         for entry in race.entries:
             if entry.organisation is not None and not any(
-                external_id.issuer == "SportSoftware"
-                for external_id in entry.organisation.external_ids
+                external_id.issuer == "SportSoftware" for external_id in entry.organisation.external_ids
             ):
                 entry.organisation.external_ids.append(
                     model.OrganisationXID(external_id=club_id, issuer="SportSoftware")

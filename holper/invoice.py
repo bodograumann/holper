@@ -67,9 +67,7 @@ class Invoice:
         self.remark = remark
 
     def get_total(self):
-        return sum(
-            item["total"] for group in self.groups.values() for item in group.values()
-        )
+        return sum(item["total"] for group in self.groups.values() for item in group.values())
 
     def check_total(self, total):
         return round(decimal.Decimal(total)) == round(self.get_total())
@@ -84,9 +82,7 @@ class Invoice:
                 {
                     "group_name": group,
                     "items": [
-                        self.groups[group][item_id]
-                        for item_id in self.prices.items
-                        if item_id in self.groups[group]
+                        self.groups[group][item_id] for item_id in self.prices.items if item_id in self.groups[group]
                     ],
                 }
                 for group in self.groups

@@ -114,9 +114,7 @@ class TestImport(TestCase):
                 entries[0].category_requests[0].category,
                 entries[1].category_requests[0].category,
             )
-            self.assertEqual(
-                entries[0].competitors[0].organisation.country.ioc_code, "GBR"
-            )
+            self.assertEqual(entries[0].competitors[0].organisation.country.ioc_code, "GBR")
 
     def test_iofxml3_team_entry_list(self):
         with open("tests/IOFv3/EntryList2.xml", "rb") as file:
@@ -140,9 +138,7 @@ class TestImport(TestCase):
             self.assertEqual(race.event, event)
             self.assertEqual(len(race.courses), 2)
             self.assertEqual(len(race.categories), 2)
-            self.assertEqual(
-                race.categories[0].event_category, event.event_categories[0]
-            )
+            self.assertEqual(race.categories[0].event_category, event.event_categories[0])
             self.assertIn(
                 race.categories[0].courses[0].course.name,
                 [course.name for course in race.courses],
@@ -163,8 +159,7 @@ class TestImport(TestCase):
 
             start = entries[0].starts[0]
             self.assertEqual(
-                start.time_offset
-                + (start.category.time_offset or datetime.timedelta(0)),
+                start.time_offset + (start.category.time_offset or datetime.timedelta(0)),
                 datetime.timedelta(hours=1, minutes=36),
             )
 
@@ -176,9 +171,7 @@ class TestImport(TestCase):
                 self.assertIsInstance(entry, model.Entry)
 
             self.assertEqual(len(entries[0].competitors), 3)
-            self.assertEqual(
-                entries[0].competitors[0].starts[0].control_card.label, "850705"
-            )
+            self.assertEqual(entries[0].competitors[0].starts[0].control_card.label, "850705")
 
             self.assertEqual(
                 entries[0].starts[0].result.start_time,
@@ -187,20 +180,14 @@ class TestImport(TestCase):
             self.assertEqual(
                 entries[0].starts[0].result.time,
                 sum(
-                    (
-                        entries[0].competitors[idx].starts[0].competitor_result.time
-                        for idx in range(3)
-                    ),
+                    (entries[0].competitors[idx].starts[0].competitor_result.time for idx in range(3)),
                     datetime.timedelta(),
                 ),
             )
             for idx in (0, 1):
                 self.assertEqual(
                     entries[0].competitors[idx].starts[0].competitor_result.finish_time,
-                    entries[0]
-                    .competitors[idx + 1]
-                    .starts[0]
-                    .competitor_result.start_time,
+                    entries[0].competitors[idx + 1].starts[0].competitor_result.start_time,
                 )
 
     def test_sportsoftware_ot_entries(self):

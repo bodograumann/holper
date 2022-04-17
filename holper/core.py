@@ -21,11 +21,7 @@ def open_session(source: str) -> sqlalchemy.orm.Session:
 
 def get_event(session: sqlalchemy.orm.Session, event_id: int) -> Optional[model.Event]:
     try:
-        (event,) = next(
-            session.execute(
-                sqlalchemy.select(model.Event).where(model.Event.event_id == event_id)
-            )
-        )
+        (event,) = next(session.execute(sqlalchemy.select(model.Event).where(model.Event.event_id == event_id)))
         return event
     except StopIteration:
         return None
@@ -33,11 +29,7 @@ def get_event(session: sqlalchemy.orm.Session, event_id: int) -> Optional[model.
 
 def get_race(session: sqlalchemy.orm.Session, race_id: int) -> Optional[model.Race]:
     try:
-        (race,) = next(
-            session.execute(
-                sqlalchemy.select(model.Race).where(model.Race.race_id == race_id)
-            )
-        )
+        (race,) = next(session.execute(sqlalchemy.select(model.Race).where(model.Race.race_id == race_id)))
         return race
     except StopIteration:
         return None
@@ -48,15 +40,11 @@ def hydrate_country_by_ioc_code(session, entity):
         return
 
     ioc_code = entity.country.ioc_code
-    result = session.execute(
-        sqlalchemy.select(model.Country).where(model.Country.ioc_code == ioc_code)
-    )
+    result = session.execute(sqlalchemy.select(model.Country).where(model.Country.ioc_code == ioc_code))
     try:
         (country,) = next(result)
     except StopIteration:
-        _logger.warning(
-            "Could not find country with ioc_code “%s” — Clearing.", ioc_code
-        )
+        _logger.warning("Could not find country with ioc_code “%s” — Clearing.", ioc_code)
         entity.country = None
         return
 
@@ -68,9 +56,7 @@ def shadow_entity_by_xid(session, entity):
     xid_cls = getattr(model, cls.__name__ + "XID")
     for xid in entity.external_ids:
         result = session.execute(
-            sqlalchemy.select(xid_cls)
-            .where(xid_cls.issuer == xid.issuer)
-            .where(xid_cls.external_id == xid.external_id)
+            sqlalchemy.select(xid_cls).where(xid_cls.issuer == xid.issuer).where(xid_cls.external_id == xid.external_id)
         )
         try:
             (saved_xid,) = next(result)
@@ -81,13 +67,9 @@ def shadow_entity_by_xid(session, entity):
 
 
 def group_courses_by_first_control(race: model.Race) -> dict[str, list[model.Course]]:
-    get_first_control: Callable[[model.Course], str] = lambda course: course.controls[
-        1
-    ].control.label
+    get_first_control: Callable[[model.Course], str] = lambda course: course.controls[1].control.label
 
     return {
         control_label: list(course_group)
-        for control_label, course_group in groupby(
-            sorted(race.courses, key=get_first_control), get_first_control
-        )
+        for control_label, course_group in groupby(sorted(race.courses, key=get_first_control), get_first_control)
     }
