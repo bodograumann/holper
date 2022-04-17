@@ -70,7 +70,7 @@ from .tools import camelcase_to_snakecase
 
 
 def auto_enum(name, members):
-    """Auto generate enum values as UPPER_CASE => upper_case"""
+    """Automatically generate enum values as UPPER_CASE => lower_case"""
     return enum.Enum(name, ((label, label.lower()) for label in members))
 
 
@@ -474,23 +474,6 @@ class EntryCategoryRequest(Base):
     event_category = relationship(EventCategory, back_populates="entry_requests")
 
 
-class StartTimeAllocationRequest(Base):
-    start_time_allocation_request_id = Column(
-        Integer, Sequence("start_time_allocation_request_id_seq"), primary_key=True
-    )
-    entry_id = Column(Integer, ForeignKey(Entry.entry_id), nullable=False)
-    entry = relationship(Entry, back_populates="start_time_allocation_requests")
-
-    type = Column(
-        Enum("StartTimeAllocationRequestType"),
-        default="StartTimeAllocationRequestType.NORMAL",
-    )
-    organisation_id = Column(Integer, ForeignKey(Organisation.organisation_id))
-    organisation = relationship(Organisation)
-    person_id = Column(Integer, ForeignKey(Person.person_id))
-    person = relationship(Person)
-
-
 StartTimeAllocationRequestType = auto_enum(
     "StartTimeAllocationRequestType",
     [
@@ -501,6 +484,23 @@ StartTimeAllocationRequestType = auto_enum(
         "GROUPED_WITH",
     ],
 )
+
+
+class StartTimeAllocationRequest(Base):
+    start_time_allocation_request_id = Column(
+        Integer, Sequence("start_time_allocation_request_id_seq"), primary_key=True
+    )
+    entry_id = Column(Integer, ForeignKey(Entry.entry_id), nullable=False)
+    entry = relationship(Entry, back_populates="start_time_allocation_requests")
+
+    type = Column(
+        Enum(StartTimeAllocationRequestType),
+        default=StartTimeAllocationRequestType.NORMAL,
+    )
+    organisation_id = Column(Integer, ForeignKey(Organisation.organisation_id))
+    organisation = relationship(Organisation)
+    person_id = Column(Integer, ForeignKey(Person.person_id))
+    person = relationship(Person)
 
 
 PunchingSystem = auto_enum("PunchingSystem", ["SportIdent", "Emit"])

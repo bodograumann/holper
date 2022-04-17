@@ -91,7 +91,7 @@ class AffineSeq:
         return AffineSeq(start, stop, step)
 
     def __repr__(self):
-        return "AffineSeq({}, {}, {})".format(self.start, self.stop, self.step)
+        return f"AffineSeq({self.start}, {self.stop}, {self.step})"
 
     def __str__(self):
         length = len(self)
