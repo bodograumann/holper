@@ -280,7 +280,9 @@ class _XMLReader:
             if self.tag(child, "Person"):
                 competitor.person = self._read_person(child)
             elif self.tag(child, "Organisation"):
-                competitor.organisation = self._read_organisation(child)
+                competitor.entry.organisation = (
+                    competitor.organisation
+                ) = self._read_organisation(child)
             elif self.tag(child, "ControlCard"):
                 competitor.control_cards.append(self._read_control_card(child))
             elif self.tag(child, "Class"):
