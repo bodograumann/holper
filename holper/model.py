@@ -607,6 +607,7 @@ class Result(Base):
     time = Column(Interval)
 
     status = Column(Enum(ResultStatus))
+    position = Column(Integer, doc="Position in the category")
 
 
 class CompetitorResult(Base):

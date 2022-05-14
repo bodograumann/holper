@@ -65,7 +65,7 @@ _csv_header_oe_de = (
     "km",
     "Hm",
     "Bahn Posten",
-    "",
+    "Platz",
 )
 _csv_header_os_de = (
     "OS0001",
@@ -505,7 +505,7 @@ def _detect_type(input_file):
         except StopIteration:
             return None
 
-        if header.startswith("OE0001;"):
+        if header.startswith("OE0001;") or header.startswith("OE0012;"):
             return "OE11"
         if header.startswith("OS0001"):
             return "OS11"
@@ -594,7 +594,6 @@ class CSVReader:
             # 49: Startgeld
             # 50: Bezahlt
             # 51: Mannschaft
-            # 56: Bahn Posten
 
             for row in csv_reader:
                 entry = model.Entry(event=self.race.event)
@@ -609,12 +608,15 @@ class CSVReader:
                 start = self.read_start_and_result(*row[10:17])
                 start.entry = entry
 
+                if start.result is not None and row[57]:
+                    start.result.position = row[57]
+
                 if row[18]:
                     entry.organisation = self.read_club(*row[18:24])
 
                 if row[24]:
                     category = self.read_category(*row[24:27])
-                    entry.category_requests.append(model.EntryCategoryRequest(category=category.event_category))
+                    entry.category_requests.append(model.EntryCategoryRequest(event_category=category.event_category))
                     start.category = category
 
                 # solo['fee'] = parse_float(row[49])
