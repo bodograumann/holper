@@ -6,6 +6,8 @@ based architecture.
 
 The minimal python version required is 3.9.
 
+More detailed documentation is published on `<https://bodograumann.github.io/holper/>`_.
+
 Toolkit
 -------
 
