@@ -108,8 +108,8 @@ class TestImport(TestCase):
                 self.assertIsInstance(entry, model.Entry)
 
             self.assertIs(
-                entries[0].category_requests[0].category,
-                entries[1].category_requests[0].category,
+                entries[0].category_requests[0].event_category,
+                entries[1].category_requests[0].event_category,
             )
             self.assertEqual(entries[0].competitors[0].organisation.country.ioc_code, "GBR")
 
