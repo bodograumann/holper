@@ -79,8 +79,8 @@ def auto_enum(name, members):
 # suggested by Sergey Shubin, http://stackoverflow.com/a/41362392/1534459
 class _ExternalObject(DeclarativeMeta):
     @classmethod
-    def __prepare__(metacls, name, bases):
-        namespace = super().__prepare__(metacls, name, bases)
+    def __prepare__(cls, name, bases):
+        namespace = super().__prepare__(cls, name, bases)
 
         if name.endswith("XID"):
             parent_model = name[:-3]
@@ -89,25 +89,22 @@ class _ExternalObject(DeclarativeMeta):
 
             namespace["issuer"] = Column(String(32), primary_key=True, nullable=False)
             namespace["external_id"] = Column(String(16), primary_key=True, nullable=False)
-            namespace[attr_id] = Column(Integer, ForeignKey("%s.%s" % (parent_model, attr_id)), nullable=False)
+            namespace[attr_id] = Column(Integer, ForeignKey(f"{parent_model}.{attr_id}"), nullable=False)
             namespace[attr_rel] = relationship(parent_model, backref="external_ids")
 
-            namespace["__repr__"] = lambda self: "<%s(%s: %s)>" % (
-                self.__class__.__name__,
-                self.issuer,
-                self.external_id,
-            )
+            namespace["__repr__"] = lambda self: f"<{self.__class__.__name__}({self.issuer}: {self.external_id})>"
 
         return namespace
 
 
 class _ModelBase:
     @declared_attr
-    def __tablename__(cls):
-        return cls.__name__
+    def __tablename__(cls):  # pylint: disable=no-self-argument
+        return cls.__name__  # pylint: disable=no-member
 
     @property
     def id_column(self):
+        """Convention for the primary id column"""
         return camelcase_to_snakecase(self.__class__.__name__) + "_id"
 
     def __repr__(self):
@@ -116,7 +113,7 @@ class _ModelBase:
         except AttributeError:
             primary_key = "No id"
 
-        return "<%s(%s)>" % (self.__class__.__name__, repr(primary_key))
+        return f"<{self.__class__.__name__}({repr(primary_key)})>"
 
 
 Base = declarative_base(cls=_ModelBase, metaclass=_ExternalObject)

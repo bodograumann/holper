@@ -735,7 +735,7 @@ class CSVReader:
 
                 yield entry
 
-    def read_club(self, club_id, abbreviation, city, country, seat=None, region=None):
+    def read_club(self, club_id, abbreviation, city, country, seat=None, region=None):  # pylint: disable=unused-argument
         club_id = int(club_id)
         try:
             return self.clubs[club_id]

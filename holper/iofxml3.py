@@ -27,6 +27,7 @@ _NS = "http://www.orienteering.org/datastandard/3.0"
 
 
 def detect(input_file):
+    """Detect whether a file is a valid IOF XML v3 file"""
     try:
         document = etree.parse(input_file)
     except etree.ParseError:
@@ -35,6 +36,7 @@ def detect(input_file):
 
 
 def read(input_file):
+    """Yield the contents of the XML file as model instances"""
     parser = etree.XMLParser(remove_comments=True, remove_pis=True, collect_ids=False)
     document = etree.parse(input_file, parser)
 

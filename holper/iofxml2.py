@@ -39,7 +39,9 @@ _top_level_elements = (
 
 
 @contextmanager
-def element_iterator(stream, events=["start"]):
+def element_iterator(stream, events=None):
+    """Context manager that returns an iterator over XML Parser events"""
+
     def _iter(stream, parser):
         while True:
             line = stream.read(256)
@@ -49,7 +51,7 @@ def element_iterator(stream, events=["start"]):
             for event in parser.read_events():
                 yield event
 
-    parser = etree.XMLPullParser(events)
+    parser = etree.XMLPullParser(events if events else ["start"])
     try:
         yield _iter(stream, parser)
     finally:
@@ -57,6 +59,8 @@ def element_iterator(stream, events=["start"]):
 
 
 def detect_fast(input_file):
+    """Detect whether a file has the IOF XML v2 format without completely parsing it"""
+
     with element_iterator(input_file) as iterator:
         try:
             _, first_element = next(iterator)
@@ -71,6 +75,7 @@ def detect_fast(input_file):
 
 
 def detect(input_file):
+    """Detect whether a file is a valid IOF XML v2 file"""
     try:
         document = etree.parse(input_file)
     except etree.ParseError:
@@ -79,6 +84,7 @@ def detect(input_file):
 
 
 def read(input_file):
+    """Yield the contents of the XML file as model instances"""
     tree = etree.parse(input_file)
     root = tree.getroot()
 
@@ -173,7 +179,7 @@ def _read_entry(element):
     for child in element:
         if child.tag == "EntryId":
             raise NotImplementedError
-        elif child.tag == "TeamName":
+        if child.tag == "TeamName":
             entry.name = child.text
         elif child.tag in {"PersonID", "Person"}:
             competitor = model.Competitor(person=_read_person(child))
@@ -186,13 +192,7 @@ def _read_entry(element):
             entry.organization = _read_club(child)
         elif child.tag == "TeamSequence":
             entry.entry_sequence = int(child.text)
-        elif child.tag == "EntryClass":
-            raise NotImplementedError
-        elif child.tag == "AllocationControl":
-            raise NotImplementedError
-        elif child.tag == "EntryDate":
-            raise NotImplementedError
-        elif child.tag == "ModifyDate":
+        elif child.tag in ("EntryClass", "AllocationControl", "EntryDate", "ModifyDate"):
             raise NotImplementedError
 
     return entry

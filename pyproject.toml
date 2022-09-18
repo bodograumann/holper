@@ -37,6 +37,17 @@ holper = "holper.cli:app"
 [tool.poetry.extras]
 postgres = ["psycopg"]
 
+
+[tool.pylint.MASTER]
+extension-pkg-whitelist = "lxml"
+
+[tool.pylint.REPORTS]
+output-format = "colorized"
+
+[tool.pylint.FORMAT]
+max-line-length = 120
+
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

@@ -97,7 +97,7 @@ def import_categories(event_id: int, category_file: Path, db_file: str = db_file
             typer.echo(f"Event #{event_id} already contains categories.")
             return
 
-        with open(category_file) as stream:
+        with open(category_file, encoding="utf-8") as stream:
             event_categories = list(iofxml3.read(stream))
 
         evt.event_categories.extend(event_categories)
@@ -163,7 +163,7 @@ def import_courses(
             typer.echo(f"Race #{race_id} already contains courses.")
             return
 
-        with open(course_file) as stream:
+        with open(course_file, encoding="utf-8") as stream:
             _evt, race_update = list(iofxml3.read(stream))
 
         with session.no_autoflush:
@@ -218,7 +218,7 @@ def import_entries(event_id: int, entry_file: Path, db_file: str = db_file_opt):
             typer.echo(f"Event #{event_id} already contains entries.")
             return
 
-        with open(entry_file) as stream:
+        with open(entry_file, encoding="utf-8") as stream:
             _, *entries = iofxml3.read(stream)
 
         with session.no_autoflush:
@@ -244,6 +244,7 @@ def startlist(
     parallel_max: Optional[int] = None,
     db_file: str = db_file_opt,
 ):
+    """Assign start times for all starters"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         race = core.get_race(session, race_id)
         if not race:
@@ -309,6 +310,7 @@ def export(
     target: Path,
     db_file: str = db_file_opt,
 ):
+    """Export entries as SportSoftware csv file"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         race = core.get_race(session, race_id)
         if not race:

@@ -1,3 +1,4 @@
+# pylint: disable=missing-function-docstring,missing-class-docstring,missing-module-docstring,protected-access
 from unittest import TestCase, expectedFailure
 
 import io
@@ -78,11 +79,11 @@ class TestImport(TestCase):
             "tests/SportSoftware/OS_11.0_EntryList3.csv": sportsoftware,
             "tests/SportSoftware/OT_10.2_EntryList.csv": sportsoftware,
         }
-        for filename in files:
+        for filename, correct_module in files.items():
             with open(filename, "rb") as file:
                 for module in modules:
                     with self.subTest(filename=filename, module=module.__name__):
-                        if module is files[filename]:
+                        if module is correct_module:
                             self.assertTrue(
                                 module.detect(file),
                                 f"{filename} is not recognized by {module.__name__}.",
@@ -100,7 +101,7 @@ class TestImport(TestCase):
     def test_iofxml3_person_entry_list(self):
         with open("tests/IOFv3/EntryList1.xml", "rb") as file:
             generator = iofxml3.read(file)
-            event = next(generator)
+            _event = next(generator)
             entries = list(generator)
             self.assertEqual(len(entries), 3)
 
@@ -116,7 +117,7 @@ class TestImport(TestCase):
     def test_iofxml3_team_entry_list(self):
         with open("tests/IOFv3/EntryList2.xml", "rb") as file:
             generator = iofxml3.read(file)
-            event = next(generator)
+            _event = next(generator)
             entries = list(generator)
             self.assertEqual(len(entries), 2)
 

@@ -98,5 +98,5 @@ class Invoice:
         template = renderer.load_template(template_file)
         invoice = renderer.render(template, data)
 
-        with open(target_file, "w") as target:
+        with open(target_file, "w", encoding="utf-8") as target:
             target.write(invoice)
