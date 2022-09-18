@@ -110,7 +110,7 @@ def generate_slots_greedily(constraints: StartConstraints, time_max=12 * 60) -> 
 
     :param constraints: Conditions that the resulting start list must follow.
     :param time_max: Time limit before which all starts have to occur. Can usually be
-    left as the default, because it has no impact on the calculation time.
+        left as the default, because it has no impact on the calculation time.
     :return: Start slots object for each course id
     """
 

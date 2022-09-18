@@ -5,7 +5,7 @@ Submodules
 ----------
 
 holper.affine_seq module
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. automodule:: holper.affine_seq
     :members:
@@ -14,7 +14,7 @@ holper.affine_seq module
 
 
 holper.core module
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 .. automodule:: holper.core
     :members:
@@ -68,7 +68,7 @@ holper.sportsoftware module
 
 
 holper.start module
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 .. automodule:: holper.start
     :members:
