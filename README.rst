@@ -4,30 +4,28 @@ hOLper
 hOLper is an orienteering competition management software with a client-server
 based architecture.
 
-Dependencies are defined in `setup.py`.
+The minimal python version required is 3.9.
 
 Toolkit
 -------
 
-- git, for version management
-- sphinx, for documentation generation
-    see `<http://www.sphinx-doc.org>`_
-- setuptools
+- git (source code versioning)
+- `poetry <https://www.python-poetry.org>`_ (dependencies)
+- `sphinx <http://www.sphinx-doc.org>`_ (documentation)
 
 Development
 -----------
 
-Setup an virtual enviroment with::
+Make sure you have poetry installed. Then install the project dependencies::
 
-    python -m venv env
-    source env/bin/activate
-    pip install -r requirements.txt
+    poetry install
+    poetry shell
 
 Run tests with ``pytest tests/test.py`` and the linter with ``pylint holper tests``.
 
 The code can be auto-formatted with ``black -S -l 120 holper tests``.
 
-To generate documentation, use the following commands:
+To generate documentation, use the following commands::
 
     python generate_class_diagram.py > docs/class_diagram.mmd
     cd docs

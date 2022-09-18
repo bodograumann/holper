@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "hOLper"
+version = "0.0.1"
+description = "hOLper is a competition management software for the orienteering sport"
+license = "GPL-3.0-or-later"
+authors = ["Bodo Graumann <mail@bodograumann.de>"]
+readme = "README.rst"
+repository = "https://github.com/bodograumann/holper"
+packages = [{include = "holper"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+PyYAML = "^6.0"
+iso8601 = "^1.0.2"
+lxml = "^4.9.1"
+more-itertools = "^8.13.0"
+ortools = "^9.3.10497"
+pystache = "^0.6.0"
+python-iconv = "^1.1"
+sqlalchemy = "^1.4"
+typer = "^0.6.1"
+xdg = "^5.1.1"
+
+# Optional
+psycopg = { version  = "^3.0", optional = true }
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.3"
+pylint = "^2.12.2"
+black = "^22.8.0"
+sphinx = "^5.1.1"
+sphinxcontrib-mermaid = "^0.7.1"
+
+[tool.poetry.scripts]
+holper = "holper.cli:app"
+
+[tool.poetry.extras]
+postgres = ["psycopg"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
