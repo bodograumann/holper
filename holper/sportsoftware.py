@@ -484,13 +484,13 @@ def detect(input_file):
 
 
 @contextmanager
-def _wrap_binary_stream(io_buffer):
+def _wrap_binary_stream(io_buffer, encoding="latin1"):
     """Access the given stream with the correct format
 
     Usually when a `io.TextIOWrapper` is destroyed, the underlying stream is
     closed. We prevent this here, because we do not control the given stream.
     """
-    wrapper = TextIOWrapper(io_buffer, encoding="latin1", newline="")
+    wrapper = TextIOWrapper(io_buffer, encoding=encoding, newline="")
     try:
         yield wrapper
     finally:
@@ -498,8 +498,8 @@ def _wrap_binary_stream(io_buffer):
         del wrapper
 
 
-def _detect_type(input_file):
-    with _wrap_binary_stream(input_file) as input_stream:
+def _detect_type(input_file, encoding="latin1"):
+    with _wrap_binary_stream(input_file, encoding=encoding) as input_stream:
         try:
             header = next(input_stream)
         except StopIteration:
@@ -514,8 +514,8 @@ def _detect_type(input_file):
         return None
 
 
-def read(input_file):
-    file_type = _detect_type(input_file)
+def read(input_file, encoding="latin1"):
+    file_type = _detect_type(input_file, encoding=encoding)
     input_file.seek(0)
 
     event = model.Event()
@@ -523,11 +523,11 @@ def read(input_file):
 
     csv_reader = CSVReader(race)
     if file_type == "OE11":
-        yield from csv_reader.read_solo_v11(input_file)
+        yield from csv_reader.read_solo_v11(input_file, encoding=encoding)
     elif file_type == "OS11":
-        yield from csv_reader.read_relay_v11(input_file)
+        yield from csv_reader.read_relay_v11(input_file, encoding=encoding)
     elif file_type == "OT10":
-        yield from csv_reader.read_team_v10(input_file)
+        yield from csv_reader.read_team_v10(input_file, encoding=encoding)
     else:
         raise NotImplementedError
 
@@ -552,11 +552,11 @@ class CSVReader:
         self.categories = {}
         self.courses = {}
 
-    def read_solo_v11(self, input_file, with_seconds=False):
+    def read_solo_v11(self, input_file, with_seconds=False, encoding="latin1"):
         """Read a SportSoftware OE2010 csv export file"""
         self.race.event.form = model.EventForm.INDIVIDUAL
 
-        with _wrap_binary_stream(input_file) as csvfile:
+        with _wrap_binary_stream(input_file, encoding=encoding) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";", doublequote=False)
             # skip header:
             next(csv_reader, None)
@@ -636,11 +636,11 @@ class CSVReader:
 
                 yield entry
 
-    def read_relay_v11(self, input_file, with_seconds=False):
+    def read_relay_v11(self, input_file, with_seconds=False, encoding="latin1"):
         """Read a SportSoftware OS2010 csv export file"""
         self.race.event.form = model.EventForm.RELAY
 
-        with _wrap_binary_stream(input_file) as csvfile:
+        with _wrap_binary_stream(input_file, encoding=encoding) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";", doublequote=False)
             # skip header:
             next(csv_reader, None)
@@ -665,6 +665,9 @@ class CSVReader:
                 start = self.read_start_and_result(*row[5:7], "", *row[7:9], *row[10:12])
                 start.entry = entry
                 start.category = category
+
+                if start.result is not None and row[-2]:
+                    start.result.position = row[-2]
 
                 for competitor_nr in range(category.event_category.max_number_of_team_members):
                     offset = 31 + competitor_nr * 14
@@ -696,11 +699,11 @@ class CSVReader:
 
                 yield entry
 
-    def read_team_v10(self, input_file):
+    def read_team_v10(self, input_file, encoding="latin1"):
         """Read a SportSoftware OT2003 csv export file"""
         self.race.event.form = model.EventForm.TEAM
 
-        with _wrap_binary_stream(input_file) as csvfile:
+        with _wrap_binary_stream(input_file, encoding=encoding) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";", doublequote=False)
             # skip header:
             next(csv_reader, None)
