@@ -552,7 +552,7 @@ class CSVReader:
         self.categories = {}
         self.courses = {}
 
-    def read_solo_v11(self, input_file, with_seconds=False, encoding="latin1"):
+    def read_solo_v11(self, input_file, with_seconds=True, encoding="latin1"):
         """Read a SportSoftware OE2010 csv export file"""
         self.race.event.form = model.EventForm.INDIVIDUAL
 
@@ -605,7 +605,7 @@ class CSVReader:
 
                 entry.competitors.append(self.read_competitor(*row[5:9], row[3]))
 
-                start = self.read_start_and_result(*row[10:17])
+                start = self.read_start_and_result(*row[10:17], with_seconds=with_seconds)
                 start.entry = entry
 
                 if start.result is not None and row[57]:
@@ -636,7 +636,7 @@ class CSVReader:
 
                 yield entry
 
-    def read_relay_v11(self, input_file, with_seconds=False, encoding="latin1"):
+    def read_relay_v11(self, input_file, with_seconds=True, encoding="latin1"):
         """Read a SportSoftware OS2010 csv export file"""
         self.race.event.form = model.EventForm.RELAY
 
@@ -662,7 +662,7 @@ class CSVReader:
 
                 # relay['fee'] = parse_float(row[29]) or 0)
 
-                start = self.read_start_and_result(*row[5:7], "", *row[7:9], *row[10:12])
+                start = self.read_start_and_result(*row[5:7], "", *row[7:9], *row[10:12], with_seconds=with_seconds)
                 start.entry = entry
                 start.category = category
 
@@ -678,18 +678,18 @@ class CSVReader:
                         competitor_start = model.CompetitorStart(
                             start=start,
                             competitor=competitor,
-                            time_offset=parse_time(row[offset + 7]),
+                            time_offset=parse_time(row[offset + 7], with_seconds),
                         )
                         if competitor.control_cards:
                             competitor_start.control_card = competitor.control_cards[0]
 
                     if any(row[offset + 8 : offset + 11]):
-                        start_offset = parse_time(row[offset + 7])
-                        finish_offset = parse_time(row[offset + 8])
+                        start_offset = parse_time(row[offset + 7], with_seconds)
+                        finish_offset = parse_time(row[offset + 8], with_seconds)
                         competitor_start.competitor_result = model.CompetitorResult(
                             start_time=datetime(MINYEAR, 1, 1) + start_offset if start_offset else None,
                             finish_time=datetime(MINYEAR, 1, 1) + finish_offset if finish_offset else None,
-                            time=parse_time(row[offset + 9]),
+                            time=parse_time(row[offset + 9], with_seconds),
                             status=self.read_result_status(row[offset + 10]),
                         )
 
@@ -699,7 +699,7 @@ class CSVReader:
 
                 yield entry
 
-    def read_team_v10(self, input_file, encoding="latin1"):
+    def read_team_v10(self, input_file, with_seconds=True, encoding="latin1"):
         """Read a SportSoftware OT2003 csv export file"""
         self.race.event.form = model.EventForm.TEAM
 
@@ -723,7 +723,7 @@ class CSVReader:
                 category = self.read_category(*row[12:16])
                 entry.category_requests.append(model.EntryCategoryRequest(event_category=category.event_category))
 
-                start = self.read_start_and_result(*row[3:8])
+                start = self.read_start_and_result(*row[3:8], with_seconds=with_seconds)
                 start.entry = entry
                 start.category = category
 
@@ -810,6 +810,7 @@ class CSVReader:
         status="",
         time_bonus="",
         time_penalty="",
+        with_seconds=True,
     ):
         """Read start and result columns
 
@@ -821,18 +822,19 @@ class CSVReader:
         """
         start = model.Start(
             competitive=non_competitive.upper() != "X",
-            time_offset=parse_time(start_offset),
+            time_offset=parse_time(start_offset, with_seconds),
         )
 
         if finish_offset or result_time or status:
-            start_offset = parse_time(start_offset)
-            finish_offset = parse_time(finish_offset)
+            start_offset = parse_time(start_offset, with_seconds)
+            finish_offset = parse_time(finish_offset, with_seconds)
             result = model.Result(
                 start=start,
                 start_time=datetime(MINYEAR, 1, 1) + start_offset if start_offset else None,
                 finish_time=datetime(MINYEAR, 1, 1) + finish_offset if finish_offset else None,
-                time_adjustment=(parse_time(time_penalty) or timedelta()) - (parse_time(time_bonus) or timedelta()),
-                time=parse_time(result_time),
+                time_adjustment=(parse_time(time_penalty, with_seconds) or timedelta())
+                - (parse_time(time_bonus, with_seconds) or timedelta()),
+                time=parse_time(result_time, with_seconds),
             )
 
             if status:
