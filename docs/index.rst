@@ -14,6 +14,7 @@ Contents:
    features
    modules
    architecture
+   model
    developer
 
 

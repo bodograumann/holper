@@ -7,6 +7,8 @@ Use SQLAlchemy as database library.
 .. _IOF XML v3.0: http://orienteering.org/resources/it/data-standard-3-0/
 """
 
+# pylint: disable=too-few-public-methods
+
 __all__ = [
     "Base",
     "Country",
@@ -85,9 +87,9 @@ class _ExternalObject(DeclarativeMeta):
             attr_rel = camelcase_to_snakecase(parent_model)
             attr_id = attr_rel + "_id"
 
-            namespace["issuer"] = Column(String(32), primary_key=True)
-            namespace["external_id"] = Column(String(16), primary_key=True)
-            namespace[attr_id] = Column(Integer, ForeignKey("%s.%s" % (parent_model, attr_id)))
+            namespace["issuer"] = Column(String(32), primary_key=True, nullable=False)
+            namespace["external_id"] = Column(String(16), primary_key=True, nullable=False)
+            namespace[attr_id] = Column(Integer, ForeignKey("%s.%s" % (parent_model, attr_id)), nullable=False)
             namespace[attr_rel] = relationship(parent_model, backref="external_ids")
 
             namespace["__repr__"] = lambda self: "<%s(%s: %s)>" % (

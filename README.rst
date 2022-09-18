@@ -26,3 +26,11 @@ Setup an virtual enviroment with::
 Run tests with ``pytest tests/test.py`` and the linter with ``pylint holper tests``.
 
 The code can be auto-formatted with ``black -S -l 120 holper tests``.
+
+To generate documentation, use the following commands:
+
+    python generate_class_diagram.py > docs/class_diagram.mmd
+    cd docs
+    make html
+
+After that you can open the docs in `<docs/_build/html/index.html`.

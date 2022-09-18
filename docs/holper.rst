@@ -4,19 +4,28 @@ holper package
 Submodules
 ----------
 
-holper.model module
-~~~~~~~~~~~~~~~~~~~
+holper.affine_seq module
+~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: holper.model
+.. automodule:: holper.affine_seq
     :members:
     :undoc-members:
     :show-inheritance:
 
 
-holper.sportsoftware module
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+holper.core module
+~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: holper.sportsoftware
+.. automodule:: holper.core
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+holper.invoice module
+~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: holper.invoice
     :members:
     :undoc-members:
     :show-inheritance:
@@ -40,10 +49,28 @@ holper.iofxml3 module
     :show-inheritance:
 
 
-holper.startlist module
+holper.model module
+~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: holper.model
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+holper.sportsoftware module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: holper.sportsoftware
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+holper.start module
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: holper.startlist
+.. automodule:: holper.start
     :members:
     :undoc-members:
     :show-inheritance:

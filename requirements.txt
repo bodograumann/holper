@@ -2,3 +2,5 @@
 pytest
 pylint
 black
+sphinx
+sphinxcontrib-mermaid
