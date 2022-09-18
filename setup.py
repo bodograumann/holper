@@ -18,6 +18,7 @@ setup(
             'sqlalchemy >= 1.4',
             'typer',
             'xdg',
+            'pystache',
         ],
 
         extras_require={
