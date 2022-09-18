@@ -658,7 +658,7 @@ class CSVReader:
                     entry.name = row[3]
 
                 category = self.read_category(*row[19:23])
-                entry.category_requests.append(model.EntryCategoryRequest(category=category.event_category))
+                entry.category_requests.append(model.EntryCategoryRequest(event_category=category.event_category))
 
                 # relay['fee'] = parse_float(row[29]) or 0)
 
