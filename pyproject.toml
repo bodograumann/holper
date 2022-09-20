@@ -48,6 +48,11 @@ output-format = "colorized"
 max-line-length = 120
 
 
+[tool.black]
+line-length = 120
+target-version = ['py39', 'py310', 'py311']
+
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

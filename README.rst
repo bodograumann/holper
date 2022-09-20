@@ -25,7 +25,7 @@ Make sure you have poetry installed. Then install the project dependencies::
 
 Run tests with ``pytest`` and the linter with ``pylint holper tests``.
 
-The code can be auto-formatted with ``black -S -l 120 holper tests``.
+The code can be auto-formatted with ``black holper tests``.
 
 To generate documentation, use the following commands::
 
