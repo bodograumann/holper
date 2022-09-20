@@ -48,6 +48,14 @@ Lint with `ESLint <https://eslint.org/>`_::
 
     npm run lint
 
+Start `Storybook <https://storybook.js.org>`_::
+
+    npm run storybook
+
+Build a static version of the storybook::
+
+    npm run build-storybook
+
 Backend
 ~~~~~~~
 
