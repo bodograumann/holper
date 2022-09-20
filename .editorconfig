@@ -13,7 +13,7 @@ indent_size = 2
 max_line_width = 80
 
 [*.py]
-max_line_width = 79
+max_line_width = 120
 indent_size = 4
 
 [Makefile,*.mak]
