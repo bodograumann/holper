@@ -18,6 +18,39 @@ Toolkit
 Development
 -----------
 
+Frontend
+~~~~~~~~
+
+The Vue 3 frontend can be found in the `app` folder.
+You need to have node.js and npm installed.
+
+Install dependencies::
+
+    npm install
+
+Compile and Hot-Reload for Development::
+
+    npm run dev
+
+Type-Check, Compile and Minify for Production::
+
+    npm run build
+
+Run Unit Tests with `Vitest <https://vitest.dev/>`_::
+
+    npm run test:unit
+
+Run typechecker on .ts and .vue files::
+
+    npm run typecheck
+
+Lint with `ESLint <https://eslint.org/>`_::
+
+    npm run lint
+
+Backend
+~~~~~~~
+
 Make sure you have poetry installed. Then install the project dependencies::
 
     poetry install
