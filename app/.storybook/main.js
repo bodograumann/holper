@@ -1,3 +1,6 @@
+const path = require("path");
+const { mergeConfig } = require("vite");
+
 module.exports = {
   "stories": [
     "../src/**/*.stories.mdx",
@@ -14,5 +17,19 @@ module.exports = {
   },
   "features": {
     "storyStoreV7": true
-  }
+  },
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      // Reuse aliases
+      resolve: {
+        alias: {
+          "@": path.resolve("./src"),
+        },
+      },
+      esbuild: {
+        // Workaround for https://github.com/storybookjs/builder-vite/issues/206
+        keepNames: true,
+      },
+    });
+  },
 }
