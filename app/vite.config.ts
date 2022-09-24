@@ -10,7 +10,7 @@ export default defineConfig({
   define: {
     __VUE_OPTIONS_API__: false,
   },
-  plugins: [vue()],
+  plugins: [vue({ reactivityTransform: true })],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
