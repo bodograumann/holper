@@ -1,0 +1,198 @@
+import { Meta, ColorPalette, ColorItem, Typeset } from "@storybook/addon-docs";
+
+export const fontSizes = [
+  "0.64rem",
+  "0.8rem",
+  "1rem",
+  "1.25rem",
+  "1.5625rem",
+  "2rem",
+];
+
+<Meta title="Design Tokens" />
+
+# Design Tokens
+
+hOLper uses tailwind to build the design up from design tokens.
+
+## Colors
+
+Colors are designed in the CIELCh color space.
+
+<ColorPalette>
+  <ColorItem title="white" colors={["#fdfef8"]} />
+  <ColorItem title="black" colors={["#10110b"]} />
+  <ColorItem
+    title="gras"
+    subtitle="Hue = 2rad = 114.6°"
+    colors={{
+      superlight: "#c2e053",
+      light: "#a0bf31",
+      semilight: "#7e9e00",
+      DEFAULT: "#688300",
+      semidark: "#526800",
+      dark: "#3d4f00",
+    }}
+  />
+  <ColorItem
+    title="forest"
+    subtitle="Hue = 2rad = 114.6°, Chroma = 30%"
+    colors={{
+      superlight: "#d0d9a0",
+      light: "#afb880",
+      semilight: "#8e9862",
+      DEFAULT: "#747e4a",
+      semidark: "#5b6532",
+      dark: "#434d1c",
+      superdark: "#293401",
+    }}
+  />
+  <ColorItem
+    title="pale-forest"
+    subtitle="Hue = 2rad = 114.6°, Chroma = 10%"
+    colors={{
+      superlight: "#d3d6c3",
+      light: "#b2b4a2",
+      semilight: "#929483",
+      DEFAULT: "#787b69",
+      semidark: "#5f6251",
+      dark: "#484a3a",
+      superdark: "#2f3122",
+    }}
+  />
+  <ColorItem
+    title="ash"
+    subtitle="Hue = 2rad = 114.6°, Chroma = 3%"
+    colors={{
+      superlight: "#d4d4cf",
+      light: "#b3b3ae",
+      semilight: "#93938e",
+      DEFAULT: "#797974",
+      semidark: "#60615c",
+      dark: "#484944",
+      superdark: "#30302c",
+    }}
+  />
+  <ColorItem
+    title="sun"
+    subtitle="Hue = 1rad = 57.3°"
+    colors={{
+      light: "#ff9957",
+      semilight: "#e47627",
+      DEFAULT: "#c25a03",
+      semidark: "#9e4700",
+      dark: "#793500",
+    }}
+  />
+  <ColorItem
+    title="sand"
+    subtitle="Hue = 1rad = 57.3°, Chroma = 30%"
+    colors={{
+      superlight: "#ffc8a5",
+      light: "#dea785",
+      semilight: "#bc8767",
+      DEFAULT: "#a06e4f",
+      semidark: "#845537",
+      dark: "#693e21",
+      superdark: "#4d2509",
+    }}
+  />
+  <ColorItem
+    title="pale-sand"
+    subtitle="Hue = 1rad = 57.3°, Chroma = 10%"
+    colors={{
+      superlight: "#e5d0c4",
+      light: "#c3afa4",
+      semilight: "#a28f84",
+      DEFAULT: "#88756b",
+      semidark: "#6e5d53",
+      dark: "#56453c",
+      superdark: "#3c2d24",
+    }}
+  />
+  <ColorItem
+    title="sky"
+    subtitle="Hue = -2.5rad = 216.8°, Chroma = 30%"
+    colors={{
+      superlight: "#82e3f6",
+      light: "#5cc0d2",
+      semilight: "#37a1b2",
+      DEFAULT: "#008596",
+      semidark: "#006b7c",
+      dark: "#005363",
+      superdark: "#003a4a",
+    }}
+  />
+  <ColorItem
+    title="pale-sky"
+    subtitle="Hue = -2.5rad = 216.8°, Chroma = 30%"
+    colors={{
+      superlight: "#bedae0",
+      light: "#9cb7bd",
+      semilight: "#7e989e",
+      DEFAULT: "#637d82",
+      semidark: "#4a6469",
+      dark: "#334c51",
+      superdark: "#1b3438",
+    }}
+  />
+  <ColorItem
+    title="dawn"
+    subtitle="Hue = 0rad = 0°, Chroma = 30%"
+    colors={{
+      superlight: "#ffc1d6",
+      light: "#e79eb3",
+      semilight: "#c67f95",
+      DEFAULT: "#a86479",
+      semidark: "#8c4b60",
+      dark: "#723349",
+      superdark: "#561a31",
+    }}
+  />
+  <ColorItem
+    title="pale-dawn"
+    subtitle="Hue = 0rad = 0°, Chroma = 10%"
+    colors={{
+      superlight: "#e8cfd5",
+      light: "#c5acb3",
+      semilight: "#a58e94",
+      DEFAULT: "#897278",
+      semidark: "#705a60",
+      dark: "#574248",
+      superdark: "#3e2b30",
+    }}
+  />
+</ColorPalette>
+
+## Display Font
+
+We use Cantora One as display font. It has only one weight und should be used for very large text only (`xl`, `2xl`, `3xl` and `4xl`.
+
+<Typeset
+  fontFamily="Cantora One"
+  fontSizes={["1.5625rem", "2rem", "2.5rem", "3rem"]}
+/>
+
+## Body Font
+
+Laila is our standard body font with five different weights. Possible size modifiers are `xs`, `sm`, `base`, `lg`, `xl` and `2xl` though usually sticking with the base size and the `sm` variant should be sufficient.
+
+### Light
+
+<Typeset fontFamily="Laila" fontSizes={fontSizes} fontWeight="300" />
+
+### Regular
+
+<Typeset fontFamily="Laila" fontSizes={fontSizes} fontWeight="400" />
+
+### Medium
+
+<Typeset fontFamily="Laila" fontSizes={fontSizes} fontWeight="500" />
+
+### SemiBold
+
+<Typeset fontFamily="Laila" fontSizes={fontSizes} fontWeight="600" />
+
+### Bold
+
+<Typeset fontFamily="Laila" fontSizes={fontSizes} fontWeight="700" />
