@@ -176,7 +176,7 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
     ]
 
     # Time range to consider
-    time_max = sum(course_slot_counts) * 2 // parallel_max
+    time_max = sum(course_slot_counts) * interval_common_factor
 
     # Model and Constraints
     model = cp_model.CpModel()
@@ -208,7 +208,7 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
 
     # Limit total start length
     last_start = model.NewIntVar(0, time_max, "last_start")
-    model.AddMaxEquality(last_start, (vars[-1] for vars in slot_variables))
+    model.AddMaxEquality(last_start, (vars[-1] for vars in slot_variables if vars))
 
     # Forbid conflicting courses to start at the same time. E.g. when they have the same first control.
     for course_group in no_common_slots:
@@ -232,8 +232,9 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
         for time in range(time_max + 1)
     ]
 
-    for time in range(time_max + 1):
-        model.Add(parallel[time] <= parallel_max)
+    if parallel_max is not None:
+        for time in range(time_max + 1):
+            model.Add(parallel[time] <= parallel_max)
 
     # Step 1: Find the shortest possible start duration
     model.Minimize(last_start)
@@ -291,7 +292,10 @@ def fill_slots(
         slots: Iterable[int] = peekable(start_slots.get(course.course_id, []))
 
         for category in constraints.order[course.course_id]:
-            category.time_offset = timedelta(minutes=slots.peek())
+            try:
+                category.time_offset = timedelta(minutes=slots.peek())
+            except StopIteration:
+                break
 
             # Skip vacancies at the start
             for _ in range(category.vacancies_before):
