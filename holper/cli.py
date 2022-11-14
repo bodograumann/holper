@@ -294,7 +294,11 @@ def startlist(
         session.commit()
 
         for course_id in sorted(start_scheme):
-            typer.echo(f"Course {course_id}: {start_scheme[course_id].pretty()} {list(start_scheme[course_id])}")
+            course = next(course for course in race.courses if course.course_id == course_id)
+            categories = ", ".join(category.short_name for category in constraints.get_categories(course))
+            typer.echo(
+                f"Course {course_id} ({categories}):\n  {start_scheme[course_id].pretty()} {list(start_scheme[course_id])}"
+            )
 
         stats = start.statistics(race)
         typer.echo(f"Starter number: {stats['entries_total']}")
