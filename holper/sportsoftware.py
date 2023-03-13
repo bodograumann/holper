@@ -950,7 +950,13 @@ class CSVWriter:
                     for external_id in category.external_ids
                     if external_id.issuer == "SportSoftware"
                 ),
-                category.event_category_id,
+                next(
+                    (
+                        external_id.external_id
+                        for external_id in category.external_ids
+                    ),
+                    category.event_category_id,
+                )
             ),
             category.short_name,
             category.name,
