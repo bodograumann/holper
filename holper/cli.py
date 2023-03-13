@@ -242,6 +242,7 @@ def startlist(
     race_id: int,
     interval: int,
     parallel_max: Optional[int] = None,
+    greedy: bool = False,
     db_file: str = db_file_opt,
 ):
     """Assign start times for all starters"""
@@ -285,8 +286,11 @@ def startlist(
         )
         constraints.add_race_courses(race)
 
-        typer.echo("Finding optimal start list. This can take some time...")
-        start_scheme = start.generate_slots_optimal(constraints, 60)
+        if greedy:
+            start_scheme = start.generate_slots_greedily(constraints)
+        else:
+            typer.echo("Finding optimal start list. This can take some time...")
+            start_scheme = start.generate_slots_optimal(constraints, 60)
 
         start_slots = {course_id: iter(seq) for course_id, seq in start_scheme.items()}
         start.fill_slots(race, constraints, start_slots)
