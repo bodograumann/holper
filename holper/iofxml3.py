@@ -235,8 +235,10 @@ class _XMLReader:
                 entry.competitors.append(competitor)
             elif self.tag(child, "Class"):
                 entry.category_requests.append(model.EntryCategoryRequest(event_category=self._read_class(child)))
+            elif self.tag(child, "StartTimeAllocationRequest"):
+                entry.start_time_allocation_requests.append(self._read_start_time_allocation_request(child))
             elif not self.tag(child, "Id"):
-                # Race, AssignedFee, ServiceRequest, StartTimeAllocationRequest, ContactInformation
+                # Race, AssignedFee, ServiceRequest, ContactInformation
                 _logger.warning("Skipping unimplemented tag <%s>", child.tag)
 
         return entry
@@ -277,8 +279,10 @@ class _XMLReader:
                 competitor.control_cards.append(self._read_control_card(child))
             elif self.tag(child, "Class"):
                 entry.category_requests.append(model.EntryCategoryRequest(event_category=self._read_class(child)))
+            elif self.tag(child, "StartTimeAllocationRequest"):
+                entry.start_time_allocation_requests.append(self._read_start_time_allocation_request(child))
             elif not self.tag(child, "Id"):
-                # Score, RaceNumber, AssignedFee, ServiceRequest, StartTimeAllocationRequest
+                # Score, RaceNumber, AssignedFee, ServiceRequest
                 _logger.warning("Skipping unimplemented tag <%s>", child.tag)
 
         return entry
@@ -377,6 +381,17 @@ class _XMLReader:
                 _logger.warning("Skipping unimplemented tag <%s>", child.tag)
 
         return event_category
+
+    def _read_start_time_allocation_request(self, element):
+        request = model.StartTimeAllocationRequest(type=model.StartTimeAllocationRequestType(camelcase_to_snakecase(element.get("type"))))
+
+        for child in element:
+            if self.tag(child, "Person"):
+                request.person = self._read_person(child)
+            elif self.tag(child, "Organisation"):
+                request.organisation = self._read_organisation(child)
+
+        return request
 
     def _read_race_course_data(self, element):
         race = model.Race()
