@@ -915,7 +915,7 @@ class CSVWriter:
                     row[8:12] = self.write_club(entry.organisation)[:4]
 
                 if entry.category_requests:
-                    row[12:16] = self.write_category(entry.category_requests[0].category)[:4]
+                    row[12:16] = self.write_category(entry.category_requests[0].event_category)[:4]
 
                 for (competitor_nr, competitor) in enumerate(entry.competitors):
                     offset = 24 + competitor_nr * 7
