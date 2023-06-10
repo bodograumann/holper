@@ -3,13 +3,14 @@
 
 from datetime import datetime, timedelta
 from pathlib import Path
+import sys
 from typing import Optional
 
 import sqlalchemy
 import typer
 from xdg import xdg_data_home
 
-from holper import core, model, iofxml3, start, sportsoftware
+from holper import core, model, iofxml3, start, sportsoftware, iof
 
 app = typer.Typer()
 
@@ -338,6 +339,19 @@ def export(
 
         with open(target, "wb") as output_file:
             sportsoftware.write(output_file, race)
+
+
+@app.command()
+def filter_unused_courses(file: typer.FileBinaryRead):
+    original = file.read()
+    course_data = iof.CourseData.from_xml(original)
+    course_data.race_course_data.delete_unused_courses()
+    print(course_data.to_xml(
+        skip_empty=True,
+        pretty_print=True,
+        encoding="UTF-8",
+        standalone=True
+    ).decode("UTF-8"))
 
 
 if __name__ == "__main__":
