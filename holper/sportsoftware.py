@@ -532,15 +532,15 @@ def read(input_file, encoding="latin1"):
         raise NotImplementedError
 
 
-def write(output_file, race):
+def write(output_file, race, encoding="latin1"):
     csv_writer = CSVWriter(race)
 
     if race.event.form is model.EventForm.INDIVIDUAL:
-        csv_writer.write_solo_v11(output_file)
+        csv_writer.write_solo_v11(output_file, encoding=encoding)
     elif race.event.form is model.EventForm.RELAY:
-        csv_writer.write_relay_v11(output_file)
+        csv_writer.write_relay_v11(output_file, encoding=encoding)
     elif race.event.form is model.EventForm.TEAM:
-        csv_writer.write_team_v10(output_file)
+        csv_writer.write_team_v10(output_file, encoding=encoding)
     else:
         raise ValueError("Unsupported event form")
 
@@ -864,8 +864,8 @@ class CSVWriter:
     def __init__(self, race):
         self.race = race
 
-    def write_solo_v11(self, output_file):
-        with _wrap_binary_stream(output_file) as csvfile:
+    def write_solo_v11(self, output_file, encoding="latin1"):
+        with _wrap_binary_stream(output_file, encoding=encoding) as csvfile:
             csv_writer = csv.writer(csvfile, delimiter=";", doublequote=False)
 
             csv_writer.writerow(_csv_header_oe_de)
@@ -892,8 +892,8 @@ class CSVWriter:
     def write_relay_v11(self, output_file):
         raise NotImplementedError
 
-    def write_team_v10(self, output_file):
-        with _wrap_binary_stream(output_file) as csvfile:
+    def write_team_v10(self, output_file, encoding="latin1"):
+        with _wrap_binary_stream(output_file, encoding=encoding) as csvfile:
             csv_writer = csv.writer(csvfile, delimiter=";", doublequote=False)
 
             csv_writer.writerow(_csv_header_ot_de)
