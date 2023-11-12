@@ -9,6 +9,7 @@ classDiagram
         +Interval time_offset
         +SmallInteger vacancies_before
         +SmallInteger vacancies_after
+        +SmallInteger starter_limit
     }
     Category "*" -- "" Race : race / categories
     Category --> "" EventCategory : event_category
@@ -147,7 +148,7 @@ classDiagram
         +SmallInteger max_number_of_team_members
         +SmallInteger min_team_age
         +SmallInteger max_team_age
-        +SmallInteger max_number_of_competitors
+        +SmallInteger starter_limit
     }
     EventCategory "" -- "*" Leg : legs / event_category
     EventCategory "" -- "*" EventCategoryXID : external_ids / event_category

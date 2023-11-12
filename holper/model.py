@@ -216,7 +216,8 @@ class EventCategory(Base):
     min_team_age = Column(SmallInteger)
     max_team_age = Column(SmallInteger)
 
-    max_number_of_competitors = Column(SmallInteger)
+    # IOF: maxNumberOfCompetitors
+    starter_limit = Column(SmallInteger)
 
 
 class EventCategoryXID(Base):
@@ -261,6 +262,7 @@ class Leg(Base):
 
     leg_number = Column(SmallInteger)
 
+    # Number of competitors of each team that compete together in this leg
     min_number_of_competitors = Column(SmallInteger, default=1)
     max_number_of_competitors = Column(SmallInteger, default=1)
 
@@ -344,6 +346,9 @@ class Category(Base):
     starts = relationship("Start", back_populates="category")
     vacancies_before = Column(SmallInteger, default=0, nullable=False)
     vacancies_after = Column(SmallInteger, default=0, nullable=False)
+
+    # IOF: maxNumberOfCompetitors
+    starter_limit = Column(SmallInteger)
 
     @property
     def name(self):
