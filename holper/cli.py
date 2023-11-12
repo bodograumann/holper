@@ -3,6 +3,7 @@
 
 from datetime import datetime, timedelta
 from pathlib import Path
+from typing import Annotated
 
 import sqlalchemy
 import typer
@@ -15,11 +16,11 @@ app = typer.Typer()
 # Note: This yields pathlib.Path objects, so we should
 # use typing.Union[str, pathlib.Path] as type. Union
 # types are currently not supported by typer however.
-db_file_opt = typer.Option(xdg_data_home() / "holper" / "data.sqlite")
+DbFileOpt = Annotated[str, typer.Option(xdg_data_home() / "holper" / "data.sqlite")]
 
 
 @app.command()
-def events(*, db_file: str = db_file_opt):
+def events(*, db_file: DbFileOpt):
     """Show list of all events"""
     Path(db_file).parent.mkdir(parents=True, exist_ok=True)
     with core.open_session(f"sqlite:///{db_file}") as session:
@@ -38,7 +39,7 @@ def events(*, db_file: str = db_file_opt):
 
 
 @app.command()
-def event(event_id: int, *, db_file: str = db_file_opt):
+def event(event_id: int, *, db_file: DbFileOpt):
     """Show details of an event"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         evt = core.get_event(session, event_id)
@@ -69,7 +70,7 @@ def event(event_id: int, *, db_file: str = db_file_opt):
 
 
 @app.command()
-def new_event(name: str, date: datetime, *, db_file: str = db_file_opt):
+def new_event(name: str, date: datetime, *, db_file: DbFileOpt):
     """Create a new single-race solo event"""
     Path(db_file).parent.mkdir(parents=True, exist_ok=True)
     with core.open_session(f"sqlite:///{db_file}") as session:
@@ -84,7 +85,7 @@ def new_event(name: str, date: datetime, *, db_file: str = db_file_opt):
 
 
 @app.command()
-def import_categories(event_id: int, category_file: Path, *, db_file: str = db_file_opt):
+def import_categories(event_id: int, category_file: Path, *, db_file: DbFileOpt):
     """Import event categories in IOF XML v3 format"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         evt = core.get_event(session, event_id)
@@ -110,7 +111,7 @@ def import_categories(event_id: int, category_file: Path, *, db_file: str = db_f
 
 
 @app.command()
-def courses(race_id: int, *, db_file: str = db_file_opt):
+def courses(race_id: int, *, db_file: DbFileOpt):
     """Show courses for a race"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         race = core.get_race(session, race_id)
@@ -147,12 +148,15 @@ def import_courses(
     race_id: int,
     course_file: Path,
     *,
-    short_category_name: bool = typer.Option(
-        "-s",
-        default=False,
-        help="Use the short category name to match category assignments.",
-    ),
-    db_file: str = db_file_opt,
+    short_category_name: Annotated[
+        bool,
+        typer.Option(
+            "-s",
+            default=False,
+            help="Use the short category name to match category assignments.",
+        ),
+    ],
+    db_file: DbFileOpt,
 ):
     """Import race courses in IOF XML v3 format"""
     with core.open_session(f"sqlite:///{db_file}") as session:
@@ -192,7 +196,7 @@ def import_courses(
 
 
 @app.command()
-def entries(event_id: int, *, db_file: str = db_file_opt):
+def entries(event_id: int, *, db_file: DbFileOpt):
     """Show all entries of an event"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         evt = core.get_event(session, event_id)
@@ -208,7 +212,7 @@ def entries(event_id: int, *, db_file: str = db_file_opt):
 
 
 @app.command()
-def import_entries(event_id: int, entry_file: Path, *, db_file: str = db_file_opt):
+def import_entries(event_id: int, entry_file: Path, *, db_file: DbFileOpt):
     """Import race entries in IOF XML v3 format"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         evt = core.get_event(session, event_id)
@@ -246,7 +250,7 @@ def startlist(
     parallel_max: int | None = None,
     *,
     greedy: bool = False,
-    db_file: str = db_file_opt,
+    db_file: DbFileOpt,
 ):
     """Assign start times for all starters"""
     with core.open_session(f"sqlite:///{db_file}") as session:
@@ -320,7 +324,7 @@ def export(
     race_id: int,
     target: Path,
     *,
-    db_file: str = db_file_opt,
+    db_file: DbFileOpt,
 ):
     """Export entries as SportSoftware csv file"""
     with core.open_session(f"sqlite:///{db_file}") as session:
