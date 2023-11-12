@@ -4,7 +4,7 @@ hOLper
 hOLper is an orienteering competition management software with a client-server
 based architecture.
 
-The minimal python version required is 3.9.
+The minimal python version required is 3.10.
 
 More detailed documentation is published on `<https://bodograumann.github.io/holper/>`_.
 
