@@ -68,7 +68,7 @@ _csv_header_oe_de = (
     "Platz",
 )
 _csv_header_os_de = (
-    "OS0001",
+    "OS0012",
     "Stnr",
     "Melde Id",
     "Bez",
@@ -379,6 +379,7 @@ _csv_header_os_de = (
     "Chipnr20",
     "Gemietet20",
     "Datenbank Id20",
+    "Platz",
     "",
 )
 _csv_header_ot_de = (
@@ -507,7 +508,7 @@ def _detect_type(input_file, encoding="latin1"):
 
         if header.startswith("OE0001;") or header.startswith("OE0012;"):
             return "OE11"
-        if header.startswith("OS0001"):
+        if header.startswith("OS0012;"):
             return "OS11"
         if sum(1 for c in header if c == ";") == 58 and header.startswith("Stnr;Mannschaft;"):
             return "OT10"
