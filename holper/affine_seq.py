@@ -29,7 +29,9 @@ class AffineSeq:
 
         self.stop = stop
 
-        assert self.step > 0
+        if self.step < 1:
+            msg = "`step` value must be positive"
+            raise ValueError(msg)
 
     def pretty(self):
         return (str(self.step) if self.step != 1 else "") + "n" + ("+" + str(self.start) if self.start else "")
