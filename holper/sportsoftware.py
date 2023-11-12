@@ -619,8 +619,6 @@ class CSVReader:
                     entry.category_requests.append(model.EntryCategoryRequest(event_category=category.event_category))
                     start.category = category
 
-                # solo['fee'] = parse_float(row[49])
-
                 if row[52]:
                     course_id = int(row[52])
                     try:
@@ -691,10 +689,6 @@ class CSVReader:
                             status=self.read_result_status(row[offset + 10]),
                         )
 
-                    # relay['times'] = {
-                    #        'finish':  parse_time(row[31 + runner_count * 14 - 6], with_seconds),
-                    # }
-
                 yield entry
 
     def read_team_v10(self, input_file, *, with_seconds=True, encoding="latin1"):
@@ -722,8 +716,6 @@ class CSVReader:
                 start = self.read_start_and_result(*row[3:8], with_seconds=with_seconds)
                 start.entry = entry
                 start.category = category
-
-                # team['fee'] = parse_float(row[22].replace(',', '.') or 0)
 
                 for competitor_nr in range(entry.category_requests[0].event_category.max_number_of_team_members):
                     offset = 24 + competitor_nr * 7

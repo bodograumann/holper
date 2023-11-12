@@ -134,7 +134,6 @@ class Country(Base):
 # Configuration of teams and legs for an event
 #
 # Custom types should be added with an X_ prefix.
-# E.g. X_CUSTOM = ()
 EventForm = auto_enum("EventForm", ["INDIVIDUAL", "TEAM", "RELAY"])
 
 
@@ -214,7 +213,7 @@ class EventCategory(Base):
     min_team_age = Column(SmallInteger)
     max_team_age = Column(SmallInteger)
 
-    # IOF: maxNumberOfCompetitors
+    # In IOF XMLv3 this is called maxNumberOfCompetitors
     starter_limit = Column(SmallInteger)
 
 
@@ -345,7 +344,7 @@ class Category(Base):
     vacancies_before = Column(SmallInteger, default=0, nullable=False)
     vacancies_after = Column(SmallInteger, default=0, nullable=False)
 
-    # IOF: maxNumberOfCompetitors
+    # In IOF XMLv3 this is called maxNumberOfCompetitors
     starter_limit = Column(SmallInteger)
 
     @property
