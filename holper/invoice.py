@@ -2,7 +2,6 @@
 
 import datetime
 import decimal
-
 from collections import OrderedDict
 
 import pystache

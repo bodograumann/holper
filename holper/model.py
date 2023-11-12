@@ -47,24 +47,24 @@ __all__ = [
 import enum
 
 from sqlalchemy import (
-    Table,
-    Column,
-    Sequence,
-    ForeignKey,
-    UniqueConstraint,
-    String,
-    SmallInteger,
-    Integer,
+    TIMESTAMP,
     Boolean,
-    Float,
+    Column,
     Date,
     DateTime,
-    Interval,
     Enum,
-    TIMESTAMP,
+    Float,
+    ForeignKey,
+    Integer,
+    Interval,
+    Sequence,
+    SmallInteger,
+    String,
+    Table,
+    UniqueConstraint,
 )
-from sqlalchemy.orm import relationship, declarative_base
-from sqlalchemy.ext.declarative import declared_attr, DeclarativeMeta
+from sqlalchemy.ext.declarative import DeclarativeMeta, declared_attr
+from sqlalchemy.orm import declarative_base, relationship
 
 from .tools import camelcase_to_snakecase
 
@@ -111,7 +111,7 @@ class _ModelBase:
         except AttributeError:
             primary_key = "No id"
 
-        return f"<{self.__class__.__name__}({repr(primary_key)})>"
+        return f"<{self.__class__.__name__}({primary_key!r})>"
 
 
 Base = declarative_base(cls=_ModelBase, metaclass=_ExternalObject)
@@ -470,7 +470,9 @@ StartTimeAllocationRequestType = auto_enum(
 
 class StartTimeAllocationRequest(Base):
     start_time_allocation_request_id = Column(
-        Integer, Sequence("start_time_allocation_request_id_seq"), primary_key=True
+        Integer,
+        Sequence("start_time_allocation_request_id_seq"),
+        primary_key=True,
     )
     entry_id = Column(Integer, ForeignKey(Entry.entry_id), nullable=False)
     entry = relationship(Entry, back_populates="start_time_allocation_requests")

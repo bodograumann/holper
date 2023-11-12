@@ -1,10 +1,11 @@
 """Core functionality"""
 
-from itertools import groupby
-from typing import Callable, Optional
 import logging
+from itertools import groupby
+
 import sqlalchemy
-from . import tools, model
+
+from . import model, tools
 
 _logger = logging.getLogger(__name__)
 
@@ -19,7 +20,7 @@ def open_session(source: str) -> sqlalchemy.orm.Session:
     return Session(future=True)
 
 
-def get_event(session: sqlalchemy.orm.Session, event_id: int) -> Optional[model.Event]:
+def get_event(session: sqlalchemy.orm.Session, event_id: int) -> model.Event | None:
     try:
         (event,) = next(session.execute(sqlalchemy.select(model.Event).where(model.Event.event_id == event_id)))
         return event
@@ -27,7 +28,7 @@ def get_event(session: sqlalchemy.orm.Session, event_id: int) -> Optional[model.
         return None
 
 
-def get_race(session: sqlalchemy.orm.Session, race_id: int) -> Optional[model.Race]:
+def get_race(session: sqlalchemy.orm.Session, race_id: int) -> model.Race | None:
     try:
         (race,) = next(session.execute(sqlalchemy.select(model.Race).where(model.Race.race_id == race_id)))
         return race
@@ -56,7 +57,9 @@ def shadow_entity_by_xid(session, entity):
     xid_cls = getattr(model, cls.__name__ + "XID")
     for xid in entity.external_ids:
         result = session.execute(
-            sqlalchemy.select(xid_cls).where(xid_cls.issuer == xid.issuer).where(xid_cls.external_id == xid.external_id)
+            sqlalchemy.select(xid_cls)
+            .where(xid_cls.issuer == xid.issuer)
+            .where(xid_cls.external_id == xid.external_id),
         )
         try:
             (saved_xid,) = next(result)
@@ -67,7 +70,8 @@ def shadow_entity_by_xid(session, entity):
 
 
 def group_courses_by_first_control(race: model.Race) -> dict[str, list[model.Course]]:
-    get_first_control: Callable[[model.Course], str] = lambda course: course.controls[1].control.label
+    def get_first_control(course: model.Course) -> str:
+        return course.controls[1].control.label
 
     return {
         control_label: list(course_group)

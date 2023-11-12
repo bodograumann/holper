@@ -1,9 +1,9 @@
 """Data exchange in Krämer SportSoftware OE/OS/OT csv"""
 
-from io import TextIOWrapper
-from contextlib import contextmanager
-from datetime import date, datetime, timedelta, MINYEAR
 import csv
+from contextlib import contextmanager, suppress
+from datetime import MINYEAR, date, datetime, timedelta
+from io import TextIOWrapper
 
 from . import model, tools
 
@@ -506,7 +506,7 @@ def _detect_type(input_file, encoding="latin1"):
         except StopIteration:
             return None
 
-        if header.startswith("OE0001;") or header.startswith("OE0012;"):
+        if header.startswith(("OE0001;", "OE0012;")):
             return "OE11"
         if header.startswith("OS0012;"):
             return "OS11"
@@ -543,7 +543,8 @@ def write(output_file, race, encoding="latin1"):
     elif race.event.form is model.EventForm.TEAM:
         csv_writer.write_team_v10(output_file, encoding=encoding)
     else:
-        raise ValueError("Unsupported event form")
+        msg = "Unsupported event form"
+        raise ValueError(msg)
 
 
 class CSVReader:
@@ -599,10 +600,8 @@ class CSVReader:
             for row in csv_reader:
                 entry = model.Entry(event=self.race.event)
 
-                try:
+                with suppress(ValueError):
                     entry.number = int(row[1])
-                except ValueError:
-                    pass
 
                 entry.competitors.append(self.read_competitor(*row[5:9], row[3]))
 
@@ -648,10 +647,8 @@ class CSVReader:
             for row in csv_reader:
                 entry = model.Entry(event=self.race.event)
 
-                try:
+                with suppress(ValueError):
                     entry.number = int(row[1])
-                except ValueError:
-                    pass
 
                 if row[13]:
                     entry.organisation = self.read_club(*row[13:19])
@@ -711,10 +708,8 @@ class CSVReader:
             for row in csv_reader:
                 entry = model.Entry(event=self.race.event)
 
-                try:
+                with suppress(ValueError):
                     entry.number = int(row[0])
-                except ValueError:
-                    pass
 
                 entry.name = row[1]
 
@@ -737,7 +732,13 @@ class CSVReader:
                 yield entry
 
     def read_club(
-        self, club_id, abbreviation, city, country, seat=None, region=None
+        self,
+        club_id,
+        abbreviation,
+        city,
+        country,
+        seat=None,
+        region=None,
     ):
         club_id = int(club_id)
         try:
@@ -749,7 +750,7 @@ class CSVReader:
                 type=model.OrganisationType.CLUB,
             )
             club.external_ids.append(
-                model.OrganisationXID(organisation=club, issuer="SportSoftware", external_id=str(club_id))
+                model.OrganisationXID(organisation=club, issuer="SportSoftware", external_id=str(club_id)),
             )
 
             if len(country) == 2:
@@ -779,7 +780,7 @@ class CSVReader:
                     event_category=event_category,
                     issuer="SportSoftware",
                     external_id=str(category_id),
-                )
+                ),
             )
             category = model.Category(race=self.race, event_category=event_category)
             for leg_number in range(1, team_size + 1):
@@ -800,7 +801,7 @@ class CSVReader:
         competitor = model.Competitor(person=person)
         if control_card_label:
             competitor.control_cards.append(
-                model.ControlCard(system=model.PunchingSystem.SportIdent, label=control_card_label)
+                model.ControlCard(system=model.PunchingSystem.SportIdent, label=control_card_label),
             )
         return competitor
 
@@ -858,7 +859,8 @@ class CSVReader:
             return model.ResultStatus.DISQUALIFIED
         if int(status) == 5:
             return model.ResultStatus.OVER_TIME
-        raise NotImplementedError(f"SportSoftware Wertung={status}")
+        msg = f"SportSoftware Wertung={status}"
+        raise NotImplementedError(msg)
 
 
 class CSVWriter:
@@ -957,7 +959,7 @@ class CSVWriter:
                         for external_id in category.external_ids
                     ),
                     category.event_category_id,
-                )
+                ),
             ),
             category.short_name,
             category.name,

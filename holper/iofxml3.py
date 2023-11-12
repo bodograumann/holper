@@ -11,12 +11,12 @@ object model for the XML, which can be handled quite efficiently.
 .. _IOF XML v3.0: http://orienteering.org/resources/it/data-standard-3-0/
 """
 
-from collections import defaultdict
 import logging
-from pkg_resources import resource_stream
+from collections import defaultdict
 
 import iso8601
 from lxml import etree
+from pkg_resources import resource_stream
 
 from . import model
 from .tools import camelcase_to_snakecase
@@ -83,7 +83,8 @@ class IDRegistry:
     def put(self, issuer, id_type, id_value, obj):
         existing = self.get(id_type, id_value)
         if existing is not None and existing is not obj:
-            raise KeyError("There is already a different element registered under this Id")
+            msg = "There is already a different element registered under this Id"
+            raise KeyError(msg)
 
         self.objects[id_type][id_value] = obj
 
@@ -466,7 +467,8 @@ class _XMLReader:
         for child in element:
             if self.tag(child, "Control"):
                 if course_control.control:
-                    raise NotImplementedError("Only one code per control allowed")
+                    msg = "Only one code per control allowed"
+                    raise NotImplementedError(msg)
                 course_control.control = self.create_obj_from_id(child, model.Control)
             elif self.tag(child, "LegLength"):
                 course_control.length = float(child.text)

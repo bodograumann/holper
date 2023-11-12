@@ -1,9 +1,8 @@
+import datetime
+import io
 from unittest import TestCase, expectedFailure
 
-import io
-import datetime
-
-from holper import iofxml3, sportsoftware, model, core
+from holper import core, iofxml3, model, sportsoftware
 
 
 class TestModel(TestCase):
@@ -29,7 +28,7 @@ class TestModel(TestCase):
 
         event1a = self.session.merge(model.Event(event_id=1, name="event1a"))
 
-        self.assertIs(event1, event1a)
+        assert event1 is event1a
 
 
 class TestImport(TestCase):
@@ -70,47 +69,41 @@ class TestImport(TestCase):
                 for module in modules:
                     with self.subTest(filename=filename, module=module.__name__):
                         if module is correct_module:
-                            self.assertTrue(
-                                module.detect(file),
-                                f"{filename} is not recognized by {module.__name__}.",
-                            )
+                            assert module.detect(file), f"{filename} is not recognized by {module.__name__}."
                         else:
-                            self.assertFalse(module.detect(file))
-                        self.assertFalse(file.closed)
+                            assert not module.detect(file)
+                        assert not file.closed
                         file.seek(0)
 
     def test_iofxml3_category_list(self):
         with open("tests/IOFv3/ClassList_Individual_Step1.xml", "rb") as file:
             categories = list(iofxml3.read(file))
-            self.assertEqual(len(categories), 2)
+            assert len(categories) == 2
 
     def test_iofxml3_person_entry_list(self):
         with open("tests/IOFv3/EntryList1.xml", "rb") as file:
             generator = iofxml3.read(file)
             _event = next(generator)
             entries = list(generator)
-            self.assertEqual(len(entries), 3)
+            assert len(entries) == 3
 
             for entry in entries:
-                self.assertIsInstance(entry, model.Entry)
+                assert isinstance(entry, model.Entry)
 
-            self.assertIs(
-                entries[0].category_requests[0].event_category,
-                entries[1].category_requests[0].event_category,
-            )
-            self.assertEqual(entries[0].competitors[0].organisation.country.ioc_code, "GBR")
+            assert entries[0].category_requests[0].event_category is entries[1].category_requests[0].event_category
+            assert entries[0].competitors[0].organisation.country.ioc_code == "GBR"
 
     def test_iofxml3_team_entry_list(self):
         with open("tests/IOFv3/EntryList2.xml", "rb") as file:
             generator = iofxml3.read(file)
             _event = next(generator)
             entries = list(generator)
-            self.assertEqual(len(entries), 2)
+            assert len(entries) == 2
 
             for entry in entries:
-                self.assertIsInstance(entry, model.Entry)
+                assert isinstance(entry, model.Entry)
 
-            self.assertEqual(len(entries[0].competitors), 5)
+            assert len(entries[0].competitors) == 5
 
     def test_iofxml3_course_data(self):
         with open("tests/IOFv3/CourseData_Individual_Step2.xml", "rb") as file:
@@ -119,32 +112,29 @@ class TestImport(TestCase):
             race = next(generator)
             self.assertRaises(StopIteration, lambda: next(generator))
 
-            self.assertEqual(race.event, event)
-            self.assertEqual(len(race.courses), 2)
-            self.assertEqual(len(race.categories), 2)
-            self.assertEqual(race.categories[0].event_category, event.event_categories[0])
-            self.assertIn(
-                race.categories[0].courses[0].course.name,
-                [course.name for course in race.courses],
-            )
+            assert race.event == event
+            assert len(race.courses) == 2
+            assert len(race.categories) == 2
+            assert race.categories[0].event_category == event.event_categories[0]
+            assert race.categories[0].courses[0].course.name in [course.name for course in race.courses]
 
     def test_sportsoftware_oe_entries(self):
         with open("tests/SportSoftware/OE_11.0_EntryList1.csv", "rb") as file:
             generator = sportsoftware.read(file)
             entries = list(generator)
             for entry in entries:
-                self.assertIsInstance(entry, model.Entry)
-                self.assertEqual(len(entry.competitors), 1)
+                assert isinstance(entry, model.Entry)
+                assert len(entry.competitors) == 1
 
             person = entries[0].competitors[0].person
-            self.assertEqual(person.given_name, "Martin")
-            self.assertEqual(person.family_name, "Ahlburg")
-            self.assertEqual(person.birth_date.year, 1988)
+            assert person.given_name == "Martin"
+            assert person.family_name == "Ahlburg"
+            assert person.birth_date.year == 1988
 
             start = entries[0].starts[0]
-            self.assertEqual(
-                start.time_offset + (start.category.time_offset or datetime.timedelta(0)),
-                datetime.timedelta(hours=1, minutes=36),
+            assert start.time_offset + (start.category.time_offset or datetime.timedelta(0)) == datetime.timedelta(
+                hours=1,
+                minutes=36,
             )
 
     def test_sportsoftware_os_entries(self):
@@ -152,26 +142,23 @@ class TestImport(TestCase):
             generator = sportsoftware.read(file)
             entries = list(generator)
             for entry in entries:
-                self.assertIsInstance(entry, model.Entry)
+                assert isinstance(entry, model.Entry)
 
-            self.assertEqual(len(entries[0].competitors), 3)
-            self.assertEqual(entries[0].competitors[0].starts[0].control_card.label, "850705")
+            assert len(entries[0].competitors) == 3
+            assert entries[0].competitors[0].starts[0].control_card.label == "850705"
 
-            self.assertEqual(
-                entries[0].starts[0].result.start_time,
-                entries[0].competitors[0].starts[0].competitor_result.start_time,
+            assert (
+                entries[0].starts[0].result.start_time
+                == entries[0].competitors[0].starts[0].competitor_result.start_time
             )
-            self.assertEqual(
-                entries[0].starts[0].result.time,
-                sum(
-                    (entries[0].competitors[idx].starts[0].competitor_result.time for idx in range(3)),
-                    datetime.timedelta(),
-                ),
+            assert entries[0].starts[0].result.time == sum(
+                (entries[0].competitors[idx].starts[0].competitor_result.time for idx in range(3)),
+                datetime.timedelta(),
             )
             for idx in (0, 1):
-                self.assertEqual(
-                    entries[0].competitors[idx].starts[0].competitor_result.finish_time,
-                    entries[0].competitors[idx + 1].starts[0].competitor_result.start_time,
+                assert (
+                    entries[0].competitors[idx].starts[0].competitor_result.finish_time
+                    == entries[0].competitors[idx + 1].starts[0].competitor_result.start_time
                 )
 
     def test_sportsoftware_ot_entries(self):
@@ -179,9 +166,9 @@ class TestImport(TestCase):
             generator = sportsoftware.read(file)
             entries = list(generator)
             for entry in entries:
-                self.assertIsInstance(entry, model.Entry)
+                assert isinstance(entry, model.Entry)
 
-            self.assertEqual(len(entries[0].competitors), 3)
+            assert len(entries[0].competitors) == 3
 
 
 class TestExport(TestCase):
@@ -198,7 +185,7 @@ class TestExport(TestCase):
         sportsoftware.write(self.buffer, race)
 
         self.buffer.seek(0)
-        self.assertEqual(sportsoftware._detect_type(self.buffer), "OE11")
+        assert sportsoftware._detect_type(self.buffer) == "OE11"
 
     @expectedFailure
     def test_sportsoftware_os_entries(self):
@@ -208,7 +195,7 @@ class TestExport(TestCase):
         sportsoftware.write(self.buffer, race)
 
         self.buffer.seek(0)
-        self.assertEqual(sportsoftware._detect_type(self.buffer), "OS11")
+        assert sportsoftware._detect_type(self.buffer) == "OS11"
 
     def test_sportsoftware_ot_entries(self):
         event = model.Event(form=model.EventForm.TEAM)
@@ -217,4 +204,4 @@ class TestExport(TestCase):
         sportsoftware.write(self.buffer, race)
 
         self.buffer.seek(0)
-        self.assertEqual(sportsoftware._detect_type(self.buffer), "OT10")
+        assert sportsoftware._detect_type(self.buffer) == "OT10"

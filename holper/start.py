@@ -14,18 +14,17 @@ the same course.
 .. _WKB: https://o-sport.de/dokumente/wettkampfwesen/
 """
 
-from collections.abc import Iterable, Mapping
-from collections import Counter, defaultdict
-from datetime import timedelta
 import operator
 import random
-from typing import Optional
+from collections import Counter, defaultdict
+from collections.abc import Iterable, Mapping
+from datetime import timedelta
 
 from more_itertools import peekable
 from ortools.sat.python import cp_model
 
-from .model import Category, Course, Start, StartTimeAllocationRequestType, Race
 from .affine_seq import AffineSeq
+from .model import Category, Course, Race, Start, StartTimeAllocationRequestType
 from .tools import disjoin
 
 
@@ -53,7 +52,7 @@ class StartConstraints:
         # Map course ids to an ordered list of categories
         self.order: dict[int, list[Category]] = defaultdict(list)
         # Maximal number of parallel starts for each start time
-        self.parallel_max: Optional[int] = parallel_max
+        self.parallel_max: int | None = parallel_max
         # Minimal time difference between two consecutive starts for each class
         self.interval: int = interval
         # Collection of course groups where each group is a collection of
@@ -72,7 +71,7 @@ class StartConstraints:
             filter(
                 lambda category: category not in categories,
                 self.order[course.course_id],
-            )
+            ),
         )
 
     def set_category_late(self, course: Course, categories: list[Category]):
@@ -81,7 +80,7 @@ class StartConstraints:
                 filter(
                     lambda category: category not in categories,
                     self.order[course.course_id],
-                )
+                ),
             )
             + categories
         )
@@ -141,7 +140,8 @@ def generate_slots_greedily(constraints: StartConstraints, time_max=12 * 60) -> 
             # Slot can be used for the current course
             break
         else:
-            raise KeyError("No free slots found")
+            msg = "No free slots found"
+            raise KeyError(msg)
 
         slots[course_id] = AffineSeq(first_slot, first_slot + constraints.interval * count, constraints.interval)
 
@@ -169,7 +169,7 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
     course_starters = list(enumerate(course_slot_counts))
     course_ids = list(constraints.course_slot_counts.keys())
 
-    course_idx_by_id = dict((course_id, idx) for idx, course_id in enumerate(course_ids))
+    course_idx_by_id = {course_id: idx for idx, course_id in enumerate(course_ids)}
     no_common_slots = [
         [course_idx_by_id[course_id] for course_id in course_group if course_id in course_idx_by_id]
         for course_group in constraints.conflicts
@@ -244,7 +244,8 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
     status = solver.Solve(model)
 
     if status == cp_model.INFEASIBLE:
-        raise Exception("No solution found.")
+        msg = "No solution found."
+        raise Exception(msg)
 
     time_max = solver.Value(last_start)
     model.Add(last_start == time_max)
@@ -252,7 +253,7 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
     # Step 2: Find the optimal solution
     model.Maximize(
         sum((starters - 1) * intervals[idx] for idx, starters in course_starters)  # Maximize intervals
-        - sum(offsets)  # Minimize offsets
+        - sum(offsets),  # Minimize offsets
     )
 
     solver = cp_model.CpSolver()
@@ -260,9 +261,10 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
     status = solver.Solve(model)
 
     if status == cp_model.INFEASIBLE:
-        raise Exception("No solution found.")
+        msg = "No solution found."
+        raise Exception(msg)
 
-    slots = {
+    return {
         course_id: AffineSeq(
             solver.Value(offsets[idx]),
             solver.Value(offsets[idx])
@@ -271,8 +273,6 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
         )
         for idx, course_id in enumerate(course_ids)
     }
-
-    return slots
 
 
 def fill_slots(

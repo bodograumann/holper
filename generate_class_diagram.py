@@ -1,6 +1,8 @@
 """Generate a Mermaid class diagram from the SQLAlchemy model classes"""
 import inspect
-from sqlalchemy.orm import class_mapper, RelationshipProperty, Mapper
+
+from sqlalchemy.orm import Mapper, RelationshipProperty, class_mapper
+
 from holper import model
 
 INDENT = 4 * " "
@@ -43,11 +45,11 @@ def print_mapper_mermaid(mapper: Mapper):
             visited_as_reverse.add(reverse)
             print(
                 f'{INDENT}{name} "{card(reverse)}" -- '
-                f'"{card(prop)}" {prop.mapper.class_.__name__} : {prop.key} / {reverse.key}'
+                f'"{card(prop)}" {prop.mapper.class_.__name__} : {prop.key} / {reverse.key}',
             )
         else:
             print(
-                f'{INDENT}{name} --> "{card(prop)}" {prop.mapper.class_.__name__} : {prop.key}'
+                f'{INDENT}{name} --> "{card(prop)}" {prop.mapper.class_.__name__} : {prop.key}',
             )
 
 

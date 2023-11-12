@@ -1,7 +1,9 @@
 """Miscellaneous helper functions"""
-from datetime import date
 import re
+from datetime import date
+
 import sqlalchemy
+
 
 # Taken from http://stackoverflow.com/a/1176023
 def camelcase_to_snakecase(name_camel):
@@ -54,7 +56,7 @@ def disjoin(lst, key):
             if key(lst[idx]) == key(lst[idx + 1]):
                 # found collision
                 try:
-                    idx2 = next(idx2 for idx2 in reversed(range(0, idx)) if key(lst[idx]) != key(lst[idx2]))
+                    idx2 = next(idx2 for idx2 in reversed(range(idx)) if key(lst[idx]) != key(lst[idx2]))
                     # move
                     lst.insert(idx, lst.pop(idx2))
                 except StopIteration:

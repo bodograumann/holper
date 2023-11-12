@@ -3,14 +3,12 @@
 
 from datetime import datetime, timedelta
 from pathlib import Path
-import sys
-from typing import Optional
 
 import sqlalchemy
 import typer
 from xdg import xdg_data_home
 
-from holper import core, model, iofxml3, start, sportsoftware, iof
+from holper import core, iof, iofxml3, model, sportsoftware, start
 
 app = typer.Typer()
 
@@ -35,7 +33,7 @@ def events(db_file: str = db_file_opt):
                 f"#{evt.event_id} "
                 f"{evt.start_time} - {evt.end_time}: "
                 f"{evt.name}, "
-                f"{len(evt.races)} races, {len(evt.event_categories)} categories, {len(evt.entries)} entries"
+                f"{len(evt.races)} races, {len(evt.event_categories)} categories, {len(evt.entries)} entries",
             )
 
 
@@ -59,7 +57,7 @@ def event(event_id: int, db_file: str = db_file_opt):
         if evt.event_categories:
             typer.echo(
                 f"{len(evt.event_categories)} Categories: "
-                + ", ".join(category.short_name for category in evt.event_categories)
+                + ", ".join(category.short_name for category in evt.event_categories),
             )
         else:
             typer.echo("No categories yet")
@@ -134,7 +132,7 @@ def courses(race_id: int, db_file: str = db_file_opt):
                 + " + ".join(
                     f"{len(cat.entry_requests)}·{cat.short_name}"
                     for cat in (assignment.category.event_category for assignment in course.categories)
-                )
+                ),
             )
 
         courses_by_first_control = core.group_courses_by_first_control(race)
@@ -149,7 +147,9 @@ def import_courses(
     race_id: int,
     course_file: Path,
     short_category_name: bool = typer.Option(
-        False, "-s", help="Use the short category name to match category assignments."
+        False,
+        "-s",
+        help="Use the short category name to match category assignments.",
     ),
     db_file: str = db_file_opt,
 ):
@@ -202,7 +202,7 @@ def entries(event_id: int, db_file: str = db_file_opt):
         for entry in evt.entries:
             person = entry.competitors[0].person
             typer.echo(
-                f"{person.given_name} {person.family_name}: {entry.category_requests[0].event_category.short_name}"
+                f"{person.given_name} {person.family_name}: {entry.category_requests[0].event_category.short_name}",
             )
 
 
@@ -242,7 +242,7 @@ def import_entries(event_id: int, entry_file: Path, db_file: str = db_file_opt):
 def startlist(
     race_id: int,
     interval: int,
-    parallel_max: Optional[int] = None,
+    parallel_max: int | None = None,
     greedy: bool = False,
     db_file: str = db_file_opt,
 ):
@@ -302,7 +302,7 @@ def startlist(
             course = next(course for course in race.courses if course.course_id == course_id)
             categories = ", ".join(category.short_name for category in constraints.get_categories(course))
             typer.echo(
-                f"Course {course_id} ({categories}):\n  {start_scheme[course_id].pretty()} {list(start_scheme[course_id])}"
+                f"Course {course_id} ({categories}):\n  {start_scheme[course_id].pretty()} {list(start_scheme[course_id])}",
             )
 
         stats = start.statistics(race)
@@ -333,7 +333,7 @@ def export(
                 external_id.issuer == "SportSoftware" for external_id in entry.organisation.external_ids
             ):
                 entry.organisation.external_ids.append(
-                    model.OrganisationXID(external_id=club_id, issuer="SportSoftware")
+                    model.OrganisationXID(external_id=club_id, issuer="SportSoftware"),
                 )
                 club_id += 1
 
@@ -346,12 +346,14 @@ def filter_unused_courses(file: typer.FileBinaryRead):
     original = file.read()
     course_data = iof.CourseData.from_xml(original)
     course_data.race_course_data.delete_unused_courses()
-    print(course_data.to_xml(
-        skip_empty=True,
-        pretty_print=True,
-        encoding="UTF-8",
-        standalone=True
-    ).decode("UTF-8"))
+    print(
+        course_data.to_xml(
+            skip_empty=True,
+            pretty_print=True,
+            encoding="UTF-8",
+            standalone=True,
+        ).decode("UTF-8"),
+    )
 
 
 if __name__ == "__main__":

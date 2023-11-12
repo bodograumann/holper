@@ -1,7 +1,8 @@
 from datetime import datetime
 from itertools import chain
 
-from pydantic_xml import BaseXmlModel, attr, element, wrapped
+from pydantic_xml import BaseXmlModel, attr, element
+
 # Unsupported:
 # - forward refs with `from future import annotated`
 
