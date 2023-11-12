@@ -72,7 +72,7 @@ class Invoice:
     def check_total(self, total):
         return round(decimal.Decimal(total)) == round(self.get_total())
 
-    def fill_template(self, template_file, target_file, labels, reserve_space=False):
+    def fill_template(self, template_file, target_file, labels, *, reserve_space=False):
         subtotal = self.get_total()
         data = {
             "date": datetime.date.today().strftime(self.date_format),

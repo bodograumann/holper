@@ -19,7 +19,7 @@ db_file_opt = typer.Option(xdg_data_home() / "holper" / "data.sqlite")
 
 
 @app.command()
-def events(db_file: str = db_file_opt):
+def events(*, db_file: str = db_file_opt):
     """Show list of all events"""
     Path(db_file).parent.mkdir(parents=True, exist_ok=True)
     with core.open_session(f"sqlite:///{db_file}") as session:
@@ -38,7 +38,7 @@ def events(db_file: str = db_file_opt):
 
 
 @app.command()
-def event(event_id: int, db_file: str = db_file_opt):
+def event(event_id: int, *, db_file: str = db_file_opt):
     """Show details of an event"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         evt = core.get_event(session, event_id)
@@ -69,7 +69,7 @@ def event(event_id: int, db_file: str = db_file_opt):
 
 
 @app.command()
-def new_event(name: str, date: datetime, db_file: str = db_file_opt):
+def new_event(name: str, date: datetime, *, db_file: str = db_file_opt):
     """Create a new single-race solo event"""
     Path(db_file).parent.mkdir(parents=True, exist_ok=True)
     with core.open_session(f"sqlite:///{db_file}") as session:
@@ -84,7 +84,7 @@ def new_event(name: str, date: datetime, db_file: str = db_file_opt):
 
 
 @app.command()
-def import_categories(event_id: int, category_file: Path, db_file: str = db_file_opt):
+def import_categories(event_id: int, category_file: Path, *, db_file: str = db_file_opt):
     """Import event categories in IOF XML v3 format"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         evt = core.get_event(session, event_id)
@@ -110,7 +110,7 @@ def import_categories(event_id: int, category_file: Path, db_file: str = db_file
 
 
 @app.command()
-def courses(race_id: int, db_file: str = db_file_opt):
+def courses(race_id: int, *, db_file: str = db_file_opt):
     """Show courses for a race"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         race = core.get_race(session, race_id)
@@ -146,9 +146,10 @@ def courses(race_id: int, db_file: str = db_file_opt):
 def import_courses(
     race_id: int,
     course_file: Path,
+    *,
     short_category_name: bool = typer.Option(
-        False,
         "-s",
+        default=False,
         help="Use the short category name to match category assignments.",
     ),
     db_file: str = db_file_opt,
@@ -191,7 +192,7 @@ def import_courses(
 
 
 @app.command()
-def entries(event_id: int, db_file: str = db_file_opt):
+def entries(event_id: int, *, db_file: str = db_file_opt):
     """Show all entries of an event"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         evt = core.get_event(session, event_id)
@@ -207,7 +208,7 @@ def entries(event_id: int, db_file: str = db_file_opt):
 
 
 @app.command()
-def import_entries(event_id: int, entry_file: Path, db_file: str = db_file_opt):
+def import_entries(event_id: int, entry_file: Path, *, db_file: str = db_file_opt):
     """Import race entries in IOF XML v3 format"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         evt = core.get_event(session, event_id)
@@ -243,6 +244,7 @@ def startlist(
     race_id: int,
     interval: int,
     parallel_max: int | None = None,
+    *,
     greedy: bool = False,
     db_file: str = db_file_opt,
 ):
@@ -317,6 +319,7 @@ def startlist(
 def export(
     race_id: int,
     target: Path,
+    *,
     db_file: str = db_file_opt,
 ):
     """Export entries as SportSoftware csv file"""
