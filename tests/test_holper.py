@@ -4,7 +4,7 @@ from unittest import TestCase, expectedFailure
 import io
 import datetime
 
-from holper import iofxml2, iofxml3, sportsoftware, model, core
+from holper import iofxml3, sportsoftware, model, core
 
 
 class TestModel(TestCase):
@@ -35,21 +35,8 @@ class TestModel(TestCase):
 
 class TestImport(TestCase):
     def test_detect(self):
-        modules = [iofxml2, iofxml3, sportsoftware]
+        modules = [iofxml3, sportsoftware]
         files = {
-            "tests/IOFv2/ClubList1.xml": iofxml2,
-            "tests/IOFv2/CompetitorList1.xml": iofxml2,
-            "tests/IOFv2/EntryList1.xml": iofxml2,
-            "tests/IOFv2/EntryList2.xml": iofxml2,
-            "tests/IOFv2/EntryList3.xml": iofxml2,
-            "tests/IOFv2/EntryList4.xml": iofxml2,
-            "tests/IOFv2/EventList1.xml": iofxml2,
-            "tests/IOFv2/RankList1.xml": iofxml2,
-            "tests/IOFv2/ResultList1.xml": iofxml2,
-            "tests/IOFv2/ResultList2.xml": iofxml2,
-            "tests/IOFv2/ResultList3.xml": iofxml2,
-            "tests/IOFv2/StartList1.xml": iofxml2,
-            "tests/IOFv2/StartList2.xml": iofxml2,
             "tests/IOFv3/ClassList.xml": iofxml3,
             "tests/IOFv3/ClassList_Individual_Step1.xml": iofxml3,
             "tests/IOFv3/ClassList_Relay_Step1.xml": iofxml3,
