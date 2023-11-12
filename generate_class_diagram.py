@@ -4,6 +4,7 @@
 
 import inspect
 from collections.abc import Generator
+from pathlib import Path
 
 from sqlalchemy.orm import Mapper, RelationshipProperty, class_mapper
 
@@ -66,7 +67,7 @@ classes = [
     )
 ]
 
-with open("docs/class_diagram.mmd", "w") as output:
+with Path("docs/class_diagram.mmd").open("w") as output:
     output.write("%%{init: { class: { useMaxWidth: false }}}%%\n")
     output.write("classDiagram\n")
     output.write(f"{INDENT}direction LR\n")

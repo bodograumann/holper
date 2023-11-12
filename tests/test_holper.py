@@ -1,5 +1,6 @@
 import datetime
 import io
+from pathlib import Path
 from unittest import TestCase, expectedFailure
 
 from holper import core, iofxml3, model, sportsoftware
@@ -65,7 +66,7 @@ class TestImport(TestCase):
             "tests/SportSoftware/OT_10.2_EntryList.csv": sportsoftware,
         }
         for filename, correct_module in files.items():
-            with open(filename, "rb") as file:
+            with Path(filename).open("rb") as file:
                 for module in modules:
                     with self.subTest(filename=filename, module=module.__name__):
                         if module is correct_module:
@@ -76,12 +77,12 @@ class TestImport(TestCase):
                         file.seek(0)
 
     def test_iofxml3_category_list(self):
-        with open("tests/IOFv3/ClassList_Individual_Step1.xml", "rb") as file:
+        with Path("tests/IOFv3/ClassList_Individual_Step1.xml").open("rb") as file:
             categories = list(iofxml3.read(file))
             assert len(categories) == 2
 
     def test_iofxml3_person_entry_list(self):
-        with open("tests/IOFv3/EntryList1.xml", "rb") as file:
+        with Path("tests/IOFv3/EntryList1.xml").open("rb") as file:
             generator = iofxml3.read(file)
             _event = next(generator)
             entries = list(generator)
@@ -94,7 +95,7 @@ class TestImport(TestCase):
             assert entries[0].competitors[0].organisation.country.ioc_code == "GBR"
 
     def test_iofxml3_team_entry_list(self):
-        with open("tests/IOFv3/EntryList2.xml", "rb") as file:
+        with Path("tests/IOFv3/EntryList2.xml").open("rb") as file:
             generator = iofxml3.read(file)
             _event = next(generator)
             entries = list(generator)
@@ -106,7 +107,7 @@ class TestImport(TestCase):
             assert len(entries[0].competitors) == 5
 
     def test_iofxml3_course_data(self):
-        with open("tests/IOFv3/CourseData_Individual_Step2.xml", "rb") as file:
+        with Path("tests/IOFv3/CourseData_Individual_Step2.xml").open("rb") as file:
             generator = iofxml3.read(file)
             event = next(generator)
             race = next(generator)
@@ -119,7 +120,7 @@ class TestImport(TestCase):
             assert race.categories[0].courses[0].course.name in [course.name for course in race.courses]
 
     def test_sportsoftware_oe_entries(self):
-        with open("tests/SportSoftware/OE_11.0_EntryList1.csv", "rb") as file:
+        with Path("tests/SportSoftware/OE_11.0_EntryList1.csv").open("rb") as file:
             generator = sportsoftware.read(file)
             entries = list(generator)
             for entry in entries:
@@ -138,7 +139,7 @@ class TestImport(TestCase):
             )
 
     def test_sportsoftware_os_entries(self):
-        with open("tests/SportSoftware/OS_11.0_EntryList1.csv", "rb") as file:
+        with Path("tests/SportSoftware/OS_11.0_EntryList1.csv").open("rb") as file:
             generator = sportsoftware.read(file)
             entries = list(generator)
             for entry in entries:
@@ -162,7 +163,7 @@ class TestImport(TestCase):
                 )
 
     def test_sportsoftware_ot_entries(self):
-        with open("tests/SportSoftware/OT_10.2_EntryList.csv", "rb") as file:
+        with Path("tests/SportSoftware/OT_10.2_EntryList.csv").open("rb") as file:
             generator = sportsoftware.read(file)
             entries = list(generator)
             for entry in entries:

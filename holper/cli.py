@@ -96,7 +96,7 @@ def import_categories(event_id: int, category_file: Path, db_file: str = db_file
             typer.echo(f"Event #{event_id} already contains categories.")
             return
 
-        with open(category_file, encoding="utf-8") as stream:
+        with category_file.open(encoding="utf-8") as stream:
             event_categories = list(iofxml3.read(stream))
 
         evt.event_categories.extend(event_categories)
@@ -164,7 +164,7 @@ def import_courses(
             typer.echo(f"Race #{race_id} already contains courses.")
             return
 
-        with open(course_file, encoding="utf-8") as stream:
+        with course_file.open(encoding="utf-8") as stream:
             _evt, race_update = list(iofxml3.read(stream))
 
         with session.no_autoflush:
@@ -219,7 +219,7 @@ def import_entries(event_id: int, entry_file: Path, db_file: str = db_file_opt):
             typer.echo(f"Event #{event_id} already contains entries.")
             return
 
-        with open(entry_file, encoding="utf-8") as stream:
+        with entry_file.open(encoding="utf-8") as stream:
             _, *entries = iofxml3.read(stream)
 
         with session.no_autoflush:
@@ -337,7 +337,7 @@ def export(
                 )
                 club_id += 1
 
-        with open(target, "wb") as output_file:
+        with target.open("wb") as output_file:
             sportsoftware.write(output_file, race)
 
 
