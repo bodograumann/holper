@@ -66,7 +66,7 @@ Make sure you have poetry installed. Then install the project dependencies::
 
 Run tests with ``pytest`` and the linter with ``ruff .``.
 
-The code can be auto-formatted with ``black holper tests``.
+The code can be auto-formatted with ``black .``.
 
 To generate documentation, use the following commands::
 
