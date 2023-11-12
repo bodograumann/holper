@@ -1,5 +1,9 @@
+#!/usr/bin/env python3
+
 """Generate a Mermaid class diagram from the SQLAlchemy model classes"""
+
 import inspect
+from collections.abc import Generator
 
 from sqlalchemy.orm import Mapper, RelationshipProperty, class_mapper
 
@@ -25,17 +29,17 @@ def card(prop: RelationshipProperty):
 visited_as_reverse = set()
 
 
-def print_mapper_mermaid(mapper: Mapper):
+def yield_mapper_mermaid(mapper: Mapper) -> Generator[str, None, None]:
     name = mapper.class_.__name__
-    print(f"{INDENT}class {name} {{")
+    yield f"{INDENT}class {name} {{"
 
     for column in mapper.columns:
-        print(f"{2 * INDENT}+{column.type.__class__.__name__} {column.key}")
+        yield f"{2 * INDENT}+{column.type.__class__.__name__} {column.key}"
 
-    print(f"{INDENT}}}")
+    yield f"{INDENT}}}"
 
     if mapper.inherits:
-        print(f"{INDENT}{name} <|-- {mapper.inherits.class_.__name__}")
+        yield f"{INDENT}{name} <|-- {mapper.inherits.class_.__name__}"
 
     for prop in mapper.relationships:
         if prop in visited_as_reverse:
@@ -43,14 +47,12 @@ def print_mapper_mermaid(mapper: Mapper):
         if prop.back_populates:
             reverse = prop.mapper.get_property(prop.back_populates)
             visited_as_reverse.add(reverse)
-            print(
+            yield (
                 f'{INDENT}{name} "{card(reverse)}" -- '
-                f'"{card(prop)}" {prop.mapper.class_.__name__} : {prop.key} / {reverse.key}',
+                f'"{card(prop)}" {prop.mapper.class_.__name__} : {prop.key} / {reverse.key}'
             )
         else:
-            print(
-                f'{INDENT}{name} --> "{card(prop)}" {prop.mapper.class_.__name__} : {prop.key}',
-            )
+            yield f'{INDENT}{name} --> "{card(prop)}" {prop.mapper.class_.__name__} : {prop.key}'
 
 
 classes = [
@@ -64,8 +66,11 @@ classes = [
     )
 ]
 
-print("%%{init: { class: { useMaxWidth: false }}}%%")
-print("classDiagram")
-print(f"{INDENT}direction LR")
-for cls in classes:
-    print_mapper_mermaid(class_mapper(cls))
+with open("docs/class_diagram.mmd", "w") as output:
+    output.write("%%{init: { class: { useMaxWidth: false }}}%%\n")
+    output.write("classDiagram\n")
+    output.write(f"{INDENT}direction LR\n")
+    for cls in classes:
+        output.write("\n")
+        for line in yield_mapper_mermaid(class_mapper(cls)):
+            output.write(line + "\n")

@@ -346,7 +346,7 @@ def filter_unused_courses(file: typer.FileBinaryRead):
     original = file.read()
     course_data = iof.CourseData.from_xml(original)
     course_data.race_course_data.delete_unused_courses()
-    print(
+    typer.echo(
         course_data.to_xml(
             skip_empty=True,
             pretty_print=True,

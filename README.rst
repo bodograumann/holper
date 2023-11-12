@@ -70,7 +70,7 @@ The code can be auto-formatted with ``black holper tests``.
 
 To generate documentation, use the following commands::
 
-    python generate_class_diagram.py > docs/class_diagram.mmd
+    ./generate_class_diagram.py
     cd docs
     make html
 
