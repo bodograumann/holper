@@ -28,6 +28,13 @@ from .model import Category, Course, Race, Start, StartTimeAllocationRequestType
 from .tools import disjoin
 
 
+class InfeasibleError(Exception):
+    """Raise when an optimization cannot find a solution."""
+
+    def __init__(self):
+        super().__init__("No solution possible")
+
+
 def _category_request_counts(category: Category):
     return Counter(request.type for start in category.starts for request in start.entry.start_time_allocation_requests)
 
@@ -244,8 +251,7 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
     status = solver.Solve(model)
 
     if status == cp_model.INFEASIBLE:
-        msg = "No solution found."
-        raise Exception(msg)
+        raise InfeasibleError
 
     time_max = solver.Value(last_start)
     model.Add(last_start == time_max)
@@ -261,8 +267,7 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
     status = solver.Solve(model)
 
     if status == cp_model.INFEASIBLE:
-        msg = "No solution found."
-        raise Exception(msg)
+        raise InfeasibleError
 
     return {
         course_id: AffineSeq(
@@ -289,37 +294,40 @@ def fill_slots(
         category.time_offset = None
 
     for course in race.courses:
-        slots: Iterable[int] = peekable(start_slots.get(course.course_id, []))
+        _fill_course_slots(constraints.order[course.course_id], start_slots.get(course.course_id, []))
 
-        for category in constraints.order[course.course_id]:
-            try:
-                category.time_offset = timedelta(minutes=slots.peek())
-            except StopIteration:
-                break
 
-            # Skip vacancies at the start
-            for _ in range(category.vacancies_before):
-                next(slots)
+def _fill_course_slots(categories: list[Category], slots_iter: Iterable[int]):
+    slots = peekable(slots_iter)
+    for category in categories:
+        try:
+            category.time_offset = timedelta(minutes=slots.peek())
+        except StopIteration:
+            break
 
-            # Non-competitive entries after competitive ones
-            starts: dict[bool, list[Start]] = defaultdict(list)
-            for start in category.starts:
-                starts[start.competitive].append(start)
+        # Skip vacancies at the start
+        for _ in range(category.vacancies_before):
+            next(slots)
 
-            for competitive in [True, False]:
-                if starts[competitive]:
-                    _assign_entries_randomly(starts[competitive], slots)
+        # Non-competitive entries after competitive ones
+        starts: dict[bool, list[Start]] = defaultdict(list)
+        for start in category.starts:
+            starts[start.competitive].append(start)
 
-                    # After each category there has to be one slot left empty
-                    try:
-                        next(slots)
-                    except StopIteration:
-                        # TODO: make sure this only happens at the very end of a course
-                        ...
+        for competitive in [True, False]:
+            if starts[competitive]:
+                _assign_entries_randomly(starts[competitive], slots)
 
-            # Skip vacancies at the end
-            for _ in range(category.vacancies_after):
-                next(slots)
+                # After each category there has to be one slot left empty
+                try:  # noqa: SIM105
+                    next(slots)
+                except StopIteration:
+                    # TODO: make sure this only happens at the very end of a course
+                    ...
+
+        # Skip vacancies at the end
+        for _ in range(category.vacancies_after):
+            next(slots)
 
 
 def _assign_entries_randomly(starts: Iterable[Start], slot_iter: Iterable[int]):

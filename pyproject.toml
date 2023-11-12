@@ -53,6 +53,7 @@ ignore = [
     "D",  # TODO: Improve doc strings later
     "DTZ",  # We work in local timezone for now. This should be configurable later.
     "PLR2004",  # Not useful
+    "TD", "FIX",  # This project is very much a work in progress.
 ]
 
 line-length = 120
@@ -64,6 +65,10 @@ allowed-confusables = [
 ]
 
 [tool.ruff.per-file-ignores]
+"holper/sportsoftware.py" = [
+    "PLR0913",  # Let’s keep it simple.
+]
+
 "tests/**/test_*" = [
     "D",  # No need to put docstrings in tests
     "SLF001",  # Unit testing private methods is fine

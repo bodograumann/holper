@@ -3,6 +3,8 @@ import io
 from pathlib import Path
 from unittest import TestCase, expectedFailure
 
+import pytest
+
 from holper import core, iofxml3, model, sportsoftware
 
 
@@ -111,7 +113,7 @@ class TestImport(TestCase):
             generator = iofxml3.read(file)
             event = next(generator)
             race = next(generator)
-            self.assertRaises(StopIteration, lambda: next(generator))
+            pytest.raises(StopIteration, lambda: next(generator))
 
             assert race.event == event
             assert len(race.courses) == 2

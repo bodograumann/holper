@@ -308,7 +308,8 @@ def startlist(
             course = next(course for course in race.courses if course.course_id == course_id)
             categories = ", ".join(category.short_name for category in constraints.get_categories(course))
             typer.echo(
-                f"Course {course_id} ({categories}):\n  {start_scheme[course_id].pretty()} {list(start_scheme[course_id])}",
+                f"Course {course_id} ({categories}):\n"
+                f"{start_scheme[course_id].pretty()} {list(start_scheme[course_id])}",
             )
 
         stats = start.statistics(race)

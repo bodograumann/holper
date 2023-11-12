@@ -729,8 +729,8 @@ class CSVReader:
         abbreviation,
         city,
         country,
-        seat=None,
-        region=None,
+        _seat=None,
+        _region=None,
     ):
         club_id = int(club_id)
         try:
@@ -947,10 +947,7 @@ class CSVWriter:
                     if external_id.issuer == "SportSoftware"
                 ),
                 next(
-                    (
-                        external_id.external_id
-                        for external_id in category.external_ids
-                    ),
+                    (external_id.external_id for external_id in category.external_ids),
                     category.event_category_id,
                 ),
             ),
