@@ -7,8 +7,6 @@ Use SQLAlchemy as database library.
 .. _IOF XML v3.0: http://orienteering.org/resources/it/data-standard-3-0/
 """
 
-# pylint: disable=too-few-public-methods
-
 __all__ = [
     "Base",
     "Country",
@@ -99,8 +97,8 @@ class _ExternalObject(DeclarativeMeta):
 
 class _ModelBase:
     @declared_attr
-    def __tablename__(cls):  # pylint: disable=no-self-argument
-        return cls.__name__  # pylint: disable=no-member
+    def __tablename__(cls):  # noqa: N805
+        return cls.__name__
 
     @property
     def id_column(self):

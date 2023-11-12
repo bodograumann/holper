@@ -1,4 +1,3 @@
-# pylint: disable=missing-function-docstring,missing-class-docstring,missing-module-docstring,protected-access
 from unittest import TestCase, expectedFailure
 
 import io

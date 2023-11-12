@@ -64,7 +64,7 @@ Make sure you have poetry installed. Then install the project dependencies::
     poetry install
     poetry shell
 
-Run tests with ``pytest`` and the linter with ``pylint holper tests``.
+Run tests with ``pytest`` and the linter with ``ruff .``.
 
 The code can be auto-formatted with ``black holper tests``.
 
