@@ -61,7 +61,7 @@ def event(event_id: int, *, db_file: DbFileOpt = default_db) -> None:
         if evt.event_categories:
             typer.echo(
                 f"{len(evt.event_categories)} Categories: "
-                + ", ".join(category.short_name for category in evt.event_categories),
+                + ", ".join(category.short_name or category.name for category in evt.event_categories),
             )
         else:
             typer.echo("No categories yet")

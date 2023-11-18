@@ -3,7 +3,7 @@
 import logging
 from contextlib import suppress
 from itertools import groupby
-from typing import TypeVar
+from typing import TypeVar, cast
 
 from sqlalchemy import create_engine, orm, select
 from sqlalchemy.exc import NoResultFound
@@ -25,17 +25,17 @@ def open_session(source: str) -> orm.Session:
 
 def get_event(session: orm.Session, event_id: int) -> model.Event | None:
     with suppress(NoResultFound):
-        return session.execute(
+        return session.scalars(
             select(model.Event).where(model.Event.event_id == event_id),
-        ).one()[0]
+        ).one()
     return None
 
 
 def get_race(session: orm.Session, race_id: int) -> model.Race | None:
     with suppress(NoResultFound):
-        return session.execute(
+        return session.scalars(
             select(model.Race).where(model.Race.race_id == race_id),
-        ).one()[0]
+        ).one()
     return None
 
 
@@ -45,9 +45,9 @@ def hydrate_country_by_ioc_code(session: orm.Session, entity: model.Organisation
 
     ioc_code = entity.country.ioc_code
     try:
-        country = session.execute(
+        country = session.scalars(
             select(model.Country).where(model.Country.ioc_code == ioc_code),
-        ).one()[0]
+        ).one()
     except NoResultFound:
         _logger.warning("Could not find country with ioc_code “%s” — Clearing.", ioc_code)
         entity.country = None
@@ -60,16 +60,20 @@ Ext = TypeVar("Ext", bound=model.HasExternalIds)
 
 
 def shadow_entity_by_xid(session: orm.Session, entity: Ext) -> Ext:
+    """Look for the entity by the external ids in the database.
+
+    Return the first match. If nothing matches, return the given entity.
+    """
     cls = entity.__class__
     xid_cls = getattr(model, cls.__name__ + "XID")
     for xid in entity.external_ids:
         try:
-            saved_xid = session.execute(
+            saved_xid = session.scalars(
                 select(xid_cls).where(xid_cls.issuer == xid.issuer).where(xid_cls.external_id == xid.external_id),
-            ).one()[0]
+            ).one()
         except NoResultFound:
             continue
-        return getattr(saved_xid, tools.camelcase_to_snakecase(cls.__name__))
+        return cast(Ext, getattr(saved_xid, tools.camelcase_to_snakecase(cls.__name__)))
     return entity
 
 

@@ -4,6 +4,7 @@ import datetime
 import decimal
 from collections import OrderedDict
 from pathlib import Path
+from typing import TypedDict
 
 import pystache  # type: ignore [import-untyped]
 
@@ -31,12 +32,19 @@ class Prices:
         return self.items[item_id][2]
 
 
+class Group(TypedDict):
+    description: str
+    price: decimal.Decimal
+    amount: int
+    total: decimal.Decimal
+
+
 class Invoice:
     def __init__(self, prices: Prices, recipient: str, date_format: str = "%y-%m-%d") -> None:
         self.prices = prices
         self.recipient = recipient
         self.date_format = date_format
-        self.groups: dict[str | None, dict[str, dict]] = OrderedDict()
+        self.groups: dict[str | None, dict[str, Group]] = OrderedDict()
         self.paid_amount = decimal.Decimal(0)
         self.remark = ""
 

@@ -4,7 +4,7 @@ import csv
 from collections.abc import Generator
 from contextlib import contextmanager, suppress
 from datetime import MINYEAR, date, datetime, timedelta
-from io import BufferedWriter, TextIOWrapper
+from io import TextIOWrapper
 from typing import IO
 
 from . import model, tools
@@ -535,7 +535,7 @@ def read(input_file: IO[bytes], encoding: str = "latin1") -> Generator[model.Ent
         raise NotImplementedError
 
 
-def write(output_file: BufferedWriter, race: model.Race, encoding: str = "latin1") -> None:
+def write(output_file: IO[bytes], race: model.Race, encoding: str = "latin1") -> None:
     csv_writer = CSVWriter(race)
 
     if race.event.form is model.EventForm.INDIVIDUAL:
@@ -617,7 +617,7 @@ class CSVReader:
                 start.entry = entry
 
                 if start.result is not None and row[57]:
-                    start.result.position = row[57]
+                    start.result.position = int(row[57])
 
                 if row[18]:
                     entry.organisation = self.read_club(*row[18:24])
@@ -678,7 +678,7 @@ class CSVReader:
                 start.category = category
 
                 if start.result is not None and row[-2]:
-                    start.result.position = row[-2]
+                    start.result.position = int(row[-2])
 
                 for competitor_nr in range(category.event_category.max_number_of_team_members):
                     offset = 31 + competitor_nr * 14
@@ -894,7 +894,7 @@ class CSVWriter:
     def __init__(self, race: model.Race) -> None:
         self.race = race
 
-    def write_solo_v11(self, output_file: BufferedWriter, encoding: str = "latin1") -> None:
+    def write_solo_v11(self, output_file: IO[bytes], encoding: str = "latin1") -> None:
         with _wrap_binary_stream(output_file, encoding=encoding) as csvfile:
             csv_writer = csv.writer(csvfile, delimiter=";", doublequote=False)
 
@@ -933,7 +933,7 @@ class CSVWriter:
 
                 if entry.number:
                     row[0] = str(entry.number)
-                row[1] = entry.name
+                row[1] = entry.name or ""
 
                 try:
                     if entry.starts[0].time_offset is not None:
@@ -963,43 +963,45 @@ class CSVWriter:
         """
         return [
             next(external_id.external_id for external_id in club.external_ids if external_id.issuer == "SportSoftware"),
-            club.short_name,
+            club.short_name or "",
             club.name[len(club.short_name) + 1 :]
             if club.short_name and club.name.startswith(club.short_name + " ")
             else club.name,
-            club.country.ioc_code if club.country else "",
+            (club.country.ioc_code or "") if club.country else "",
             "",
             "",
         ]
 
     def write_category(self, category: model.EventCategory) -> list[str]:
         return [
-            next(
-                (
-                    external_id.external_id
-                    for external_id in category.external_ids
-                    if external_id.issuer == "SportSoftware"
-                ),
+            str(
                 next(
-                    (external_id.external_id for external_id in category.external_ids),
-                    category.event_category_id,
+                    (
+                        external_id.external_id
+                        for external_id in category.external_ids
+                        if external_id.issuer == "SportSoftware"
+                    ),
+                    next(
+                        (external_id.external_id for external_id in category.external_ids),
+                        category.event_category_id,
+                    ),
                 ),
             ),
-            category.short_name,
+            category.short_name or category.name,
             category.name,
-            category.max_number_of_team_members,
+            str(category.max_number_of_team_members),
         ]
 
     def write_competitor(self, competitor: model.Competitor) -> list[str]:
         person = competitor.person
         competitor_row = [
-            person.family_name,
-            person.given_name,
+            person.family_name or "",
+            person.given_name or "",
             str(person.birth_date.year) if person.birth_date else "",
             "F" if person.sex is model.Sex.FEMALE else "M",
         ]
         if competitor.control_cards:
-            competitor_row.append(competitor.control_cards[0].label)
+            competitor_row.append(competitor.control_cards[0].label or "")
         else:
             competitor_row.append("")
         return competitor_row

@@ -20,7 +20,10 @@ def fix_sqlite_engine(engine: sqlalchemy.Engine) -> None:
     """
 
     @sqlalchemy.event.listens_for(engine, "connect")
-    def do_connect(dbapi_connection, _connection_record) -> None:  # noqa: ANN001 - types are not exposed by sqlalchemy
+    def do_connect(  #  type: ignore [no-untyped-def]
+        dbapi_connection,  # noqa: ANN001 - types are not exposed by sqlalchemy
+        _connection_record,  # noqa: ANN001 - types are not exposed by sqlalchemy
+    ) -> None:
         # disable pysqlite's emitting of the BEGIN statement entirely.
         # also stops it from emitting COMMIT before any DDL.
         dbapi_connection.isolation_level = None

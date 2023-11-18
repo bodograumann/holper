@@ -56,6 +56,7 @@ ignore = [
     "D",  # TODO: Improve doc strings later
     "DTZ",  # We work in local timezone for now. This should be configurable later.
     "PLR2004",  # Not useful
+    "TCH003",  # Type annotation are required at run-time for sqlalchemy
     "TD", "FIX",  # This project is very much a work in progress.
 ]
 
@@ -96,10 +97,20 @@ target-version = ["py310", "py311"]
 
 
 [tool.mypy]
+strict = true
 exclude = [
     "^docs",
     "^holper/iofxml3.py",  # To be rewritten
 ]
+
+[[tool.mypy.overrides]]
+module = ["docs.*", "tests.*"]
+disallow_untyped_defs = false
+strict_optional = false
+
+[[tool.mypy.overrides]]
+module = ["generate_class_diagram"]
+disallow_any_generics = false
 
 [build-system]
 requires = ["poetry-core"]

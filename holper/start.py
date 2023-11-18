@@ -37,7 +37,7 @@ class InfeasibleError(Exception):
         super().__init__("No solution possible")
 
 
-def _category_request_counts(category: Category) -> Counter:
+def _category_request_counts(category: Category) -> Counter[StartTimeAllocationRequestType]:
     return Counter(request.type for start in category.starts for request in start.entry.start_time_allocation_requests)
 
 
@@ -304,7 +304,7 @@ def fill_slots(
         _fill_course_slots(constraints.order[course.course_id], start_slots.get(course.course_id, []))
 
 
-def _fill_course_slots(categories: list[Category], slots_iter: Iterable[int]):
+def _fill_course_slots(categories: list[Category], slots_iter: Iterable[int]) -> None:
     slots = peekable(slots_iter)
     for category in categories:
         try:
@@ -359,6 +359,9 @@ def _assign_entries_randomly(starts: Iterable[Start], slot_iter: Iterator[int]) 
     disjoin(sequence, lambda start: start.entry.organisation)
 
     for start in sequence:
+        if start.category.time_offset is None:
+            msg = f"Incomplete category starts for category {start.category}"
+            raise ValueError(msg)
         start.time_offset = timedelta(minutes=next(slot_iter)) - start.category.time_offset
 
 
@@ -366,9 +369,19 @@ class Statistics:
     def __init__(self, race: Race) -> None:
         starts = sum((list(category.starts) for category in race.categories), [])
         total = len(starts)
-        last_slot = max(start.category.time_offset + start.time_offset for start in starts)
+        offsets = [
+            start.category.time_offset + start.time_offset
+            for start in starts
+            if start.category.time_offset is not None and start.time_offset is not None
+        ]
+
+        if len(offsets) < total:
+            msg = f"Only {len(offsets)} of {total} starts have valid times."
+            raise ValueError(msg)
+
+        last_slot = max(offsets)
         mean = total / ((last_slot + timedelta(minutes=1)).total_seconds() / 60)
-        counts = Counter(start.category.time_offset + start.time_offset for start in starts)
+        counts = Counter(offsets)
         stats = Counter(counts.values())
 
         self.entries_total = total
