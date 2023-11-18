@@ -50,7 +50,7 @@ extend-exclude = [
 select = ["ALL"]
 ignore = [
     "A00",  # This is ok in context of dataclasses, pydantic and sqlalchemy
-    "ANN",  # We have not setup proper type annotations yet
+    "ANN101",  # Conflicting with mypy in places and due to be removed upstream
     "D203",  # Conflicts with D211
     "D213",  # Conflicts with D212
     "D",  # TODO: Improve doc strings later
@@ -80,8 +80,10 @@ classmethod-decorators = [
 "holper/cli.py" = [
     "UP007",  # Union types are not yet supported by typer. Cf. https://github.com/tiangolo/typer/issues/533
 ]
+"holper/iofxml3.py" = ["ALL"]  # To be rewritten
 
 "tests/**/test_*" = [
+    "ANN",  # No need to annotate test functions with types
     "D",  # No need to put docstrings in tests
     "SLF001",  # Unit testing private methods is fine
     "S101",  # We use assert for assertions
@@ -95,7 +97,8 @@ target-version = ["py310", "py311"]
 
 [tool.mypy]
 exclude = [
-    "^docs"
+    "^docs",
+    "^holper/iofxml3.py",  # To be rewritten
 ]
 
 [build-system]

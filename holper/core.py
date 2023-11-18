@@ -3,6 +3,7 @@
 import logging
 from contextlib import suppress
 from itertools import groupby
+from typing import TypeVar
 
 from sqlalchemy import create_engine, orm, select
 from sqlalchemy.exc import NoResultFound
@@ -38,7 +39,7 @@ def get_race(session: orm.Session, race_id: int) -> model.Race | None:
     return None
 
 
-def hydrate_country_by_ioc_code(session, entity: model.Organisation | model.Person | None):
+def hydrate_country_by_ioc_code(session: orm.Session, entity: model.Organisation | model.Person | None) -> None:
     if not entity or not entity.country:
         return
 
@@ -55,7 +56,10 @@ def hydrate_country_by_ioc_code(session, entity: model.Organisation | model.Pers
     entity.country = country
 
 
-def shadow_entity_by_xid(session, entity):
+Ext = TypeVar("Ext", bound=model.HasExternalIds)
+
+
+def shadow_entity_by_xid(session: orm.Session, entity: Ext) -> Ext:
     cls = entity.__class__
     xid_cls = getattr(model, cls.__name__ + "XID")
     for xid in entity.external_ids:

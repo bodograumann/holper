@@ -13,7 +13,7 @@ from holper import model
 INDENT = 4 * " "
 
 
-def card(prop: RelationshipProperty | MapperProperty):
+def card(prop: RelationshipProperty | MapperProperty) -> str:
     """Generate cardinality indicator for a relationship property"""
 
     if prop.uselist:

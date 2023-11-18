@@ -1,2 +1,0 @@
-#!/bin/env sh
-rm tags; find . -type f -iname "*.py" -print0 | xargs -0 ctags -a

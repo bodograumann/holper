@@ -71,7 +71,7 @@ class IDRegistry:
     We do not support all of these though.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.objects = defaultdict(dict)
 
     def get(self, id_type, id_value):
@@ -93,7 +93,7 @@ class IDRegistry:
 
 
 class _XMLReader:
-    def __init__(self, namespace, default_registry):
+    def __init__(self, namespace, default_registry) -> None:
         self.namespace = namespace
         self.default_registry = default_registry
         self.id_registries = defaultdict(IDRegistry)
@@ -288,12 +288,15 @@ class _XMLReader:
 
         return entry
 
+    def _read_sex(self, sex):
+        if sex == "F":
+            return model.Sex.FEMALE
+        if sex == "M":
+            return model.Sex.MALE
+
     def _read_person(self, element):
         person = self.create_obj(element, model.Person)
-
-        sex = element.get("sex")
-        if sex is not None:
-            person.sex = model.Sex(sex)
+        person.sex = self._read_sex(element.get("sex"))
 
         for child in element:
             if self.tag(child, "Name"):
@@ -338,9 +341,9 @@ class _XMLReader:
         system = element.get("system")
         if system is not None:
             if system.lower() in {"si", "sportident"}:
-                card.system = model.PunchingSystem.SportIdent
+                card.system = model.PunchingSystem.SPORT_IDENT
             elif system.lower() == "emit":
-                card.system = model.PunchingSystem.Emit
+                card.system = model.PunchingSystem.EMIT
             else:
                 raise NotImplementedError(system)
 
@@ -357,9 +360,7 @@ class _XMLReader:
         if max_age is not None:
             event_category.max_age = int(max_age)
 
-        sex = element.get("sex")
-        if sex is not None and sex != "B":
-            event_category.sex = model.Sex(sex)
+        event_category.sex = self._read_sex(element.get("sex"))
 
         for child in element:
             leg_count = 0

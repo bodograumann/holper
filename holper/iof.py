@@ -16,14 +16,16 @@ class IOFBaseModel(BaseXmlModel, nsmap=nsmap, search_mode="ordered"):
     pass
 
 
-class ClassCourseAssignment(IOFBaseModel):
+class AbstractCourseAssignment(IOFBaseModel):
+    course_name: str = element(tag="CourseName")
+
+
+class ClassCourseAssignment(AbstractCourseAssignment):
     class_name: str = element(tag="ClassName")
-    course_name: str = element(tag="CourseName")
 
 
-class TeamMemberCourseAssignment(IOFBaseModel):
+class TeamMemberCourseAssignment(AbstractCourseAssignment):
     leg: int = element(tag="Leg")
-    course_name: str = element(tag="CourseName")
     course_family: str = element(tag="CourseFamily")
 
 
@@ -68,14 +70,15 @@ class RaceCourseData(IOFBaseModel):
     team_course_assignments: list[TeamCourseAssignment] | None = element(tag="TeamCourseAssignment")
     class_course_assignments: list[ClassCourseAssignment] | None = element(tag="ClassCourseAssignment")
 
-    def delete_unused_courses(self):
+    def delete_unused_courses(self) -> None:
         used_courses = [
             assignment.course_name
             for assignment in chain(
                 chain.from_iterable(
-                    team_assignment.team_member_course_assignments for team_assignment in self.team_course_assignments
+                    team_assignment.team_member_course_assignments
+                    for team_assignment in self.team_course_assignments or []
                 ),
-                self.class_course_assignments,
+                self.class_course_assignments or [],
             )
         ]
         self.courses = [course for course in self.courses if course.name in used_courses]

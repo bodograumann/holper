@@ -45,6 +45,8 @@ __all__ = [
 ]
 
 import enum
+from abc import abstractmethod
+from typing import Any
 
 from sqlalchemy import (
     TIMESTAMP,
@@ -69,22 +71,17 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from .tools import camelcase_to_snakecase
 
 
-def auto_enum(name, members):
-    """Automatically generate enum values as UPPER_CASE => lower_case"""
-    return enum.Enum(name, ((label, label.lower()) for label in members))
-
-
 class Base(DeclarativeBase):
     @declared_attr.directive
-    def __tablename__(cls):
+    def __tablename__(cls) -> str:
         return cls.__name__
 
     @property
-    def id_column(self):
+    def id_column(self) -> str:
         """Convention for the primary id column"""
         return camelcase_to_snakecase(self.__class__.__name__) + "_id"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         try:
             primary_key = getattr(self, self.id_column)
         except AttributeError:
@@ -108,6 +105,11 @@ class ExternalId:
 class HasExternalIds:
     """Back populate list of external ids"""
 
+    @property
+    @abstractmethod
+    def external_ids(self) -> Mapped[Any]:
+        ...
+
 
 class Country(Base):
     country_id = mapped_column(
@@ -126,7 +128,7 @@ class Country(Base):
 # Configuration of teams and legs for an event
 #
 # Custom types should be added with an X_ prefix.
-EventForm = auto_enum("EventForm", ["INDIVIDUAL", "TEAM", "RELAY"])
+EventForm = enum.StrEnum("EventForm", ["INDIVIDUAL", "TEAM", "RELAY"])
 
 
 class Event(Base, HasExternalIds):
@@ -157,12 +159,10 @@ class EventXID(Base, ExternalId):
     event = relationship(Event, back_populates="external_ids")
 
 
-class Sex(enum.Enum):
-    FEMALE = "F"
-    MALE = "M"
+Sex = enum.StrEnum("Sex", ["FEMALE", "MALE"])
 
 
-EventCategoryStatus = auto_enum(
+EventCategoryStatus = enum.StrEnum(
     "EventCategoryStatus",
     [
         "NORMAL",
@@ -232,11 +232,11 @@ class Race(Base):
     courses = relationship("Course", back_populates="race")
 
     @property
-    def entries(self):
+    def entries(self) -> list["Entry"]:
         return self.event.entries
 
 
-RaceCategoryStatus = auto_enum(
+RaceCategoryStatus = enum.StrEnum(
     "RaceCategoryStatus",
     [
         "START_TIMES_NOT_ALLOCATED",
@@ -283,7 +283,7 @@ class Course(Base):
     categories = relationship("CategoryCourseAssignment", back_populates="course")
 
 
-ControlType = auto_enum(
+ControlType = enum.StrEnum(
     "ControlType",
     ["CONTROL", "START", "FINISH", "CROSSING_POINT", "END_OF_MARKED_ROUTE"],
 )
@@ -345,11 +345,11 @@ class Category(Base):
     starter_limit = mapped_column(SmallInteger)
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self.event_category.name
 
     @property
-    def short_name(self):
+    def short_name(self) -> str:
         return self.event_category.short_name
 
 
@@ -382,7 +382,7 @@ class PersonXID(Base, ExternalId):
     person = relationship(Person, back_populates="external_ids")
 
 
-OrganisationType = auto_enum(
+OrganisationType = enum.StrEnum(
     "OrganisationType",
     [
         "IOF",
@@ -437,7 +437,7 @@ class Entry(Base, HasExternalIds):
     starts = relationship("Start", back_populates="entry")
 
     @property
-    def races(self):
+    def races(self) -> list[Race]:
         # TODO: Allow participation in only some of the events races.
         return self.event.races
 
@@ -460,7 +460,7 @@ class EntryCategoryRequest(Base):
     event_category = relationship(EventCategory, back_populates="entry_requests")
 
 
-StartTimeAllocationRequestType = auto_enum(
+StartTimeAllocationRequestType = enum.StrEnum(
     "StartTimeAllocationRequestType",
     [
         "NORMAL",
@@ -491,7 +491,7 @@ class StartTimeAllocationRequest(Base):
     person = relationship(Person)
 
 
-PunchingSystem = auto_enum("PunchingSystem", ["SportIdent", "Emit"])
+PunchingSystem = enum.StrEnum("PunchingSystem", ["SPORT_IDENT", "EMIT"])
 
 
 class ControlCard(Base):
@@ -584,7 +584,7 @@ class CompetitorStart(Base):
 
 ### Results ###
 
-ResultStatus = auto_enum(
+ResultStatus = enum.StrEnum(
     "ResultStatus",
     [
         "OK",

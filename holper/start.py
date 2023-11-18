@@ -21,7 +21,9 @@ from collections.abc import Iterable, Iterator, Mapping
 from datetime import timedelta
 
 from more_itertools import peekable
-from ortools.sat.python import cp_model
+
+# Cf. https://github.com/google/or-tools/issues/3993
+from ortools.sat.python import cp_model  # type: ignore [import-untyped]
 
 from .affine_seq import AffineSeq
 from .model import Category, Course, Race, Start, StartTimeAllocationRequestType
@@ -31,11 +33,11 @@ from .tools import disjoin
 class InfeasibleError(Exception):
     """Raise when an optimization cannot find a solution."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("No solution possible")
 
 
-def _category_request_counts(category: Category):
+def _category_request_counts(category: Category) -> Counter:
     return Counter(request.type for start in category.starts for request in start.entry.start_time_allocation_requests)
 
 
@@ -43,7 +45,7 @@ EARLY = StartTimeAllocationRequestType.EARLY_START
 LATE = StartTimeAllocationRequestType.LATE_START
 
 
-def _category_order_key(category: Category):
+def _category_order_key(category: Category) -> tuple[int, int, int]:
     counter = _category_request_counts(category)
     return (
         counter[LATE] - counter[EARLY],
@@ -55,7 +57,12 @@ def _category_order_key(category: Category):
 class StartConstraints:
     """Declare constraints for start list creation"""
 
-    def __init__(self, interval: int = 1, parallel_max: int | None = None, conflicts: list[list[int]] | None = None):
+    def __init__(
+        self,
+        interval: int = 1,
+        parallel_max: int | None = None,
+        conflicts: list[list[int]] | None = None,
+    ) -> None:
         # Map course ids to an ordered list of categories
         self.order: dict[int, list[Category]] = defaultdict(list)
         # Maximal number of parallel starts for each start time
@@ -66,14 +73,14 @@ class StartConstraints:
         # course ids so that the courses must not start at the same time
         self.conflicts: list[list[int]] = [] if conflicts is None else conflicts
 
-    def add_race_courses(self, race: Race):
+    def add_race_courses(self, race: Race) -> None:
         for category in race.categories:
             self.order[category.courses[0].course.course_id].append(category)
 
         for categories in self.order.values():
             categories.sort(key=_category_order_key)
 
-    def set_category_early(self, course: Course, categories: list[Category]):
+    def set_category_early(self, course: Course, categories: list[Category]) -> None:
         self.order[course.course_id] = categories + list(
             filter(
                 lambda category: category not in categories,
@@ -81,7 +88,7 @@ class StartConstraints:
             ),
         )
 
-    def set_category_late(self, course: Course, categories: list[Category]):
+    def set_category_late(self, course: Course, categories: list[Category]) -> None:
         self.order[course.course_id] = (
             list(
                 filter(
@@ -284,7 +291,7 @@ def fill_slots(
     race: Race,
     constraints: StartConstraints,
     start_slots: Mapping[int, Iterable[int]],
-):
+) -> None:
     """Assign :py:class:`entries <.model.Entry>` to the start slots.
 
     There already has to be a :py:class:`Start <.model.Start>` object
@@ -330,7 +337,7 @@ def _fill_course_slots(categories: list[Category], slots_iter: Iterable[int]):
             next(slots)
 
 
-def _assign_entries_randomly(starts: Iterable[Start], slot_iter: Iterator[int]):
+def _assign_entries_randomly(starts: Iterable[Start], slot_iter: Iterator[int]) -> None:
     preferences = defaultdict(list)
     for start in starts:
         pref = 0
@@ -355,19 +362,19 @@ def _assign_entries_randomly(starts: Iterable[Start], slot_iter: Iterator[int]):
         start.time_offset = timedelta(minutes=next(slot_iter)) - start.category.time_offset
 
 
-def statistics(race: Race):
-    starts = sum((list(category.starts) for category in race.categories), [])
-    total = len(starts)
-    last_slot = max(start.category.time_offset + start.time_offset for start in starts)
-    mean = total / ((last_slot + timedelta(minutes=1)).total_seconds() / 60)
-    counts = Counter(start.category.time_offset + start.time_offset for start in starts)
-    stats = Counter(counts.values())
+class Statistics:
+    def __init__(self, race: Race) -> None:
+        starts = sum((list(category.starts) for category in race.categories), [])
+        total = len(starts)
+        last_slot = max(start.category.time_offset + start.time_offset for start in starts)
+        mean = total / ((last_slot + timedelta(minutes=1)).total_seconds() / 60)
+        counts = Counter(start.category.time_offset + start.time_offset for start in starts)
+        stats = Counter(counts.values())
 
-    return {
-        "entries_total": total,
-        "last_start": last_slot.total_seconds() / 60,
-        "entries_per_slot": stats,
-        "entries_per_slot_avg": mean,
-        "entries_per_slot_var": sum(counts[slot] ** 2 for slot in counts) / (last_slot.total_seconds() / 60 + 1)
-        - mean**2,
-    }
+        self.entries_total = total
+        self.last_start = last_slot.total_seconds() / 60
+        self.entries_per_slot = stats
+        self.entries_per_slot_avg = mean
+        self.entries_per_slot_var = (
+            sum(counts[slot] ** 2 for slot in counts) / (last_slot.total_seconds() / 60 + 1) - mean**2
+        )
