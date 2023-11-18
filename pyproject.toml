@@ -20,11 +20,11 @@ more-itertools = "^8.13.0"
 ortools = "^9.3.10497"
 pystache = "^0.6.0"
 python-iconv = "^1.1"
-sqlalchemy = "^1.4"
+sqlalchemy = "^2.0.23"
 typer = "^0.9.0"
 xdg = "^5.1.1"
-pydantic = "^1.10.9"
-pydantic-xml = "^0.6.2"
+pydantic = "^2.5.0"
+pydantic-xml = "^2.4.0"
 
 # Optional
 psycopg = { version  = "^3.0", optional = true }
@@ -34,6 +34,9 @@ black = "^22.8.0"
 sphinx = "^5.1.1"
 sphinxcontrib-mermaid = "^0.7.1"
 ruff = "^0.1.5"
+mypy = "^1.7.0"
+pytest = "^7.4.3"
+
 
 [tool.poetry.extras]
 postgres = ["psycopg"]
@@ -64,9 +67,18 @@ allowed-confusables = [
     "’",  # This is proper typography. Cf. https://github.com/astral-sh/ruff/issues/1040
 ]
 
+[tool.ruff.pep8-naming]
+classmethod-decorators = [
+    "sqlalchemy.ext.declarative.declared_attr",
+    "sqlalchemy.ext.declarative.declared_attr.directive",
+]
+
 [tool.ruff.per-file-ignores]
 "holper/sportsoftware.py" = [
     "PLR0913",  # Let’s keep it simple.
+]
+"holper/cli.py" = [
+    "UP007",  # Union types are not yet supported by typer. Cf. https://github.com/tiangolo/typer/issues/533
 ]
 
 "tests/**/test_*" = [
@@ -80,6 +92,11 @@ allowed-confusables = [
 line-length = 120
 target-version = ["py310", "py311"]
 
+
+[tool.mypy]
+exclude = [
+    "^docs"
+]
 
 [build-system]
 requires = ["poetry-core"]

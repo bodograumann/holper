@@ -6,14 +6,14 @@ import inspect
 from collections.abc import Generator
 from pathlib import Path
 
-from sqlalchemy.orm import Mapper, RelationshipProperty, class_mapper
+from sqlalchemy.orm import Mapper, MapperProperty, RelationshipProperty, class_mapper
 
 from holper import model
 
 INDENT = 4 * " "
 
 
-def card(prop: RelationshipProperty):
+def card(prop: RelationshipProperty | MapperProperty):
     """Generate cardinality indicator for a relationship property"""
 
     if prop.uselist:

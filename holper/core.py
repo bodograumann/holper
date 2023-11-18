@@ -1,6 +1,7 @@
 """Core functionality"""
 
 import logging
+from contextlib import suppress
 from itertools import groupby
 
 from sqlalchemy import create_engine, orm, select
@@ -22,18 +23,22 @@ def open_session(source: str) -> orm.Session:
 
 
 def get_event(session: orm.Session, event_id: int) -> model.Event | None:
-    return session.execute(
-        select(model.Event).where(model.Event.event_id == event_id),
-    ).one_or_none()
+    with suppress(NoResultFound):
+        return session.execute(
+            select(model.Event).where(model.Event.event_id == event_id),
+        ).one()[0]
+    return None
 
 
 def get_race(session: orm.Session, race_id: int) -> model.Race | None:
-    return session.execute(
-        select(model.Race).where(model.Race.race_id == race_id),
-    ).one_or_none()
+    with suppress(NoResultFound):
+        return session.execute(
+            select(model.Race).where(model.Race.race_id == race_id),
+        ).one()[0]
+    return None
 
 
-def hydrate_country_by_ioc_code(session, entity):
+def hydrate_country_by_ioc_code(session, entity: model.Organisation | model.Person | None):
     if not entity or not entity.country:
         return
 
@@ -41,7 +46,7 @@ def hydrate_country_by_ioc_code(session, entity):
     try:
         country = session.execute(
             select(model.Country).where(model.Country.ioc_code == ioc_code),
-        ).one()
+        ).one()[0]
     except NoResultFound:
         _logger.warning("Could not find country with ioc_code “%s” — Clearing.", ioc_code)
         entity.country = None
@@ -57,7 +62,7 @@ def shadow_entity_by_xid(session, entity):
         try:
             saved_xid = session.execute(
                 select(xid_cls).where(xid_cls.issuer == xid.issuer).where(xid_cls.external_id == xid.external_id),
-            ).one()
+            ).one()[0]
         except NoResultFound:
             continue
         return getattr(saved_xid, tools.camelcase_to_snakecase(cls.__name__))

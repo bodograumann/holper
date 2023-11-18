@@ -17,7 +17,7 @@ the same course.
 import operator
 import random
 from collections import Counter, defaultdict
-from collections.abc import Iterable, Mapping
+from collections.abc import Iterable, Iterator, Mapping
 from datetime import timedelta
 
 from more_itertools import peekable
@@ -55,7 +55,7 @@ def _category_order_key(category: Category):
 class StartConstraints:
     """Declare constraints for start list creation"""
 
-    def __init__(self, interval=1, parallel_max=None, conflicts=None):
+    def __init__(self, interval: int = 1, parallel_max: int | None = None, conflicts: list[list[int]] | None = None):
         # Map course ids to an ordered list of categories
         self.order: dict[int, list[Category]] = defaultdict(list)
         # Maximal number of parallel starts for each start time
@@ -111,7 +111,7 @@ class StartConstraints:
         }
 
 
-def generate_slots_greedily(constraints: StartConstraints, time_max=12 * 60) -> dict[int, AffineSeq]:
+def generate_slots_greedily(constraints: StartConstraints, time_max: int = 12 * 60) -> dict[int, AffineSeq]:
     """Greedily finds a start slot scheme under the given constraints
 
     :param constraints: Conditions that the resulting start list must follow.
@@ -123,7 +123,7 @@ def generate_slots_greedily(constraints: StartConstraints, time_max=12 * 60) -> 
     # Map course ids to the set of allocated start times
     slots: dict[int, AffineSeq] = {}
     # Number of already assigned slots for each possible start time
-    parallel = defaultdict(int)
+    parallel: dict[int, int] = defaultdict(int)
 
     # Assign start slots to courses, starting from the course with the most entries
     for course_id, count in sorted(constraints.course_slot_counts.items(), key=operator.itemgetter(1), reverse=True):
@@ -330,7 +330,7 @@ def _fill_course_slots(categories: list[Category], slots_iter: Iterable[int]):
             next(slots)
 
 
-def _assign_entries_randomly(starts: Iterable[Start], slot_iter: Iterable[int]):
+def _assign_entries_randomly(starts: Iterable[Start], slot_iter: Iterator[int]):
     preferences = defaultdict(list)
     for start in starts:
         pref = 0
