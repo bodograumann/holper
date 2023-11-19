@@ -81,7 +81,8 @@ classmethod-decorators = [
 "holper/cli.py" = [
     "UP007",  # Union types are not yet supported by typer. Cf. https://github.com/tiangolo/typer/issues/533
 ]
-"holper/iof.py" = [
+"holper/iof*" = [
+    "E501",  # Copied docstrings from xml schema
     "RUF012",  # Pydantic automatically generates a default factory for lists etc.
 ]
 "holper/iofxml3.py" = ["ALL"]  # To be rewritten

@@ -354,8 +354,8 @@ def export(
 @app.command()
 def filter_unused_courses(file: typer.FileBinaryRead) -> None:
     original = file.read()
-    course_data = iof.CourseData.from_xml(original)
-    course_data.race_course_data.delete_unused_courses()
+    course_data = iof.course_data.CourseData.from_xml(original)
+    course_data.delete_unused_courses()
     typer.echo(
         course_data.to_xml(
             skip_empty=True,
