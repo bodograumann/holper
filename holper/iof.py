@@ -1,10 +1,12 @@
+from collections.abc import Iterable
 from datetime import datetime
 from itertools import chain
+from typing import Annotated
 
 from pydantic_xml import BaseXmlModel, attr, element
 
 # Unsupported:
-# - forward refs with `from future import annotated`
+# - forward refs with `from __future__ import annotations`
 
 nsmap = {
     "": "http://www.orienteering.org/datastandard/3.0",
@@ -16,82 +18,83 @@ class IOFBaseModel(BaseXmlModel, nsmap=nsmap, search_mode="ordered"):
     pass
 
 
-class AbstractCourseAssignment(IOFBaseModel):
-    course_name: str = element(tag="CourseName")
+class ClassCourseAssignment(IOFBaseModel):
+    class_name: Annotated[str, element(tag="ClassName")]
+    course_name: Annotated[str, element(tag="CourseName")]
 
 
-class ClassCourseAssignment(AbstractCourseAssignment):
-    class_name: str = element(tag="ClassName")
-
-
-class TeamMemberCourseAssignment(AbstractCourseAssignment):
-    leg: int = element(tag="Leg")
-    course_family: str = element(tag="CourseFamily")
+class TeamMemberCourseAssignment(IOFBaseModel):
+    leg: Annotated[int, element(tag="Leg")]
+    course_name: Annotated[str, element(tag="CourseName")]
+    course_family: Annotated[str, element(tag="CourseFamily")]
 
 
 class TeamCourseAssignment(IOFBaseModel):
-    bib_number: str = element(tag="BibNumber")
-    team_member_course_assignments: list[TeamMemberCourseAssignment] = element(tag="TeamMemberCourseAssignment")
+    bib_number: Annotated[str, element(tag="BibNumber")]
+    team_member_course_assignments: Annotated[
+        list[TeamMemberCourseAssignment],
+        element(tag="TeamMemberCourseAssignment"),
+    ]
 
 
 class CourseControl(IOFBaseModel):
-    type: str = attr()
-    control: str = element(tag="Control")
-    leg_length: int | None = element(tag="LegLength")
+    type: Annotated[str, attr()]
+    control: Annotated[str, element(tag="Control")]
+    leg_length: Annotated[int | None, element(tag="LegLength")]
 
 
 class Course(IOFBaseModel):
-    name: str = element(tag="Name")
-    course_family: str | None = element(tag="CourseFamily")
-    length: int = element(tag="Length")
-    climb: int = element(tag="Climb")
-    course_controls: list[CourseControl] | None = element(tag="CourseControl")
+    name: Annotated[str, element(tag="Name")]
+    course_family: Annotated[str | None, element(tag="CourseFamily")] = None
+    length: Annotated[int, element(tag="Length")]
+    climb: Annotated[int, element(tag="Climb")]
+    course_controls: Annotated[list[CourseControl] | None, element(tag="CourseControl")] = None
 
 
 class MapPosition(IOFBaseModel):
-    x: float = attr()
-    y: float = attr()
-    unit: str = attr()
+    x: Annotated[float, attr()]
+    y: Annotated[float, attr()]
+    unit: Annotated[str, attr()]
 
 
 class Control(IOFBaseModel):
-    control_id: str = element(tag="Id")
-    map_position: MapPosition = element(tag="MapPosition")
+    control_id: Annotated[str, element(tag="Id")]
+    map_position: Annotated[MapPosition, element(tag="MapPosition")]
 
 
 class Map(IOFBaseModel):
-    scale: int = element(tag="Scale")
+    scale: Annotated[int, element(tag="Scale")]
 
 
 class RaceCourseData(IOFBaseModel):
-    map: Map = element(tag="Map")
-    controls: list[Control] = element(tag="Control")
-    courses: list[Course] = element(tag="Course")
-    team_course_assignments: list[TeamCourseAssignment] | None = element(tag="TeamCourseAssignment")
-    class_course_assignments: list[ClassCourseAssignment] | None = element(tag="ClassCourseAssignment")
+    maps: Annotated[list[Map], element(tag="Map")] = []
+    controls: Annotated[list[Control], element(tag="Control")] = []
+    courses: Annotated[list[Course], element(tag="Course")] = []
+    class_course_assignments: Annotated[list[ClassCourseAssignment], element(tag="ClassCourseAssignment")] = []
+    team_course_assignments: Annotated[list[TeamCourseAssignment], element(tag="TeamCourseAssignment")] = []
+
+    @property
+    def all_course_assignments(self) -> Iterable[TeamMemberCourseAssignment | ClassCourseAssignment]:
+        return chain(
+            chain.from_iterable(
+                team_assignment.team_member_course_assignments for team_assignment in self.team_course_assignments or []
+            ),
+            self.class_course_assignments or [],
+        )
 
     def delete_unused_courses(self) -> None:
-        used_courses = [
-            assignment.course_name
-            for assignment in chain(
-                chain.from_iterable(
-                    team_assignment.team_member_course_assignments
-                    for team_assignment in self.team_course_assignments or []
-                ),
-                self.class_course_assignments or [],
-            )
-        ]
+        used_courses = [assignment.course_name for assignment in self.all_course_assignments]
         self.courses = [course for course in self.courses if course.name in used_courses]
 
 
 class Event(IOFBaseModel):
-    name: str = element(tag="Name")
+    name: Annotated[str, element(tag="Name")]
 
 
 class CourseData(IOFBaseModel):
-    iof_version: str = attr(name="iofVersion")
-    create_time: datetime = attr(name="createTime")
-    creator: str = attr()
+    iof_version: Annotated[str, attr(name="iofVersion")]
+    create_time: Annotated[datetime, attr(name="createTime")]
+    creator: Annotated[str, attr()]
 
-    event: Event = element(tag="Event")
-    race_course_data: RaceCourseData = element(tag="RaceCourseData")
+    event: Annotated[Event, element(tag="Event")]
+    race_course_data: Annotated[RaceCourseData, element(tag="RaceCourseData")]
