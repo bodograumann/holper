@@ -2,17 +2,18 @@ import datetime
 import io
 from importlib.resources import files
 from pathlib import Path
-from unittest import TestCase, expectedFailure
+
+import pytest
 
 from holper import model, sportsoftware
 
 from . import SportSoftware
 
 
-class TestIndividual(TestCase):
-    def test_recognize_file_format(self):
+class TestIndividual:
+    def test_recognize_file_format(self, subtests):
         for idx in range(1, 3):
-            with self.subTest(idx=idx), (files(SportSoftware) / f"OE_11.0_EntryList{idx}.csv").open("rb") as file:
+            with subtests.test(idx=idx), (files(SportSoftware) / f"OE_11.0_EntryList{idx}.csv").open("rb") as file:
                 assert sportsoftware.detect(file)
                 assert not file.closed
 
@@ -46,10 +47,10 @@ class TestIndividual(TestCase):
         assert sportsoftware._detect_type(buffer) == "OE11"
 
 
-class TestRelay(TestCase):
-    def test_recognize_file_format(self):
+class TestRelay:
+    def test_recognize_file_format(self, subtests):
         for idx in range(1, 4):
-            with self.subTest(idx=idx), (files(SportSoftware) / f"OS_11.0_EntryList{idx}.csv").open("rb") as file:
+            with subtests.test(idx=idx), (files(SportSoftware) / f"OS_11.0_EntryList{idx}.csv").open("rb") as file:
                 assert sportsoftware.detect(file)
                 assert not file.closed
 
@@ -77,7 +78,7 @@ class TestRelay(TestCase):
                     == entries[0].competitors[idx + 1].starts[0].competitor_result.start_time
                 )
 
-    @expectedFailure
+    @pytest.mark.xfail(raises=NotImplementedError)
     def test_write_os_entries(self):
         event = model.Event(form=model.EventForm.RELAY)
         race = model.Race(event=event)
@@ -89,7 +90,7 @@ class TestRelay(TestCase):
         assert sportsoftware._detect_type(buffer) == "OS11"
 
 
-class TestTeam(TestCase):
+class TestTeam:
     def test_recognize_file_format(self):
         with (files(SportSoftware) / "OT_10.2_EntryList.csv").open("rb") as file:
             assert sportsoftware.detect(file)

@@ -1,6 +1,5 @@
 from datetime import date
 from importlib.resources import files
-from unittest import TestCase
 
 from holper.iof import (
     ClassList,
@@ -16,7 +15,7 @@ from holper.iof import (
 from . import IOFv3
 
 
-class TestClassList(TestCase):
+class TestClassList:
     def test_read_open_example(self):
         xml_data = (files(IOFv3) / "ClassList.xml").read_bytes()
         class_list = ClassList.from_xml(xml_data)
@@ -44,7 +43,7 @@ class TestClassList(TestCase):
         assert class_list.classes[1].number_of_competitors == 38
 
 
-class TestCompetitorList(TestCase):
+class TestCompetitorList:
     def test_read_example(self):
         xml_data = (files(IOFv3) / "CompetitorList.xml").read_bytes()
         competitor_list = CompetitorList.from_xml(xml_data)
@@ -53,7 +52,7 @@ class TestCompetitorList(TestCase):
         assert len(competitor_list.competitors[0].organisations) == 2
 
 
-class TestCourseData(TestCase):
+class TestCourseData:
     def test_read_individual_example1(self):
         xml_data = (files(IOFv3) / "CourseData_Individual_Step2.xml").read_bytes()
         course_data = CourseData.from_xml(xml_data)
@@ -101,7 +100,7 @@ class TestCourseData(TestCase):
         assert len(race.team_course_assignments[1].team_member_course_assignments) == 5
 
 
-class TestEntryList(TestCase):
+class TestEntryList:
     def test_read_example1(self):
         xml_data = (files(IOFv3) / "EntryList1.xml").read_bytes()
         entry_list = EntryList.from_xml(xml_data)
@@ -120,7 +119,7 @@ class TestEntryList(TestCase):
         assert len(entry_list.team_entries[0].team_entry_persons) == 5
 
 
-class TestEventList(TestCase):
+class TestEventList:
     def test_read_example(self):
         xml_data = (files(IOFv3) / "Event_name_and_start_time.xml").read_bytes()
         event_list = EventList.from_xml(xml_data)
@@ -128,7 +127,7 @@ class TestEventList(TestCase):
         assert len(event_list.events) == 1
 
 
-class TestOrganisationList(TestCase):
+class TestOrganisationList:
     def test_read_example(self):
         xml_data = (files(IOFv3) / "OrganisationList.xml").read_bytes()
         organisation_list = OrganisationList.from_xml(xml_data)
@@ -136,7 +135,7 @@ class TestOrganisationList(TestCase):
         assert len(organisation_list.organisations) == 4
 
 
-class TestResultList(TestCase):
+class TestResultList:
     def test_read_example1(self):
         xml_data = (files(IOFv3) / "ResultList1.xml").read_bytes()
         result_list = ResultList.from_xml(xml_data)
@@ -180,7 +179,7 @@ class TestResultList(TestCase):
         # Note: We don't support the Extensions in this example. They are ignored.
 
 
-class TestStartList(TestCase):
+class TestStartList:
     def test_read_example1(self):
         xml_data = (files(IOFv3) / "StartList1.xml").read_bytes()
         start_list = StartList.from_xml(xml_data)

@@ -1,38 +1,33 @@
 from pathlib import Path
-from unittest import TestCase
 
 import pytest
 
 from holper import core, iofxml3, model
 
 
-class TestModel(TestCase):
-    session = None
+class TestModel:
+    @pytest.fixture(scope="class")
+    def session(self):
+        return core.open_session("sqlite:///:memory:")
 
-    @classmethod
-    def setUpClass(cls):
-        cls.session = core.open_session("sqlite:///:memory:")
+    @pytest.fixture(autouse=True)
+    def _transaction(self, session):
+        session.begin_nested()
+        try:
+            yield
+        finally:
+            session.rollback()
 
-    def setUp(self):
-        self.session.begin_nested()
-
-    def tearDown(self):
-        self.session.rollback()
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.session.rollback()
-
-    def test_event(self):
+    def test_event(self, session):
         event1 = model.Event(event_id=1, name="event1", form=model.EventForm.RELAY)
-        self.session.add(event1)
+        session.add(event1)
 
-        event1a = self.session.merge(model.Event(event_id=1, name="event1a"))
+        event1a = session.merge(model.Event(event_id=1, name="event1a"))
 
         assert event1 is event1a
 
 
-class TestImport(TestCase):
+class TestImport:
     def test_iofxml3_category_list(self):
         with Path("tests/IOFv3/ClassList_Individual_Step1.xml").open("rb") as file:
             categories = list(iofxml3.read(file))
