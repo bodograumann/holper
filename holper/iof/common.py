@@ -302,12 +302,12 @@ class Leg(IOFBaseModel):
 
     name: Annotated[str | None, element(tag="Name"), Doc("The name of the leg, if not sequentially named.")] = None
     min_number_of_competitors: Annotated[
-        int | None,
+        int,
         attr(name="minNumberOfCompetitors"),
         Doc("The minimum number of competitors in case of a parallel leg."),
     ] = 1
     max_number_of_competitors: Annotated[
-        int | None,
+        int,
         attr(name="maxNumberOfCompetitors"),
         Doc("The maximum number of competitors in case of a parallel leg."),
     ] = 1
@@ -524,7 +524,7 @@ class Control(IOFBaseModel):
         Doc("The position of the control according to tha map's coordinate system."),
     ] = None
     type: Annotated[
-        ControlType | None,
+        ControlType,
         attr(name="type"),
         Doc(
             "The type of the control: (ordinary) control, start, finish, crossing point or end of marked route. This attribute can be overridden on the CourseControl level.",
@@ -803,17 +803,16 @@ class Class(IOFBaseModel):
             "B",
             "F",
             "M",
-        ]
-        | None,
+        ],
         attr(name="sex"),
     ] = "B"
     min_number_of_team_members: Annotated[
-        int | None,
+        int,
         attr(name="minNumberOfTeamMembers"),
         Doc("The minimum number of members in a team taking part in the class, if the class is a team class."),
     ] = 1
     max_number_of_team_members: Annotated[
-        int | None,
+        int,
         attr(name="maxNumberOfTeamMembers"),
         Doc("The maximum number of members in a team taking part in the class, if the class is a team class."),
     ] = 1
@@ -846,8 +845,7 @@ class Class(IOFBaseModel):
             "Default",
             "Unordered",
             "UnorderedNoTimes",
-        ]
-        | None,
+        ],
         attr(name="resultListMode"),
         Doc(
             """Defines the kind of information to include in the result list, and how to sort it. For example, the result list of a beginner's class may include just "finished" or "did not finish" instead of the actual times.

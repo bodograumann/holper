@@ -38,8 +38,7 @@ class SplitTime(IOFBaseModel):
             "OK",
             "Missing",
             "Additional",
-        ]
-        | None,
+        ],
         attr(name="status"),
         Doc(
             """
@@ -568,7 +567,7 @@ class ClassResult(IOFBaseModel):
     ] = []
     team_results: Annotated[list[TeamResult], element(tag="TeamResult"), Doc("Results for teams in the class.")] = []
     time_resolution: Annotated[
-        float | None,
+        float,
         attr(name="timeResolution"),
         Doc("The time resolution of the results, normally 1. For tenths of a second, use 0.1."),
     ] = 1

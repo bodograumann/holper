@@ -252,7 +252,7 @@ class ClassStart(IOFBaseModel):
     ] = []
     team_starts: Annotated[list[TeamStart], element(tag="TeamStart"), Doc("Start times for teams in the class.")] = []
     time_resolution: Annotated[
-        float | None,
+        float,
         attr(name="timeResolution"),
         Doc("The time resolution of the start times, normally 1. For tenths of a second, use 0.1."),
     ] = 1

@@ -146,7 +146,7 @@ class CourseControl(IOFBaseModel):
         ),
     ] = None
     random_order: Annotated[
-        bool | None,
+        bool,
         attr(name="randomOrder"),
         Doc(
             "Non-broken sequences of course controls having randomOrder set to true can be visited in an arbitrary order.",
@@ -159,8 +159,7 @@ class CourseControl(IOFBaseModel):
             "FunnelTapedRoute",
             "MandatoryCrossingPoint",
             "MandatoryOutOfBoundsAreaPassage",
-        ]
-        | None,
+        ],
         attr(name="specialInstruction"),
         Doc(
             "Any special instruction applied at the control, see http://orienteering.org/wp-content/uploads/2010/12/Control-Descriptions-2004-symbols-only.pdf, page 15.",

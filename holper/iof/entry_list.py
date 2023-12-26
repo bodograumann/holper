@@ -39,8 +39,7 @@ class StartTimeAllocationRequest(IOFBaseModel):
             "LateStart",
             "SeparatedFrom",
             "GroupedWith",
-        ]
-        | None,
+        ],
         attr(name="type"),
         Doc(
             """The type of start time allocation request.
