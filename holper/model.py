@@ -305,7 +305,6 @@ class CourseControl(Base):
     control: Mapped[Control] = relationship(Control)
 
     leg_length: Mapped[float | None] = mapped_column(doc="Leg length in kilometers")
-    leg_climb: Mapped[float | None] = mapped_column(doc="Leg climb in meters")
 
     type: Mapped[ControlType] = mapped_column(Enum(ControlType), default=ControlType.CONTROL)
     score: Mapped[float | None]
