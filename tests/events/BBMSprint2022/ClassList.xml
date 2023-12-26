@@ -1,0 +1,363 @@
+<?xml version="1.0"?>
+<ClassList xmlns="http://www.orienteering.org/datastandard/3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" iofVersion="3.0" createTime="2022-03-30T20:03:52" creator="omanager.orientierungslauf.de">
+  <Class sex="B">
+    <Id>177190</Id>
+    <Name>BK (Beginner Kurz)</Name>
+    <ShortName>BK</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">4.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">4.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="B">
+    <Id>177195</Id>
+    <Name>BL (Beginner Lang)</Name>
+    <ShortName>BL</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">4.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">4.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="F" maxAge="10">
+    <Id>177170</Id>
+    <Name>D-10 (Damen bis 10)</Name>
+    <ShortName>D-10</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">3.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">5.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="F" maxAge="12">
+    <Id>177175</Id>
+    <Name>D-12 (Damen bis 12)</Name>
+    <ShortName>D-12</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">3.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">5.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="F" maxAge="14">
+    <Id>177130</Id>
+    <Name>D-14 (Damen bis 14)</Name>
+    <ShortName>D-14</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">3.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">5.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="F" maxAge="16">
+    <Id>177110</Id>
+    <Name>D-16 (Damen bis 16)</Name>
+    <ShortName>D-16</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">4.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">6.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="F" maxAge="18">
+    <Id>177090</Id>
+    <Name>D-18 (Damen bis 18)</Name>
+    <ShortName>D-18</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">4.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">6.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="F">
+    <Id>177115</Id>
+    <Name>D19- (Damen ab 19)</Name>
+    <ShortName>D19-</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">10.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">12.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="F" minAge="35">
+    <Id>177145</Id>
+    <Name>D35- (Damen ab 35)</Name>
+    <ShortName>D35-</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">10.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">12.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="F" minAge="45">
+    <Id>177100</Id>
+    <Name>D45- (Damen ab 45)</Name>
+    <ShortName>D45-</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">10.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">12.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="F" minAge="55">
+    <Id>177105</Id>
+    <Name>D55- (Damen ab 55)</Name>
+    <ShortName>D55-</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">10.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">12.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="F" minAge="65">
+    <Id>177080</Id>
+    <Name>D65- (Damen ab 65)</Name>
+    <ShortName>D65-</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">10.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">12.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="F" minAge="75">
+    <Id>177125</Id>
+    <Name>D75- (Damen ab 75)</Name>
+    <ShortName>D75-</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">10.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">12.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="M" maxAge="10">
+    <Id>177180</Id>
+    <Name>H-10 (Herren bis 10)</Name>
+    <ShortName>H-10</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">3.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">5.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="M" maxAge="12">
+    <Id>177185</Id>
+    <Name>H-12 (Herren bis 12)</Name>
+    <ShortName>H-12</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">3.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">5.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="M" maxAge="14">
+    <Id>177150</Id>
+    <Name>H-14 (Herren bis 14)</Name>
+    <ShortName>H-14</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">3.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">5.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="M" maxAge="16">
+    <Id>177155</Id>
+    <Name>H-16 (Herren bis 16)</Name>
+    <ShortName>H-16</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">4.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">6.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="M" maxAge="18">
+    <Id>177135</Id>
+    <Name>H-18 (Herren bis 18)</Name>
+    <ShortName>H-18</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">4.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">6.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="M">
+    <Id>177160</Id>
+    <Name>H19- (Herren ab 19)</Name>
+    <ShortName>H19-</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">10.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">12.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="M" minAge="35">
+    <Id>177085</Id>
+    <Name>H35- (Herren ab 35)</Name>
+    <ShortName>H35-</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">10.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">12.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="M" minAge="45">
+    <Id>177140</Id>
+    <Name>H45- (Herren ab 45)</Name>
+    <ShortName>H45-</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">10.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">12.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="M" minAge="55">
+    <Id>177165</Id>
+    <Name>H55- (Herren ab 55)</Name>
+    <ShortName>H55-</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">10.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">12.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="M" minAge="65">
+    <Id>177120</Id>
+    <Name>H65- (Herren ab 65)</Name>
+    <ShortName>H65-</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">10.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">12.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+  <Class sex="M" minAge="75">
+    <Id>177095</Id>
+    <Name>H75- (Herren ab 75)</Name>
+    <ShortName>H75-</ShortName>
+    <Fee type="Normal">
+      <Name>normal</Name>
+      <Amount currency="EUR">10.50</Amount>
+      <ValidToTime>2022-03-22T23:59:00+02:00</ValidToTime>
+    </Fee>
+    <Fee type="Late">
+      <Name>Nachmeldung</Name>
+      <Amount currency="EUR">12.50</Amount>
+      <ValidToTime>2022-03-22T11:00:00+02:00</ValidToTime>
+    </Fee>
+  </Class>
+</ClassList>

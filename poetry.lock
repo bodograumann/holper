@@ -1523,6 +1523,20 @@ pymysql = ["pymysql"]
 sqlcipher = ["sqlcipher3-binary"]
 
 [[package]]
+name = "syrupy"
+version = "4.6.0"
+description = "Pytest Snapshot Test Utility"
+optional = false
+python-versions = ">=3.8.1,<4"
+files = [
+    {file = "syrupy-4.6.0-py3-none-any.whl", hash = "sha256:747aae1bcf3cb3249e33b1e6d81097874d23615982d5686ebe637875b0775a1b"},
+    {file = "syrupy-4.6.0.tar.gz", hash = "sha256:231b1f5d00f1f85048ba81676c79448076189c4aef4d33f21ae32f3b4c565a54"},
+]
+
+[package.dependencies]
+pytest = ">=7.0.0,<8.0.0"
+
+[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -1609,4 +1623,4 @@ postgres = ["psycopg"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "83b79ae392c24d55fb361eefae1c3b8efec33962d688191185364ae9e342c655"
+content-hash = "13cac33e9abb3b2da7e62170861e6a9053ccf9cdc20bc0e590ac369a0b36a47b"
