@@ -47,7 +47,8 @@ class PersonName(IOFBaseModel):
 class Country(IOFBaseModel):
     """Defines the name of the country."""
 
-    text: Annotated[str, constr(strip_whitespace=True)]
+    # Note: the schema does not allow a missing body here, but we are more lenient.
+    text: Annotated[str, constr(strip_whitespace=True)] = ""
     code: Annotated[
         str,
         attr(name="code"),

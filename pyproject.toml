@@ -87,7 +87,6 @@ classmethod-decorators = [
     "E501",  # Copied docstrings from xml schema
     "RUF012",  # Pydantic automatically generates a default factory for lists etc.
 ]
-"holper/iofxml3.py" = ["ALL"]  # To be rewritten
 
 "tests/**/test_*" = [
     "ANN",  # No need to annotate test functions with types
@@ -106,8 +105,8 @@ target-version = ["py310", "py311"]
 strict = true
 exclude = [
     "^docs",
-    "^holper/iofxml3.py",  # To be rewritten
 ]
+plugins = ["pydantic.mypy"]
 
 [[tool.mypy.overrides]]
 module = ["docs.*", "tests.*"]
@@ -117,6 +116,11 @@ strict_optional = false
 [[tool.mypy.overrides]]
 module = ["generate_class_diagram"]
 disallow_any_generics = false
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
 
 [build-system]
 requires = ["poetry-core"]

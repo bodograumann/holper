@@ -284,6 +284,28 @@ class CourseData(BaseMessageElement):
         Doc("The course data for each race; one element per race in the event."),
     ]
 
+    @property
+    def ordered_race_course_data(self) -> list[RaceCourseData | None]:
+        """Order race course data by race_number.
+
+        Creates a sparse list.
+        If an element does not have a race_number, it is put at the first empty position.
+        """
+        data: list[RaceCourseData | None] = [None] * len(self.race_course_data)
+        for race_course_data in self.race_course_data:
+            if race_course_data.race_number:
+                data = data + [None] * (race_course_data.race_number - len(data))
+                data[race_course_data.race_number - 1] = race_course_data
+
+        race_idx = 0
+        for race_course_data in self.race_course_data:
+            if not race_course_data.race_number:
+                while data[race_idx] is not None:
+                    race_idx += 1
+                data[race_idx] = race_course_data
+
+        return data
+
     def delete_unused_courses(self) -> None:
         for race in self.race_course_data:
             race.delete_unused_courses()

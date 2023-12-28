@@ -259,6 +259,7 @@ class Leg(Base):
     event_category_id: Mapped[int] = mapped_column(ForeignKey(EventCategory.event_category_id))
     event_category: Mapped[EventCategory] = relationship(EventCategory, back_populates="legs")
 
+    # Ordinal number of the leg in the category, starting at 1.
     leg_number: Mapped[int | None] = mapped_column(SmallInteger)
 
     # Number of competitors of each team that compete together in this leg

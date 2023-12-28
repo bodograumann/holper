@@ -214,6 +214,47 @@
   
   '''
 # ---
+# name: test_imports_and_startlist[event0].7
+  '''
+  Competitor Anna borodina has not provided a control card
+  Competitor Dimitry borodin has not provided a control card
+  Competitor Yevhen Smokov has not provided a control card
+  Course 1 (D-10, H-10):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31]
+  Course 2 (BK, D-12, H-12):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45]
+  Course 3 (D-14, H-14):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22]
+  Course 4 (D-16, D19K, D45-, D50-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63]
+  Course 5 (D-18, D35-, D40-, H-16, H19K, H55-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75, 78, 81, 84, 87, 90, 93, 96, 99, 102]
+  Course 6 (D19L, H45-, H50-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75, 78, 81]
+  Course 7 (BL):
+  3n+2 [2, 5, 8, 11, 14, 17, 20, 23]
+  Course 8 (H-18, H35-, H40-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27]
+  Course 9 (H19L):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22, 25]
+  Course 10 (D55-, D60-, H60-, H65-, H70-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72]
+  Course 11 (D65-, D70-, H75-, H80-):
+  3n+1 [1, 4, 7, 10, 13, 16, 19]
+  Course 12 (D75-, D80-):
+  3n+2 [2, 5]
+  Starter number: 157
+  Last start: 102.0
+  Starters per start time: 1.52 ±3.43
+  1 parallel starters: 16 times
+  2 parallel starters: 7 times
+  3 parallel starters: 10 times
+  4 parallel starters: 11 times
+  5 parallel starters: 7 times
+  6 parallel starters: 3 times
+  
+  '''
+# ---
 # name: test_imports_and_startlist[event1]
   '''
   A new event “WinterOL2023” was created successfully with number #1.
@@ -228,10 +269,6 @@
 # ---
 # name: test_imports_and_startlist[event1].2
   '''
-  Could not find category Leo.
-  Could not find category Andreas.
-  Could not find category Jürgen.
-  Could not find category Tamas.
   Imported 18 courses
   
   '''
@@ -420,6 +457,47 @@
   
   '''
 # ---
+# name: test_imports_and_startlist[event1].7
+  '''
+  Course 1 (D19-L, H19-K):
+  3n+2 [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35]
+  Course 2 (H35-, H-18, H40-):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49]
+  Course 3 (H19-L):
+  3n+2 [2, 5, 8, 11, 14, 17]
+  Course 4 (BK, D-10, H-10):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75, 78, 81, 84]
+  Course 5 (D-12, H-12):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37]
+  Course 6 (D-14):
+  3n [0, 3, 6]
+  Course 7 (H-14):
+  3n+1 [1, 4]
+  Course 8 (BL):
+  3n+2 [2, 5, 8, 11, 14]
+  Course 9 (D-16, D50-, D19-K, D55-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54]
+  Course 10 (H45-, H50-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54]
+  Course 11 (D-18, D35-, H-16, H55-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63]
+  Course 12 (D60-, D65-, H70-, H75-):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22, 25, 28]
+  Course 13 (D70-, D75-, H80-):
+  3n+2 [2, 5, 8, 11, 14, 17]
+  Course 14 (D40-, D45-, H60-, H65-):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40]
+  Starter number: 156
+  Last start: 84.0
+  Starters per start time: 1.84 ±2.75
+  1 parallel starters: 15 times
+  2 parallel starters: 9 times
+  3 parallel starters: 11 times
+  4 parallel starters: 20 times
+  5 parallel starters: 2 times
+  
+  '''
+# ---
 # name: test_imports_and_startlist[event2]
   '''
   A new event “BBMSprint2022” was created successfully with number #1.
@@ -434,14 +512,6 @@
 # ---
 # name: test_imports_and_startlist[event2].2
   '''
-  Could not find category Leo.
-  Could not find category Jürgen.
-  Could not find category Tamas.
-  Could not find category Christian.
-  Could not find category Andreas.
-  Could not find category Johannes.
-  Could not find category Bernd.
-  Could not find category Michael.
   Imported 21 courses
   
   '''
@@ -606,6 +676,55 @@
   Kseniya Dabrytskaya: D19-
   Alena Yurpalova: D19-
   Anton Yurpalov: H19-
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event2].7
+  '''
+  Competitor Andrea Naß has not provided a control card
+  Competitor Ulrike Thieme has not provided a control card
+  Competitor Sascha Schulz has not provided a control card
+  Competitor Thea Schulz has not provided a control card
+  Competitor Clara Schulz has not provided a control card
+  Competitor Franziska Lau has not provided a control card
+  Competitor Claudia Becker has not provided a control card
+  Competitor Karl Herold has not provided a control card
+  Competitor Tjare Funke has not provided a control card
+  Course 1 (D19-, H45-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66]
+  Course 2 (H-18, H35-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24]
+  Course 3 (H19-):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22, 25]
+  Course 4 (BK, D-10, H-10):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51]
+  Course 5 (D-12, H-12):
+  3n+20 [20, 23, 26, 29, 32]
+  Course 6 (D-14):
+  3n+2 [2]
+  Course 7 (H-14):
+  3n+1 [1, 4, 7, 10, 13, 16, 19]
+  Course 8 (BL):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22, 25, 28]
+  Course 9 (D-16, D55-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39]
+  Course 10 (D45-, H65-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45]
+  Course 11 (D-18, D35-, H-16, H55-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75]
+  Course 12 (D65-, H75-):
+  3n+2 [2, 5, 8, 11, 14, 17]
+  Course 13 (D75-):
+  3n+31 [31, 34]
+  Starter number: 135
+  Last start: 75.0
+  Starters per start time: 1.78 ±3.81
+  1 parallel starters: 14 times
+  2 parallel starters: 9 times
+  3 parallel starters: 10 times
+  4 parallel starters: 3 times
+  5 parallel starters: 5 times
+  6 parallel starters: 6 times
   
   '''
 # ---

@@ -3,7 +3,6 @@
 import logging
 from contextlib import suppress
 from itertools import groupby
-from typing import TypeVar, cast
 
 from sqlalchemy import create_engine, orm, select
 from sqlalchemy.exc import NoResultFound
@@ -54,27 +53,6 @@ def hydrate_country_by_ioc_code(session: orm.Session, entity: model.Organisation
         return
 
     entity.country = country
-
-
-Ext = TypeVar("Ext", bound=model.HasExternalIds)
-
-
-def shadow_entity_by_xid(session: orm.Session, entity: Ext) -> Ext:
-    """Look for the entity by the external ids in the database.
-
-    Return the first match. If nothing matches, return the given entity.
-    """
-    cls = entity.__class__
-    xid_cls = getattr(model, cls.__name__ + "XID")
-    for xid in entity.external_ids:
-        try:
-            saved_xid = session.scalars(
-                select(xid_cls).where(xid_cls.issuer == xid.issuer).where(xid_cls.external_id == xid.external_id),
-            ).one()
-        except NoResultFound:
-            continue
-        return cast(Ext, getattr(saved_xid, tools.camelcase_to_snakecase(cls.__name__)))
-    return entity
 
 
 def group_courses_by_first_control(race: model.Race) -> dict[str, list[model.Course]]:

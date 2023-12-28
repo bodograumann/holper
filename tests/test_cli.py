@@ -45,4 +45,4 @@ def test_imports_and_startlist(event, cli_snapshot):
         cli_snapshot("event", "1")
         cli_snapshot("entries", "1")
 
-        cli_snapshot("startlist", "1", "3", "--parallel-max", "6")
+        cli_snapshot("startlist", "1", "3", "--parallel-max", "6", "--greedy")
