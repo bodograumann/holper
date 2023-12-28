@@ -17,9 +17,10 @@ class IdArgs(TypedDict):
 
 
 class Importer:
-    def __init__(self, root: BaseMessageElement) -> None:
+    def __init__(self, root: BaseMessageElement, countries: list[model.Country]) -> None:
         self.default_issuer = root.creator or "unknown"
         self.organisations: list[model.Organisation] = []
+        self.countries = countries
 
     def extract_id(self, id_: Id) -> IdArgs:
         return {
@@ -37,6 +38,13 @@ class Importer:
                 for entity_id in entity.external_ids
             )
         )
+
+    def find_country(self, ioc_code: str) -> model.Country | None:
+        try:
+            return next(country for country in self.countries if country.ioc_code == ioc_code)
+        except StopIteration:
+            logging.warning("Could not find country with ioc_code %s.", ioc_code)
+            return None
 
     def import_class(self, class_: Class) -> model.EventCategory:
         imported = model.EventCategory(
@@ -155,7 +163,7 @@ class Importer:
     def import_country(self, country: Country | None) -> model.Country | None:
         if country is None:
             return None
-        return model.Country(ioc_code=country.code)
+        return self.find_country(country.code)
 
     def import_control_card(self, control_card: ControlCard) -> model.ControlCard:
         imported = model.ControlCard(label=control_card.text)

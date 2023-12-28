@@ -113,7 +113,7 @@ def import_categories(event_id: int, category_file: ImportFileOpt, *, db_file: D
 
         xml_data = category_file.read_bytes()
         class_list = iof.ClassList.from_xml(xml_data)
-        importer = iof.Importer(class_list)
+        importer = iof.Importer(class_list, core.get_countries(session))
         event_categories = [importer.import_class(class_) for class_ in class_list.classes]
 
         evt.event_categories.extend(event_categories)
@@ -181,7 +181,7 @@ def import_courses(
             raise typer.Abort
 
         course_data = iof.CourseData.from_xml(course_file.read_bytes())
-        importer = iof.Importer(course_data)
+        importer = iof.Importer(course_data, core.get_countries(session))
 
         ordered_data = course_data.ordered_race_course_data
         if len(ordered_data) > len(evt.races):
@@ -245,7 +245,7 @@ def import_entries(event_id: int, entry_file: ImportFileOpt, *, db_file: DbFileO
             raise typer.Abort
 
         entry_list = iof.EntryList.from_xml(entry_file.read_bytes())
-        importer = iof.Importer(entry_list)
+        importer = iof.Importer(entry_list, core.get_countries(session))
 
         with session.no_autoflush:
             if evt.form == model.EventForm.INDIVIDUAL:
@@ -254,12 +254,6 @@ def import_entries(event_id: int, entry_file: ImportFileOpt, *, db_file: DbFileO
                 ]
             else:
                 entries = [importer.import_team_entry(entry, evt.event_categories) for entry in entry_list.team_entries]
-
-            for entry in entries:
-                core.hydrate_country_by_ioc_code(session, entry.organisation)
-                for competitor in entry.competitors:
-                    core.hydrate_country_by_ioc_code(session, competitor.person)
-                    core.hydrate_country_by_ioc_code(session, competitor.organisation)
 
             evt.entries = entries
 

@@ -38,21 +38,8 @@ def get_race(session: orm.Session, race_id: int) -> model.Race | None:
     return None
 
 
-def hydrate_country_by_ioc_code(session: orm.Session, entity: model.Organisation | model.Person | None) -> None:
-    if not entity or not entity.country:
-        return
-
-    ioc_code = entity.country.ioc_code
-    try:
-        country = session.scalars(
-            select(model.Country).where(model.Country.ioc_code == ioc_code),
-        ).one()
-    except NoResultFound:
-        _logger.warning("Could not find country with ioc_code “%s” — Clearing.", ioc_code)
-        entity.country = None
-        return
-
-    entity.country = country
+def get_countries(session: orm.Session) -> list[model.Country]:
+    return list(session.scalars(select(model.Country)).all())
 
 
 def group_courses_by_first_control(race: model.Race) -> dict[str, list[model.Course]]:
