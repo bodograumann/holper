@@ -14,22 +14,30 @@ the same course.
 .. _WKB: https://o-sport.de/dokumente/wettkampfwesen/
 """
 
-from collections.abc import Iterable, Mapping
-from collections import Counter, defaultdict
-from datetime import timedelta
 import operator
 import random
-from typing import Optional
+from collections import Counter, defaultdict
+from collections.abc import Iterable, Iterator, Mapping
+from datetime import timedelta
 
 from more_itertools import peekable
-from ortools.sat.python import cp_model
 
-from .model import Category, Course, Start, StartTimeAllocationRequestType, Race
+# Cf. https://github.com/google/or-tools/issues/3993
+from ortools.sat.python import cp_model  # type: ignore [import-untyped]
+
 from .affine_seq import AffineSeq
+from .model import Category, Course, Race, Start, StartTimeAllocationRequestType
 from .tools import disjoin
 
 
-def _category_request_counts(category: Category):
+class InfeasibleError(Exception):
+    """Raise when an optimization cannot find a solution."""
+
+    def __init__(self) -> None:
+        super().__init__("No solution possible")
+
+
+def _category_request_counts(category: Category) -> Counter[StartTimeAllocationRequestType]:
     return Counter(request.type for start in category.starts for request in start.entry.start_time_allocation_requests)
 
 
@@ -37,7 +45,7 @@ EARLY = StartTimeAllocationRequestType.EARLY_START
 LATE = StartTimeAllocationRequestType.LATE_START
 
 
-def _category_order_key(category: Category):
+def _category_order_key(category: Category) -> tuple[int, int, int]:
     counter = _category_request_counts(category)
     return (
         counter[LATE] - counter[EARLY],
@@ -49,39 +57,44 @@ def _category_order_key(category: Category):
 class StartConstraints:
     """Declare constraints for start list creation"""
 
-    def __init__(self, interval=1, parallel_max=None, conflicts=None):
+    def __init__(
+        self,
+        interval: int = 1,
+        parallel_max: int | None = None,
+        conflicts: list[list[int]] | None = None,
+    ) -> None:
         # Map course ids to an ordered list of categories
         self.order: dict[int, list[Category]] = defaultdict(list)
         # Maximal number of parallel starts for each start time
-        self.parallel_max: Optional[int] = parallel_max
+        self.parallel_max: int | None = parallel_max
         # Minimal time difference between two consecutive starts for each class
         self.interval: int = interval
         # Collection of course groups where each group is a collection of
         # course ids so that the courses must not start at the same time
         self.conflicts: list[list[int]] = [] if conflicts is None else conflicts
 
-    def add_race_courses(self, race: Race):
+    def add_race_courses(self, race: Race) -> None:
         for category in race.categories:
             self.order[category.courses[0].course.course_id].append(category)
 
         for categories in self.order.values():
             categories.sort(key=_category_order_key)
 
-    def set_category_early(self, course: Course, categories: list[Category]):
+    def set_category_early(self, course: Course, categories: list[Category]) -> None:
         self.order[course.course_id] = categories + list(
             filter(
                 lambda category: category not in categories,
                 self.order[course.course_id],
-            )
+            ),
         )
 
-    def set_category_late(self, course: Course, categories: list[Category]):
+    def set_category_late(self, course: Course, categories: list[Category]) -> None:
         self.order[course.course_id] = (
             list(
                 filter(
                     lambda category: category not in categories,
                     self.order[course.course_id],
-                )
+                ),
             )
             + categories
         )
@@ -105,7 +118,7 @@ class StartConstraints:
         }
 
 
-def generate_slots_greedily(constraints: StartConstraints, time_max=12 * 60) -> dict[int, AffineSeq]:
+def generate_slots_greedily(constraints: StartConstraints, time_max: int = 12 * 60) -> dict[int, AffineSeq]:
     """Greedily finds a start slot scheme under the given constraints
 
     :param constraints: Conditions that the resulting start list must follow.
@@ -117,7 +130,7 @@ def generate_slots_greedily(constraints: StartConstraints, time_max=12 * 60) -> 
     # Map course ids to the set of allocated start times
     slots: dict[int, AffineSeq] = {}
     # Number of already assigned slots for each possible start time
-    parallel = defaultdict(int)
+    parallel: dict[int, int] = defaultdict(int)
 
     # Assign start slots to courses, starting from the course with the most entries
     for course_id, count in sorted(constraints.course_slot_counts.items(), key=operator.itemgetter(1), reverse=True):
@@ -141,7 +154,8 @@ def generate_slots_greedily(constraints: StartConstraints, time_max=12 * 60) -> 
             # Slot can be used for the current course
             break
         else:
-            raise KeyError("No free slots found")
+            msg = "No free slots found"
+            raise KeyError(msg)
 
         slots[course_id] = AffineSeq(first_slot, first_slot + constraints.interval * count, constraints.interval)
 
@@ -169,7 +183,7 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
     course_starters = list(enumerate(course_slot_counts))
     course_ids = list(constraints.course_slot_counts.keys())
 
-    course_idx_by_id = dict((course_id, idx) for idx, course_id in enumerate(course_ids))
+    course_idx_by_id = {course_id: idx for idx, course_id in enumerate(course_ids)}
     no_common_slots = [
         [course_idx_by_id[course_id] for course_id in course_group if course_id in course_idx_by_id]
         for course_group in constraints.conflicts
@@ -244,7 +258,7 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
     status = solver.Solve(model)
 
     if status == cp_model.INFEASIBLE:
-        raise Exception("No solution found.")
+        raise InfeasibleError
 
     time_max = solver.Value(last_start)
     model.Add(last_start == time_max)
@@ -252,7 +266,7 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
     # Step 2: Find the optimal solution
     model.Maximize(
         sum((starters - 1) * intervals[idx] for idx, starters in course_starters)  # Maximize intervals
-        - sum(offsets)  # Minimize offsets
+        - sum(offsets),  # Minimize offsets
     )
 
     solver = cp_model.CpSolver()
@@ -260,9 +274,9 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
     status = solver.Solve(model)
 
     if status == cp_model.INFEASIBLE:
-        raise Exception("No solution found.")
+        raise InfeasibleError
 
-    slots = {
+    return {
         course_id: AffineSeq(
             solver.Value(offsets[idx]),
             solver.Value(offsets[idx])
@@ -272,14 +286,12 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
         for idx, course_id in enumerate(course_ids)
     }
 
-    return slots
-
 
 def fill_slots(
     race: Race,
     constraints: StartConstraints,
     start_slots: Mapping[int, Iterable[int]],
-):
+) -> None:
     """Assign :py:class:`entries <.model.Entry>` to the start slots.
 
     There already has to be a :py:class:`Start <.model.Start>` object
@@ -289,40 +301,43 @@ def fill_slots(
         category.time_offset = None
 
     for course in race.courses:
-        slots: Iterable[int] = peekable(start_slots.get(course.course_id, []))
-
-        for category in constraints.order[course.course_id]:
-            try:
-                category.time_offset = timedelta(minutes=slots.peek())
-            except StopIteration:
-                break
-
-            # Skip vacancies at the start
-            for _ in range(category.vacancies_before):
-                next(slots)
-
-            # Non-competitive entries after competitive ones
-            starts: dict[bool, list[Start]] = defaultdict(list)
-            for start in category.starts:
-                starts[start.competitive].append(start)
-
-            for competitive in [True, False]:
-                if starts[competitive]:
-                    _assign_entries_randomly(starts[competitive], slots)
-
-                    # After each category there has to be one slot left empty
-                    try:
-                        next(slots)
-                    except StopIteration:
-                        # TODO: make sure this only happens at the very end of a course
-                        ...
-
-            # Skip vacancies at the end
-            for _ in range(category.vacancies_after):
-                next(slots)
+        _fill_course_slots(constraints.order[course.course_id], start_slots.get(course.course_id, []))
 
 
-def _assign_entries_randomly(starts: Iterable[Start], slot_iter: Iterable[int]):
+def _fill_course_slots(categories: list[Category], slots_iter: Iterable[int]) -> None:
+    slots = peekable(slots_iter)
+    for category in categories:
+        try:
+            category.time_offset = timedelta(minutes=slots.peek())
+        except StopIteration:
+            break
+
+        # Skip vacancies at the start
+        for _ in range(category.vacancies_before):
+            next(slots)
+
+        # Non-competitive entries after competitive ones
+        starts: dict[bool, list[Start]] = defaultdict(list)
+        for start in category.starts:
+            starts[start.competitive].append(start)
+
+        for competitive in [True, False]:
+            if starts[competitive]:
+                _assign_entries_randomly(starts[competitive], slots)
+
+                # After each category there has to be one slot left empty
+                try:  # noqa: SIM105
+                    next(slots)
+                except StopIteration:
+                    # TODO: make sure this only happens at the very end of a course
+                    ...
+
+        # Skip vacancies at the end
+        for _ in range(category.vacancies_after):
+            next(slots)
+
+
+def _assign_entries_randomly(starts: Iterable[Start], slot_iter: Iterator[int]) -> None:
     preferences = defaultdict(list)
     for start in starts:
         pref = 0
@@ -344,22 +359,35 @@ def _assign_entries_randomly(starts: Iterable[Start], slot_iter: Iterable[int]):
     disjoin(sequence, lambda start: start.entry.organisation)
 
     for start in sequence:
+        if start.category.time_offset is None:
+            msg = f"Incomplete category starts for category {start.category}"
+            raise ValueError(msg)
         start.time_offset = timedelta(minutes=next(slot_iter)) - start.category.time_offset
 
 
-def statistics(race: Race):
-    starts = sum((list(category.starts) for category in race.categories), [])
-    total = len(starts)
-    last_slot = max(start.category.time_offset + start.time_offset for start in starts)
-    mean = total / ((last_slot + timedelta(minutes=1)).total_seconds() / 60)
-    counts = Counter(start.category.time_offset + start.time_offset for start in starts)
-    stats = Counter(counts.values())
+class Statistics:
+    def __init__(self, race: Race) -> None:
+        starts = sum((list(category.starts) for category in race.categories), [])
+        total = len(starts)
+        offsets = [
+            start.category.time_offset + start.time_offset
+            for start in starts
+            if start.category.time_offset is not None and start.time_offset is not None
+        ]
 
-    return {
-        "entries_total": total,
-        "last_start": last_slot.total_seconds() / 60,
-        "entries_per_slot": stats,
-        "entries_per_slot_avg": mean,
-        "entries_per_slot_var": sum(counts[slot] ** 2 for slot in counts) / (last_slot.total_seconds() / 60 + 1)
-        - mean**2,
-    }
+        if len(offsets) < total:
+            msg = f"Only {len(offsets)} of {total} starts have valid times."
+            raise ValueError(msg)
+
+        last_slot = max(offsets)
+        mean = total / ((last_slot + timedelta(minutes=1)).total_seconds() / 60)
+        counts = Counter(offsets)
+        stats = Counter(counts.values())
+
+        self.entries_total = total
+        self.last_start = last_slot.total_seconds() / 60
+        self.entries_per_slot = stats
+        self.entries_per_slot_avg = mean
+        self.entries_per_slot_var = (
+            sum(counts[slot] ** 2 for slot in counts) / (last_slot.total_seconds() / 60 + 1) - mean**2
+        )

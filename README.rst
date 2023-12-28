@@ -4,7 +4,7 @@ hOLper
 hOLper is an orienteering competition management software with a client-server
 based architecture.
 
-The minimal python version required is 3.9.
+The minimal python version required is 3.10.
 
 More detailed documentation is published on `<https://bodograumann.github.io/holper/>`_.
 
@@ -64,13 +64,13 @@ Make sure you have poetry installed. Then install the project dependencies::
     poetry install
     poetry shell
 
-Run tests with ``pytest`` and the linter with ``pylint holper tests``.
+Run tests with ``pytest`` and the linter with ``ruff .``.
 
-The code can be auto-formatted with ``black holper tests``.
+The code can be auto-formatted with ``black .``.
 
 To generate documentation, use the following commands::
 
-    python generate_class_diagram.py > docs/class_diagram.mmd
+    ./generate_class_diagram.py
     cd docs
     make html
 

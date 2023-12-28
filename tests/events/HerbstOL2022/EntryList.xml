@@ -1,0 +1,4868 @@
+<?xml version="1.0"?>
+<EntryList xmlns="http://www.orienteering.org/datastandard/3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" iofVersion="3.0" createTime="2022-11-16T21:11:40" creator="omanager.orientierungslauf.de">
+  <Event>
+    <Name>Herbst-OL 2022</Name>
+    <StartTime>
+      <Date>2022-11-19</Date>
+      <Time>11:00:00+01:00</Time>
+    </StartTime>
+  </Event>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE056785</Id>
+      <Name>
+        <Family>Lahm</Family>
+        <Given>Katja</Given>
+      </Name>
+      <BirthDate>1968-01-01</BirthDate>
+      <Address>
+        <City>Koblenz</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV03081</Id>
+      <Name>CTG Koblenz</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8303076</ControlCard>
+    <Class>
+      <Id>200895</Id>
+      <Name>D50- (Damen ab 50)</Name>
+      <ShortName>D50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:32</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Ullmann</Family>
+        <Given>Marlene</Given>
+      </Name>
+      <BirthDate>2010-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV03122</Id>
+      <Name>Volkssport Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">300827</ControlCard>
+    <Class>
+      <Id>200965</Id>
+      <Name>D-12 (Damen bis 12)</Name>
+      <ShortName>D-12</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <ServiceRequest>
+      <Service><Name>Extraangebot Kompassleihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot Kompassleihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2022-11-14T00:11:22</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family> Zumbühl </Family>
+        <Given>Lina</Given>
+      </Name>
+      <BirthDate>2009-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV03122</Id>
+      <Name>Volkssport Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">361277</ControlCard>
+    <Class>
+      <Id>201015</Id>
+      <Name>D-14 (Damen bis 14)</Name>
+      <ShortName>D-14</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:22</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE034723</Id>
+      <Name>
+        <Family>Kössler</Family>
+        <Given>Wolfgang</Given>
+      </Name>
+      <BirthDate>1956-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV03122</Id>
+      <Name>Volkssport Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">302986</ControlCard>
+    <Class>
+      <Id>201010</Id>
+      <Name>H65- (Herren ab 65)</Name>
+      <ShortName>H65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:22</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE048344</Id>
+      <Name>
+        <Family>Polgar</Family>
+        <Given>Erika</Given>
+      </Name>
+      <BirthDate>1972-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV03122</Id>
+      <Name>Volkssport Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">339017</ControlCard>
+    <Class>
+      <Id>200970</Id>
+      <Name>D19K (Damen ab 19 Kurz)</Name>
+      <ShortName>D19K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:22</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE059218</Id>
+      <Name>
+        <Family>Zeh</Family>
+        <Given>Anatol</Given>
+      </Name>
+      <BirthDate>2009-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01093</Id>
+      <Name>ESV Lok Berlin-Schöneweide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8516907</ControlCard>
+    <Class>
+      <Id>201045</Id>
+      <Name>H-14 (Herren bis 14)</Name>
+      <ShortName>H-14</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:32</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE035755</Id>
+      <Name>
+        <Family>Kremer</Family>
+        <Given>Christian</Given>
+      </Name>
+      <BirthDate>1950-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01093</Id>
+      <Name>ESV Lok Berlin-Schöneweide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2048523</ControlCard>
+    <Class>
+      <Id>200925</Id>
+      <Name>H70- (Herren ab 70)</Name>
+      <ShortName>H70-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:32</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE065968</Id>
+      <Name>
+        <Family>Poschitzki</Family>
+        <Given>Laila</Given>
+      </Name>
+      <BirthDate>2007-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01093</Id>
+      <Name>ESV Lok Berlin-Schöneweide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">6806</ControlCard>
+    <Class>
+      <Id>200985</Id>
+      <Name>D-16 (Damen bis 16)</Name>
+      <ShortName>D-16</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:32</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE076345</Id>
+      <Name>
+        <Family>Poschitzki</Family>
+        <Given>Emma</Given>
+      </Name>
+      <BirthDate>2007-01-01</BirthDate>
+      <Address>
+        <City>Erkner</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01093</Id>
+      <Name>ESV Lok Berlin-Schöneweide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">6804</ControlCard>
+    <Class>
+      <Id>200985</Id>
+      <Name>D-16 (Damen bis 16)</Name>
+      <ShortName>D-16</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:32</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE043328</Id>
+      <Name>
+        <Family>Keller</Family>
+        <Given>Janik</Given>
+      </Name>
+      <BirthDate>2006-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01093</Id>
+      <Name>ESV Lok Berlin-Schöneweide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">224344</ControlCard>
+    <Class>
+      <Id>201055</Id>
+      <Name>H-16 (Herren bis 16)</Name>
+      <ShortName>H-16</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:32</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE044847</Id>
+      <Name>
+        <Family>Uhlemann</Family>
+        <Given>Sibylle</Given>
+      </Name>
+      <BirthDate>1974-01-01</BirthDate>
+      <Address>
+        <City>Potsdam</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01093</Id>
+      <Name>ESV Lok Berlin-Schöneweide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">6805</ControlCard>
+    <Class>
+      <Id>200975</Id>
+      <Name>D45- (Damen ab 45)</Name>
+      <ShortName>D45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">11.50</Amount>
+        <ValidToTime>2022-11-20T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T08:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE018587</Id>
+      <Name>
+        <Family>Graumann</Family>
+        <Given>Heidrun</Given>
+      </Name>
+      <BirthDate>1963-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01093</Id>
+      <Name>ESV Lok Berlin-Schöneweide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8201263</ControlCard>
+    <Class>
+      <Id>200980</Id>
+      <Name>D55- (Damen ab 55)</Name>
+      <ShortName>D55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:32</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE031208</Id>
+      <Name>
+        <Family>Richter</Family>
+        <Given>Sabine</Given>
+      </Name>
+      <BirthDate>1966-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01093</Id>
+      <Name>ESV Lok Berlin-Schöneweide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8606452</ControlCard>
+    <Class>
+      <Id>200980</Id>
+      <Name>D55- (Damen ab 55)</Name>
+      <ShortName>D55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:32</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE018553</Id>
+      <Name>
+        <Family>Graumann</Family>
+        <Given>Bernd</Given>
+      </Name>
+      <BirthDate>1961-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01093</Id>
+      <Name>ESV Lok Berlin-Schöneweide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8091061</ControlCard>
+    <Class>
+      <Id>201070</Id>
+      <Name>H60- (Herren ab 60)</Name>
+      <ShortName>H60-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:32</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE027687</Id>
+      <Name>
+        <Family>Vogt</Family>
+        <Given>Felicitas</Given>
+      </Name>
+      <BirthDate>2000-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01027</Id>
+      <Name>USV TU Dresden</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8606494</ControlCard>
+    <Class>
+      <Id>200920</Id>
+      <Name>D19L (Damen ab 19 Lang)</Name>
+      <ShortName>D19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:27</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE031266</Id>
+      <Name>
+        <Family>Trappe</Family>
+        <Given>Kathrin</Given>
+      </Name>
+      <BirthDate>1986-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01126</Id>
+      <Name>TOLF Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8200386</ControlCard>
+    <Class>
+      <Id>201035</Id>
+      <Name>D35- (Damen ab 35)</Name>
+      <ShortName>D35-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:39</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE053343</Id>
+      <Name>
+        <Family>Brandt</Family>
+        <Given>Linda</Given>
+      </Name>
+      <BirthDate>2006-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01465</Id>
+      <Name>Köpenicker SC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8122436</ControlCard>
+    <Class>
+      <Id>200985</Id>
+      <Name>D-16 (Damen bis 16)</Name>
+      <ShortName>D-16</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:20</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE054078</Id>
+      <Name>
+        <Family>Brandt</Family>
+        <Given>Katrin</Given>
+      </Name>
+      <BirthDate>1978-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01465</Id>
+      <Name>Köpenicker SC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8191278</ControlCard>
+    <Class>
+      <Id>200940</Id>
+      <Name>D40- (Damen ab 40)</Name>
+      <ShortName>D40-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:20</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE023338</Id>
+      <Name>
+        <Family>Storch</Family>
+        <Given>Jana</Given>
+      </Name>
+      <BirthDate>1977-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01465</Id>
+      <Name>Köpenicker SC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2770803</ControlCard>
+    <Class>
+      <Id>200975</Id>
+      <Name>D45- (Damen ab 45)</Name>
+      <ShortName>D45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE046702</Id>
+      <Name>
+        <Family>Neitzel</Family>
+        <Given>Andreas</Given>
+      </Name>
+      <BirthDate>1970-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01465</Id>
+      <Name>Köpenicker SC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8122448</ControlCard>
+    <Class>
+      <Id>201000</Id>
+      <Name>H19K (Herren ab 19 Kurz)</Name>
+      <ShortName>H19K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:20</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Cain</Family>
+        <Given>Finjas</Given>
+      </Name>
+      <BirthDate>2012-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01481</Id>
+      <Name>TSV Karlshorst</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">5044</ControlCard>
+    <Class>
+      <Id>201075</Id>
+      <Name>H-10 (Herren bis 10)</Name>
+      <ShortName>H-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">5.50</Amount>
+        <ValidToTime>2022-11-20T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-15T12:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE016317</Id>
+      <Name>
+        <Family>Krieger</Family>
+        <Given>Thomas</Given>
+      </Name>
+      <BirthDate>1974-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01481</Id>
+      <Name>TSV Karlshorst</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8051274</ControlCard>
+    <Class>
+      <Id>201030</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:29</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE024782</Id>
+      <Name>
+        <Family>Röhl</Family>
+        <Given>Stefan</Given>
+      </Name>
+      <BirthDate>1968-01-01</BirthDate>
+      <Address>
+        <City>Bingen am Rhein</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01613</Id>
+      <Name>OLF Mainz</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8667613</ControlCard>
+    <Class>
+      <Id>200890</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:34</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE040407</Id>
+      <Name>
+        <Family>Mevius</Family>
+        <Given>Andreas</Given>
+      </Name>
+      <BirthDate>1959-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01829</Id>
+      <Name>Lübecker Turnerschaft</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">7040853</ControlCard>
+    <Class>
+      <Id>201070</Id>
+      <Name>H60- (Herren ab 60)</Name>
+      <ShortName>H60-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-10T07:11:42</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE017753</Id>
+      <Name>
+        <Family>Frenzel</Family>
+        <Given>Oskar</Given>
+      </Name>
+      <BirthDate>2000-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02033</Id>
+      <Name>OK Mark Brandenburg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">7020215</ControlCard>
+    <Class>
+      <Id>200950</Id>
+      <Name>H19L (Herren ab 19 Lang)</Name>
+      <ShortName>H19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">11.50</Amount>
+        <ValidToTime>2022-11-20T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T11:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE017737</Id>
+      <Name>
+        <Family>Frenzel</Family>
+        <Given>Friederike</Given>
+      </Name>
+      <BirthDate>1975-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02033</Id>
+      <Name>OK Mark Brandenburg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8050203</ControlCard>
+    <Class>
+      <Id>200920</Id>
+      <Name>D19L (Damen ab 19 Lang)</Name>
+      <ShortName>D19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:40</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE071428</Id>
+      <Name>
+        <Family>Adorján</Family>
+        <Given>Vera Lotte</Given>
+      </Name>
+      <BirthDate>2011-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02124</Id>
+      <Name>Berliner Turnerschaft</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">9150573</ControlCard>
+    <Class>
+      <Id>200965</Id>
+      <Name>D-12 (Damen bis 12)</Name>
+      <ShortName>D-12</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:27</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE065869</Id>
+      <Name>
+        <Family>Tulban</Family>
+        <Given>Petru</Given>
+      </Name>
+      <BirthDate>2006-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02124</Id>
+      <Name>Berliner Turnerschaft</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8400199</ControlCard>
+    <Class>
+      <Id>201055</Id>
+      <Name>H-16 (Herren bis 16)</Name>
+      <ShortName>H-16</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:27</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE039921</Id>
+      <Name>
+        <Family>Kühschelm</Family>
+        <Given>Leopold</Given>
+      </Name>
+      <BirthDate>1979-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02124</Id>
+      <Name>Berliner Turnerschaft</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8632425</ControlCard>
+    <Class>
+      <Id>201050</Id>
+      <Name>H40- (Herren ab 40)</Name>
+      <ShortName>H40-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:27</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE010038</Id>
+      <Name>
+        <Family>Adorján</Family>
+        <Given>Péter</Given>
+      </Name>
+      <BirthDate>1973-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02124</Id>
+      <Name>Berliner Turnerschaft</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8018024</ControlCard>
+    <Class>
+      <Id>201050</Id>
+      <Name>H40- (Herren ab 40)</Name>
+      <ShortName>H40-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:27</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE019808</Id>
+      <Name>
+        <Family>Herold</Family>
+        <Given>Rudolf</Given>
+      </Name>
+      <BirthDate>1952-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">5085</ControlCard>
+    <Class>
+      <Id>200925</Id>
+      <Name>H70- (Herren ab 70)</Name>
+      <ShortName>H70-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE071189</Id>
+      <Name>
+        <Family>Gergs</Family>
+        <Given>Nelio</Given>
+      </Name>
+      <BirthDate>2007-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">300822</ControlCard>
+    <Class>
+      <Id>201055</Id>
+      <Name>H-16 (Herren bis 16)</Name>
+      <ShortName>H-16</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE035581</Id>
+      <Name>
+        <Family>Mieske</Family>
+        <Given>Frank</Given>
+      </Name>
+      <BirthDate>1967-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">7208102</ControlCard>
+    <Class>
+      <Id>200910</Id>
+      <Name>H35- (Herren ab 35)</Name>
+      <ShortName>H35-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE065611</Id>
+      <Name>
+        <Family>Appelt</Family>
+        <Given>Christian</Given>
+      </Name>
+      <BirthDate>1978-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8003566</ControlCard>
+    <Class>
+      <Id>201050</Id>
+      <Name>H40- (Herren ab 40)</Name>
+      <ShortName>H40-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE016424</Id>
+      <Name>
+        <Family>Kubald</Family>
+        <Given>Katrin</Given>
+      </Name>
+      <BirthDate>1969-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8150269</ControlCard>
+    <Class>
+      <Id>200895</Id>
+      <Name>D50- (Damen ab 50)</Name>
+      <ShortName>D50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE014387</Id>
+      <Name>
+        <Family>Jobst</Family>
+        <Given>Henry</Given>
+      </Name>
+      <BirthDate>1970-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8251070</ControlCard>
+    <Class>
+      <Id>200890</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE013496</Id>
+      <Name>
+        <Family>Brettschneider</Family>
+        <Given>Uwe</Given>
+      </Name>
+      <BirthDate>1968-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8013496</ControlCard>
+    <Class>
+      <Id>200890</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE035309</Id>
+      <Name>
+        <Family>Feldmann</Family>
+        <Given>Gudrun</Given>
+      </Name>
+      <BirthDate>1966-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8003553</ControlCard>
+    <Class>
+      <Id>200980</Id>
+      <Name>D55- (Damen ab 55)</Name>
+      <ShortName>D55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE013123</Id>
+      <Name>
+        <Family>Ferchow</Family>
+        <Given>Anne</Given>
+      </Name>
+      <BirthDate>1964-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">5068</ControlCard>
+    <Class>
+      <Id>200980</Id>
+      <Name>D55- (Damen ab 55)</Name>
+      <ShortName>D55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE011846</Id>
+      <Name>
+        <Family>Demmig</Family>
+        <Given>Sven</Given>
+      </Name>
+      <BirthDate>1966-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8200466</ControlCard>
+    <Class>
+      <Id>201065</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE014600</Id>
+      <Name>
+        <Family>Käding</Family>
+        <Given>Bernd</Given>
+      </Name>
+      <BirthDate>1964-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8150964</ControlCard>
+    <Class>
+      <Id>201065</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE011739</Id>
+      <Name>
+        <Family>Brettschneider</Family>
+        <Given>Gerhard</Given>
+      </Name>
+      <BirthDate>1954-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8003563</ControlCard>
+    <Class>
+      <Id>201065</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE049384</Id>
+      <Name>
+        <Family>Feldmann</Family>
+        <Given>André</Given>
+      </Name>
+      <BirthDate>1965-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8003570</ControlCard>
+    <Class>
+      <Id>201065</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE035284</Id>
+      <Name>
+        <Family>Grassow</Family>
+        <Given>Thomas</Given>
+      </Name>
+      <BirthDate>1967-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8290467</ControlCard>
+    <Class>
+      <Id>201065</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE028510</Id>
+      <Name>
+        <Family>Winkler</Family>
+        <Given>Jochen</Given>
+      </Name>
+      <BirthDate>1950-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8002501</ControlCard>
+    <Class>
+      <Id>201065</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE011747</Id>
+      <Name>
+        <Family>Brettschneider</Family>
+        <Given>Gudrun</Given>
+      </Name>
+      <BirthDate>1960-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8003551</ControlCard>
+    <Class>
+      <Id>200945</Id>
+      <Name>D60- (Damen ab 60)</Name>
+      <ShortName>D60-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE037644</Id>
+      <Name>
+        <Family>Grassow</Family>
+        <Given>Petra</Given>
+      </Name>
+      <BirthDate>1970-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8700222</ControlCard>
+    <Class>
+      <Id>200945</Id>
+      <Name>D60- (Damen ab 60)</Name>
+      <ShortName>D60-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE013454</Id>
+      <Name>
+        <Family>Brettschneider</Family>
+        <Given>Hartmut</Given>
+      </Name>
+      <BirthDate>1958-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">5065</ControlCard>
+    <Class>
+      <Id>201070</Id>
+      <Name>H60- (Herren ab 60)</Name>
+      <ShortName>H60-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE017000</Id>
+      <Name>
+        <Family>Lehmann</Family>
+        <Given>Gabriela</Given>
+      </Name>
+      <BirthDate>1957-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8003556</ControlCard>
+    <Class>
+      <Id>200885</Id>
+      <Name>D65- (Damen ab 65)</Name>
+      <ShortName>D65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE035573</Id>
+      <Name>
+        <Family>Mielecke</Family>
+        <Given>Kerstin</Given>
+      </Name>
+      <BirthDate>1954-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">5072</ControlCard>
+    <Class>
+      <Id>200885</Id>
+      <Name>D65- (Damen ab 65)</Name>
+      <ShortName>D65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE069118</Id>
+      <Name>
+        <Family>Pommer</Family>
+        <Given>Norbert</Given>
+      </Name>
+      <BirthDate>1957-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">300813</ControlCard>
+    <Class>
+      <Id>201010</Id>
+      <Name>H65- (Herren ab 65)</Name>
+      <ShortName>H65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE034682</Id>
+      <Name>
+        <Family>Boeck</Family>
+        <Given>Sascha</Given>
+      </Name>
+      <BirthDate>1989-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8131089</ControlCard>
+    <Class>
+      <Id>200950</Id>
+      <Name>H19L (Herren ab 19 Lang)</Name>
+      <ShortName>H19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE070909</Id>
+      <Name>
+        <Family>Dimova</Family>
+        <Given>Margarita</Given>
+      </Name>
+      <BirthDate>1997-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8003555</ControlCard>
+    <Class>
+      <Id>200920</Id>
+      <Name>D19L (Damen ab 19 Lang)</Name>
+      <ShortName>D19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE065158</Id>
+      <Name>
+        <Family>Schipke</Family>
+        <Given>Carola</Given>
+      </Name>
+      <BirthDate>1974-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">300817</ControlCard>
+    <Class>
+      <Id>200970</Id>
+      <Name>D19K (Damen ab 19 Kurz)</Name>
+      <ShortName>D19K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="IOF">22644</Id>
+      <Id type="national">DE022033</Id>
+      <Name>
+        <Family>Schramm</Family>
+        <Given>Erwin</Given>
+      </Name>
+      <BirthDate>1985-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8110685</ControlCard>
+    <Class>
+      <Id>201000</Id>
+      <Name>H19K (Herren ab 19 Kurz)</Name>
+      <ShortName>H19K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE035292</Id>
+      <Name>
+        <Family>Yeung</Family>
+        <Given>Ralph</Given>
+      </Name>
+      <BirthDate>1999-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">5086</ControlCard>
+    <Class>
+      <Id>201000</Id>
+      <Name>H19K (Herren ab 19 Kurz)</Name>
+      <ShortName>H19K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:35</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="IOF">43903</Id>
+      <Id type="national">DE011531</Id>
+      <Name>
+        <Family>Bräuer</Family>
+        <Given>Dennis</Given>
+      </Name>
+      <BirthDate>1999-01-01</BirthDate>
+      <Address>
+        <City>Lengefeld</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02182</Id>
+      <Name>SV Lengefeld</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8606440</ControlCard>
+    <Class>
+      <Id>200950</Id>
+      <Name>H19L (Herren ab 19 Lang)</Name>
+      <ShortName>H19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:25</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE057246</Id>
+      <Name>
+        <Family>Kehlmaier</Family>
+        <Given>Christian</Given>
+      </Name>
+      <BirthDate>1971-01-01</BirthDate>
+      <Address>
+        <City>Dresden</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02299</Id>
+      <Name>Post SV Dresden</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8222258</ControlCard>
+    <Class>
+      <Id>200890</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:12</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE072715</Id>
+      <Name>
+        <Family>Sperling</Family>
+        <Given>Justus</Given>
+      </Name>
+      <BirthDate>2012-01-01</BirthDate>
+      <Address>
+        <City>Potsdam</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2801469</ControlCard>
+    <Class>
+      <Id>201075</Id>
+      <Name>H-10 (Herren bis 10)</Name>
+      <ShortName>H-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE065364</Id>
+      <Name>
+        <Family>Hirschmann</Family>
+        <Given>Maxim</Given>
+      </Name>
+      <BirthDate>2010-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8517600</ControlCard>
+    <Class>
+      <Id>201045</Id>
+      <Name>H-14 (Herren bis 14)</Name>
+      <ShortName>H-14</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE065372</Id>
+      <Name>
+        <Family>Mache</Family>
+        <Given>Lucas Pascal</Given>
+      </Name>
+      <BirthDate>2010-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8022403</ControlCard>
+    <Class>
+      <Id>201045</Id>
+      <Name>H-14 (Herren bis 14)</Name>
+      <ShortName>H-14</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE034319</Id>
+      <Name>
+        <Family>Plötz</Family>
+        <Given>Gerhard</Given>
+      </Name>
+      <BirthDate>1950-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8241050</ControlCard>
+    <Class>
+      <Id>200925</Id>
+      <Name>H70- (Herren ab 70)</Name>
+      <ShortName>H70-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE059903</Id>
+      <Name>
+        <Family>Knuth</Family>
+        <Given>David</Given>
+      </Name>
+      <BirthDate>1968-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8210224</ControlCard>
+    <Class>
+      <Id>201060</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE076246</Id>
+      <Name>
+        <Family>Sperling</Family>
+        <Given>Heiko</Given>
+      </Name>
+      <BirthDate>1982-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2034097</ControlCard>
+    <Class>
+      <Id>201040</Id>
+      <Name>BL (Beginner Lang)</Name>
+      <ShortName>BL</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE034351</Id>
+      <Name>
+        <Family>Siebert</Family>
+        <Given>Jacqueline</Given>
+      </Name>
+      <BirthDate>1967-01-01</BirthDate>
+      <Address>
+        <City>Nuthetal</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">440423</ControlCard>
+    <Class>
+      <Id>201040</Id>
+      <Name>BL (Beginner Lang)</Name>
+      <ShortName>BL</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE072707</Id>
+      <Name>
+        <Family>Sperling</Family>
+        <Given>Ella</Given>
+      </Name>
+      <BirthDate>2014-01-01</BirthDate>
+      <Address>
+        <City>Potsdam</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2056381</ControlCard>
+    <Class>
+      <Id>200960</Id>
+      <Name>D-10 (Damen bis 10)</Name>
+      <ShortName>D-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE060083</Id>
+      <Name>
+        <Family>Knuth</Family>
+        <Given>Kamilla</Given>
+      </Name>
+      <BirthDate>2013-01-01</BirthDate>
+      <Address>
+        <City>Potsdam</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">237836</ControlCard>
+    <Class>
+      <Id>200960</Id>
+      <Name>D-10 (Damen bis 10)</Name>
+      <ShortName>D-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE059953</Id>
+      <Name>
+        <Family>Knuth</Family>
+        <Given>Gergely</Given>
+      </Name>
+      <BirthDate>2007-01-01</BirthDate>
+      <Address>
+        <City>Potsdam</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8204200</ControlCard>
+    <Class>
+      <Id>201055</Id>
+      <Name>H-16 (Herren bis 16)</Name>
+      <ShortName>H-16</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE059945</Id>
+      <Name>
+        <Family>Knuth</Family>
+        <Given>Sara</Given>
+      </Name>
+      <BirthDate>2005-01-01</BirthDate>
+      <Address>
+        <City>Potsdam</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8382670</ControlCard>
+    <Class>
+      <Id>200915</Id>
+      <Name>D-18 (Damen bis 18)</Name>
+      <ShortName>D-18</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE035656</Id>
+      <Name>
+        <Family>Cain</Family>
+        <Given>Fidelius</Given>
+      </Name>
+      <BirthDate>2007-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8180307</ControlCard>
+    <Class>
+      <Id>201025</Id>
+      <Name>H-18 (Herren bis 18)</Name>
+      <ShortName>H-18</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">6.50</Amount>
+        <ValidToTime>2022-11-20T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T14:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE034210</Id>
+      <Name>
+        <Family>Kummerlöwe</Family>
+        <Given>Juliane</Given>
+      </Name>
+      <BirthDate>1979-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">571979</ControlCard>
+    <Class>
+      <Id>201035</Id>
+      <Name>D35- (Damen ab 35)</Name>
+      <ShortName>D35-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE034252</Id>
+      <Name>
+        <Family>Metzger</Family>
+        <Given>Max</Given>
+      </Name>
+      <BirthDate>1985-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8516970</ControlCard>
+    <Class>
+      <Id>200910</Id>
+      <Name>H35- (Herren ab 35)</Name>
+      <ShortName>H35-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE050125</Id>
+      <Name>
+        <Family>Dost</Family>
+        <Given>Anna</Given>
+      </Name>
+      <BirthDate>1977-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8663318</ControlCard>
+    <Class>
+      <Id>200975</Id>
+      <Name>D45- (Damen ab 45)</Name>
+      <ShortName>D45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE059937</Id>
+      <Name>
+        <Family>Söter</Family>
+        <Given>Johanna</Given>
+      </Name>
+      <BirthDate>1974-01-01</BirthDate>
+      <Address>
+        <City>Potsdam</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2143424</ControlCard>
+    <Class>
+      <Id>200975</Id>
+      <Name>D45- (Damen ab 45)</Name>
+      <ShortName>D45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE034385</Id>
+      <Name>
+        <Family>Siebert</Family>
+        <Given>Tinko</Given>
+      </Name>
+      <BirthDate>1965-01-01</BirthDate>
+      <Address>
+        <City>Nuthetal</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1407345</ControlCard>
+    <Class>
+      <Id>201030</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE045845</Id>
+      <Name>
+        <Family>Hoffmann</Family>
+        <Given>Frank-Dieter</Given>
+      </Name>
+      <BirthDate>1963-01-01</BirthDate>
+      <Address>
+        <City>Brandenburg a. d. Havel</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">7676763</ControlCard>
+    <Class>
+      <Id>201065</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE069142</Id>
+      <Name>
+        <Family>Füßling</Family>
+        <Given>Martin</Given>
+      </Name>
+      <BirthDate>1982-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">300801</ControlCard>
+    <Class>
+      <Id>200885</Id>
+      <Name>D65- (Damen ab 65)</Name>
+      <ShortName>D65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE053765</Id>
+      <Name>
+        <Family>Großmann</Family>
+        <Given>Michael</Given>
+      </Name>
+      <BirthDate>1978-01-01</BirthDate>
+      <Address>
+        <City>Babelsberg</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">7208673</ControlCard>
+    <Class>
+      <Id>200950</Id>
+      <Name>H19L (Herren ab 19 Lang)</Name>
+      <ShortName>H19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE013503</Id>
+      <Name>
+        <Family>Bringezu</Family>
+        <Given>Kristina</Given>
+      </Name>
+      <BirthDate>1969-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8291069</ControlCard>
+    <Class>
+      <Id>200920</Id>
+      <Name>D19L (Damen ab 19 Lang)</Name>
+      <ShortName>D19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE027257</Id>
+      <Name>
+        <Family>Tschischkale</Family>
+        <Given>Kati</Given>
+      </Name>
+      <BirthDate>1987-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2143430</ControlCard>
+    <Class>
+      <Id>200970</Id>
+      <Name>D19K (Damen ab 19 Kurz)</Name>
+      <ShortName>D19K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE072369</Id>
+      <Name>
+        <Family>Mache</Family>
+        <Given>Thomas </Given>
+      </Name>
+      <BirthDate>1975-01-01</BirthDate>
+      <Address>
+        <City>Potsdam</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1323193</ControlCard>
+    <Class>
+      <Id>201000</Id>
+      <Name>H19K (Herren ab 19 Kurz)</Name>
+      <ShortName>H19K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>GRYDZIUSZKO</Family>
+        <Given>Marcin</Given>
+      </Name>
+      <BirthDate>1975-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">PLV04377</Id>
+      <Name>UKS Energetyk Dychów</Name>
+      <Country code="POL"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8646247</ControlCard>
+    <Class>
+      <Id>201030</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:24</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>KRAMSKI</Family>
+        <Given>Mariusz</Given>
+      </Name>
+      <BirthDate>1970-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">PLV04377</Id>
+      <Name>UKS Energetyk Dychów</Name>
+      <Country code="POL"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8414140</ControlCard>
+    <Class>
+      <Id>201030</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:24</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>PACYNA</Family>
+        <Given>Krzysztof</Given>
+      </Name>
+      <BirthDate>1973-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">PLV04377</Id>
+      <Name>UKS Energetyk Dychów</Name>
+      <Country code="POL"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8001098</ControlCard>
+    <Class>
+      <Id>201030</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:24</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE076220</Id>
+      <Name>
+        <Family>Deptuła</Family>
+        <Given>Jerzy</Given>
+      </Name>
+      <BirthDate>1959-01-01</BirthDate>
+      <Address>
+        <City>Krosno Odrzańskie</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">PLV04377</Id>
+      <Name>UKS Energetyk Dychów</Name>
+      <Country code="POL"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8640919</ControlCard>
+    <Class>
+      <Id>201065</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:24</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>MELIŃSKI</Family>
+        <Given>Wojciech</Given>
+      </Name>
+      <BirthDate>1954-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">PLV04377</Id>
+      <Name>UKS Energetyk Dychów</Name>
+      <Country code="POL"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2023831</ControlCard>
+    <Class>
+      <Id>201010</Id>
+      <Name>H65- (Herren ab 65)</Name>
+      <ShortName>H65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:24</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE072559</Id>
+      <Name>
+        <Family>Schwanebeck</Family>
+        <Given>Ralf</Given>
+      </Name>
+      <BirthDate>1978-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV04336</Id>
+      <Name>TSV 90 Röbel</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8003876</ControlCard>
+    <Class>
+      <Id>201060</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:22</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE047239</Id>
+      <Name>
+        <Family>Fink</Family>
+        <Given>Martina</Given>
+      </Name>
+      <BirthDate>1976-01-01</BirthDate>
+      <Address>
+        <City>Bollewick</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV04336</Id>
+      <Name>TSV 90 Röbel</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8670958</ControlCard>
+    <Class>
+      <Id>200975</Id>
+      <Name>D45- (Damen ab 45)</Name>
+      <ShortName>D45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:22</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE072541</Id>
+      <Name>
+        <Family>Fink</Family>
+        <Given>Wolfgang</Given>
+      </Name>
+      <BirthDate>1953-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV04336</Id>
+      <Name>TSV 90 Röbel</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8022408</ControlCard>
+    <Class>
+      <Id>201010</Id>
+      <Name>H65- (Herren ab 65)</Name>
+      <ShortName>H65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:22</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE073747</Id>
+      <Name>
+        <Family>Köhler</Family>
+        <Given>Paul</Given>
+      </Name>
+      <BirthDate>2008-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV08502</Id>
+      <Name>TSC Strausberg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1479980</ControlCard>
+    <Class>
+      <Id>201045</Id>
+      <Name>H-14 (Herren bis 14)</Name>
+      <ShortName>H-14</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:26</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE073755</Id>
+      <Name>
+        <Family>Schälicke</Family>
+        <Given>Gunnar</Given>
+      </Name>
+      <BirthDate>2008-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV08502</Id>
+      <Name>TSC Strausberg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1323199</ControlCard>
+    <Class>
+      <Id>201045</Id>
+      <Name>H-14 (Herren bis 14)</Name>
+      <ShortName>H-14</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:26</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE067295</Id>
+      <Name>
+        <Family>Tulban</Family>
+        <Given>Nicolae</Given>
+      </Name>
+      <BirthDate>1972-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">ROV07978</Id>
+      <Name>CS Babarunca</Name>
+      <Country code="ROU"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">7300570</ControlCard>
+    <Class>
+      <Id>200890</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:13</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Nedoborovsky</Family>
+        <Given>Ivanna</Given>
+      </Name>
+      <BirthDate>2016-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02447</Id>
+      <Name>BSV Halle-Ammendorf</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">222667</ControlCard>
+    <Class>
+      <Id>200960</Id>
+      <Name>D-10 (Damen bis 10)</Name>
+      <ShortName>D-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:10</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE039343</Id>
+      <Name>
+        <Family>Nedoborovsky</Family>
+        <Given>Daniel</Given>
+      </Name>
+      <BirthDate>2005-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02447</Id>
+      <Name>BSV Halle-Ammendorf</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2060355</ControlCard>
+    <Class>
+      <Id>201025</Id>
+      <Name>H-18 (Herren bis 18)</Name>
+      <ShortName>H-18</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:10</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE041900</Id>
+      <Name>
+        <Family>Nedoborovsky</Family>
+        <Given>Andrey</Given>
+      </Name>
+      <BirthDate>1970-01-01</BirthDate>
+      <Address>
+        <City>Halle</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02447</Id>
+      <Name>BSV Halle-Ammendorf</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1470535</ControlCard>
+    <Class>
+      <Id>200890</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:10</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE069390</Id>
+      <Name>
+        <Family>Alonen</Family>
+        <Given>Matti</Given>
+      </Name>
+      <BirthDate>1982-01-01</BirthDate>
+      <Address>
+        <City>Halle (Saale)</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02447</Id>
+      <Name>BSV Halle-Ammendorf</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8400073</ControlCard>
+    <Class>
+      <Id>200950</Id>
+      <Name>H19L (Herren ab 19 Lang)</Name>
+      <ShortName>H19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:10</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="IOF">21143</Id>
+      <Id type="national">DE028776</Id>
+      <Name>
+        <Family>Wollenberg</Family>
+        <Given>Bernd</Given>
+      </Name>
+      <BirthDate>1948-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV06514</Id>
+      <Name>SV Schorfheide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">9130748</ControlCard>
+    <Class>
+      <Id>200925</Id>
+      <Name>H70- (Herren ab 70)</Name>
+      <ShortName>H70-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:27</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE065413</Id>
+      <Name>
+        <Family>Chowdhury</Family>
+        <Given>Diana</Given>
+      </Name>
+      <BirthDate>1981-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV06514</Id>
+      <Name>SV Schorfheide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8001045</ControlCard>
+    <Class>
+      <Id>200940</Id>
+      <Name>D40- (Damen ab 40)</Name>
+      <ShortName>D40-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:27</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE073341</Id>
+      <Name>
+        <Family>Winnig</Family>
+        <Given>Bela</Given>
+      </Name>
+      <BirthDate>2013-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">740307</ControlCard>
+    <Class>
+      <Id>201075</Id>
+      <Name>H-10 (Herren bis 10)</Name>
+      <ShortName>H-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE060025</Id>
+      <Name>
+        <Family>Leukert</Family>
+        <Given>Ida</Given>
+      </Name>
+      <BirthDate>2011-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8516446</ControlCard>
+    <Class>
+      <Id>200965</Id>
+      <Name>D-12 (Damen bis 12)</Name>
+      <ShortName>D-12</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE026960</Id>
+      <Name>
+        <Family>Thiel</Family>
+        <Given>Susi</Given>
+      </Name>
+      <BirthDate>1947-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8150547</ControlCard>
+    <Class>
+      <Id>201020</Id>
+      <Name>D75- (Damen ab 75)</Name>
+      <ShortName>D75-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Jürgens</Family>
+        <Given>Marlene</Given>
+      </Name>
+      <BirthDate>2006-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">236147</ControlCard>
+    <Class>
+      <Id>201060</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Rohloff</Family>
+        <Given>Susann</Given>
+      </Name>
+      <BirthDate>1989-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">300826</ControlCard>
+    <Class>
+      <Id>201060</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE060364</Id>
+      <Name>
+        <Family>Kharitonov</Family>
+        <Given>Oleg</Given>
+      </Name>
+      <BirthDate>1979-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1402002</ControlCard>
+    <Class>
+      <Id>201040</Id>
+      <Name>BL (Beginner Lang)</Name>
+      <ShortName>BL</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE064796</Id>
+      <Name>
+        <Family>Kharitonova</Family>
+        <Given>Aksana</Given>
+      </Name>
+      <BirthDate>1979-01-01</BirthDate>
+      <Address>
+        <City>Berlin - Wilmersdorf</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2127115</ControlCard>
+    <Class>
+      <Id>201040</Id>
+      <Name>BL (Beginner Lang)</Name>
+      <ShortName>BL</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE065695</Id>
+      <Name>
+        <Family>Pliquett</Family>
+        <Given>Jörg</Given>
+      </Name>
+      <BirthDate>1966-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">410250</ControlCard>
+    <Class>
+      <Id>201040</Id>
+      <Name>BL (Beginner Lang)</Name>
+      <ShortName>BL</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE073804</Id>
+      <Name>
+        <Family>Lange</Family>
+        <Given>Linda</Given>
+      </Name>
+      <BirthDate>2013-01-01</BirthDate>
+      <Address>
+        <City>Berlin </City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8515510</ControlCard>
+    <Class>
+      <Id>200960</Id>
+      <Name>D-10 (Damen bis 10)</Name>
+      <ShortName>D-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE058757</Id>
+      <Name>
+        <Family>Kharitonov</Family>
+        <Given>Maksim</Given>
+      </Name>
+      <BirthDate>2011-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1414978</ControlCard>
+    <Class>
+      <Id>200905</Id>
+      <Name>H-12 (Herren bis 12)</Name>
+      <ShortName>H-12</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE050076</Id>
+      <Name>
+        <Family>Leukert</Family>
+        <Given>Lina</Given>
+      </Name>
+      <BirthDate>2007-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8516946</ControlCard>
+    <Class>
+      <Id>200985</Id>
+      <Name>D-16 (Damen bis 16)</Name>
+      <ShortName>D-16</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE046330</Id>
+      <Name>
+        <Family>Tovchigrechko</Family>
+        <Given>Maria</Given>
+      </Name>
+      <BirthDate>2007-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8662644</ControlCard>
+    <Class>
+      <Id>200915</Id>
+      <Name>D-18 (Damen bis 18)</Name>
+      <ShortName>D-18</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">6.50</Amount>
+        <ValidToTime>2022-11-20T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T19:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE032256</Id>
+      <Name>
+        <Family>Lange</Family>
+        <Given>Jonas</Given>
+      </Name>
+      <BirthDate>2004-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8629608</ControlCard>
+    <Class>
+      <Id>201025</Id>
+      <Name>H-18 (Herren bis 18)</Name>
+      <ShortName>H-18</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE030937</Id>
+      <Name>
+        <Family>Winnig</Family>
+        <Given>Anke</Given>
+      </Name>
+      <BirthDate>1976-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8140176</ControlCard>
+    <Class>
+      <Id>200975</Id>
+      <Name>D45- (Damen ab 45)</Name>
+      <ShortName>D45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE046322</Id>
+      <Name>
+        <Family>Shmakova</Family>
+        <Given>Alina</Given>
+      </Name>
+      <BirthDate>1977-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8516435</ControlCard>
+    <Class>
+      <Id>200975</Id>
+      <Name>D45- (Damen ab 45)</Name>
+      <ShortName>D45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">11.50</Amount>
+        <ValidToTime>2022-11-20T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T19:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE012703</Id>
+      <Name>
+        <Family>Edelhoff</Family>
+        <Given>Stefan</Given>
+      </Name>
+      <BirthDate>1973-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8662647</ControlCard>
+    <Class>
+      <Id>201030</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE035854</Id>
+      <Name>
+        <Family>Winterfeldt</Family>
+        <Given>Stefan</Given>
+      </Name>
+      <BirthDate>1976-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">336146</ControlCard>
+    <Class>
+      <Id>201030</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE024790</Id>
+      <Name>
+        <Family>Röhner</Family>
+        <Given>Uwe</Given>
+      </Name>
+      <BirthDate>1972-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8662646</ControlCard>
+    <Class>
+      <Id>201030</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE017232</Id>
+      <Name>
+        <Family>Leonhardt</Family>
+        <Given>Annette</Given>
+      </Name>
+      <BirthDate>1967-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8210167</ControlCard>
+    <Class>
+      <Id>200895</Id>
+      <Name>D50- (Damen ab 50)</Name>
+      <ShortName>D50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE017282</Id>
+      <Name>
+        <Family>Leukert</Family>
+        <Given>Kristin</Given>
+      </Name>
+      <BirthDate>1971-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8665216</ControlCard>
+    <Class>
+      <Id>200895</Id>
+      <Name>D50- (Damen ab 50)</Name>
+      <ShortName>D50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE013438</Id>
+      <Name>
+        <Family>Forberg</Family>
+        <Given>Matthias</Given>
+      </Name>
+      <BirthDate>1970-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8190901</ControlCard>
+    <Class>
+      <Id>200890</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE044194</Id>
+      <Name>
+        <Family>Lange</Family>
+        <Given>Udo</Given>
+      </Name>
+      <BirthDate>1971-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8151271</ControlCard>
+    <Class>
+      <Id>200890</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="IOF">7898</Id>
+      <Id type="national">DE011482</Id>
+      <Name>
+        <Family>Braatz</Family>
+        <Given>Frank</Given>
+      </Name>
+      <BirthDate>1962-01-01</BirthDate>
+      <Address>
+        <City>Woltersdorf</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">7122062</ControlCard>
+    <Class>
+      <Id>200890</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE010046</Id>
+      <Name>
+        <Family>Ahlburg</Family>
+        <Given>Kerstin</Given>
+      </Name>
+      <BirthDate>1965-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8662642</ControlCard>
+    <Class>
+      <Id>200980</Id>
+      <Name>D55- (Damen ab 55)</Name>
+      <ShortName>D55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE014337</Id>
+      <Name>
+        <Family>Dalüge</Family>
+        <Given>Kai</Given>
+      </Name>
+      <BirthDate>1966-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1677</ControlCard>
+    <Class>
+      <Id>201065</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE010062</Id>
+      <Name>
+        <Family>Ahlburg</Family>
+        <Given>Rainer</Given>
+      </Name>
+      <BirthDate>1964-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8662643</ControlCard>
+    <Class>
+      <Id>201065</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE011490</Id>
+      <Name>
+        <Family>Braatz</Family>
+        <Given>Monika</Given>
+      </Name>
+      <BirthDate>1957-01-01</BirthDate>
+      <Address>
+        <City>Woltersdorf</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">5100</ControlCard>
+    <Class>
+      <Id>200885</Id>
+      <Name>D65- (Damen ab 65)</Name>
+      <ShortName>D65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE014569</Id>
+      <Name>
+        <Family>Jürgens</Family>
+        <Given>Uwe</Given>
+      </Name>
+      <BirthDate>1957-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1402001</ControlCard>
+    <Class>
+      <Id>201010</Id>
+      <Name>H65- (Herren ab 65)</Name>
+      <ShortName>H65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE020912</Id>
+      <Name>
+        <Family>Jandrig</Family>
+        <Given>Burkhard</Given>
+      </Name>
+      <BirthDate>1956-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">560211</ControlCard>
+    <Class>
+      <Id>201010</Id>
+      <Name>H65- (Herren ab 65)</Name>
+      <ShortName>H65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE021069</Id>
+      <Name>
+        <Family>Winnig</Family>
+        <Given>Denis</Given>
+      </Name>
+      <BirthDate>1974-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8011054</ControlCard>
+    <Class>
+      <Id>200950</Id>
+      <Name>H19L (Herren ab 19 Lang)</Name>
+      <ShortName>H19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE029188</Id>
+      <Name>
+        <Family>Zschäckel</Family>
+        <Given>Raik</Given>
+      </Name>
+      <BirthDate>1967-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8081067</ControlCard>
+    <Class>
+      <Id>200950</Id>
+      <Name>H19L (Herren ab 19 Lang)</Name>
+      <ShortName>H19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE029196</Id>
+      <Name>
+        <Family>Zschäckel</Family>
+        <Given>Robin</Given>
+      </Name>
+      <BirthDate>1997-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">973101</ControlCard>
+    <Class>
+      <Id>200950</Id>
+      <Name>H19L (Herren ab 19 Lang)</Name>
+      <ShortName>H19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE065702</Id>
+      <Name>
+        <Family>Xylander</Family>
+        <Given>Anke</Given>
+      </Name>
+      <BirthDate>1971-01-01</BirthDate>
+      <Address>
+        <City>Strausberg</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">710919</ControlCard>
+    <Class>
+      <Id>200920</Id>
+      <Name>D19L (Damen ab 19 Lang)</Name>
+      <ShortName>D19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:15</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE072327</Id>
+      <Name>
+        <Family>Fröhlich</Family>
+        <Given>Imanuel</Given>
+      </Name>
+      <BirthDate>2009-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01861</Id>
+      <Name>Berliner TSC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1458650</ControlCard>
+    <Class>
+      <Id>201045</Id>
+      <Name>H-14 (Herren bis 14)</Name>
+      <ShortName>H-14</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:31</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE011101</Id>
+      <Name>
+        <Family>Blome</Family>
+        <Given>Hans-Peter</Given>
+      </Name>
+      <BirthDate>1952-01-01</BirthDate>
+      <Address>
+        <City>Oranienburg</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01861</Id>
+      <Name>Berliner TSC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">889199</ControlCard>
+    <Class>
+      <Id>201010</Id>
+      <Name>H65- (Herren ab 65)</Name>
+      <ShortName>H65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:31</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE072319</Id>
+      <Name>
+        <Family>Fröhlich</Family>
+        <Given>Hannes</Given>
+      </Name>
+      <BirthDate>1992-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01861</Id>
+      <Name>Berliner TSC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1458649</ControlCard>
+    <Class>
+      <Id>201000</Id>
+      <Name>H19K (Herren ab 19 Kurz)</Name>
+      <ShortName>H19K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:31</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE053351</Id>
+      <Name>
+        <Family>Siebert</Family>
+        <Given>Stine Friederike</Given>
+      </Name>
+      <BirthDate>1999-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">IEV05681</Id>
+      <Name>Dublin University Orienteers</Name>
+      <Country code="IRL"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1407344</ControlCard>
+    <Class>
+      <Id>200920</Id>
+      <Name>D19L (Damen ab 19 Lang)</Name>
+      <ShortName>D19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:13</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE071642</Id>
+      <Name>
+        <Family>Martsyniv</Family>
+        <Given>Andriy</Given>
+      </Name>
+      <BirthDate>1975-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">UAV08867</Id>
+      <Name>Our Club</Name>
+      <Country code="UKR"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1201029</ControlCard>
+    <Class>
+      <Id>201030</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:25</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Hallier und Bahrenberg</Family>
+        <Given>Jakob und Bosse</Given>
+      </Name>
+      <BirthDate>2012-01-01</BirthDate>
+    </Person>
+    <ControlCard punchingSystem="SI">300828</ControlCard>
+    <Class>
+      <Id>201075</Id>
+      <Name>H-10 (Herren bis 10)</Name>
+      <ShortName>H-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <ServiceRequest>
+      <Service><Name>Extraangebot zusätzliche Karte</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot zusätzliche Karte</Name>
+          <Amount currency="EUR">2</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2022-11-14T00:11:48</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Hallier und Bahrenberg</Family>
+        <Given>Valentin und Carla</Given>
+      </Name>
+      <BirthDate>2015-01-01</BirthDate>
+    </Person>
+    <ControlCard punchingSystem="SI">300829</ControlCard>
+    <Class>
+      <Id>201075</Id>
+      <Name>H-10 (Herren bis 10)</Name>
+      <ShortName>H-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">3.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot zusätzliche Karte</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot zusätzliche Karte</Name>
+          <Amount currency="EUR">2</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2022-11-14T00:11:48</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Rahn</Family>
+        <Given>Artur und Leo</Given>
+      </Name>
+      <BirthDate>2015-01-01</BirthDate>
+    </Person>
+    <ControlCard punchingSystem="SI">300835</ControlCard>
+    <Class>
+      <Id>201075</Id>
+      <Name>H-10 (Herren bis 10)</Name>
+      <ShortName>H-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">5.50</Amount>
+        <ValidToTime>2022-11-20T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <ServiceRequest>
+      <Service><Name>Extraangebot zusätzliche Karte</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot zusätzliche Karte</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <ServiceRequest>
+      <Service><Name>Extraangebot Kompassleihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot Kompassleihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2022-11-15T09:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE052840</Id>
+      <Name>
+        <Family>Dalüge</Family>
+        <Given>Beate</Given>
+      </Name>
+      <BirthDate>1966-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <ControlCard punchingSystem="SI">1671</ControlCard>
+    <Class>
+      <Id>201060</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:45</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Bonewitz</Family>
+        <Given>Franziska</Given>
+      </Name>
+      <BirthDate>1987-01-01</BirthDate>
+    </Person>
+    <ControlCard punchingSystem="SI">1676</ControlCard>
+    <Class>
+      <Id>201060</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-20T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T08:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE077971</Id>
+      <Name>
+        <Family>Orlanski</Family>
+        <Given>Alina</Given>
+      </Name>
+      <BirthDate>1987-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <ControlCard punchingSystem="SI">300832</ControlCard>
+    <Class>
+      <Id>201060</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-20T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2022-11-14T13:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Orlanski </Family>
+        <Given>Paul</Given>
+      </Name>
+      <BirthDate>1990-01-01</BirthDate>
+    </Person>
+    <ControlCard punchingSystem="SI">300833</ControlCard>
+    <Class>
+      <Id>201060</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-20T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <ServiceRequest>
+      <Service><Name>Extraangebot Kompassleihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot Kompassleihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2022-11-14T23:11:03</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Orlianskaia</Family>
+        <Given>Anna</Given>
+      </Name>
+      <BirthDate>1994-01-01</BirthDate>
+    </Person>
+    <ControlCard punchingSystem="SI">300834</ControlCard>
+    <Class>
+      <Id>201060</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-20T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <ServiceRequest>
+      <Service><Name>Extraangebot Kompassleihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot Kompassleihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2022-11-14T23:11:03</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE078002</Id>
+      <Name>
+        <Family>Levitski</Family>
+        <Given>Olga </Given>
+      </Name>
+      <BirthDate>1987-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <ControlCard punchingSystem="SI">300830</ControlCard>
+    <Class>
+      <Id>201060</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-20T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2022-11-15T01:11:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE056975</Id>
+      <Name>
+        <Family>Herms</Family>
+        <Given>Michael</Given>
+      </Name>
+      <BirthDate>1978-01-01</BirthDate>
+      <Address>
+        <City>Potsdam</City>
+      </Address>
+    </Person>
+    <ControlCard punchingSystem="SI">7197719</ControlCard>
+    <Class>
+      <Id>201040</Id>
+      <Name>BL (Beginner Lang)</Name>
+      <ShortName>BL</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:47</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE077997</Id>
+      <Name>
+        <Family>borodina</Family>
+        <Given>Anna</Given>
+      </Name>
+      <BirthDate>1980-01-01</BirthDate>
+      <Address>
+        <City>Berlin </City>
+      </Address>
+    </Person>
+    <Class>
+      <Id>201040</Id>
+      <Name>BL (Beginner Lang)</Name>
+      <ShortName>BL</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-20T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T23:11:13</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Levitski </Family>
+        <Given>Daniil</Given>
+      </Name>
+      <BirthDate>1989-01-01</BirthDate>
+    </Person>
+    <ControlCard punchingSystem="SI">300831</ControlCard>
+    <Class>
+      <Id>201040</Id>
+      <Name>BL (Beginner Lang)</Name>
+      <ShortName>BL</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">4.50</Amount>
+        <ValidToTime>2022-11-20T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2022-11-15T02:11:02</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE074646</Id>
+      <Name>
+        <Family>Jürgens</Family>
+        <Given>Anne</Given>
+      </Name>
+      <BirthDate>1983-01-01</BirthDate>
+      <Address>
+        <City>Woltersdorf</City>
+      </Address>
+    </Person>
+    <ControlCard punchingSystem="SI">2008976</ControlCard>
+    <Class>
+      <Id>201035</Id>
+      <Name>D35- (Damen ab 35)</Name>
+      <ShortName>D35-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:49</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE074068</Id>
+      <Name>
+        <Family>Smokov</Family>
+        <Given>Yevhen</Given>
+      </Name>
+      <BirthDate>1990-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Class>
+      <Id>200950</Id>
+      <Name>H19L (Herren ab 19 Lang)</Name>
+      <ShortName>H19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:43</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE053749</Id>
+      <Name>
+        <Family>Lenter</Family>
+        <Given>Juliane</Given>
+      </Name>
+      <BirthDate>1983-01-01</BirthDate>
+    </Person>
+    <ControlCard punchingSystem="SI">7208672</ControlCard>
+    <Class>
+      <Id>200920</Id>
+      <Name>D19L (Damen ab 19 Lang)</Name>
+      <ShortName>D19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:45</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE077434</Id>
+      <Name>
+        <Family>Yudina</Family>
+        <Given>Maryna</Given>
+      </Name>
+      <BirthDate>1990-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <ControlCard punchingSystem="SI">300836</ControlCard>
+    <Class>
+      <Id>200920</Id>
+      <Name>D19L (Damen ab 19 Lang)</Name>
+      <ShortName>D19L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2022-11-14T00:11:46</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Yurpalova </Family>
+        <Given>Alena</Given>
+      </Name>
+      <BirthDate>1988-01-01</BirthDate>
+    </Person>
+    <ControlCard punchingSystem="SI">300838</ControlCard>
+    <Class>
+      <Id>200970</Id>
+      <Name>D19K (Damen ab 19 Kurz)</Name>
+      <ShortName>D19K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2022-11-14T00:11:52</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE077484</Id>
+      <Name>
+        <Family>Bahrenberg</Family>
+        <Given>Ralf</Given>
+      </Name>
+      <BirthDate>1976-01-01</BirthDate>
+      <Address>
+        <City>Lübeck </City>
+      </Address>
+    </Person>
+    <ControlCard punchingSystem="SI">6152</ControlCard>
+    <Class>
+      <Id>201000</Id>
+      <Name>H19K (Herren ab 19 Kurz)</Name>
+      <ShortName>H19K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:48</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Christ</Family>
+        <Given>Tobias</Given>
+      </Name>
+      <BirthDate>1975-01-01</BirthDate>
+    </Person>
+    <ControlCard punchingSystem="SI">2045573</ControlCard>
+    <Class>
+      <Id>201000</Id>
+      <Name>H19K (Herren ab 19 Kurz)</Name>
+      <ShortName>H19K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T00:11:48</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE073622</Id>
+      <Name>
+        <Family>Yurpalov</Family>
+        <Given>Anton</Given>
+      </Name>
+      <BirthDate>1988-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <ControlCard punchingSystem="SI">300837</ControlCard>
+    <Class>
+      <Id>201000</Id>
+      <Name>H19K (Herren ab 19 Kurz)</Name>
+      <ShortName>H19K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldeschluss</Name>
+        <Amount currency="EUR">9.50</Amount>
+        <ValidToTime>2022-11-13T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2022-11-14T00:11:52</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE077989</Id>
+      <Name>
+        <Family>borodin</Family>
+        <Given>Dimitry</Given>
+      </Name>
+      <BirthDate>1989-01-01</BirthDate>
+      <Address>
+        <City>Berlin </City>
+      </Address>
+    </Person>
+    <Class>
+      <Id>201000</Id>
+      <Name>H19K (Herren ab 19 Kurz)</Name>
+      <ShortName>H19K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">11.50</Amount>
+        <ValidToTime>2022-11-20T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2022-11-14T23:11:12</EntryTime>
+  </PersonEntry>
+</EntryList>

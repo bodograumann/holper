@@ -1,0 +1,4802 @@
+<?xml version="1.0"?>
+<EntryList xmlns="http://www.orienteering.org/datastandard/3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" iofVersion="3.0" createTime="2023-03-16T20:03:58" creator="omanager.orientierungslauf.de">
+  <Event>
+    <Name>53. Berliner Winter-OL</Name>
+    <StartTime>
+      <Date>2023-03-18</Date>
+      <Time>11:00:00+01:00</Time>
+    </StartTime>
+  </Event>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE056785</Id>
+      <Name>
+        <Family>Lahm</Family>
+        <Given>Katja</Given>
+      </Name>
+      <BirthDate>1968-01-01</BirthDate>
+      <Address>
+        <City>Koblenz</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV03081</Id>
+      <Name>CTG Koblenz</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8303076</ControlCard>
+    <Class>
+      <Id>219380</Id>
+      <Name>D55- (Damen ab 55)</Name>
+      <ShortName>D55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:58</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE034723</Id>
+      <Name>
+        <Family>Kössler</Family>
+        <Given>Wolfgang</Given>
+      </Name>
+      <BirthDate>1956-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV03122</Id>
+      <Name>Volkssport Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">302986</ControlCard>
+    <Class>
+      <Id>219410</Id>
+      <Name>H65- (Herren ab 65)</Name>
+      <ShortName>H65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">11.00</Amount>
+        <ValidToTime>2023-03-19T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T14:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE048344</Id>
+      <Name>
+        <Family>Polgar</Family>
+        <Given>Erika</Given>
+      </Name>
+      <BirthDate>1972-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV03122</Id>
+      <Name>Volkssport Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">339017</ControlCard>
+    <Class>
+      <Id>219480</Id>
+      <Name>D19-K (Damen ab 19 kurz)</Name>
+      <ShortName>D19-K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:12</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE066263</Id>
+      <Name>
+        <Family>Schlittermann</Family>
+        <Given>Emilia</Given>
+      </Name>
+      <BirthDate>2011-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01093</Id>
+      <Name>ESV Lok Berlin-Schöneweide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">5109</ControlCard>
+    <Class>
+      <Id>219365</Id>
+      <Name>D-12 (Damen bis 12)</Name>
+      <ShortName>D-12</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <StartTimeAllocationRequest type="EarlyStart" />
+    <EntryTime>2023-03-13T00:03:56</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE076999</Id>
+      <Name>
+        <Family>Kleiner</Family>
+        <Given>Mariella</Given>
+      </Name>
+      <BirthDate>2011-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01093</Id>
+      <Name>ESV Lok Berlin-Schöneweide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">6809</ControlCard>
+    <Class>
+      <Id>219365</Id>
+      <Name>D-12 (Damen bis 12)</Name>
+      <ShortName>D-12</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:56</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE018553</Id>
+      <Name>
+        <Family>Graumann</Family>
+        <Given>Bernd</Given>
+      </Name>
+      <BirthDate>1961-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01093</Id>
+      <Name>ESV Lok Berlin-Schöneweide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8091061</ControlCard>
+    <Class>
+      <Id>219460</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:56</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE079703</Id>
+      <Name>
+        <Family>Reinhardt</Family>
+        <Given>Emma</Given>
+      </Name>
+      <BirthDate>2009-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01093</Id>
+      <Name>ESV Lok Berlin-Schöneweide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">224348</ControlCard>
+    <Class>
+      <Id>219360</Id>
+      <Name>D-10 (Damen bis 10)</Name>
+      <ShortName>D-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <StartTimeAllocationRequest type="LateStart" />
+    <EntryTime>2023-03-13T00:03:56</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE043328</Id>
+      <Name>
+        <Family>Keller</Family>
+        <Given>Janik</Given>
+      </Name>
+      <BirthDate>2006-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01093</Id>
+      <Name>ESV Lok Berlin-Schöneweide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">224344</ControlCard>
+    <Class>
+      <Id>219425</Id>
+      <Name>H-18 (Herren bis 18)</Name>
+      <ShortName>H-18</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:56</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE018587</Id>
+      <Name>
+        <Family>Graumann</Family>
+        <Given>Heidrun</Given>
+      </Name>
+      <BirthDate>1963-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01093</Id>
+      <Name>ESV Lok Berlin-Schöneweide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8201263</ControlCard>
+    <Class>
+      <Id>219380</Id>
+      <Name>D55- (Damen ab 55)</Name>
+      <ShortName>D55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <StartTimeAllocationRequest type="LateStart" />
+    <EntryTime>2023-03-13T00:03:56</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE054565</Id>
+      <Name>
+        <Family>Neidhardt</Family>
+        <Given>Michael</Given>
+      </Name>
+      <BirthDate>1963-01-01</BirthDate>
+      <Address>
+        <City>Erkner</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01093</Id>
+      <Name>ESV Lok Berlin-Schöneweide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8180163</ControlCard>
+    <Class>
+      <Id>219470</Id>
+      <Name>H60- (Herren ab 60)</Name>
+      <ShortName>H60-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:56</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Trappe</Family>
+        <Given>Egon Johannes</Given>
+      </Name>
+      <BirthDate>2019-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01126</Id>
+      <Name>TOLF Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8180619</ControlCard>
+    <Class>
+      <Id>219475</Id>
+      <Name>H-10 (Herren bis 10)</Name>
+      <ShortName>H-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:24</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE031266</Id>
+      <Name>
+        <Family>Trappe</Family>
+        <Given>Kathrin</Given>
+      </Name>
+      <BirthDate>1986-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01126</Id>
+      <Name>TOLF Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8200386</ControlCard>
+    <Class>
+      <Id>219435</Id>
+      <Name>D35- (Damen ab 35)</Name>
+      <ShortName>D35-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:24</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE070363</Id>
+      <Name>
+        <Family>Hertel</Family>
+        <Given>Frank</Given>
+      </Name>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01465</Id>
+      <Name>Köpenicker SC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1003675</ControlCard>
+    <Class>
+      <Id>219440</Id>
+      <Name>BL (Beginner Lang)</Name>
+      <ShortName>BL</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:57</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE035771</Id>
+      <Name>
+        <Family>Hertel</Family>
+        <Given>Adrian</Given>
+      </Name>
+      <BirthDate>2006-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01465</Id>
+      <Name>Köpenicker SC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2133051</ControlCard>
+    <Class>
+      <Id>219425</Id>
+      <Name>H-18 (Herren bis 18)</Name>
+      <ShortName>H-18</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:57</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE054078</Id>
+      <Name>
+        <Family>Brandt</Family>
+        <Given>Katrin</Given>
+      </Name>
+      <BirthDate>1978-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01465</Id>
+      <Name>Köpenicker SC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8191278</ControlCard>
+    <Class>
+      <Id>219375</Id>
+      <Name>D45- (Damen ab 45)</Name>
+      <ShortName>D45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:57</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE035804</Id>
+      <Name>
+        <Family>Fillinger</Family>
+        <Given>Katrin</Given>
+      </Name>
+      <BirthDate>1970-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01465</Id>
+      <Name>Köpenicker SC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">211493</ControlCard>
+    <Class>
+      <Id>219295</Id>
+      <Name>D50- (Damen ab 50)</Name>
+      <ShortName>D50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:57</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE046702</Id>
+      <Name>
+        <Family>Neitzel</Family>
+        <Given>Andreas</Given>
+      </Name>
+      <BirthDate>1970-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01465</Id>
+      <Name>Köpenicker SC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8122448</ControlCard>
+    <Class>
+      <Id>219290</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:57</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE026720</Id>
+      <Name>
+        <Family>Mönch</Family>
+        <Given>Dirk</Given>
+      </Name>
+      <BirthDate>1968-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01465</Id>
+      <Name>Köpenicker SC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8119904</ControlCard>
+    <Class>
+      <Id>219465</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:57</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE021382</Id>
+      <Name>
+        <Family>Neitzel</Family>
+        <Given>Ulrike</Given>
+      </Name>
+      <BirthDate>2001-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01465</Id>
+      <Name>Köpenicker SC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1010924</ControlCard>
+    <Class>
+      <Id>219485</Id>
+      <Name>D19-L (Damen ab 19 lang)</Name>
+      <ShortName>D19-L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:57</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE022984</Id>
+      <Name>
+        <Family>Spranger</Family>
+        <Given>Lutz</Given>
+      </Name>
+      <BirthDate>1967-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01481</Id>
+      <Name>TSV Karlshorst</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">7670724</ControlCard>
+    <Class>
+      <Id>219310</Id>
+      <Name>H35- (Herren ab 35)</Name>
+      <ShortName>H35-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:57</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE016317</Id>
+      <Name>
+        <Family>Krieger</Family>
+        <Given>Thomas</Given>
+      </Name>
+      <BirthDate>1974-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01481</Id>
+      <Name>TSV Karlshorst</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8051274</ControlCard>
+    <Class>
+      <Id>219430</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:57</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE046570</Id>
+      <Name>
+        <Family>Hase</Family>
+        <Given>Michael</Given>
+      </Name>
+      <BirthDate>1963-01-01</BirthDate>
+      <Address>
+        <City>BERLIN</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01481</Id>
+      <Name>TSV Karlshorst</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8630265</ControlCard>
+    <Class>
+      <Id>219465</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:57</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE013058</Id>
+      <Name>
+        <Family>Farrak</Family>
+        <Given>Holger</Given>
+      </Name>
+      <BirthDate>1970-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01639</Id>
+      <Name>SV Robotron Dresden</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2057</ControlCard>
+    <Class>
+      <Id>219290</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:53</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE079638</Id>
+      <Name>
+        <Family>Hanßke</Family>
+        <Given>Linnéa</Given>
+      </Name>
+      <BirthDate>2005-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01655</Id>
+      <Name>MTK Bad Harzburg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2652</ControlCard>
+    <Class>
+      <Id>219460</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot zusätzliche Karte</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot zusätzliche Karte</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2023-03-13T00:03:12</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE061776</Id>
+      <Name>
+        <Family>Hanßke</Family>
+        <Given>Lotta</Given>
+      </Name>
+      <BirthDate>2010-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01655</Id>
+      <Name>MTK Bad Harzburg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">7489</ControlCard>
+    <Class>
+      <Id>219460</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot zusätzliche Karte</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot zusätzliche Karte</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2023-03-13T00:03:12</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE020285</Id>
+      <Name>
+        <Family>Höhne</Family>
+        <Given>Lena</Given>
+      </Name>
+      <BirthDate>1999-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01663</Id>
+      <Name>SG LVB Leipzig</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">9630741</ControlCard>
+    <Class>
+      <Id>219485</Id>
+      <Name>D19-L (Damen ab 19 lang)</Name>
+      <ShortName>D19-L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:10</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE038337</Id>
+      <Name>
+        <Family>Powik</Family>
+        <Given>Lene</Given>
+      </Name>
+      <BirthDate>2010-01-01</BirthDate>
+      <Address>
+        <City>Michendorf</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02033</Id>
+      <Name>OK Mark Brandenburg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">888906</ControlCard>
+    <Class>
+      <Id>219415</Id>
+      <Name>D-14 (Damen bis 14)</Name>
+      <ShortName>D-14</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:52</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE072484</Id>
+      <Name>
+        <Family>Berens</Family>
+        <Given>Alina</Given>
+      </Name>
+      <BirthDate>2010-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02033</Id>
+      <Name>OK Mark Brandenburg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">7700551</ControlCard>
+    <Class>
+      <Id>219415</Id>
+      <Name>D-14 (Damen bis 14)</Name>
+      <ShortName>D-14</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:52</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE060299</Id>
+      <Name>
+        <Family>Weiß</Family>
+        <Given>Paula</Given>
+      </Name>
+      <BirthDate>2009-01-01</BirthDate>
+      <Address>
+        <City>Michendorf</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02033</Id>
+      <Name>OK Mark Brandenburg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">7212278</ControlCard>
+    <Class>
+      <Id>219415</Id>
+      <Name>D-14 (Damen bis 14)</Name>
+      <ShortName>D-14</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:52</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE038345</Id>
+      <Name>
+        <Family>Powik</Family>
+        <Given>Marla</Given>
+      </Name>
+      <BirthDate>2013-01-01</BirthDate>
+      <Address>
+        <City>Michendorf</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02033</Id>
+      <Name>OK Mark Brandenburg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1008427</ControlCard>
+    <Class>
+      <Id>219360</Id>
+      <Name>D-10 (Damen bis 10)</Name>
+      <ShortName>D-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:52</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE073797</Id>
+      <Name>
+        <Family>Knaack</Family>
+        <Given>Amelie</Given>
+      </Name>
+      <BirthDate>2013-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02033</Id>
+      <Name>OK Mark Brandenburg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2143412</ControlCard>
+    <Class>
+      <Id>219360</Id>
+      <Name>D-10 (Damen bis 10)</Name>
+      <ShortName>D-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">5.00</Amount>
+        <ValidToTime>2023-03-19T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T16:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE070975</Id>
+      <Name>
+        <Family>Weiß</Family>
+        <Given>Anton</Given>
+      </Name>
+      <BirthDate>2013-01-01</BirthDate>
+      <Address>
+        <City>Michendorf OT Wilhelmshorst</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02033</Id>
+      <Name>OK Mark Brandenburg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1020584</ControlCard>
+    <Class>
+      <Id>219305</Id>
+      <Name>H-12 (Herren bis 12)</Name>
+      <ShortName>H-12</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:52</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE035937</Id>
+      <Name>
+        <Family>Fell</Family>
+        <Given>Ronja</Given>
+      </Name>
+      <BirthDate>1993-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02124</Id>
+      <Name>Berliner Turnerschaft</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8442202</ControlCard>
+    <Class>
+      <Id>219420</Id>
+      <Name>D75- (Damen ab 75)</Name>
+      <ShortName>D75-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:50</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE032933</Id>
+      <Name>
+        <Family>Jobst</Family>
+        <Given>Ivonne</Given>
+      </Name>
+      <BirthDate>1975-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02124</Id>
+      <Name>Berliner Turnerschaft</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8300875</ControlCard>
+    <Class>
+      <Id>219460</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:50</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE014395</Id>
+      <Name>
+        <Family>Jobst</Family>
+        <Given>Thessa</Given>
+      </Name>
+      <BirthDate>1998-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02124</Id>
+      <Name>Berliner Turnerschaft</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1510980</ControlCard>
+    <Class>
+      <Id>219440</Id>
+      <Name>BL (Beginner Lang)</Name>
+      <ShortName>BL</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:50</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE036068</Id>
+      <Name>
+        <Family>Kumbier</Family>
+        <Given>Lionel</Given>
+      </Name>
+      <BirthDate>2008-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02124</Id>
+      <Name>Berliner Turnerschaft</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8118208</ControlCard>
+    <Class>
+      <Id>219455</Id>
+      <Name>H-16 (Herren bis 16)</Name>
+      <ShortName>H-16</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:50</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE071337</Id>
+      <Name>
+        <Family>Green</Family>
+        <Given>Carl Costa</Given>
+      </Name>
+      <BirthDate>2008-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02124</Id>
+      <Name>Berliner Turnerschaft</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8362008</ControlCard>
+    <Class>
+      <Id>219455</Id>
+      <Name>H-16 (Herren bis 16)</Name>
+      <ShortName>H-16</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:50</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE065869</Id>
+      <Name>
+        <Family>Tulban</Family>
+        <Given>Petru</Given>
+      </Name>
+      <BirthDate>2006-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02124</Id>
+      <Name>Berliner Turnerschaft</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8400199</ControlCard>
+    <Class>
+      <Id>219425</Id>
+      <Name>H-18 (Herren bis 18)</Name>
+      <ShortName>H-18</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:50</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="IOF">37085</Id>
+      <Id type="national">DE034616</Id>
+      <Name>
+        <Family>Fell</Family>
+        <Given>Tobias</Given>
+      </Name>
+      <BirthDate>1980-01-01</BirthDate>
+      <Address>
+        <City>Chorin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02124</Id>
+      <Name>Berliner Turnerschaft</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8110680</ControlCard>
+    <Class>
+      <Id>219310</Id>
+      <Name>H35- (Herren ab 35)</Name>
+      <ShortName>H35-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <StartTimeAllocationRequest type="EarlyStart" />
+    <EntryTime>2023-03-13T00:03:50</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE036042</Id>
+      <Name>
+        <Family>Schwartz</Family>
+        <Given>Matthias</Given>
+      </Name>
+      <BirthDate>1981-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02124</Id>
+      <Name>Berliner Turnerschaft</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8719081</ControlCard>
+    <Class>
+      <Id>219450</Id>
+      <Name>H40- (Herren ab 40)</Name>
+      <ShortName>H40-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:50</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE010038</Id>
+      <Name>
+        <Family>Adorján</Family>
+        <Given>Péter</Given>
+      </Name>
+      <BirthDate>1973-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02124</Id>
+      <Name>Berliner Turnerschaft</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8018024</ControlCard>
+    <Class>
+      <Id>219430</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:50</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE027413</Id>
+      <Name>
+        <Family>Usemann</Family>
+        <Given>Barbara</Given>
+      </Name>
+      <BirthDate>1953-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">5071</ControlCard>
+    <Class>
+      <Id>219390</Id>
+      <Name>D70- (Damen ab 70)</Name>
+      <ShortName>D70-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE046546</Id>
+      <Name>
+        <Family>Gericke</Family>
+        <Given>Madeline</Given>
+      </Name>
+      <BirthDate>1991-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">5032</ControlCard>
+    <Class>
+      <Id>219390</Id>
+      <Name>D70- (Damen ab 70)</Name>
+      <ShortName>D70-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <StartTimeAllocationRequest type="EarlyStart" />
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE019808</Id>
+      <Name>
+        <Family>Herold</Family>
+        <Given>Rudolf</Given>
+      </Name>
+      <BirthDate>1952-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">5085</ControlCard>
+    <Class>
+      <Id>219325</Id>
+      <Name>H70- (Herren ab 70)</Name>
+      <ShortName>H70-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE032925</Id>
+      <Name>
+        <Family>Herold</Family>
+        <Given>Silke</Given>
+      </Name>
+      <BirthDate>1987-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1305870</ControlCard>
+    <Class>
+      <Id>219460</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Licht</Family>
+        <Given>Tobias</Given>
+      </Name>
+      <BirthDate>1983-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">300826</ControlCard>
+    <Class>
+      <Id>219440</Id>
+      <Name>BL (Beginner Lang)</Name>
+      <ShortName>BL</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot Kompass-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot Kompass-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Brettschneider </Family>
+        <Given>Paulina /Max</Given>
+      </Name>
+      <BirthDate>2020-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8003565</ControlCard>
+    <Class>
+      <Id>219360</Id>
+      <Name>D-10 (Damen bis 10)</Name>
+      <ShortName>D-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <StartTimeAllocationRequest type="EarlyStart" />
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE013488</Id>
+      <Name>
+        <Family>Brettschneider</Family>
+        <Given>Moritz</Given>
+      </Name>
+      <BirthDate>1986-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">5056</ControlCard>
+    <Class>
+      <Id>219310</Id>
+      <Name>H35- (Herren ab 35)</Name>
+      <ShortName>H35-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <StartTimeAllocationRequest type="EarlyStart" />
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE065611</Id>
+      <Name>
+        <Family>Appelt</Family>
+        <Given>Christian</Given>
+      </Name>
+      <BirthDate>1978-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8003566</ControlCard>
+    <Class>
+      <Id>219430</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Mihram</Family>
+        <Given>Felix</Given>
+      </Name>
+      <BirthDate>1978-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">300815</ControlCard>
+    <Class>
+      <Id>219430</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE028510</Id>
+      <Name>
+        <Family>Winkler</Family>
+        <Given>Jochen</Given>
+      </Name>
+      <BirthDate>1950-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8002501</ControlCard>
+    <Class>
+      <Id>219430</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE016424</Id>
+      <Name>
+        <Family>Kubald</Family>
+        <Given>Katrin</Given>
+      </Name>
+      <BirthDate>1969-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8150269</ControlCard>
+    <Class>
+      <Id>219295</Id>
+      <Name>D50- (Damen ab 50)</Name>
+      <ShortName>D50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="IOF">31371</Id>
+      <Id type="national">DE014387</Id>
+      <Name>
+        <Family>Jobst</Family>
+        <Given>Henry</Given>
+      </Name>
+      <BirthDate>1970-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">9200003</ControlCard>
+    <Class>
+      <Id>219290</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE013123</Id>
+      <Name>
+        <Family>Ferchow</Family>
+        <Given>Anne</Given>
+      </Name>
+      <BirthDate>1964-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">5068</ControlCard>
+    <Class>
+      <Id>219380</Id>
+      <Name>D55- (Damen ab 55)</Name>
+      <ShortName>D55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE014626</Id>
+      <Name>
+        <Family>Käding</Family>
+        <Given>Kirsten</Given>
+      </Name>
+      <BirthDate>1967-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8003554</ControlCard>
+    <Class>
+      <Id>219380</Id>
+      <Name>D55- (Damen ab 55)</Name>
+      <ShortName>D55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE011846</Id>
+      <Name>
+        <Family>Demmig</Family>
+        <Given>Sven</Given>
+      </Name>
+      <BirthDate>1966-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8200466</ControlCard>
+    <Class>
+      <Id>219465</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE011739</Id>
+      <Name>
+        <Family>Brettschneider</Family>
+        <Given>Gerhard</Given>
+      </Name>
+      <BirthDate>1954-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8003563</ControlCard>
+    <Class>
+      <Id>219465</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE014600</Id>
+      <Name>
+        <Family>Käding</Family>
+        <Given>Bernd</Given>
+      </Name>
+      <BirthDate>1964-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8150964</ControlCard>
+    <Class>
+      <Id>219465</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE011747</Id>
+      <Name>
+        <Family>Brettschneider</Family>
+        <Given>Gudrun</Given>
+      </Name>
+      <BirthDate>1960-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8003551</ControlCard>
+    <Class>
+      <Id>219345</Id>
+      <Name>D60- (Damen ab 60)</Name>
+      <ShortName>D60-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE035573</Id>
+      <Name>
+        <Family>Mielecke</Family>
+        <Given>Kerstin</Given>
+      </Name>
+      <BirthDate>1954-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">5072</ControlCard>
+    <Class>
+      <Id>219285</Id>
+      <Name>D65- (Damen ab 65)</Name>
+      <ShortName>D65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE017000</Id>
+      <Name>
+        <Family>Lehmann</Family>
+        <Given>Gabriela</Given>
+      </Name>
+      <BirthDate>1957-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8003556</ControlCard>
+    <Class>
+      <Id>219285</Id>
+      <Name>D65- (Damen ab 65)</Name>
+      <ShortName>D65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE069118</Id>
+      <Name>
+        <Family>Pommer</Family>
+        <Given>Norbert</Given>
+      </Name>
+      <BirthDate>1957-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8234303</ControlCard>
+    <Class>
+      <Id>219410</Id>
+      <Name>H65- (Herren ab 65)</Name>
+      <ShortName>H65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE070371</Id>
+      <Name>
+        <Family>Gergs</Family>
+        <Given>Konstanze</Given>
+      </Name>
+      <BirthDate>1982-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">300820</ControlCard>
+    <Class>
+      <Id>219480</Id>
+      <Name>D19-K (Damen ab 19 kurz)</Name>
+      <ShortName>D19-K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE034682</Id>
+      <Name>
+        <Family>Boeck</Family>
+        <Given>Sascha</Given>
+      </Name>
+      <BirthDate>1989-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02140</Id>
+      <Name>Kaulsdorfer OLV Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8131089</ControlCard>
+    <Class>
+      <Id>219495</Id>
+      <Name>H19-L (Herren ab 19 lang)</Name>
+      <ShortName>H19-L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE079141</Id>
+      <Name>
+        <Family>Manns</Family>
+        <Given>Marlen</Given>
+      </Name>
+      <BirthDate>2012-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2056386</ControlCard>
+    <Class>
+      <Id>219365</Id>
+      <Name>D-12 (Damen bis 12)</Name>
+      <ShortName>D-12</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE072723</Id>
+      <Name>
+        <Family>Gühne</Family>
+        <Given>Frida</Given>
+      </Name>
+      <BirthDate>2011-01-01</BirthDate>
+      <Address>
+        <City>Potsdam</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2034100</ControlCard>
+    <Class>
+      <Id>219365</Id>
+      <Name>D-12 (Damen bis 12)</Name>
+      <ShortName>D-12</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE079331</Id>
+      <Name>
+        <Family>Sperling</Family>
+        <Given>Heiko</Given>
+      </Name>
+      <BirthDate>1982-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2056387</ControlCard>
+    <Class>
+      <Id>219440</Id>
+      <Name>BL (Beginner Lang)</Name>
+      <ShortName>BL</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE072707</Id>
+      <Name>
+        <Family>Sperling</Family>
+        <Given>Ella</Given>
+      </Name>
+      <BirthDate>2014-01-01</BirthDate>
+      <Address>
+        <City>Potsdam</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2801283</ControlCard>
+    <Class>
+      <Id>219360</Id>
+      <Name>D-10 (Damen bis 10)</Name>
+      <ShortName>D-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE078044</Id>
+      <Name>
+        <Family>Rex</Family>
+        <Given>Mia</Given>
+      </Name>
+      <BirthDate>2014-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2041799</ControlCard>
+    <Class>
+      <Id>219360</Id>
+      <Name>D-10 (Damen bis 10)</Name>
+      <ShortName>D-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE079133</Id>
+      <Name>
+        <Family>Joppich</Family>
+        <Given>Clara</Given>
+      </Name>
+      <BirthDate>2013-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2056382</ControlCard>
+    <Class>
+      <Id>219360</Id>
+      <Name>D-10 (Damen bis 10)</Name>
+      <ShortName>D-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE072715</Id>
+      <Name>
+        <Family>Sperling</Family>
+        <Given>Justus</Given>
+      </Name>
+      <BirthDate>2012-01-01</BirthDate>
+      <Address>
+        <City>Potsdam</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2801469</ControlCard>
+    <Class>
+      <Id>219305</Id>
+      <Name>H-12 (Herren bis 12)</Name>
+      <ShortName>H-12</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE078474</Id>
+      <Name>
+        <Family>Cain</Family>
+        <Given>Finjas</Given>
+      </Name>
+      <BirthDate>2012-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">5044</ControlCard>
+    <Class>
+      <Id>219305</Id>
+      <Name>H-12 (Herren bis 12)</Name>
+      <ShortName>H-12</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE034137</Id>
+      <Name>
+        <Family>Fischer</Family>
+        <Given>Leander</Given>
+      </Name>
+      <BirthDate>2009-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8654362</ControlCard>
+    <Class>
+      <Id>219455</Id>
+      <Name>H-16 (Herren bis 16)</Name>
+      <ShortName>H-16</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE044897</Id>
+      <Name>
+        <Family>Uhlemann</Family>
+        <Given>Livia</Given>
+      </Name>
+      <BirthDate>2006-01-01</BirthDate>
+      <Address>
+        <City>Potsdam</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8000889</ControlCard>
+    <Class>
+      <Id>219315</Id>
+      <Name>D-18 (Damen bis 18)</Name>
+      <ShortName>D-18</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE035656</Id>
+      <Name>
+        <Family>Cain</Family>
+        <Given>Fidelius</Given>
+      </Name>
+      <BirthDate>2007-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8180307</ControlCard>
+    <Class>
+      <Id>219425</Id>
+      <Name>H-18 (Herren bis 18)</Name>
+      <ShortName>H-18</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE012117</Id>
+      <Name>
+        <Family>Dobslaw</Family>
+        <Given>Henryk</Given>
+      </Name>
+      <BirthDate>1977-01-01</BirthDate>
+      <Address>
+        <City>Potsdam</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1030477</ControlCard>
+    <Class>
+      <Id>219310</Id>
+      <Name>H35- (Herren ab 35)</Name>
+      <ShortName>H35-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE034153</Id>
+      <Name>
+        <Family>Fischer</Family>
+        <Given>Yvonne</Given>
+      </Name>
+      <BirthDate>1979-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8302040</ControlCard>
+    <Class>
+      <Id>219340</Id>
+      <Name>D40- (Damen ab 40)</Name>
+      <ShortName>D40-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE069142</Id>
+      <Name>
+        <Family>Füßling</Family>
+        <Given>Martin</Given>
+      </Name>
+      <BirthDate>1982-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">300801</ControlCard>
+    <Class>
+      <Id>219450</Id>
+      <Name>H40- (Herren ab 40)</Name>
+      <ShortName>H40-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE034385</Id>
+      <Name>
+        <Family>Siebert</Family>
+        <Given>Tinko</Given>
+      </Name>
+      <BirthDate>1965-01-01</BirthDate>
+      <Address>
+        <City>Nuthetal</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1407345</ControlCard>
+    <Class>
+      <Id>219430</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE034434</Id>
+      <Name>
+        <Family>Wauer</Family>
+        <Given>Matthias</Given>
+      </Name>
+      <BirthDate>1954-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">7202421</ControlCard>
+    <Class>
+      <Id>219410</Id>
+      <Name>H65- (Herren ab 65)</Name>
+      <ShortName>H65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE027257</Id>
+      <Name>
+        <Family>Tschischkale</Family>
+        <Given>Kati</Given>
+      </Name>
+      <BirthDate>1987-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2143430</ControlCard>
+    <Class>
+      <Id>219480</Id>
+      <Name>D19-K (Damen ab 19 kurz)</Name>
+      <ShortName>D19-K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE053765</Id>
+      <Name>
+        <Family>Großmann</Family>
+        <Given>Michael</Given>
+      </Name>
+      <BirthDate>1978-01-01</BirthDate>
+      <Address>
+        <City>Babelsberg</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">7208673</ControlCard>
+    <Class>
+      <Id>219495</Id>
+      <Name>H19-L (Herren ab 19 lang)</Name>
+      <ShortName>H19-L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE013503</Id>
+      <Name>
+        <Family>Bringezu</Family>
+        <Given>Kristina</Given>
+      </Name>
+      <BirthDate>1969-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8291069</ControlCard>
+    <Class>
+      <Id>219485</Id>
+      <Name>D19-L (Damen ab 19 lang)</Name>
+      <ShortName>D19-L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE034450</Id>
+      <Name>
+        <Family>von Szada</Family>
+        <Given>Nora</Given>
+      </Name>
+      <BirthDate>2002-01-01</BirthDate>
+      <Address>
+        <City>Potsdam</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02075</Id>
+      <Name>OLV Potsdam</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8011945</ControlCard>
+    <Class>
+      <Id>219485</Id>
+      <Name>D19-L (Damen ab 19 lang)</Name>
+      <ShortName>D19-L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:08</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE072567</Id>
+      <Name>
+        <Family>Schwanebeck</Family>
+        <Given>Heinrich</Given>
+      </Name>
+      <BirthDate>2009-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV04336</Id>
+      <Name>TSV 90 Röbel</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8055533</ControlCard>
+    <Class>
+      <Id>219445</Id>
+      <Name>H-14 (Herren bis 14)</Name>
+      <ShortName>H-14</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:07</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE072541</Id>
+      <Name>
+        <Family>Fink</Family>
+        <Given>Wolfgang</Given>
+      </Name>
+      <BirthDate>1953-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV04336</Id>
+      <Name>TSV 90 Röbel</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8022408</ControlCard>
+    <Class>
+      <Id>219325</Id>
+      <Name>H70- (Herren ab 70)</Name>
+      <ShortName>H70-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:07</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE072559</Id>
+      <Name>
+        <Family>Schwanebeck</Family>
+        <Given>Ralf</Given>
+      </Name>
+      <BirthDate>1978-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV04336</Id>
+      <Name>TSV 90 Röbel</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8003876</ControlCard>
+    <Class>
+      <Id>219460</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:07</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE072575</Id>
+      <Name>
+        <Family>Schwanebeck</Family>
+        <Given>Theodor</Given>
+      </Name>
+      <BirthDate>2007-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV04336</Id>
+      <Name>TSV 90 Röbel</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8288881</ControlCard>
+    <Class>
+      <Id>219455</Id>
+      <Name>H-16 (Herren bis 16)</Name>
+      <ShortName>H-16</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:07</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE047239</Id>
+      <Name>
+        <Family>Fink</Family>
+        <Given>Martina</Given>
+      </Name>
+      <BirthDate>1976-01-01</BirthDate>
+      <Address>
+        <City>Bollewick</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV04336</Id>
+      <Name>TSV 90 Röbel</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8670958</ControlCard>
+    <Class>
+      <Id>219375</Id>
+      <Name>D45- (Damen ab 45)</Name>
+      <ShortName>D45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:07</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE078127</Id>
+      <Name>
+        <Family>Engel</Family>
+        <Given>Ole</Given>
+      </Name>
+      <BirthDate>2014-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV08502</Id>
+      <Name>TSC Strausberg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1479980</ControlCard>
+    <Class>
+      <Id>219475</Id>
+      <Name>H-10 (Herren bis 10)</Name>
+      <ShortName>H-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE073763</Id>
+      <Name>
+        <Family>Herold</Family>
+        <Given>Karl</Given>
+      </Name>
+      <BirthDate>2014-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV08502</Id>
+      <Name>TSC Strausberg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1113040</ControlCard>
+    <Class>
+      <Id>219475</Id>
+      <Name>H-10 (Herren bis 10)</Name>
+      <ShortName>H-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE078151</Id>
+      <Name>
+        <Family>Schmidt</Family>
+        <Given>Emil</Given>
+      </Name>
+      <BirthDate>2014-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV08502</Id>
+      <Name>TSC Strausberg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2140799</ControlCard>
+    <Class>
+      <Id>219475</Id>
+      <Name>H-10 (Herren bis 10)</Name>
+      <ShortName>H-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <StartTimeAllocationRequest type="LateStart" />
+    <EntryTime>2023-03-13T00:03:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE071329</Id>
+      <Name>
+        <Family>Kalisch</Family>
+        <Given>Hannah</Given>
+      </Name>
+      <BirthDate>2011-01-01</BirthDate>
+      <Address>
+        <City>Rehfelde</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV08502</Id>
+      <Name>TSC Strausberg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2039974</ControlCard>
+    <Class>
+      <Id>219365</Id>
+      <Name>D-12 (Damen bis 12)</Name>
+      <ShortName>D-12</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <StartTimeAllocationRequest type="EarlyStart" />
+    <EntryTime>2023-03-13T00:03:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE071113</Id>
+      <Name>
+        <Family>Schmidt</Family>
+        <Given>Ella</Given>
+      </Name>
+      <BirthDate>2011-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV08502</Id>
+      <Name>TSC Strausberg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2133058</ControlCard>
+    <Class>
+      <Id>219365</Id>
+      <Name>D-12 (Damen bis 12)</Name>
+      <ShortName>D-12</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <StartTimeAllocationRequest type="EarlyStart" />
+    <EntryTime>2023-03-13T00:03:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE078169</Id>
+      <Name>
+        <Family>Burczyk </Family>
+        <Given>Johanna</Given>
+      </Name>
+      <BirthDate>2011-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV08502</Id>
+      <Name>TSC Strausberg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2140800</ControlCard>
+    <Class>
+      <Id>219365</Id>
+      <Name>D-12 (Damen bis 12)</Name>
+      <ShortName>D-12</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE070347</Id>
+      <Name>
+        <Family>Funke</Family>
+        <Given>Tjare</Given>
+      </Name>
+      <BirthDate>2009-01-01</BirthDate>
+      <Address>
+        <City>Eggersdorf</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV08502</Id>
+      <Name>TSC Strausberg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1020581</ControlCard>
+    <Class>
+      <Id>219445</Id>
+      <Name>H-14 (Herren bis 14)</Name>
+      <ShortName>H-14</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE078119</Id>
+      <Name>
+        <Family>Kalisch</Family>
+        <Given>Louisa </Given>
+      </Name>
+      <BirthDate>2014-01-01</BirthDate>
+      <Address>
+        <City>Rehfelde</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV08502</Id>
+      <Name>TSC Strausberg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2039975</ControlCard>
+    <Class>
+      <Id>219360</Id>
+      <Name>D-10 (Damen bis 10)</Name>
+      <ShortName>D-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <StartTimeAllocationRequest type="LateStart" />
+    <EntryTime>2023-03-13T00:03:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE073747</Id>
+      <Name>
+        <Family>Köhler</Family>
+        <Given>Paul</Given>
+      </Name>
+      <BirthDate>2008-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV08502</Id>
+      <Name>TSC Strausberg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8501935</ControlCard>
+    <Class>
+      <Id>219455</Id>
+      <Name>H-16 (Herren bis 16)</Name>
+      <ShortName>H-16</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE073755</Id>
+      <Name>
+        <Family>Schälicke</Family>
+        <Given>Gunnar</Given>
+      </Name>
+      <BirthDate>2008-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV08502</Id>
+      <Name>TSC Strausberg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1323199</ControlCard>
+    <Class>
+      <Id>219455</Id>
+      <Name>H-16 (Herren bis 16)</Name>
+      <ShortName>H-16</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE068706</Id>
+      <Name>
+        <Family>Schmidt</Family>
+        <Given>Olaf</Given>
+      </Name>
+      <BirthDate>1977-01-01</BirthDate>
+      <Address>
+        <City>Eggersdorf</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV08502</Id>
+      <Name>TSC Strausberg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8019935</ControlCard>
+    <Class>
+      <Id>219430</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE070339</Id>
+      <Name>
+        <Family>Herold</Family>
+        <Given>Katrin</Given>
+      </Name>
+      <BirthDate>1984-01-01</BirthDate>
+      <Address>
+        <City>Eggersdorf</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV08502</Id>
+      <Name>TSC Strausberg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8300584</ControlCard>
+    <Class>
+      <Id>219480</Id>
+      <Name>D19-K (Damen ab 19 kurz)</Name>
+      <ShortName>D19-K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <StartTimeAllocationRequest type="LateStart" />
+    <EntryTime>2023-03-13T00:03:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE075248</Id>
+      <Name>
+        <Family>Kalisch</Family>
+        <Given>Fabian</Given>
+      </Name>
+      <BirthDate>1981-01-01</BirthDate>
+      <Address>
+        <City>Rehfelde</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV08502</Id>
+      <Name>TSC Strausberg</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1001898</ControlCard>
+    <Class>
+      <Id>219490</Id>
+      <Name>H19-K (Herren ab 19 kurz)</Name>
+      <ShortName>H19-K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE067295</Id>
+      <Name>
+        <Family>Tulban</Family>
+        <Given>Nicolae</Given>
+      </Name>
+      <BirthDate>1972-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">ROV07978</Id>
+      <Name>CS Babarunca</Name>
+      <Country code="ROU"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">7300570</ControlCard>
+    <Class>
+      <Id>219290</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:59</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE013769</Id>
+      <Name>
+        <Family>Büchner</Family>
+        <Given>Alexander</Given>
+      </Name>
+      <BirthDate>1993-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV02447</Id>
+      <Name>BSV Halle-Ammendorf</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">410403</ControlCard>
+    <Class>
+      <Id>219490</Id>
+      <Name>H19-K (Herren ab 19 kurz)</Name>
+      <ShortName>H19-K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:11</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="IOF">21143</Id>
+      <Id type="national">DE028776</Id>
+      <Name>
+        <Family>Wollenberg</Family>
+        <Given>Bernd</Given>
+      </Name>
+      <BirthDate>1948-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV06514</Id>
+      <Name>SV Schorfheide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8088081</ControlCard>
+    <Class>
+      <Id>219355</Id>
+      <Name>H75- (Herren ab 75)</Name>
+      <ShortName>H75-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <StartTimeAllocationRequest type="LateStart" />
+    <EntryTime>2023-03-13T00:03:43</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE067211</Id>
+      <Name>
+        <Family>Peukert</Family>
+        <Given>Lina</Given>
+      </Name>
+      <BirthDate>2012-01-01</BirthDate>
+      <Address>
+        <City>Eberswalde</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV06514</Id>
+      <Name>SV Schorfheide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2211342</ControlCard>
+    <Class>
+      <Id>219460</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:43</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE044871</Id>
+      <Name>
+        <Family>Peukert</Family>
+        <Given>Michael</Given>
+      </Name>
+      <BirthDate>1976-01-01</BirthDate>
+      <Address>
+        <City>Eberswalde</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV06514</Id>
+      <Name>SV Schorfheide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1401073</ControlCard>
+    <Class>
+      <Id>219460</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:43</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE078078</Id>
+      <Name>
+        <Family>Roggerone</Family>
+        <Given>Juan Francisco</Given>
+      </Name>
+      <BirthDate>1993-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV06514</Id>
+      <Name>SV Schorfheide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8493785</ControlCard>
+    <Class>
+      <Id>219490</Id>
+      <Name>H19-K (Herren ab 19 kurz)</Name>
+      <ShortName>H19-K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:43</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE069861</Id>
+      <Name>
+        <Family>Ushakov</Family>
+        <Given>Dmitry</Given>
+      </Name>
+      <BirthDate>1973-01-01</BirthDate>
+      <Address>
+        <City>Greifswald</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV06514</Id>
+      <Name>SV Schorfheide</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8644568</ControlCard>
+    <Class>
+      <Id>219495</Id>
+      <Name>H19-L (Herren ab 19 lang)</Name>
+      <ShortName>H19-L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:43</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE060025</Id>
+      <Name>
+        <Family>Leukert</Family>
+        <Given>Ida</Given>
+      </Name>
+      <BirthDate>2011-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8516446</ControlCard>
+    <Class>
+      <Id>219365</Id>
+      <Name>D-12 (Damen bis 12)</Name>
+      <ShortName>D-12</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE026952</Id>
+      <Name>
+        <Family>Thiel</Family>
+        <Given>Rolf</Given>
+      </Name>
+      <BirthDate>1943-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8250943</ControlCard>
+    <Class>
+      <Id>219330</Id>
+      <Name>H80- (Herren ab 80)</Name>
+      <ShortName>H80-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE026960</Id>
+      <Name>
+        <Family>Thiel</Family>
+        <Given>Susi</Given>
+      </Name>
+      <BirthDate>1947-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8150547</ControlCard>
+    <Class>
+      <Id>219460</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Schüler</Family>
+        <Given>Bernd</Given>
+      </Name>
+      <BirthDate>1965-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">336152</ControlCard>
+    <Class>
+      <Id>219440</Id>
+      <Name>BL (Beginner Lang)</Name>
+      <ShortName>BL</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE058757</Id>
+      <Name>
+        <Family>Kharitonov</Family>
+        <Given>Maksim</Given>
+      </Name>
+      <BirthDate>2011-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1414978</ControlCard>
+    <Class>
+      <Id>219305</Id>
+      <Name>H-12 (Herren bis 12)</Name>
+      <ShortName>H-12</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE050076</Id>
+      <Name>
+        <Family>Leukert</Family>
+        <Given>Lina</Given>
+      </Name>
+      <BirthDate>2007-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8516946</ControlCard>
+    <Class>
+      <Id>219385</Id>
+      <Name>D-16 (Damen bis 16)</Name>
+      <ShortName>D-16</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE066023</Id>
+      <Name>
+        <Family>Schueler</Family>
+        <Given>Rafael</Given>
+      </Name>
+      <BirthDate>2007-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2033012</ControlCard>
+    <Class>
+      <Id>219455</Id>
+      <Name>H-16 (Herren bis 16)</Name>
+      <ShortName>H-16</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE046330</Id>
+      <Name>
+        <Family>Tovchigrechko</Family>
+        <Given>Maria</Given>
+      </Name>
+      <BirthDate>2007-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8662644</ControlCard>
+    <Class>
+      <Id>219315</Id>
+      <Name>D-18 (Damen bis 18)</Name>
+      <ShortName>D-18</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE029188</Id>
+      <Name>
+        <Family>Zschäckel</Family>
+        <Given>Raik</Given>
+      </Name>
+      <BirthDate>1967-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8081067</ControlCard>
+    <Class>
+      <Id>219310</Id>
+      <Name>H35- (Herren ab 35)</Name>
+      <ShortName>H35-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE062617</Id>
+      <Name>
+        <Family>Purvys</Family>
+        <Given>Virginijus</Given>
+      </Name>
+      <BirthDate>1980-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8000783</ControlCard>
+    <Class>
+      <Id>219310</Id>
+      <Name>H35- (Herren ab 35)</Name>
+      <ShortName>H35-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE064796</Id>
+      <Name>
+        <Family>Kharitonova</Family>
+        <Given>Aksana</Given>
+      </Name>
+      <BirthDate>1979-01-01</BirthDate>
+      <Address>
+        <City>Berlin - Wilmersdorf</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2127115</ControlCard>
+    <Class>
+      <Id>219340</Id>
+      <Name>D40- (Damen ab 40)</Name>
+      <ShortName>D40-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE060364</Id>
+      <Name>
+        <Family>Kharitonov</Family>
+        <Given>Oleg</Given>
+      </Name>
+      <BirthDate>1979-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1402002</ControlCard>
+    <Class>
+      <Id>219450</Id>
+      <Name>H40- (Herren ab 40)</Name>
+      <ShortName>H40-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE030937</Id>
+      <Name>
+        <Family>Winnig</Family>
+        <Given>Anke</Given>
+      </Name>
+      <BirthDate>1976-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8140176</ControlCard>
+    <Class>
+      <Id>219375</Id>
+      <Name>D45- (Damen ab 45)</Name>
+      <ShortName>D45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE035846</Id>
+      <Name>
+        <Family>Rudert</Family>
+        <Given>Bettina</Given>
+      </Name>
+      <BirthDate>1973-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8662640</ControlCard>
+    <Class>
+      <Id>219295</Id>
+      <Name>D50- (Damen ab 50)</Name>
+      <ShortName>D50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE029170</Id>
+      <Name>
+        <Family>Zschäckel</Family>
+        <Given>Daniela</Given>
+      </Name>
+      <BirthDate>1972-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8220972</ControlCard>
+    <Class>
+      <Id>219295</Id>
+      <Name>D50- (Damen ab 50)</Name>
+      <ShortName>D50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE017282</Id>
+      <Name>
+        <Family>Leukert</Family>
+        <Given>Kristin</Given>
+      </Name>
+      <BirthDate>1971-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8665216</ControlCard>
+    <Class>
+      <Id>219295</Id>
+      <Name>D50- (Damen ab 50)</Name>
+      <ShortName>D50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE025003</Id>
+      <Name>
+        <Family>Rudert</Family>
+        <Given>Andreas</Given>
+      </Name>
+      <BirthDate>1969-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2037652</ControlCard>
+    <Class>
+      <Id>219290</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE011052</Id>
+      <Name>
+        <Family>Bleidorn</Family>
+        <Given>Stefan</Given>
+      </Name>
+      <BirthDate>1968-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8241268</ControlCard>
+    <Class>
+      <Id>219290</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE013438</Id>
+      <Name>
+        <Family>Forberg</Family>
+        <Given>Matthias</Given>
+      </Name>
+      <BirthDate>1970-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8190901</ControlCard>
+    <Class>
+      <Id>219290</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE012703</Id>
+      <Name>
+        <Family>Edelhoff</Family>
+        <Given>Stefan</Given>
+      </Name>
+      <BirthDate>1973-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8662647</ControlCard>
+    <Class>
+      <Id>219290</Id>
+      <Name>H50- (Herren ab 50)</Name>
+      <ShortName>H50-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE017232</Id>
+      <Name>
+        <Family>Leonhardt</Family>
+        <Given>Annette</Given>
+      </Name>
+      <BirthDate>1967-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8210167</ControlCard>
+    <Class>
+      <Id>219380</Id>
+      <Name>D55- (Damen ab 55)</Name>
+      <ShortName>D55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE010046</Id>
+      <Name>
+        <Family>Ahlburg</Family>
+        <Given>Kerstin</Given>
+      </Name>
+      <BirthDate>1965-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8662642</ControlCard>
+    <Class>
+      <Id>219380</Id>
+      <Name>D55- (Damen ab 55)</Name>
+      <ShortName>D55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE010062</Id>
+      <Name>
+        <Family>Ahlburg</Family>
+        <Given>Rainer</Given>
+      </Name>
+      <BirthDate>1964-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8662643</ControlCard>
+    <Class>
+      <Id>219465</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE014337</Id>
+      <Name>
+        <Family>Dalüge</Family>
+        <Given>Kai</Given>
+      </Name>
+      <BirthDate>1966-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1677</ControlCard>
+    <Class>
+      <Id>219465</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="IOF">7898</Id>
+      <Id type="national">DE011482</Id>
+      <Name>
+        <Family>Braatz</Family>
+        <Given>Frank</Given>
+      </Name>
+      <BirthDate>1962-01-01</BirthDate>
+      <Address>
+        <City>Woltersdorf</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">7122062</ControlCard>
+    <Class>
+      <Id>219470</Id>
+      <Name>H60- (Herren ab 60)</Name>
+      <ShortName>H60-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE011490</Id>
+      <Name>
+        <Family>Braatz</Family>
+        <Given>Monika</Given>
+      </Name>
+      <BirthDate>1957-01-01</BirthDate>
+      <Address>
+        <City>Woltersdorf</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">5100</ControlCard>
+    <Class>
+      <Id>219285</Id>
+      <Name>D65- (Damen ab 65)</Name>
+      <ShortName>D65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE014569</Id>
+      <Name>
+        <Family>Jürgens</Family>
+        <Given>Uwe</Given>
+      </Name>
+      <BirthDate>1957-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1402001</ControlCard>
+    <Class>
+      <Id>219410</Id>
+      <Name>H65- (Herren ab 65)</Name>
+      <ShortName>H65-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE029196</Id>
+      <Name>
+        <Family>Zschäckel</Family>
+        <Given>Robin</Given>
+      </Name>
+      <BirthDate>1997-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">973101</ControlCard>
+    <Class>
+      <Id>219495</Id>
+      <Name>H19-L (Herren ab 19 lang)</Name>
+      <ShortName>H19-L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE021069</Id>
+      <Name>
+        <Family>Winnig</Family>
+        <Given>Denis</Given>
+      </Name>
+      <BirthDate>1974-01-01</BirthDate>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01598</Id>
+      <Name>SV IHW Alex 78 Berlin</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8011054</ControlCard>
+    <Class>
+      <Id>219495</Id>
+      <Name>H19-L (Herren ab 19 lang)</Name>
+      <ShortName>H19-L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE053377</Id>
+      <Name>
+        <Family>Kahlert</Family>
+        <Given>Matthias</Given>
+      </Name>
+      <BirthDate>1968-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01861</Id>
+      <Name>Berliner TSC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">2114530</ControlCard>
+    <Class>
+      <Id>219465</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:41</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE033288</Id>
+      <Name>
+        <Family>Trösch</Family>
+        <Given>Urs</Given>
+      </Name>
+      <BirthDate>1966-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01861</Id>
+      <Name>Berliner TSC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1458647</ControlCard>
+    <Class>
+      <Id>219465</Id>
+      <Name>H55- (Herren ab 55)</Name>
+      <ShortName>H55-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:41</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE072319</Id>
+      <Name>
+        <Family>Fröhlich</Family>
+        <Given>Hannes</Given>
+      </Name>
+      <BirthDate>1992-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01861</Id>
+      <Name>Berliner TSC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1458649</ControlCard>
+    <Class>
+      <Id>219490</Id>
+      <Name>H19-K (Herren ab 19 kurz)</Name>
+      <ShortName>H19-K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:41</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="IOF">22347</Id>
+      <Id type="national">DE031703</Id>
+      <Name>
+        <Family>Blume</Family>
+        <Given>Karsten</Given>
+      </Name>
+      <BirthDate>1989-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">DEV01861</Id>
+      <Name>Berliner TSC</Name>
+      <Country code="GER"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">8030789</ControlCard>
+    <Class>
+      <Id>219495</Id>
+      <Name>H19-L (Herren ab 19 lang)</Name>
+      <ShortName>H19-L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:41</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE071642</Id>
+      <Name>
+        <Family>Martsyniv</Family>
+        <Given>Andriy</Given>
+      </Name>
+      <BirthDate>1975-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <Organisation type="Club">
+      <Id type="national">UAV08867</Id>
+      <Name>Our Club</Name>
+      <Country code="UKR"/>
+    </Organisation>
+    <ControlCard punchingSystem="SI">1201029</ControlCard>
+    <Class>
+      <Id>219430</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:07</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE056975</Id>
+      <Name>
+        <Family>Herms</Family>
+        <Given>Michael</Given>
+      </Name>
+      <BirthDate>1978-01-01</BirthDate>
+      <Address>
+        <City>Potsdam</City>
+      </Address>
+    </Person>
+    <ControlCard punchingSystem="SI">7197719</ControlCard>
+    <Class>
+      <Id>219460</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:24</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Köhler</Family>
+        <Given>Doreen</Given>
+      </Name>
+    </Person>
+    <ControlCard punchingSystem="SI">5093</ControlCard>
+    <Class>
+      <Id>219460</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Engel</Family>
+        <Given>Ulrike</Given>
+      </Name>
+    </Person>
+    <ControlCard punchingSystem="SI">1113031</ControlCard>
+    <Class>
+      <Id>219460</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:14</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE052840</Id>
+      <Name>
+        <Family>Dalüge</Family>
+        <Given>Beate</Given>
+      </Name>
+      <BirthDate>1966-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <ControlCard punchingSystem="SI">1671</ControlCard>
+    <Class>
+      <Id>219460</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-19T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T20:03:00</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Schöb-Dirks</Family>
+        <Given>Sandra</Given>
+      </Name>
+      <BirthDate>1973-01-01</BirthDate>
+    </Person>
+    <ControlCard punchingSystem="SI">300829</ControlCard>
+    <Class>
+      <Id>219460</Id>
+      <Name>BK (Beginner Kurz)</Name>
+      <ShortName>BK</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Nachmeldung</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-19T00:00:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-16T19:03:44</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person>
+      <Name>
+        <Family>Bleidorn / Sedlin</Family>
+        <Given>Anna / Carla</Given>
+      </Name>
+    </Person>
+    <ControlCard punchingSystem="SI">410121</ControlCard>
+    <Class>
+      <Id>219360</Id>
+      <Name>D-10 (Damen bis 10)</Name>
+      <ShortName>D-10</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">3.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot zusätzliche Karte</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot zusätzliche Karte</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2023-03-12T14:03:03</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE079662</Id>
+      <Name>
+        <Family>Roggendorf</Family>
+        <Given>Benjamin</Given>
+      </Name>
+      <BirthDate>2005-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <ControlCard punchingSystem="SI">300828</ControlCard>
+    <Class>
+      <Id>219425</Id>
+      <Name>H-18 (Herren bis 18)</Name>
+      <ShortName>H-18</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">4.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot Kompass-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot Kompass-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2023-03-13T00:03:23</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE079414</Id>
+      <Name>
+        <Family>Prosolkov</Family>
+        <Given>Valerii</Given>
+      </Name>
+      <BirthDate>1981-01-01</BirthDate>
+    </Person>
+    <ControlCard punchingSystem="SI">8668686</ControlCard>
+    <Class>
+      <Id>219450</Id>
+      <Name>H40- (Herren ab 40)</Name>
+      <ShortName>H40-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:22</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE058997</Id>
+      <Name>
+        <Family>Dirks</Family>
+        <Given>Stefan</Given>
+      </Name>
+      <BirthDate>1975-01-01</BirthDate>
+    </Person>
+    <ControlCard punchingSystem="SI">2133060</ControlCard>
+    <Class>
+      <Id>219430</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:25</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE079646</Id>
+      <Name>
+        <Family>Roggendorf</Family>
+        <Given>Matthias</Given>
+      </Name>
+      <BirthDate>1975-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <ControlCard punchingSystem="SI">300827</ControlCard>
+    <Class>
+      <Id>219430</Id>
+      <Name>H45- (Herren ab 45)</Name>
+      <ShortName>H45-</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <ServiceRequest>
+      <Service><Name>Extraangebot Kompass-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot Kompass-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2023-03-13T00:03:21</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE074068</Id>
+      <Name>
+        <Family>Smokov</Family>
+        <Given>Yevhen</Given>
+      </Name>
+      <BirthDate>1990-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <ControlCard punchingSystem="SI">2060356</ControlCard>
+    <Class>
+      <Id>219490</Id>
+      <Name>H19-K (Herren ab 19 kurz)</Name>
+      <ShortName>H19-K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:25</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="M">
+      <Id type="national">DE072905</Id>
+      <Name>
+        <Family>Heizmann</Family>
+        <Given>Johannes</Given>
+      </Name>
+      <BirthDate>1989-01-01</BirthDate>
+      <Address>
+        <City>Berlin</City>
+      </Address>
+    </Person>
+    <ControlCard punchingSystem="SI">1101070</ControlCard>
+    <Class>
+      <Id>219490</Id>
+      <Name>H19-K (Herren ab 19 kurz)</Name>
+      <ShortName>H19-K</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <ServiceRequest>
+      <Service><Name>Extraangebot SI-Leihe</Name></Service>
+      <RequestedQuantity>1</RequestedQuantity>
+      <AssignedFee>
+        <Fee>
+          <Name>Extraangebot SI-Leihe</Name>
+          <Amount currency="EUR">1</Amount>
+        </Fee>
+      </AssignedFee>
+    </ServiceRequest>
+    <EntryTime>2023-03-13T00:03:20</EntryTime>
+  </PersonEntry>
+  <PersonEntry>
+    <Person sex="F">
+      <Id type="national">DE053749</Id>
+      <Name>
+        <Family>Lenter</Family>
+        <Given>Juliane</Given>
+      </Name>
+      <BirthDate>1983-01-01</BirthDate>
+    </Person>
+    <ControlCard punchingSystem="SI">7208672</ControlCard>
+    <Class>
+      <Id>219485</Id>
+      <Name>D19-L (Damen ab 19 lang)</Name>
+      <ShortName>D19-L</ShortName>
+    </Class>
+    <AssignedFee>
+      <Fee>
+        <Name>Meldegebühr Meldetermin</Name>
+        <Amount currency="EUR">9.00</Amount>
+        <ValidToTime>2023-03-12T23:59:00+01:00</ValidToTime>
+      </Fee>
+    </AssignedFee>
+    <EntryTime>2023-03-13T00:03:26</EntryTime>
+  </PersonEntry>
+</EntryList>

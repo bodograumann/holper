@@ -1,0 +1,754 @@
+# serializer version: 1
+# name: test_create_event
+  '''
+  Initialized hOLper database.
+  
+  '''
+# ---
+# name: test_create_event.1
+  '''
+  A new event “event.test-name.1” was created successfully with number #1.
+  
+  '''
+# ---
+# name: test_create_event.2
+  '''
+  #1 2024-02-29 10:00:00 - 2024-03-01 10:00:00: event.test-name.1, 1 races, 0 categories, 0 entries
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event0]
+  '''
+  Initialized hOLper database.
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event0].1
+  '''
+  A new event “HerbstOL2022” was created successfully with number #1.
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event0].2
+  '''
+  Imported 36 categories
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event0].3
+  '''
+  Imported 16 courses
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event0].4
+  '''
+  Imported 157 entries
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event0].5
+  '''
+  #1 2024-02-29 10:00:00 - 2024-03-01 10:00:00: HerbstOL2022, 1 races, 36 categories, 157 entries
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event0].6
+  '''
+  Name: HerbstOL2022
+  Period: 2024-02-29 10:00:00 - 2024-03-01 10:00:00
+  Form: individual
+  1 Races: 2024-02-29 10:00:00
+  36 Categories: BK, BL, D-10, D-12, D-14, D-16, D-18, D19K, D19L, D35-, D40-, D45-, D50-, D55-, D60-, D65-, D70-, D75-, D80-, H-10, H-12, H-14, H-16, H-18, H19K, H19L, H35-, H40-, H45-, H50-, H55-, H60-, H65-, H70-, H75-, H80-
+  157 Entries
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event0].7
+  '''
+  Katja Lahm: D50-
+  Marlene Ullmann: D-12
+  Lina Zumbühl: D-14
+  Wolfgang Kössler: H65-
+  Erika Polgar: D19K
+  Anatol Zeh: H-14
+  Christian Kremer: H70-
+  Laila Poschitzki: D-16
+  Emma Poschitzki: D-16
+  Janik Keller: H-16
+  Sibylle Uhlemann: D45-
+  Heidrun Graumann: D55-
+  Sabine Richter: D55-
+  Bernd Graumann: H60-
+  Felicitas Vogt: D19L
+  Kathrin Trappe: D35-
+  Linda Brandt: D-16
+  Katrin Brandt: D40-
+  Jana Storch: D45-
+  Andreas Neitzel: H19K
+  Finjas Cain: H-10
+  Thomas Krieger: H45-
+  Stefan Röhl: H50-
+  Andreas Mevius: H60-
+  Oskar Frenzel: H19L
+  Friederike Frenzel: D19L
+  Vera Lotte Adorján: D-12
+  Petru Tulban: H-16
+  Leopold Kühschelm: H40-
+  Péter Adorján: H40-
+  Rudolf Herold: H70-
+  Nelio Gergs: H-16
+  Frank Mieske: H35-
+  Christian Appelt: H40-
+  Katrin Kubald: D50-
+  Henry Jobst: H50-
+  Uwe Brettschneider: H50-
+  Gudrun Feldmann: D55-
+  Anne Ferchow: D55-
+  Sven Demmig: H55-
+  Bernd Käding: H55-
+  Gerhard Brettschneider: H55-
+  André Feldmann: H55-
+  Thomas Grassow: H55-
+  Jochen Winkler: H55-
+  Gudrun Brettschneider: D60-
+  Petra Grassow: D60-
+  Hartmut Brettschneider: H60-
+  Gabriela Lehmann: D65-
+  Kerstin Mielecke: D65-
+  Norbert Pommer: H65-
+  Sascha Boeck: H19L
+  Margarita Dimova: D19L
+  Carola Schipke: D19K
+  Erwin Schramm: H19K
+  Ralph Yeung: H19K
+  Dennis Bräuer: H19L
+  Christian Kehlmaier: H50-
+  Justus Sperling: H-10
+  Maxim Hirschmann: H-14
+  Lucas Pascal Mache: H-14
+  Gerhard Plötz: H70-
+  David Knuth: BK
+  Heiko Sperling: BL
+  Jacqueline Siebert: BL
+  Ella Sperling: D-10
+  Kamilla Knuth: D-10
+  Gergely Knuth: H-16
+  Sara Knuth: D-18
+  Fidelius Cain: H-18
+  Juliane Kummerlöwe: D35-
+  Max Metzger: H35-
+  Anna Dost: D45-
+  Johanna Söter: D45-
+  Tinko Siebert: H45-
+  Frank-Dieter Hoffmann: H55-
+  Martin Füßling: D65-
+  Michael Großmann: H19L
+  Kristina Bringezu: D19L
+  Kati Tschischkale: D19K
+  Thomas Mache: H19K
+  Marcin GRYDZIUSZKO: H45-
+  Mariusz KRAMSKI: H45-
+  Krzysztof PACYNA: H45-
+  Jerzy Deptuła: H55-
+  Wojciech MELIŃSKI: H65-
+  Ralf Schwanebeck: BK
+  Martina Fink: D45-
+  Wolfgang Fink: H65-
+  Paul Köhler: H-14
+  Gunnar Schälicke: H-14
+  Nicolae Tulban: H50-
+  Ivanna Nedoborovsky: D-10
+  Daniel Nedoborovsky: H-18
+  Andrey Nedoborovsky: H50-
+  Matti Alonen: H19L
+  Bernd Wollenberg: H70-
+  Diana Chowdhury: D40-
+  Bela Winnig: H-10
+  Ida Leukert: D-12
+  Susi Thiel: D75-
+  Marlene Jürgens: BK
+  Susann Rohloff: BK
+  Oleg Kharitonov: BL
+  Aksana Kharitonova: BL
+  Jörg Pliquett: BL
+  Linda Lange: D-10
+  Maksim Kharitonov: H-12
+  Lina Leukert: D-16
+  Maria Tovchigrechko: D-18
+  Jonas Lange: H-18
+  Anke Winnig: D45-
+  Alina Shmakova: D45-
+  Stefan Edelhoff: H45-
+  Stefan Winterfeldt: H45-
+  Uwe Röhner: H45-
+  Annette Leonhardt: D50-
+  Kristin Leukert: D50-
+  Matthias Forberg: H50-
+  Udo Lange: H50-
+  Frank Braatz: H50-
+  Kerstin Ahlburg: D55-
+  Kai Dalüge: H55-
+  Rainer Ahlburg: H55-
+  Monika Braatz: D65-
+  Uwe Jürgens: H65-
+  Burkhard Jandrig: H65-
+  Denis Winnig: H19L
+  Raik Zschäckel: H19L
+  Robin Zschäckel: H19L
+  Anke Xylander: D19L
+  Imanuel Fröhlich: H-14
+  Hans-Peter Blome: H65-
+  Hannes Fröhlich: H19K
+  Stine Friederike Siebert: D19L
+  Andriy Martsyniv: H45-
+  Jakob und Bosse Hallier und Bahrenberg: H-10
+  Valentin und Carla Hallier und Bahrenberg: H-10
+  Artur und Leo Rahn: H-10
+  Beate Dalüge: BK
+  Franziska Bonewitz: BK
+  Alina Orlanski: BK
+  Paul Orlanski: BK
+  Anna Orlianskaia: BK
+  Olga Levitski: BK
+  Michael Herms: BL
+  Anna borodina: BL
+  Daniil Levitski: BL
+  Anne Jürgens: D35-
+  Yevhen Smokov: H19L
+  Juliane Lenter: D19L
+  Maryna Yudina: D19L
+  Alena Yurpalova: D19K
+  Ralf Bahrenberg: H19K
+  Tobias Christ: H19K
+  Anton Yurpalov: H19K
+  Dimitry borodin: H19K
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event0].8
+  '''
+  Competitor Anna borodina has not provided a control card
+  Competitor Dimitry borodin has not provided a control card
+  Competitor Yevhen Smokov has not provided a control card
+  Course 1 (D-10, H-10):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31]
+  Course 2 (BK, D-12, H-12):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45]
+  Course 3 (D-14, H-14):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22]
+  Course 4 (D-16, D19K, D45-, D50-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63]
+  Course 5 (D-18, D35-, D40-, H-16, H19K, H55-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75, 78, 81, 84, 87, 90, 93, 96, 99, 102]
+  Course 6 (D19L, H45-, H50-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75, 78, 81]
+  Course 7 (BL):
+  3n+2 [2, 5, 8, 11, 14, 17, 20, 23]
+  Course 8 (H-18, H35-, H40-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27]
+  Course 9 (H19L):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22, 25]
+  Course 10 (D55-, D60-, H60-, H65-, H70-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72]
+  Course 11 (D65-, D70-, H75-, H80-):
+  3n+1 [1, 4, 7, 10, 13, 16, 19]
+  Course 12 (D75-, D80-):
+  3n+2 [2, 5]
+  Starter number: 157
+  Last start: 102.0
+  Starters per start time: 1.52 ±3.43
+  1 parallel starters: 16 times
+  2 parallel starters: 7 times
+  3 parallel starters: 10 times
+  4 parallel starters: 11 times
+  5 parallel starters: 7 times
+  6 parallel starters: 3 times
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event1]
+  '''
+  Initialized hOLper database.
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event1].1
+  '''
+  A new event “WinterOL2023” was created successfully with number #1.
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event1].2
+  '''
+  Imported 35 categories
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event1].3
+  '''
+  Imported 18 courses
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event1].4
+  '''
+  Imported 156 entries
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event1].5
+  '''
+  #1 2024-02-29 10:00:00 - 2024-03-01 10:00:00: WinterOL2023, 1 races, 35 categories, 156 entries
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event1].6
+  '''
+  Name: WinterOL2023
+  Period: 2024-02-29 10:00:00 - 2024-03-01 10:00:00
+  Form: individual
+  1 Races: 2024-02-29 10:00:00
+  35 Categories: BK, BL, D-10, D-12, D-14, D-16, D-18, D19-K, D19-L, D35-, D40-, D45-, D50-, D55-, D60-, D65-, D70-, D75-, H-10, H-12, H-14, H-16, H-18, H19-K, H19-L, H35-, H40-, H45-, H50-, H55-, H60-, H65-, H70-, H75-, H80-
+  156 Entries
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event1].7
+  '''
+  Katja Lahm: D55-
+  Wolfgang Kössler: H65-
+  Erika Polgar: D19-K
+  Emilia Schlittermann: D-12
+  Mariella Kleiner: D-12
+  Bernd Graumann: BK
+  Emma Reinhardt: D-10
+  Janik Keller: H-18
+  Heidrun Graumann: D55-
+  Michael Neidhardt: H60-
+  Egon Johannes Trappe: H-10
+  Kathrin Trappe: D35-
+  Frank Hertel: BL
+  Adrian Hertel: H-18
+  Katrin Brandt: D45-
+  Katrin Fillinger: D50-
+  Andreas Neitzel: H50-
+  Dirk Mönch: H55-
+  Ulrike Neitzel: D19-L
+  Lutz Spranger: H35-
+  Thomas Krieger: H45-
+  Michael Hase: H55-
+  Holger Farrak: H50-
+  Linnéa Hanßke: BK
+  Lotta Hanßke: BK
+  Lena Höhne: D19-L
+  Lene Powik: D-14
+  Alina Berens: D-14
+  Paula Weiß: D-14
+  Marla Powik: D-10
+  Amelie Knaack: D-10
+  Anton Weiß: H-12
+  Ronja Fell: D75-
+  Ivonne Jobst: BK
+  Thessa Jobst: BL
+  Lionel Kumbier: H-16
+  Carl Costa Green: H-16
+  Petru Tulban: H-18
+  Tobias Fell: H35-
+  Matthias Schwartz: H40-
+  Péter Adorján: H45-
+  Barbara Usemann: D70-
+  Madeline Gericke: D70-
+  Rudolf Herold: H70-
+  Silke Herold: BK
+  Tobias Licht: BL
+  Paulina /Max Brettschneider: D-10
+  Moritz Brettschneider: H35-
+  Christian Appelt: H45-
+  Felix Mihram: H45-
+  Jochen Winkler: H45-
+  Katrin Kubald: D50-
+  Henry Jobst: H50-
+  Anne Ferchow: D55-
+  Kirsten Käding: D55-
+  Sven Demmig: H55-
+  Gerhard Brettschneider: H55-
+  Bernd Käding: H55-
+  Gudrun Brettschneider: D60-
+  Kerstin Mielecke: D65-
+  Gabriela Lehmann: D65-
+  Norbert Pommer: H65-
+  Konstanze Gergs: D19-K
+  Sascha Boeck: H19-L
+  Marlen Manns: D-12
+  Frida Gühne: D-12
+  Heiko Sperling: BL
+  Ella Sperling: D-10
+  Mia Rex: D-10
+  Clara Joppich: D-10
+  Justus Sperling: H-12
+  Finjas Cain: H-12
+  Leander Fischer: H-16
+  Livia Uhlemann: D-18
+  Fidelius Cain: H-18
+  Henryk Dobslaw: H35-
+  Yvonne Fischer: D40-
+  Martin Füßling: H40-
+  Tinko Siebert: H45-
+  Matthias Wauer: H65-
+  Kati Tschischkale: D19-K
+  Michael Großmann: H19-L
+  Kristina Bringezu: D19-L
+  Nora von Szada: D19-L
+  Heinrich Schwanebeck: H-14
+  Wolfgang Fink: H70-
+  Ralf Schwanebeck: BK
+  Theodor Schwanebeck: H-16
+  Martina Fink: D45-
+  Ole Engel: H-10
+  Karl Herold: H-10
+  Emil Schmidt: H-10
+  Hannah Kalisch: D-12
+  Ella Schmidt: D-12
+  Johanna Burczyk: D-12
+  Tjare Funke: H-14
+  Louisa Kalisch: D-10
+  Paul Köhler: H-16
+  Gunnar Schälicke: H-16
+  Olaf Schmidt: H45-
+  Katrin Herold: D19-K
+  Fabian Kalisch: H19-K
+  Nicolae Tulban: H50-
+  Alexander Büchner: H19-K
+  Bernd Wollenberg: H75-
+  Lina Peukert: BK
+  Michael Peukert: BK
+  Juan Francisco Roggerone: H19-K
+  Dmitry Ushakov: H19-L
+  Ida Leukert: D-12
+  Rolf Thiel: H80-
+  Susi Thiel: BK
+  Bernd Schüler: BL
+  Maksim Kharitonov: H-12
+  Lina Leukert: D-16
+  Rafael Schueler: H-16
+  Maria Tovchigrechko: D-18
+  Raik Zschäckel: H35-
+  Virginijus Purvys: H35-
+  Aksana Kharitonova: D40-
+  Oleg Kharitonov: H40-
+  Anke Winnig: D45-
+  Bettina Rudert: D50-
+  Daniela Zschäckel: D50-
+  Kristin Leukert: D50-
+  Andreas Rudert: H50-
+  Stefan Bleidorn: H50-
+  Matthias Forberg: H50-
+  Stefan Edelhoff: H50-
+  Annette Leonhardt: D55-
+  Kerstin Ahlburg: D55-
+  Rainer Ahlburg: H55-
+  Kai Dalüge: H55-
+  Frank Braatz: H60-
+  Monika Braatz: D65-
+  Uwe Jürgens: H65-
+  Robin Zschäckel: H19-L
+  Denis Winnig: H19-L
+  Matthias Kahlert: H55-
+  Urs Trösch: H55-
+  Hannes Fröhlich: H19-K
+  Karsten Blume: H19-L
+  Andriy Martsyniv: H45-
+  Michael Herms: BK
+  Doreen Köhler: BK
+  Ulrike Engel: BK
+  Beate Dalüge: BK
+  Sandra Schöb-Dirks: BK
+  Anna / Carla Bleidorn / Sedlin: D-10
+  Benjamin Roggendorf: H-18
+  Valerii Prosolkov: H40-
+  Stefan Dirks: H45-
+  Matthias Roggendorf: H45-
+  Yevhen Smokov: H19-K
+  Johannes Heizmann: H19-K
+  Juliane Lenter: D19-L
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event1].8
+  '''
+  Course 1 (D19-L, H19-K):
+  3n+2 [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35]
+  Course 2 (H35-, H-18, H40-):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49]
+  Course 3 (H19-L):
+  3n+2 [2, 5, 8, 11, 14, 17]
+  Course 4 (BK, D-10, H-10):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75, 78, 81, 84]
+  Course 5 (D-12, H-12):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37]
+  Course 6 (D-14):
+  3n [0, 3, 6]
+  Course 7 (H-14):
+  3n+1 [1, 4]
+  Course 8 (BL):
+  3n+2 [2, 5, 8, 11, 14]
+  Course 9 (D-16, D50-, D19-K, D55-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54]
+  Course 10 (H45-, H50-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54]
+  Course 11 (D-18, D35-, H-16, H55-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63]
+  Course 12 (D60-, D65-, H70-, H75-):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22, 25, 28]
+  Course 13 (D70-, D75-, H80-):
+  3n+2 [2, 5, 8, 11, 14, 17]
+  Course 14 (D40-, D45-, H60-, H65-):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40]
+  Starter number: 156
+  Last start: 84.0
+  Starters per start time: 1.84 ±2.75
+  1 parallel starters: 15 times
+  2 parallel starters: 9 times
+  3 parallel starters: 11 times
+  4 parallel starters: 20 times
+  5 parallel starters: 2 times
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event2]
+  '''
+  Initialized hOLper database.
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event2].1
+  '''
+  A new event “BBMSprint2022” was created successfully with number #1.
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event2].2
+  '''
+  Imported 24 categories
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event2].3
+  '''
+  Imported 21 courses
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event2].4
+  '''
+  Imported 135 entries
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event2].5
+  '''
+  #1 2024-02-29 10:00:00 - 2024-03-01 10:00:00: BBMSprint2022, 1 races, 24 categories, 135 entries
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event2].6
+  '''
+  Name: BBMSprint2022
+  Period: 2024-02-29 10:00:00 - 2024-03-01 10:00:00
+  Form: individual
+  1 Races: 2024-02-29 10:00:00
+  24 Categories: BK, BL, D-10, D-12, D-14, D-16, D-18, D19-, D35-, D45-, D55-, D65-, D75-, H-10, H-12, H-14, H-16, H-18, H19-, H35-, H45-, H55-, H65-, H75-
+  135 Entries
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event2].7
+  '''
+  Erika Polgar: D45-
+  Wolfgang Kössler: H65-
+  Anatol Zeh: H-14
+  Janik Keller: H-16
+  Heidrun Graumann: D55-
+  Lutz Wohlrabe: H55-
+  Friederike Graumann: D19-
+  Sabine Richter: D55-
+  Kathrin Trappe: D35-
+  Frank-Peter Frenzel: H55-
+  Maren Brandt: BK
+  Linda Brandt: D-16
+  Katrin Brandt: D35-
+  Andreas Lau: H45-
+  Andreas Neitzel: H45-
+  Ulrike Neitzel: D19-
+  Martin Röhl: H45-
+  Britta Brünings: D55-
+  Dieter Müller-Danert: H55-
+  Henning Kapischke: H19-
+  Vera Lotte Adorján: D-12
+  Clara Schulz: D-12
+  Lionel Kumbier: H-14
+  Andrea Naß: BK
+  Thea Schulz: D-10
+  Frida Magurno: D-10
+  Serafina Quabeck: D-10
+  Franziska Lau: D-16
+  Petru Tulban: H-16
+  Claudia Becker: D35-
+  Noemi Quabeck: D35-
+  Leopold Kühschelm: H35-
+  Matthias Schwartz: H35-
+  Pina Mauch: D19-
+  Sebastian Fleiß: H19-
+  Linus Appelt: H-14
+  Nelio Gergs: H-14
+  Erika Lemnitzer: D75-
+  Eberhard Lemnitzer: H75-
+  Sascha Boeck: BK
+  Konstanze Gergs: BL
+  Max Brettschneider: BL
+  Eva Heilmann: BL
+  Ulrike Thieme: BL
+  Katrin Herold: D35-
+  Christian Appelt: H35-
+  Erwin Schramm: H35-
+  Robert Jäschke: H35-
+  Katrin Kubald: D45-
+  Carola Schipke: D45-
+  Henry Jobst: H45-
+  Gudrun Brettschneider: D55-
+  Kirsten Käding: D55-
+  André Feldmann: H55-
+  Sven Demmig: H55-
+  Bernd Käding: H55-
+  Thomas Adam: H55-
+  Gabriela Lehmann: D65-
+  Rudolf Herold: H65-
+  Gerhard Brettschneider: H65-
+  Jochen Winkler: H65-
+  Margarita Dimova: D19-
+  Henriette Käding: D19-
+  Isabell Jänich: D19-
+  Matthias Müller: H55-
+  Justus Sperling: H-10
+  Ella Sperling: BK
+  Dorian Dost: BK
+  Kamilla Knuth: D-10
+  Gergely Knuth: H-16
+  Leander Fischer: H-16
+  Sara Knuth: D-18
+  Yvonne Fischer: D35-
+  Martin Füßling: H35-
+  Kristina Bringezu: D45-
+  David Knuth: H45-
+  Kati Tschischkale: D55-
+  Lina Peukert: D-10
+  Karl Herold: H-10
+  Paul Köhler: H-14
+  Gunnar Schälicke: H-14
+  Tjare Funke: H-14
+  Ella Schmidt: D-14
+  Andreea Tulban: BL
+  Nicolae Tulban: H45-
+  Sabine Schramm: BK
+  Peter Petrov: H45-
+  Bernd Wollenberg: H65-
+  Ida Leukert: D-12
+  Susi Thiel: D75-
+  Rolf Thiel: H75-
+  Helmut Fillinger: H75-
+  Yves Baujard: H75-
+  Irina Wollmerstädt: BL
+  Monika Braatz: BL
+  Sascha Schulz: BL
+  Linda Lange: D-10
+  Maksim Kharitonov: H-12
+  Lina Leukert: D-16
+  Maria Tovchigrechko: D-16
+  Rafael Schueler: H-16
+  Jonas Lange: H-18
+  Aksana Kharitonova: D35-
+  Oleg Kharitonov: H35-
+  Kristin Leukert: D45-
+  Alina Shmakova: D45-
+  Bettina Rudert: D45-
+  Matthias Forberg: H45-
+  Udo Lange: H45-
+  Frank Braatz: H45-
+  Annette Leonhardt: D55-
+  Kai Dalüge: H55-
+  Lea Luttenberger: D19-
+  Daniela Zschäckel: D19-
+  Stefan Bleidorn: H19-
+  Raik Zschäckel: H19-
+  Robin Zschäckel: H19-
+  Uwe Röhner: H19-
+  Katerina Wollmerstädt: D45-
+  Anke Templiner: D45-
+  Jeannette Molnar: D55-
+  Galina Scholtz: D55-
+  Urs Trösch: H55-
+  Hans-Peter Blome: H65-
+  Aurelien Filiali: H19-
+  Karsten Blume: H19-
+  Sandra Schöb-Dirks: BK
+  Neo Lau: BK
+  Beate Dalüge: BL
+  Franziska Bonewitz: BL
+  Stefan Dirks: H45-
+  Olaf Schmidt: H45-
+  Kseniya Dabrytskaya: D19-
+  Alena Yurpalova: D19-
+  Anton Yurpalov: H19-
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event2].8
+  '''
+  Competitor Andrea Naß has not provided a control card
+  Competitor Ulrike Thieme has not provided a control card
+  Competitor Sascha Schulz has not provided a control card
+  Competitor Thea Schulz has not provided a control card
+  Competitor Clara Schulz has not provided a control card
+  Competitor Franziska Lau has not provided a control card
+  Competitor Claudia Becker has not provided a control card
+  Competitor Karl Herold has not provided a control card
+  Competitor Tjare Funke has not provided a control card
+  Course 1 (D19-, H45-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66]
+  Course 2 (H-18, H35-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24]
+  Course 3 (H19-):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22, 25]
+  Course 4 (BK, D-10, H-10):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51]
+  Course 5 (D-12, H-12):
+  3n+20 [20, 23, 26, 29, 32]
+  Course 6 (D-14):
+  3n+2 [2]
+  Course 7 (H-14):
+  3n+1 [1, 4, 7, 10, 13, 16, 19]
+  Course 8 (BL):
+  3n+1 [1, 4, 7, 10, 13, 16, 19, 22, 25, 28]
+  Course 9 (D-16, D55-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39]
+  Course 10 (D45-, H65-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45]
+  Course 11 (D-18, D35-, H-16, H55-):
+  3n [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75]
+  Course 12 (D65-, H75-):
+  3n+2 [2, 5, 8, 11, 14, 17]
+  Course 13 (D75-):
+  3n+31 [31, 34]
+  Starter number: 135
+  Last start: 75.0
+  Starters per start time: 1.78 ±3.81
+  1 parallel starters: 14 times
+  2 parallel starters: 9 times
+  3 parallel starters: 10 times
+  4 parallel starters: 3 times
+  5 parallel starters: 5 times
+  6 parallel starters: 6 times
+  
+  '''
+# ---

@@ -2,27 +2,42 @@
 """Command line interface to the holper tool"""
 
 from datetime import datetime, timedelta
+from importlib.resources import files
 from pathlib import Path
-from typing import Optional
+from typing import Annotated, Optional
 
 import sqlalchemy
 import typer
 from xdg import xdg_data_home
 
-from holper import core, model, iofxml3, start, sportsoftware
+from holper import core, iof, model, resources, sportsoftware, start
 
 app = typer.Typer()
 
-# Note: This yields pathlib.Path objects, so we should
-# use typing.Union[str, pathlib.Path] as type. Union
-# types are currently not supported by typer however.
-db_file_opt = typer.Option(xdg_data_home() / "holper" / "data.sqlite")
+DbFileOpt = Annotated[Path, typer.Option()]
+default_db = xdg_data_home() / "holper" / "data.sqlite"
+ImportFileOpt = Annotated[
+    Path,
+    typer.Argument(exists=True, file_okay=True, dir_okay=False, readable=True, allow_dash=True),
+]
+ExportFileOpt = Annotated[Path, typer.Argument(dir_okay=False, readable=True, allow_dash=True)]
 
 
 @app.command()
-def events(db_file: str = db_file_opt):
-    """Show list of all events"""
+def init(*, db_file: DbFileOpt = default_db) -> None:
+    """Initialize database with country data."""
     Path(db_file).parent.mkdir(parents=True, exist_ok=True)
+
+    with core.open_session(f"sqlite:///{db_file}") as session:
+        session.execute(sqlalchemy.text((files(resources) / "Country.sql").read_text()))
+        session.commit()
+
+    typer.echo("Initialized hOLper database.")
+
+
+@app.command()
+def events(*, db_file: DbFileOpt = default_db) -> None:
+    """Show list of all events"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         event_list = [evt for (evt,) in session.execute(sqlalchemy.select(model.Event))]
 
@@ -34,18 +49,18 @@ def events(db_file: str = db_file_opt):
                 f"#{evt.event_id} "
                 f"{evt.start_time} - {evt.end_time}: "
                 f"{evt.name}, "
-                f"{len(evt.races)} races, {len(evt.event_categories)} categories, {len(evt.entries)} entries"
+                f"{len(evt.races)} races, {len(evt.event_categories)} categories, {len(evt.entries)} entries",
             )
 
 
 @app.command()
-def event(event_id: int, db_file: str = db_file_opt):
+def event(event_id: int, *, db_file: DbFileOpt = default_db) -> None:
     """Show details of an event"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         evt = core.get_event(session, event_id)
         if not evt:
             typer.echo("Event could not be found.")
-            return
+            raise typer.Abort
 
         typer.echo(f"Name: {evt.name}")
         typer.echo(f"Period: {evt.start_time} - {evt.end_time}")
@@ -58,7 +73,7 @@ def event(event_id: int, db_file: str = db_file_opt):
         if evt.event_categories:
             typer.echo(
                 f"{len(evt.event_categories)} Categories: "
-                + ", ".join(category.short_name for category in evt.event_categories)
+                + ", ".join(category.short_name or category.name for category in evt.event_categories),
             )
         else:
             typer.echo("No categories yet")
@@ -70,9 +85,8 @@ def event(event_id: int, db_file: str = db_file_opt):
 
 
 @app.command()
-def new_event(name: str, date: datetime, db_file: str = db_file_opt):
+def new_event(name: str, date: datetime, *, db_file: DbFileOpt = default_db) -> None:
     """Create a new single-race solo event"""
-    Path(db_file).parent.mkdir(parents=True, exist_ok=True)
     with core.open_session(f"sqlite:///{db_file}") as session:
         evt = model.Event(name=name, start_time=date, end_time=date + timedelta(days=1))
         race = model.Race(first_start=date)
@@ -85,20 +99,22 @@ def new_event(name: str, date: datetime, db_file: str = db_file_opt):
 
 
 @app.command()
-def import_categories(event_id: int, category_file: Path, db_file: str = db_file_opt):
+def import_categories(event_id: int, category_file: ImportFileOpt, *, db_file: DbFileOpt = default_db) -> None:
     """Import event categories in IOF XML v3 format"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         evt = core.get_event(session, event_id)
         if not evt:
             typer.echo("Event could not be found.")
-            return
+            raise typer.Abort
 
         if evt.event_categories:
             typer.echo(f"Event #{event_id} already contains categories.")
-            return
+            raise typer.Abort
 
-        with open(category_file, encoding="utf-8") as stream:
-            event_categories = list(iofxml3.read(stream))
+        xml_data = category_file.read_bytes()
+        class_list = iof.ClassList.from_xml(xml_data)
+        importer = iof.Importer(class_list, core.get_countries(session))
+        event_categories = [importer.import_class(class_) for class_ in class_list.classes]
 
         evt.event_categories.extend(event_categories)
         # Create race categories
@@ -111,13 +127,13 @@ def import_categories(event_id: int, category_file: Path, db_file: str = db_file
 
 
 @app.command()
-def courses(race_id: int, db_file: str = db_file_opt):
+def courses(race_id: int, *, db_file: DbFileOpt = default_db) -> None:
     """Show courses for a race"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         race = core.get_race(session, race_id)
         if not race:
             typer.echo("Race could not be found.")
-            return
+            raise typer.Abort
 
         for course in race.courses:
             typer.echo(f"{course.name}: ", nl=False)
@@ -133,7 +149,7 @@ def courses(race_id: int, db_file: str = db_file_opt):
                 + " + ".join(
                     f"{len(cat.entry_requests)}·{cat.short_name}"
                     for cat in (assignment.category.event_category for assignment in course.categories)
-                )
+                ),
             )
 
         courses_by_first_control = core.group_courses_by_first_control(race)
@@ -145,90 +161,99 @@ def courses(race_id: int, db_file: str = db_file_opt):
 
 @app.command()
 def import_courses(
-    race_id: int,
-    course_file: Path,
-    short_category_name: bool = typer.Option(
-        False, "-s", help="Use the short category name to match category assignments."
-    ),
-    db_file: str = db_file_opt,
-):
-    """Import race courses in IOF XML v3 format"""
+    event_id: int,
+    course_file: ImportFileOpt,
+    *,
+    short_category_name: Annotated[
+        bool,
+        typer.Option(
+            "-s",
+            help="Use the short category name to match category assignments.",
+        ),
+    ] = False,
+    db_file: DbFileOpt = default_db,
+) -> None:
+    """Import event courses in IOF XML v3 format"""
     with core.open_session(f"sqlite:///{db_file}") as session:
-        race = core.get_race(session, race_id)
-        if not race:
-            typer.echo("Race could not be found.")
-            return
+        evt = core.get_event(session, event_id)
+        if not evt:
+            typer.echo("Event could not be found.")
+            raise typer.Abort
 
-        if race.courses:
-            typer.echo(f"Race #{race_id} already contains courses.")
-            return
+        course_data = iof.CourseData.from_xml(course_file.read_bytes())
+        importer = iof.Importer(course_data, core.get_countries(session))
 
-        with open(course_file, encoding="utf-8") as stream:
-            _evt, race_update = list(iofxml3.read(stream))
+        ordered_data = course_data.ordered_race_course_data
+        if len(ordered_data) > len(evt.races):
+            typer.echo("Import file contains course data for more races than exist in this event.")
+            raise typer.Abort
 
-        with session.no_autoflush:
-            race.courses = race_update.courses
-            race.controls = race_update.controls
+        for race, race_course_data in zip(evt.races, ordered_data, strict=False):
+            if race_course_data is None:
+                typer.echo(f"No course data included for race #{race.race_id}. Skipping!")
+                continue
+            if race.courses:
+                typer.echo(f"Race #{race.race_id} already contains courses. Skipping!")
+                continue
+
+            race.controls = [importer.import_control(control) for control in race_course_data.controls]
+            race.courses = [importer.import_course(course, race.controls) for course in race_course_data.courses]
 
             # Link courses with existing categories
-            for update_category in race_update.categories:
-                name = update_category.name
-                try:
-                    category = next(
-                        category
-                        for category in race.categories
-                        if category.name == name or short_category_name and category.short_name == name
-                    )
-                except StopIteration:
-                    typer.echo(f"Could not find category {name}.")
-                    continue
-                category.courses = update_category.courses
+            for class_course_assignment in race_course_data.class_course_assignments:
+                assignment = importer.import_class_course_assignment(
+                    class_course_assignment,
+                    race.courses,
+                    race.categories,
+                    use_short_category_name=short_category_name,
+                )
+                if assignment is not None:
+                    session.add(assignment)
 
-        session.commit()
+            session.commit()
 
-        typer.echo(f"Imported {len(race.courses)} courses")
+            typer.echo(f"Imported {len(race.courses)} courses")
 
 
 @app.command()
-def entries(event_id: int, db_file: str = db_file_opt):
+def entries(event_id: int, *, db_file: DbFileOpt = default_db) -> None:
     """Show all entries of an event"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         evt = core.get_event(session, event_id)
         if not evt:
             typer.echo("Event could not be found.")
-            return
+            raise typer.Abort
 
         for entry in evt.entries:
             person = entry.competitors[0].person
             typer.echo(
-                f"{person.given_name} {person.family_name}: {entry.category_requests[0].event_category.short_name}"
+                f"{person.given_name} {person.family_name}: {entry.category_requests[0].event_category.short_name}",
             )
 
 
 @app.command()
-def import_entries(event_id: int, entry_file: Path, db_file: str = db_file_opt):
+def import_entries(event_id: int, entry_file: ImportFileOpt, *, db_file: DbFileOpt = default_db) -> None:
     """Import race entries in IOF XML v3 format"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         evt = core.get_event(session, event_id)
         if not evt:
             typer.echo("Event could not be found.")
-            return
+            raise typer.Abort
 
         if evt.entries:
             typer.echo(f"Event #{event_id} already contains entries.")
-            return
+            raise typer.Abort
 
-        with open(entry_file, encoding="utf-8") as stream:
-            _, *entries = iofxml3.read(stream)
+        entry_list = iof.EntryList.from_xml(entry_file.read_bytes())
+        importer = iof.Importer(entry_list, core.get_countries(session))
 
         with session.no_autoflush:
-            for entry in entries:
-                core.hydrate_country_by_ioc_code(session, entry.organisation)
-                for competitor in entry.competitors:
-                    core.hydrate_country_by_ioc_code(session, competitor.person)
-                    core.hydrate_country_by_ioc_code(session, competitor.organisation)
-                for request in entry.category_requests:
-                    request.event_category = core.shadow_entity_by_xid(session, request.event_category)
+            if evt.form == model.EventForm.INDIVIDUAL:
+                entries = [
+                    importer.import_person_entry(entry, evt.event_categories) for entry in entry_list.person_entries
+                ]
+            else:
+                entries = [importer.import_team_entry(entry, evt.event_categories) for entry in entry_list.team_entries]
 
             evt.entries = entries
 
@@ -242,15 +267,16 @@ def startlist(
     race_id: int,
     interval: int,
     parallel_max: Optional[int] = None,
+    *,
     greedy: bool = False,
-    db_file: str = db_file_opt,
-):
+    db_file: DbFileOpt = default_db,
+) -> None:
     """Assign start times for all starters"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         race = core.get_race(session, race_id)
         if not race:
             typer.echo("Race could not be found.")
-            return
+            raise typer.Abort
 
         # generate starts in race
         for category in race.categories:
@@ -301,29 +327,31 @@ def startlist(
             course = next(course for course in race.courses if course.course_id == course_id)
             categories = ", ".join(category.short_name for category in constraints.get_categories(course))
             typer.echo(
-                f"Course {course_id} ({categories}):\n  {start_scheme[course_id].pretty()} {list(start_scheme[course_id])}"
+                f"Course {course_id} ({categories}):\n"
+                f"{start_scheme[course_id].pretty()} {list(start_scheme[course_id])}",
             )
 
-        stats = start.statistics(race)
-        typer.echo(f"Starter number: {stats['entries_total']}")
-        typer.echo(f"Last start: {stats['last_start']}")
-        typer.echo(f"Starters per start time: {stats['entries_per_slot_avg']:.2f} ±{stats['entries_per_slot_var']:.2f}")
-        for count in sorted(stats["entries_per_slot"]):
-            typer.echo(f"{count} parallel starters: {stats['entries_per_slot'][count]} times")
+        stats = start.Statistics(race)
+        typer.echo(f"Starter number: {stats.entries_total}")
+        typer.echo(f"Last start: {stats.last_start}")
+        typer.echo(f"Starters per start time: {stats.entries_per_slot_avg:.2f} ±{stats.entries_per_slot_var:.2f}")
+        for count in sorted(stats.entries_per_slot):
+            typer.echo(f"{count} parallel starters: {stats.entries_per_slot[count]} times")
 
 
 @app.command()
 def export(
     race_id: int,
-    target: Path,
-    db_file: str = db_file_opt,
-):
+    target: ExportFileOpt,
+    *,
+    db_file: DbFileOpt = default_db,
+) -> None:
     """Export entries as SportSoftware csv file"""
     with core.open_session(f"sqlite:///{db_file}") as session:
         race = core.get_race(session, race_id)
         if not race:
             typer.echo("Race could not be found.")
-            return
+            raise typer.Abort
 
         # Make sure clubs have ids
         club_id = 1
@@ -332,12 +360,27 @@ def export(
                 external_id.issuer == "SportSoftware" for external_id in entry.organisation.external_ids
             ):
                 entry.organisation.external_ids.append(
-                    model.OrganisationXID(external_id=club_id, issuer="SportSoftware")
+                    model.OrganisationXID(external_id=club_id, issuer="SportSoftware"),
                 )
                 club_id += 1
 
-        with open(target, "wb") as output_file:
+        with target.open("wb") as output_file:
             sportsoftware.write(output_file, race)
+
+
+@app.command()
+def filter_unused_courses(file: typer.FileBinaryRead) -> None:
+    original = file.read()
+    course_data = iof.course_data.CourseData.from_xml(original)
+    course_data.delete_unused_courses()
+    typer.echo(
+        course_data.to_xml(
+            skip_empty=True,
+            pretty_print=True,
+            encoding="UTF-8",
+            standalone=True,
+        ),
+    )
 
 
 if __name__ == "__main__":

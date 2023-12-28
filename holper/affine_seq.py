@@ -1,10 +1,12 @@
 """Affine Sequences with convenience operators"""
 
 import re
+from collections.abc import Iterator
 from math import gcd
+from typing import Self
 
 
-def lcm(int1, int2):
+def lcm(int1: int, int2: int) -> int:
     """Calculate the least common multiple of two integers"""
     if not int1 or not int2:
         return 0
@@ -18,9 +20,12 @@ affine_sequence_re = re.compile(r"(?P<interval>[0-9]*)n(?:\+(?P<offset>[0-9]+))?
 class AffineSeq:
     __slots__ = ["start", "stop", "step"]
 
-    def __init__(self, start, stop, step=1):
+    def __init__(self, start: int | str, stop: int, step: int = 1) -> None:
         if isinstance(start, str):
             match = affine_sequence_re.match(start)
+            if match is None:
+                msg = f"`start` value '{start}' has invalid format"
+                raise ValueError(msg)
             self.start = int(match.group("offset") or 0)
             self.step = int(match.group("interval") or 1)
         else:
@@ -29,41 +34,42 @@ class AffineSeq:
 
         self.stop = stop
 
-        assert self.step > 0
+        if self.step < 1:
+            msg = "`step` value must be positive"
+            raise ValueError(msg)
 
-    def pretty(self):
+    def pretty(self) -> str:
         return (str(self.step) if self.step != 1 else "") + "n" + ("+" + str(self.start) if self.start else "")
 
-    def to_range(self):
+    def to_range(self) -> range:
         return range(self.start, self.stop, self.step)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.to_range())
 
-    def __getitem__(self, key):
-        if isinstance(key, AffineSeq):
-            return AffineSeq(self[key.start], self[key.stop], self.step * key.step)
+    def __getitem__(self, key: int) -> int:
         return self.start + self.step * key
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[int]:
         return iter(self.to_range())
 
-    def __reversed__(self):
+    def __reversed__(self) -> Iterator[int]:
         return reversed(self.to_range())
 
-    def __contains__(self, item):
+    def __contains__(self, item: int) -> bool:
         return self.start <= item < self.stop and (item - self.start) % self.step == 0
 
-    def __add__(self, other):
-        return AffineSeq(self.start + other.start, self.stop + other.stop, self.step + other.step)
+    def __add__(self, other: Self) -> Self:
+        return type(self)(self.start + other.start, self.stop + other.stop, self.step + other.step)
 
-    def __lshift__(self, steps):
-        return AffineSeq(self.start - steps * self.step, self.stop - steps * self.step, self.step)
+    def __lshift__(self, steps: int) -> Self:
+        return type(self)(self.start - steps * self.step, self.stop - steps * self.step, self.step)
 
-    def __rshift__(self, steps):
-        return AffineSeq(self.start + steps * self.step, self.stop + steps * self.step, self.step)
+    def __rshift__(self, steps: int) -> Self:
 
-    def __and__(self, other):
+        return type(self)(self.start + steps * self.step, self.stop + steps * self.step, self.step)
+
+    def __and__(self, other: Self) -> Self:
         start = max(self.start, other.start)
         stop = min(self.stop, other.stop)
         step = lcm(self.step, other.step)
@@ -78,12 +84,12 @@ class AffineSeq:
             else:
                 stop = start
 
-        return AffineSeq(start, stop, step)
+        return type(self)(start, stop, step)
 
-    def __repr__(self):
-        return f"AffineSeq({self.start}, {self.stop}, {self.step})"
+    def __repr__(self) -> str:
+        return f"{type(self).__name__}({self.start}, {self.stop}, {self.step})"
 
-    def __str__(self):
+    def __str__(self) -> str:
         length = len(self)
         string = "("
         if length > 0:

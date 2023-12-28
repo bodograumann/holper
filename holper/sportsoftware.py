@@ -1,9 +1,11 @@
 """Data exchange in Krämer SportSoftware OE/OS/OT csv"""
 
-from io import TextIOWrapper
-from contextlib import contextmanager
-from datetime import date, datetime, timedelta, MINYEAR
 import csv
+from collections.abc import Generator
+from contextlib import contextmanager, suppress
+from datetime import MINYEAR, date, datetime, timedelta
+from io import TextIOWrapper
+from typing import IO
 
 from . import model, tools
 
@@ -68,7 +70,7 @@ _csv_header_oe_de = (
     "Platz",
 )
 _csv_header_os_de = (
-    "OS0001",
+    "OS0012",
     "Stnr",
     "Melde Id",
     "Bez",
@@ -379,6 +381,7 @@ _csv_header_os_de = (
     "Chipnr20",
     "Gemietet20",
     "Datenbank Id20",
+    "Platz",
     "",
 )
 _csv_header_ot_de = (
@@ -444,13 +447,13 @@ _csv_header_ot_de = (
 )
 
 
-def parse_float(string):
+def parse_float(string: str) -> float | None:
     if not string:
         return None
     return float(string.replace(",", "."))
 
 
-def parse_sex(string):
+def parse_sex(string: str) -> model.Sex | None:
     if string in ("W", "D", "F"):
         return model.Sex.FEMALE
     if string in ("M", "H"):
@@ -458,7 +461,7 @@ def parse_sex(string):
     return None
 
 
-def parse_time(string, with_seconds=True):
+def parse_time(string: str, *, with_seconds: bool = True) -> timedelta | None:
     if string == "":
         return None
     values = list(map(int, string.split(":")))
@@ -468,7 +471,7 @@ def parse_time(string, with_seconds=True):
     return timedelta(seconds=seconds, minutes=minutes, hours=hours)
 
 
-def format_time(value, with_seconds=True):
+def format_time(value: timedelta, *, with_seconds: bool = True) -> str:
     if value is None:
         return ""
     if value.microseconds:
@@ -479,12 +482,12 @@ def format_time(value, with_seconds=True):
     return string
 
 
-def detect(input_file):
+def detect(input_file: IO[bytes]) -> bool:
     return bool(_detect_type(input_file))
 
 
 @contextmanager
-def _wrap_binary_stream(io_buffer, encoding="latin1"):
+def _wrap_binary_stream(io_buffer: IO[bytes], encoding: str = "latin1") -> Generator[TextIOWrapper, None, None]:
     """Access the given stream with the correct format
 
     Usually when a `io.TextIOWrapper` is destroyed, the underlying stream is
@@ -498,23 +501,23 @@ def _wrap_binary_stream(io_buffer, encoding="latin1"):
         del wrapper
 
 
-def _detect_type(input_file, encoding="latin1"):
+def _detect_type(input_file: IO[bytes], encoding: str = "latin1") -> str | None:
     with _wrap_binary_stream(input_file, encoding=encoding) as input_stream:
         try:
             header = next(input_stream)
         except StopIteration:
             return None
 
-        if header.startswith("OE0001;") or header.startswith("OE0012;"):
+        if header.startswith(("OE0001;", "OE0012;")):
             return "OE11"
-        if header.startswith("OS0001"):
+        if header.startswith("OS0012;"):
             return "OS11"
         if sum(1 for c in header if c == ";") == 58 and header.startswith("Stnr;Mannschaft;"):
             return "OT10"
         return None
 
 
-def read(input_file, encoding="latin1"):
+def read(input_file: IO[bytes], encoding: str = "latin1") -> Generator[model.Entry, None, None]:
     file_type = _detect_type(input_file, encoding=encoding)
     input_file.seek(0)
 
@@ -532,27 +535,34 @@ def read(input_file, encoding="latin1"):
         raise NotImplementedError
 
 
-def write(output_file, race):
+def write(output_file: IO[bytes], race: model.Race, encoding: str = "latin1") -> None:
     csv_writer = CSVWriter(race)
 
     if race.event.form is model.EventForm.INDIVIDUAL:
-        csv_writer.write_solo_v11(output_file)
+        csv_writer.write_solo_v11(output_file, encoding=encoding)
     elif race.event.form is model.EventForm.RELAY:
-        csv_writer.write_relay_v11(output_file)
+        csv_writer.write_relay_v11(output_file, encoding=encoding)
     elif race.event.form is model.EventForm.TEAM:
-        csv_writer.write_team_v10(output_file)
+        csv_writer.write_team_v10(output_file, encoding=encoding)
     else:
-        raise ValueError("Unsupported event form")
+        msg = "Unsupported event form"
+        raise ValueError(msg)
 
 
 class CSVReader:
-    def __init__(self, race):
+    def __init__(self, race: model.Race) -> None:
         self.race = race
-        self.clubs = {}
-        self.categories = {}
-        self.courses = {}
+        self.clubs: dict[int, model.Organisation] = {}
+        self.categories: dict[int, model.Category] = {}
+        self.courses: dict[int, model.Course] = {}
 
-    def read_solo_v11(self, input_file, with_seconds=True, encoding="latin1"):
+    def read_solo_v11(
+        self,
+        input_file: IO[bytes],
+        *,
+        with_seconds: bool = True,
+        encoding: str = "latin1",
+    ) -> Generator[model.Entry, None, None]:
         """Read a SportSoftware OE2010 csv export file"""
         self.race.event.form = model.EventForm.INDIVIDUAL
 
@@ -598,18 +608,16 @@ class CSVReader:
             for row in csv_reader:
                 entry = model.Entry(event=self.race.event)
 
-                try:
+                with suppress(ValueError):
                     entry.number = int(row[1])
-                except ValueError:
-                    pass
 
-                entry.competitors.append(self.read_competitor(*row[5:9], row[3]))
+                entry.competitors.append(self.read_competitor(*(*row[5:9], row[3])))
 
                 start = self.read_start_and_result(*row[10:17], with_seconds=with_seconds)
                 start.entry = entry
 
                 if start.result is not None and row[57]:
-                    start.result.position = row[57]
+                    start.result.position = int(row[57])
 
                 if row[18]:
                     entry.organisation = self.read_club(*row[18:24])
@@ -619,9 +627,8 @@ class CSVReader:
                     entry.category_requests.append(model.EntryCategoryRequest(event_category=category.event_category))
                     start.category = category
 
-                # solo['fee'] = parse_float(row[49])
-
-                if row[52]:
+                # Note: we can only assing courses to categories
+                if row[52] and start.category:
                     course_id = int(row[52])
                     try:
                         course = self.courses[course_id]
@@ -632,11 +639,17 @@ class CSVReader:
                             climb=parse_float(row[55]),
                         )
                         self.courses[course_id] = course
-                    entry.course = course
+                    # TODO: This fails: start.category.courses = [course]
 
                 yield entry
 
-    def read_relay_v11(self, input_file, with_seconds=True, encoding="latin1"):
+    def read_relay_v11(
+        self,
+        input_file: IO[bytes],
+        *,
+        with_seconds: bool = True,
+        encoding: str = "latin1",
+    ) -> Generator[model.Entry, None, None]:
         """Read a SportSoftware OS2010 csv export file"""
         self.race.event.form = model.EventForm.RELAY
 
@@ -647,10 +660,8 @@ class CSVReader:
             for row in csv_reader:
                 entry = model.Entry(event=self.race.event)
 
-                try:
+                with suppress(ValueError):
                     entry.number = int(row[1])
-                except ValueError:
-                    pass
 
                 if row[13]:
                     entry.organisation = self.read_club(*row[13:19])
@@ -662,44 +673,46 @@ class CSVReader:
 
                 # relay['fee'] = parse_float(row[29]) or 0)
 
-                start = self.read_start_and_result(*row[5:7], "", *row[7:9], *row[10:12], with_seconds=with_seconds)
+                start = self.read_start_and_result(*(*row[5:7], "", *row[7:9], *row[10:12]), with_seconds=with_seconds)
                 start.entry = entry
                 start.category = category
 
                 if start.result is not None and row[-2]:
-                    start.result.position = row[-2]
+                    start.result.position = int(row[-2])
 
                 for competitor_nr in range(category.event_category.max_number_of_team_members):
                     offset = 31 + competitor_nr * 14
-                    competitor = self.read_competitor(*row[offset + 3 : offset + 7], row[offset + 11])
+                    competitor = self.read_competitor(*(*row[offset + 3 : offset + 7], row[offset + 11]))
                     entry.competitors.append(competitor)
 
                     if row[offset + 7]:
                         competitor_start = model.CompetitorStart(
                             start=start,
                             competitor=competitor,
-                            time_offset=parse_time(row[offset + 7], with_seconds),
+                            time_offset=parse_time(row[offset + 7], with_seconds=with_seconds),
                         )
                         if competitor.control_cards:
                             competitor_start.control_card = competitor.control_cards[0]
 
                     if any(row[offset + 8 : offset + 11]):
-                        start_offset = parse_time(row[offset + 7], with_seconds)
-                        finish_offset = parse_time(row[offset + 8], with_seconds)
+                        start_offset = parse_time(row[offset + 7], with_seconds=with_seconds)
+                        finish_offset = parse_time(row[offset + 8], with_seconds=with_seconds)
                         competitor_start.competitor_result = model.CompetitorResult(
                             start_time=datetime(MINYEAR, 1, 1) + start_offset if start_offset else None,
                             finish_time=datetime(MINYEAR, 1, 1) + finish_offset if finish_offset else None,
-                            time=parse_time(row[offset + 9], with_seconds),
+                            time=parse_time(row[offset + 9], with_seconds=with_seconds),
                             status=self.read_result_status(row[offset + 10]),
                         )
 
-                    # relay['times'] = {
-                    #        'finish':  parse_time(row[31 + runner_count * 14 - 6], with_seconds),
-                    # }
-
                 yield entry
 
-    def read_team_v10(self, input_file, with_seconds=True, encoding="latin1"):
+    def read_team_v10(
+        self,
+        input_file: IO[bytes],
+        *,
+        with_seconds: bool = True,
+        encoding: str = "latin1",
+    ) -> Generator[model.Entry, None, None]:
         """Read a SportSoftware OT2003 csv export file"""
         self.race.event.form = model.EventForm.TEAM
 
@@ -710,10 +723,8 @@ class CSVReader:
             for row in csv_reader:
                 entry = model.Entry(event=self.race.event)
 
-                try:
+                with suppress(ValueError):
                     entry.number = int(row[0])
-                except ValueError:
-                    pass
 
                 entry.name = row[1]
 
@@ -727,8 +738,6 @@ class CSVReader:
                 start.entry = entry
                 start.category = category
 
-                # team['fee'] = parse_float(row[22].replace(',', '.') or 0)
-
                 for competitor_nr in range(entry.category_requests[0].event_category.max_number_of_team_members):
                     offset = 24 + competitor_nr * 7
                     entry.competitors.append(self.read_competitor(*row[offset : offset + 5]))
@@ -736,9 +745,15 @@ class CSVReader:
                 yield entry
 
     def read_club(
-        self, club_id, abbreviation, city, country, seat=None, region=None
-    ):  # pylint: disable=unused-argument
-        club_id = int(club_id)
+        self,
+        club_id_repr: str,
+        abbreviation: str,
+        city: str,
+        country: str,
+        _seat: str | None = None,
+        _region: str | None = None,
+    ) -> model.Organisation:
+        club_id = int(club_id_repr)
         try:
             return self.clubs[club_id]
         except KeyError:
@@ -748,7 +763,7 @@ class CSVReader:
                 type=model.OrganisationType.CLUB,
             )
             club.external_ids.append(
-                model.OrganisationXID(organisation=club, issuer="SportSoftware", external_id=str(club_id))
+                model.OrganisationXID(organisation=club, issuer="SportSoftware", external_id=str(club_id)),
             )
 
             if len(country) == 2:
@@ -759,9 +774,15 @@ class CSVReader:
             self.clubs[club_id] = club
             return club
 
-    def read_category(self, category_id, short_name, name, team_size=1):
-        category_id = int(category_id)
-        team_size = int(team_size) if team_size else 1
+    def read_category(
+        self,
+        category_id_repr: str,
+        short_name: str,
+        name: str,
+        team_size_repr: str = "",
+    ) -> model.Category:
+        category_id = int(category_id_repr)
+        team_size = int(team_size_repr) if team_size_repr else 1
         try:
             return self.categories[category_id]
         except KeyError:
@@ -778,7 +799,7 @@ class CSVReader:
                     event_category=event_category,
                     issuer="SportSoftware",
                     external_id=str(category_id),
-                )
+                ),
             )
             category = model.Category(race=self.race, event_category=event_category)
             for leg_number in range(1, team_size + 1):
@@ -787,8 +808,15 @@ class CSVReader:
             self.categories[category_id] = category
             return category
 
-    def read_competitor(self, family_name, given_name, birth_year, sex, control_card_label):
-        birth_year = tools.normalize_year(birth_year)
+    def read_competitor(
+        self,
+        family_name: str,
+        given_name: str,
+        birth_year_repr: str,
+        sex: str,
+        control_card_label: str,
+    ) -> model.Competitor:
+        birth_year = tools.normalize_year(birth_year_repr)
 
         person = model.Person(
             family_name=family_name,
@@ -799,21 +827,22 @@ class CSVReader:
         competitor = model.Competitor(person=person)
         if control_card_label:
             competitor.control_cards.append(
-                model.ControlCard(system=model.PunchingSystem.SportIdent, label=control_card_label)
+                model.ControlCard(system=model.PunchingSystem.SPORT_IDENT, label=control_card_label),
             )
         return competitor
 
     def read_start_and_result(
         self,
-        non_competitive,
-        start_offset,
-        finish_offset="",
-        result_time="",
-        status="",
-        time_bonus="",
-        time_penalty="",
-        with_seconds=True,
-    ):
+        non_competitive: str,
+        start_offset_repr: str,
+        finish_offset_repr: str = "",
+        result_time: str = "",
+        status: str = "",
+        time_bonus: str = "",
+        time_penalty: str = "",
+        *,
+        with_seconds: bool = True,
+    ) -> model.Start:
         """Read start and result columns
 
         Note: The export data only contains relative time values, while
@@ -822,21 +851,21 @@ class CSVReader:
         types, which still need to be shifted to the proper race start
         time.
         """
+        start_offset = parse_time(start_offset_repr, with_seconds=with_seconds)
         start = model.Start(
             competitive=non_competitive.upper() != "X",
-            time_offset=parse_time(start_offset, with_seconds),
+            time_offset=start_offset,
         )
 
-        if finish_offset or result_time or status:
-            start_offset = parse_time(start_offset, with_seconds)
-            finish_offset = parse_time(finish_offset, with_seconds)
+        if finish_offset_repr or result_time or status:
+            finish_offset = parse_time(finish_offset_repr, with_seconds=with_seconds)
             result = model.Result(
                 start=start,
                 start_time=datetime(MINYEAR, 1, 1) + start_offset if start_offset else None,
                 finish_time=datetime(MINYEAR, 1, 1) + finish_offset if finish_offset else None,
-                time_adjustment=(parse_time(time_penalty, with_seconds) or timedelta())
-                - (parse_time(time_bonus, with_seconds) or timedelta()),
-                time=parse_time(result_time, with_seconds),
+                time_adjustment=(parse_time(time_penalty, with_seconds=with_seconds) or timedelta())
+                - (parse_time(time_bonus, with_seconds=with_seconds) or timedelta()),
+                time=parse_time(result_time, with_seconds=with_seconds),
             )
 
             if status:
@@ -844,7 +873,7 @@ class CSVReader:
 
         return start
 
-    def read_result_status(self, status):
+    def read_result_status(self, status: str) -> model.ResultStatus:
         if int(status) == 0:
             return model.ResultStatus.OK
         if int(status) == 1:
@@ -857,15 +886,16 @@ class CSVReader:
             return model.ResultStatus.DISQUALIFIED
         if int(status) == 5:
             return model.ResultStatus.OVER_TIME
-        raise NotImplementedError(f"SportSoftware Wertung={status}")
+        msg = f"SportSoftware Wertung={status}"
+        raise NotImplementedError(msg)
 
 
 class CSVWriter:
-    def __init__(self, race):
+    def __init__(self, race: model.Race) -> None:
         self.race = race
 
-    def write_solo_v11(self, output_file):
-        with _wrap_binary_stream(output_file) as csvfile:
+    def write_solo_v11(self, output_file: IO[bytes], encoding: str = "latin1") -> None:
+        with _wrap_binary_stream(output_file, encoding=encoding) as csvfile:
             csv_writer = csv.writer(csvfile, delimiter=";", doublequote=False)
 
             csv_writer.writerow(_csv_header_oe_de)
@@ -889,11 +919,11 @@ class CSVWriter:
 
                 csv_writer.writerow(row)
 
-    def write_relay_v11(self, output_file):
+    def write_relay_v11(self, output_file: IO[bytes], encoding: str = "latin1") -> None:
         raise NotImplementedError
 
-    def write_team_v10(self, output_file):
-        with _wrap_binary_stream(output_file) as csvfile:
+    def write_team_v10(self, output_file: IO[bytes], encoding: str = "latin1") -> None:
+        with _wrap_binary_stream(output_file, encoding=encoding) as csvfile:
             csv_writer = csv.writer(csvfile, delimiter=";", doublequote=False)
 
             csv_writer.writerow(_csv_header_ot_de)
@@ -903,7 +933,7 @@ class CSVWriter:
 
                 if entry.number:
                     row[0] = str(entry.number)
-                row[1] = entry.name
+                row[1] = entry.name or ""
 
                 try:
                     if entry.starts[0].time_offset is not None:
@@ -915,7 +945,7 @@ class CSVWriter:
                     row[8:12] = self.write_club(entry.organisation)[:4]
 
                 if entry.category_requests:
-                    row[12:16] = self.write_category(entry.category_requests[0].category)[:4]
+                    row[12:16] = self.write_category(entry.category_requests[0].event_category)[:4]
 
                 for (competitor_nr, competitor) in enumerate(entry.competitors):
                     offset = 24 + competitor_nr * 7
@@ -926,58 +956,57 @@ class CSVWriter:
 
                 csv_writer.writerow(row)
 
-    def write_club(self, club):
+    def write_club(self, club: model.Organisation) -> list[str]:
         """Convert club to cells
 
         A club id and name is required.
         """
         return [
             next(external_id.external_id for external_id in club.external_ids if external_id.issuer == "SportSoftware"),
-            club.short_name,
+            club.short_name or "",
             club.name[len(club.short_name) + 1 :]
             if club.short_name and club.name.startswith(club.short_name + " ")
             else club.name,
-            club.country.ioc_code if club.country else "",
+            (club.country.ioc_code or "") if club.country else "",
             "",
             "",
         ]
 
-    def write_category(self, category: model.EventCategory):
+    def write_category(self, category: model.EventCategory) -> list[str]:
         return [
-            next(
-                (
-                    external_id.external_id
-                    for external_id in category.external_ids
-                    if external_id.issuer == "SportSoftware"
-                ),
+            str(
                 next(
                     (
                         external_id.external_id
                         for external_id in category.external_ids
+                        if external_id.issuer == "SportSoftware"
                     ),
-                    category.event_category_id,
-                )
+                    next(
+                        (external_id.external_id for external_id in category.external_ids),
+                        category.event_category_id,
+                    ),
+                ),
             ),
-            category.short_name,
+            category.short_name or category.name,
             category.name,
-            category.max_number_of_team_members,
+            str(category.max_number_of_team_members),
         ]
 
-    def write_competitor(self, competitor):
+    def write_competitor(self, competitor: model.Competitor) -> list[str]:
         person = competitor.person
         competitor_row = [
-            person.family_name,
-            person.given_name,
+            person.family_name or "",
+            person.given_name or "",
             str(person.birth_date.year) if person.birth_date else "",
             "F" if person.sex is model.Sex.FEMALE else "M",
         ]
         if competitor.control_cards:
-            competitor_row.append(competitor.control_cards[0].label)
+            competitor_row.append(competitor.control_cards[0].label or "")
         else:
             competitor_row.append("")
         return competitor_row
 
-    def write_start_and_result(self, start):
+    def write_start_and_result(self, start: model.Start) -> list[str]:
         return [
             "" if start.competitive else "X",
             format_time((start.category.time_offset or timedelta()) + start.time_offset)

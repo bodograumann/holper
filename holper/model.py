@@ -7,7 +7,7 @@ Use SQLAlchemy as database library.
 .. _IOF XML v3.0: http://orienteering.org/resources/it/data-standard-3-0/
 """
 
-# pylint: disable=too-few-public-methods
+from __future__ import annotations
 
 __all__ = [
     "Base",
@@ -47,100 +47,88 @@ __all__ = [
 ]
 
 import enum
+from abc import abstractmethod
+from datetime import date, datetime, timedelta
+from typing import Any, Self
 
 from sqlalchemy import (
-    Table,
-    Column,
-    Sequence,
-    ForeignKey,
-    UniqueConstraint,
-    String,
-    SmallInteger,
-    Integer,
-    Boolean,
-    Float,
-    Date,
-    DateTime,
-    Interval,
-    Enum,
     TIMESTAMP,
+    Column,
+    Enum,
+    ForeignKey,
+    Integer,
+    Sequence,
+    SmallInteger,
+    String,
+    Table,
+    UniqueConstraint,
 )
-from sqlalchemy.orm import relationship, declarative_base
-from sqlalchemy.ext.declarative import declared_attr, DeclarativeMeta
+from sqlalchemy.ext.declarative import declared_attr
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 from .tools import camelcase_to_snakecase
 
 
-def auto_enum(name, members):
-    """Automatically generate enum values as UPPER_CASE => lower_case"""
-    return enum.Enum(name, ((label, label.lower()) for label in members))
-
-
-# suggested by Sergey Shubin, http://stackoverflow.com/a/41362392/1534459
-class _ExternalObject(DeclarativeMeta):
-    @classmethod
-    def __prepare__(cls, name, bases):
-        namespace = super().__prepare__(cls, name, bases)
-
-        if name.endswith("XID"):
-            parent_model = name[:-3]
-            attr_rel = camelcase_to_snakecase(parent_model)
-            attr_id = attr_rel + "_id"
-
-            namespace["issuer"] = Column(String(32), primary_key=True, nullable=False)
-            namespace["external_id"] = Column(String(16), primary_key=True, nullable=False)
-            namespace[attr_id] = Column(Integer, ForeignKey(f"{parent_model}.{attr_id}"), nullable=False)
-            namespace[attr_rel] = relationship(parent_model, backref="external_ids")
-
-            namespace["__repr__"] = lambda self: f"<{self.__class__.__name__}({self.issuer}: {self.external_id})>"
-
-        return namespace
-
-
-class _ModelBase:
-    @declared_attr
-    def __tablename__(cls):  # pylint: disable=no-self-argument
-        return cls.__name__  # pylint: disable=no-member
+class Base(DeclarativeBase):
+    @declared_attr.directive
+    def __tablename__(cls) -> str:
+        return cls.__name__
 
     @property
-    def id_column(self):
+    def id_column(self) -> str:
         """Convention for the primary id column"""
         return camelcase_to_snakecase(self.__class__.__name__) + "_id"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         try:
             primary_key = getattr(self, self.id_column)
         except AttributeError:
             primary_key = "No id"
 
-        return f"<{self.__class__.__name__}({repr(primary_key)})>"
+        return f"<{self.__class__.__name__}({primary_key!r})>"
 
 
-Base = declarative_base(cls=_ModelBase, metaclass=_ExternalObject)
+class ExternalId:
+    """Common base class for external id models."""
+
+    @declared_attr
+    def issuer(cls) -> Mapped[str]:
+        return mapped_column(String(32), primary_key=True, nullable=False)
+
+    @declared_attr
+    def external_id(cls) -> Mapped[str]:
+        return mapped_column(String(16), primary_key=True, nullable=False)
+
+
+class HasExternalIds:
+    """Back populate list of external ids"""
+
+    @property
+    @abstractmethod
+    def external_ids(self) -> Mapped[Any]:
+        ...
 
 
 class Country(Base):
-    country_id = Column(
-        Integer,
+    country_id: Mapped[int] = mapped_column(
         Sequence("country_id_seq"),
         primary_key=True,
         autoincrement=False,
         doc="ISO-3166 numeric code",
     )
-    name = Column(String(63), nullable=False)
-    iso_alpha_2 = Column(String(2), doc="ISO-3166 alpha-2 code", nullable=False)
-    iso_alpha_3 = Column(String(3), doc="ISO-3166 alpha-3 code", nullable=False)
-    ioc_code = Column(String(3), doc="International Olympic Committee’s 3-letter code")
+    name: Mapped[str] = mapped_column(String(63))
+    iso_alpha_2: Mapped[str] = mapped_column(String(2), doc="ISO-3166 alpha-2 code")
+    iso_alpha_3: Mapped[str] = mapped_column(String(3), doc="ISO-3166 alpha-3 code")
+    ioc_code: Mapped[str | None] = mapped_column(String(3), doc="International Olympic Committee’s 3-letter code")
 
 
 # Configuration of teams and legs for an event
 #
 # Custom types should be added with an X_ prefix.
-# E.g. X_CUSTOM = ()
-EventForm = auto_enum("EventForm", ["INDIVIDUAL", "TEAM", "RELAY"])
+EventForm = enum.StrEnum("EventForm", ["INDIVIDUAL", "TEAM", "RELAY"])
 
 
-class Event(Base):
+class Event(Base, HasExternalIds):
     """Largest organisational unit to assign entries to
 
     An event can consist of one or multiple :py:class:`races <.Race>`.
@@ -150,27 +138,28 @@ class Event(Base):
     :py:class:`~.EventCategory`.
     """
 
-    event_id = Column(Integer, Sequence("event_id_seq"), primary_key=True)
-    name = Column(String(255))
-    start_time = Column(DateTime)
-    end_time = Column(DateTime)
-    form = Column(Enum(EventForm), default=EventForm.INDIVIDUAL, nullable=False)
+    event_id: Mapped[int] = mapped_column(Sequence("event_id_seq"), primary_key=True)
+    external_ids: Mapped[list[EventXID]] = relationship("EventXID", back_populates="event")
 
-    races = relationship("Race", back_populates="event")
-    event_categories = relationship("EventCategory", back_populates="event")
-    entries = relationship("Entry", back_populates="event")
+    name: Mapped[str | None] = mapped_column(String(255))
+    start_time: Mapped[datetime | None]
+    end_time: Mapped[datetime | None]
+    form: Mapped[EventForm] = mapped_column(Enum(EventForm), default=EventForm.INDIVIDUAL)
 
-
-class EventXID(Base):
-    pass
+    races: Mapped[list[Race]] = relationship("Race", back_populates="event")
+    event_categories: Mapped[list[EventCategory]] = relationship("EventCategory", back_populates="event")
+    entries: Mapped[list[Entry]] = relationship("Entry", back_populates="event")
 
 
-class Sex(enum.Enum):
-    FEMALE = "F"
-    MALE = "M"
+class EventXID(Base, ExternalId):
+    event_id: Mapped[int] = mapped_column(ForeignKey("Event.event_id"))
+    event: Mapped[Event] = relationship(Event, back_populates="external_ids")
 
 
-EventCategoryStatus = auto_enum(
+Sex = enum.StrEnum("Sex", ["FEMALE", "MALE"])
+
+
+EventCategoryStatus = enum.StrEnum(
     "EventCategoryStatus",
     [
         "NORMAL",
@@ -182,7 +171,7 @@ EventCategoryStatus = auto_enum(
 )
 
 
-class EventCategory(Base):
+class EventCategory(Base, HasExternalIds):
     """Category in an event
 
     Here category information specific to an event but common to all
@@ -194,54 +183,65 @@ class EventCategory(Base):
     ranking.
     """
 
-    event_category_id = Column(Integer, Sequence("event_category_id_seq"), primary_key=True)
+    event_category_id: Mapped[int] = mapped_column(Sequence("event_category_id_seq"), primary_key=True)
+    external_ids: Mapped[list[EventCategoryXID]] = relationship("EventCategoryXID", back_populates="event_category")
 
-    event_id = Column(Integer, ForeignKey(Event.event_id))
-    event = relationship(Event, back_populates="event_categories")
-    name = Column(String(32), nullable=False)
-    short_name = Column(String(8))
-    status = Column(Enum(EventCategoryStatus), default=EventCategoryStatus.NORMAL)
+    event_id: Mapped[int | None] = mapped_column(ForeignKey(Event.event_id))
+    event: Mapped[Event | None] = relationship(Event, back_populates="event_categories")
+    name: Mapped[str] = mapped_column(String(32))
+    short_name: Mapped[str | None] = mapped_column(String(8))
+    status: Mapped[EventCategoryStatus] = mapped_column(
+        Enum(EventCategoryStatus),
+        default=EventCategoryStatus.NORMAL,
+    )
 
-    legs = relationship("Leg", back_populates="event_category")
-    entry_requests = relationship("EntryCategoryRequest", back_populates="event_category")
+    legs: Mapped[list[Leg]] = relationship("Leg", back_populates="event_category")
+    entry_requests: Mapped[list[EntryCategoryRequest]] = relationship(
+        "EntryCategoryRequest",
+        back_populates="event_category",
+    )
 
     ### restrictions ###
 
-    min_age = Column(SmallInteger)
-    max_age = Column(SmallInteger)
-    sex = Column(Enum(Sex))
+    min_age: Mapped[int | None] = mapped_column(SmallInteger)
+    max_age: Mapped[int | None] = mapped_column(SmallInteger)
+    sex: Mapped[Sex | None] = mapped_column(Enum(Sex))
 
-    min_number_of_team_members = Column(SmallInteger, default=1)
-    max_number_of_team_members = Column(SmallInteger, default=1)
-    min_team_age = Column(SmallInteger)
-    max_team_age = Column(SmallInteger)
+    min_number_of_team_members: Mapped[int] = mapped_column(SmallInteger, default=1)
+    max_number_of_team_members: Mapped[int] = mapped_column(SmallInteger, default=1)
+    min_team_age: Mapped[int | None] = mapped_column(SmallInteger)
+    max_team_age: Mapped[int | None] = mapped_column(SmallInteger)
 
-    max_number_of_competitors = Column(SmallInteger)
+    # In IOF XMLv3 this is called maxNumberOfCompetitors
+    starter_limit: Mapped[int | None] = mapped_column(SmallInteger)
 
 
-class EventCategoryXID(Base):
-    pass
+class EventCategoryXID(Base, ExternalId):
+    event_category_id: Mapped[int] = mapped_column(
+        ForeignKey("EventCategory.event_category_id"),
+    )
+    event_category: Mapped[EventCategory] = relationship(EventCategory, back_populates="external_ids")
 
 
 class Race(Base):
     """Smallest organisational unit to assign entries to"""
 
-    race_id = Column(Integer, Sequence("race_id_seq"), primary_key=True)
-    event_id = Column(Integer, ForeignKey(Event.event_id), nullable=False)
-    event = relationship(Event, back_populates="races")
+    race_id: Mapped[int] = mapped_column(Sequence("race_id_seq"), primary_key=True)
+    event_id: Mapped[int] = mapped_column(ForeignKey(Event.event_id))
+    event: Mapped[Event] = relationship(Event, back_populates="races")
 
-    first_start = Column(TIMESTAMP(timezone=True))
+    first_start: Mapped[datetime | None] = mapped_column(TIMESTAMP(timezone=True))
 
-    categories = relationship("Category", back_populates="race")
-    controls = relationship("Control", back_populates="race")
-    courses = relationship("Course", back_populates="race")
+    categories: Mapped[list[Category]] = relationship("Category", back_populates="race")
+    controls: Mapped[list[Control]] = relationship("Control", back_populates="race")
+    courses: Mapped[list[Course]] = relationship("Course", back_populates="race")
 
     @property
-    def entries(self):
+    def entries(self) -> list[Entry]:
         return self.event.entries
 
 
-RaceCategoryStatus = auto_enum(
+RaceCategoryStatus = enum.StrEnum(
     "RaceCategoryStatus",
     [
         "START_TIMES_NOT_ALLOCATED",
@@ -255,70 +255,73 @@ RaceCategoryStatus = auto_enum(
 
 
 class Leg(Base):
-    leg_id = Column(Integer, Sequence("leg_id_seq"), primary_key=True)
-    event_category_id = Column(Integer, ForeignKey(EventCategory.event_category_id), nullable=False)
-    event_category = relationship(EventCategory, back_populates="legs")
+    leg_id: Mapped[int] = mapped_column(Sequence("leg_id_seq"), primary_key=True)
+    event_category_id: Mapped[int] = mapped_column(ForeignKey(EventCategory.event_category_id))
+    event_category: Mapped[EventCategory] = relationship(EventCategory, back_populates="legs")
 
-    leg_number = Column(SmallInteger)
+    # Ordinal number of the leg in the category, starting at 1.
+    leg_number: Mapped[int | None] = mapped_column(SmallInteger)
 
-    min_number_of_competitors = Column(SmallInteger, default=1)
-    max_number_of_competitors = Column(SmallInteger, default=1)
+    # Number of competitors of each team that compete together in this leg
+    min_number_of_competitors: Mapped[int] = mapped_column(SmallInteger, default=1)
+    max_number_of_competitors: Mapped[int] = mapped_column(SmallInteger, default=1)
 
 
 class Control(Base):
-    control_id = Column(Integer, Sequence("control_id_seq"), primary_key=True)
-    race_id = Column(Integer, ForeignKey(Race.race_id), nullable=False)
-    race = relationship(Race, back_populates="controls")
-    label = Column(String(16), nullable=False)
+    control_id: Mapped[int] = mapped_column(Sequence("control_id_seq"), primary_key=True)
+    race_id: Mapped[int] = mapped_column(ForeignKey(Race.race_id))
+    race: Mapped[Race] = relationship(Race, back_populates="controls")
+    label: Mapped[str] = mapped_column(String(16))
 
     UniqueConstraint("race_id", "label")
 
 
 class Course(Base):
-    course_id = Column(Integer, Sequence("course_id_seq"), primary_key=True)
-    race_id = Column(Integer, ForeignKey(Race.race_id), nullable=False)
-    race = relationship(Race, back_populates="courses")
+    course_id: Mapped[int] = mapped_column(Sequence("course_id_seq"), primary_key=True)
+    race_id: Mapped[int] = mapped_column(ForeignKey(Race.race_id))
+    race: Mapped[Race] = relationship(Race, back_populates="courses")
 
-    name = Column(String(16))
-    length = Column(Float, doc="Course length in kilometers")
-    climb = Column(Float, doc="Course climb in meters")
+    name: Mapped[str] = mapped_column(String(16))
+    length: Mapped[float | None] = mapped_column(doc="Course length in kilometers")
+    climb: Mapped[float | None] = mapped_column(doc="Course climb in meters")
 
-    controls = relationship("CourseControl", back_populates="course")
-    categories = relationship("CategoryCourseAssignment", back_populates="course")
+    controls: Mapped[list[CourseControl]] = relationship("CourseControl", back_populates="course")
+    categories: Mapped[list[CategoryCourseAssignment]] = relationship(
+        "CategoryCourseAssignment",
+        back_populates="course",
+    )
 
 
-ControlType = auto_enum(
+ControlType = enum.StrEnum(
     "ControlType",
     ["CONTROL", "START", "FINISH", "CROSSING_POINT", "END_OF_MARKED_ROUTE"],
 )
 
 
 class CourseControl(Base):
-    course_control_id = Column(Integer, Sequence("course_control_id_seq"), primary_key=True)
-    course_id = Column(Integer, ForeignKey(Course.course_id), nullable=False)
-    course = relationship(Course, back_populates="controls")
-    control_id = Column(Integer, ForeignKey(Control.control_id), nullable=False)
-    control = relationship(Control)
+    course_control_id: Mapped[int] = mapped_column(Sequence("course_control_id_seq"), primary_key=True)
+    course_id: Mapped[int] = mapped_column(ForeignKey(Course.course_id))
+    course: Mapped[Course] = relationship(Course, back_populates="controls")
+    control_id: Mapped[int] = mapped_column(ForeignKey(Control.control_id))
+    control: Mapped[Control] = relationship(Control)
 
-    leg_length = Column(Float, doc="Leg length in kilometers")
-    leg_climb = Column(Float, doc="Leg climb in meters")
+    leg_length: Mapped[float | None] = mapped_column(doc="Leg length in kilometers")
 
-    type = Column(Enum(ControlType), default=ControlType.CONTROL, nullable=False)
-    score = Column(Float)
-    order = Column(
-        Integer,
+    type: Mapped[ControlType] = mapped_column(Enum(ControlType), default=ControlType.CONTROL)
+    score: Mapped[float | None]
+    order: Mapped[int | None] = mapped_column(
         doc="If a course control has a higher `order` than another, \
             it has to be punched after it.",
     )
-    after_course_control_id = Column(Integer, ForeignKey("CourseControl.course_control_id"))
-    after = relationship(
+    after_course_control_id: Mapped[int | None] = mapped_column(ForeignKey("CourseControl.course_control_id"))
+    after: Mapped[Self | None] = relationship(
         "CourseControl",
         foreign_keys=[after_course_control_id],
         remote_side=course_control_id,
         doc="Control must be punched after this other control.",
     )
-    before_course_control_id = Column(Integer, ForeignKey("CourseControl.course_control_id"))
-    before = relationship(
+    before_course_control_id: Mapped[int | None] = mapped_column(ForeignKey("CourseControl.course_control_id"))
+    before: Mapped[Self | None] = relationship(
         "CourseControl",
         foreign_keys=[before_course_control_id],
         remote_side=course_control_id,
@@ -329,58 +332,70 @@ class CourseControl(Base):
 class Category(Base):
     """Realize an EventCategory for one specific race of that event"""
 
-    category_id = Column(Integer, Sequence("category_id_seq"), primary_key=True)
-    race_id = Column(Integer, ForeignKey(Race.race_id), nullable=False)
-    race = relationship(Race, back_populates="categories")
+    category_id: Mapped[int] = mapped_column(Sequence("category_id_seq"), primary_key=True)
+    race_id: Mapped[int] = mapped_column(ForeignKey(Race.race_id))
+    race: Mapped[Race] = relationship(Race, back_populates="categories")
 
-    event_category_id = Column(Integer, ForeignKey(EventCategory.event_category_id), nullable=False)
-    event_category = relationship(EventCategory)
+    event_category_id: Mapped[int] = mapped_column(ForeignKey(EventCategory.event_category_id))
+    event_category: Mapped[EventCategory] = relationship(EventCategory)
 
-    status = Column(Enum(RaceCategoryStatus), default=RaceCategoryStatus.START_TIMES_NOT_ALLOCATED)
+    status: Mapped[RaceCategoryStatus] = mapped_column(
+        Enum(RaceCategoryStatus),
+        default=RaceCategoryStatus.START_TIMES_NOT_ALLOCATED,
+    )
 
-    courses = relationship("CategoryCourseAssignment", back_populates="category")
+    courses: Mapped[list[CategoryCourseAssignment]] = relationship(
+        "CategoryCourseAssignment",
+        back_populates="category",
+    )
 
-    time_offset = Column(Interval, doc="Start time offset from race start time")
-    starts = relationship("Start", back_populates="category")
-    vacancies_before = Column(SmallInteger, default=0, nullable=False)
-    vacancies_after = Column(SmallInteger, default=0, nullable=False)
+    time_offset: Mapped[timedelta | None] = mapped_column(doc="Start time offset from race start time")
+    starts: Mapped[list[Start]] = relationship("Start", back_populates="category")
+    vacancies_before: Mapped[int] = mapped_column(SmallInteger, default=0)
+    vacancies_after: Mapped[int] = mapped_column(SmallInteger, default=0)
+
+    # In IOF XMLv3 this is called maxNumberOfCompetitors
+    starter_limit: Mapped[int | None] = mapped_column(SmallInteger)
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self.event_category.name
 
     @property
-    def short_name(self):
-        return self.event_category.short_name
+    def short_name(self) -> str:
+        return self.event_category.short_name or self.event_category.name
 
 
 class CategoryCourseAssignment(Base):
-    category_id = Column(Integer, ForeignKey(Category.category_id), primary_key=True)
-    category = relationship(Category, back_populates="courses")
-    leg = Column(SmallInteger, default=1, primary_key=True)
-    course_id = Column(Integer, ForeignKey(Course.course_id), nullable=False)
-    course = relationship(Course, back_populates="categories")
+    category_id: Mapped[int] = mapped_column(ForeignKey(Category.category_id), primary_key=True)
+    category: Mapped[Category] = relationship(Category, back_populates="courses")
+    leg: Mapped[int] = mapped_column(SmallInteger, default=1, primary_key=True)
+    course_id: Mapped[int] = mapped_column(ForeignKey(Course.course_id))
+    course: Mapped[Course] = relationship(Course, back_populates="categories")
 
 
 ### Entries ###
 
 
-class Person(Base):
-    person_id = Column(Integer, Sequence("person_id_seq"), primary_key=True)
-    title = Column(String(31))
-    family_name = Column(String(64))
-    given_name = Column(String(160))
-    birth_date = Column(Date)
-    country_id = Column(Integer, ForeignKey(Country.country_id))
-    country = relationship(Country)
-    sex = Column(Enum(Sex))
+class Person(Base, HasExternalIds):
+    person_id: Mapped[int] = mapped_column(Sequence("person_id_seq"), primary_key=True)
+    external_ids: Mapped[list[PersonXID]] = relationship("PersonXID", back_populates="person")
+
+    title: Mapped[str | None] = mapped_column(String(31))
+    family_name: Mapped[str | None] = mapped_column(String(64))
+    given_name: Mapped[str | None] = mapped_column(String(160))
+    birth_date: Mapped[date | None]
+    country_id: Mapped[int | None] = mapped_column(ForeignKey(Country.country_id))
+    country: Mapped[Country | None] = relationship(Country)
+    sex: Mapped[Sex | None] = mapped_column(Enum(Sex))
 
 
-class PersonXID(Base):
-    pass
+class PersonXID(Base, ExternalId):
+    person_id: Mapped[int] = mapped_column(ForeignKey("Person.person_id"))
+    person: Mapped[Person] = relationship(Person, back_populates="external_ids")
 
 
-OrganisationType = auto_enum(
+OrganisationType = enum.StrEnum(
     "OrganisationType",
     [
         "IOF",
@@ -396,64 +411,71 @@ OrganisationType = auto_enum(
 )
 
 
-class Organisation(Base):
-    organisation_id = Column(Integer, Sequence("organisation_id_seq"), primary_key=True)
-    name = Column(String(255), nullable=False)
-    short_name = Column(String(32))
-    country_id = Column(Integer, ForeignKey(Country.country_id))
-    country = relationship(Country)
-    type = Column(Enum(OrganisationType))
+class Organisation(Base, HasExternalIds):
+    organisation_id: Mapped[int] = mapped_column(Sequence("organisation_id_seq"), primary_key=True)
+    external_ids: Mapped[list[OrganisationXID]] = relationship("OrganisationXID", back_populates="organisation")
+
+    name: Mapped[str] = mapped_column(String(255))
+    short_name: Mapped[str | None] = mapped_column(String(32))
+    country_id: Mapped[int | None] = mapped_column(ForeignKey(Country.country_id))
+    country: Mapped[Country | None] = relationship(Country)
+    type: Mapped[OrganisationType | None] = mapped_column(Enum(OrganisationType))
 
 
-class OrganisationXID(Base):
-    pass
+class OrganisationXID(Base, ExternalId):
+    organisation_id: Mapped[int] = mapped_column(ForeignKey("Organisation.organisation_id"))
+    organisation: Mapped[Organisation] = relationship(Organisation, back_populates="external_ids")
 
 
-class Entry(Base):
-    entry_id = Column(Integer, Sequence("entry_id_seq"), primary_key=True)
+class Entry(Base, HasExternalIds):
+    entry_id: Mapped[int] = mapped_column(Sequence("entry_id_seq"), primary_key=True)
+    external_ids: Mapped[list[EntryXID]] = relationship("EntryXID", back_populates="entry")
 
-    event_id = Column(Integer, ForeignKey(Event.event_id), nullable=False)
-    event = relationship(Event, back_populates="entries")
+    event_id: Mapped[int] = mapped_column(ForeignKey(Event.event_id))
+    event: Mapped[Event] = relationship(Event, back_populates="entries")
 
-    number = Column(Integer, nullable=True)
-    name = Column(String(255))
-    competitors = relationship("Competitor", back_populates="entry")
+    number: Mapped[int | None]
+    name: Mapped[str | None] = mapped_column(String(255))
+    competitors: Mapped[list[Competitor]] = relationship("Competitor", back_populates="entry")
 
-    organisation_id = Column(Integer, ForeignKey(Organisation.organisation_id))
-    organisation = relationship(Organisation)
+    organisation_id: Mapped[int | None] = mapped_column(ForeignKey(Organisation.organisation_id))
+    organisation: Mapped[Organisation | None] = relationship(Organisation)
 
-    category_requests = relationship(
+    category_requests: Mapped[list[EntryCategoryRequest]] = relationship(
         "EntryCategoryRequest",
         back_populates="entry",
         doc="Requested categories with preference",
     )
-    start_time_allocation_requests = relationship("StartTimeAllocationRequest")
-    starts = relationship("Start", back_populates="entry")
+    start_time_allocation_requests: Mapped[list[StartTimeAllocationRequest]] = relationship(
+        "StartTimeAllocationRequest",
+    )
+    starts: Mapped[list[Start]] = relationship("Start", back_populates="entry")
 
     @property
-    def races(self):
+    def races(self) -> list[Race]:
         # TODO: Allow participation in only some of the events races.
         return self.event.races
 
 
-class EntryXID(Base):
-    pass
+class EntryXID(Base, ExternalId):
+    entry_id: Mapped[int] = mapped_column(ForeignKey("Entry.entry_id"))
+    entry: Mapped[Entry] = relationship(Entry, back_populates="external_ids")
 
 
 class EntryCategoryRequest(Base):
-    entry_id = Column(Integer, ForeignKey(Entry.entry_id), primary_key=True)
-    entry = relationship(Entry)
-    preference = Column(
+    entry_id: Mapped[int] = mapped_column(ForeignKey(Entry.entry_id), primary_key=True)
+    entry: Mapped[Entry] = relationship(Entry)
+    preference: Mapped[int] = mapped_column(
         SmallInteger,
         primary_key=True,
         default=0,
         doc="Lower number means higher preference",
     )
-    event_category_id = Column(Integer, ForeignKey(EventCategory.event_category_id), nullable=False)
-    event_category = relationship(EventCategory, back_populates="entry_requests")
+    event_category_id: Mapped[int] = mapped_column(ForeignKey(EventCategory.event_category_id))
+    event_category: Mapped[EventCategory] = relationship(EventCategory, back_populates="entry_requests")
 
 
-StartTimeAllocationRequestType = auto_enum(
+StartTimeAllocationRequestType = enum.StrEnum(
     "StartTimeAllocationRequestType",
     [
         "NORMAL",
@@ -466,48 +488,54 @@ StartTimeAllocationRequestType = auto_enum(
 
 
 class StartTimeAllocationRequest(Base):
-    start_time_allocation_request_id = Column(
-        Integer, Sequence("start_time_allocation_request_id_seq"), primary_key=True
+    start_time_allocation_request_id: Mapped[int] = mapped_column(
+        Sequence("start_time_allocation_request_id_seq"),
+        primary_key=True,
     )
-    entry_id = Column(Integer, ForeignKey(Entry.entry_id), nullable=False)
-    entry = relationship(Entry, back_populates="start_time_allocation_requests")
+    entry_id: Mapped[int] = mapped_column(ForeignKey(Entry.entry_id))
+    entry: Mapped[Entry] = relationship(Entry, back_populates="start_time_allocation_requests")
 
-    type = Column(
+    type: Mapped[StartTimeAllocationRequestType] = mapped_column(
         Enum(StartTimeAllocationRequestType),
         default=StartTimeAllocationRequestType.NORMAL,
     )
-    organisation_id = Column(Integer, ForeignKey(Organisation.organisation_id))
-    organisation = relationship(Organisation)
-    person_id = Column(Integer, ForeignKey(Person.person_id))
-    person = relationship(Person)
+    organisation_id: Mapped[int | None] = mapped_column(ForeignKey(Organisation.organisation_id))
+    organisation: Mapped[Organisation | None] = relationship(Organisation)
+    person_id: Mapped[int | None] = mapped_column(ForeignKey(Person.person_id))
+    person: Mapped[Person | None] = relationship(Person)
 
 
-PunchingSystem = auto_enum("PunchingSystem", ["SportIdent", "Emit"])
+PunchingSystem = enum.StrEnum("PunchingSystem", ["SPORT_IDENT", "EMIT"])
 
 
 class ControlCard(Base):
-    control_card_id = Column(Integer, Sequence("control_card_id_seq"), primary_key=True)
-    system = Column(Enum(PunchingSystem))
-    label = Column(String(16))
+    control_card_id: Mapped[int] = mapped_column(Sequence("control_card_id_seq"), primary_key=True)
+    system: Mapped[PunchingSystem | None] = mapped_column(Enum(PunchingSystem))
+    label: Mapped[str | None] = mapped_column(String(16))
 
 
-class Competitor(Base):
-    competitor_id = Column(Integer, Sequence("competitor_id_seq"), primary_key=True)
+class Competitor(Base, HasExternalIds):
+    competitor_id: Mapped[int] = mapped_column(Sequence("competitor_id_seq"), primary_key=True)
+    external_ids: Mapped[list[CompetitorXID]] = relationship("CompetitorXID", back_populates="competitor")
 
-    entry_id = Column(Integer, ForeignKey(Entry.entry_id), nullable=False)
-    entry = relationship(Entry, back_populates="competitors")
+    entry_id: Mapped[int] = mapped_column(ForeignKey(Entry.entry_id))
+    entry: Mapped[Entry] = relationship(Entry, back_populates="competitors")
 
-    entry_sequence = Column(SmallInteger, default=1, doc="1-based position of the competitor in the team")
-    leg_number = Column(SmallInteger)
-    leg_order = Column(SmallInteger)
+    entry_sequence: Mapped[int] = mapped_column(
+        SmallInteger,
+        default=1,
+        doc="1-based position of the competitor in the team",
+    )
+    leg_number: Mapped[int | None] = mapped_column(SmallInteger)
+    leg_order: Mapped[int | None] = mapped_column(SmallInteger)
 
-    person_id = Column(Integer, ForeignKey(Person.person_id), nullable=False)
-    person = relationship(Person)
+    person_id: Mapped[int] = mapped_column(ForeignKey(Person.person_id))
+    person: Mapped[Person] = relationship(Person)
 
-    organisation_id = Column(Integer, ForeignKey(Organisation.organisation_id))
-    organisation = relationship(Organisation)
+    organisation_id: Mapped[int | None] = mapped_column(ForeignKey(Organisation.organisation_id))
+    organisation: Mapped[Organisation | None] = relationship(Organisation)
 
-    control_cards = relationship(
+    control_cards: Mapped[list[ControlCard]] = relationship(
         "ControlCard",
         secondary=Table(
             "CompetitorControlCards",
@@ -527,53 +555,57 @@ class Competitor(Base):
         ),
     )
 
-    starts = relationship("CompetitorStart", back_populates="competitor")
+    starts: Mapped[list[CompetitorStart]] = relationship("CompetitorStart", back_populates="competitor")
 
 
-class CompetitorXID(Base):
-    pass
+class CompetitorXID(Base, ExternalId):
+    competitor_id: Mapped[int] = mapped_column(ForeignKey("Competitor.competitor_id"))
+    competitor: Mapped[Competitor] = relationship(Competitor, back_populates="external_ids")
 
 
 ### Starts ###
 
 
 class Start(Base):
-    start_id = Column(Integer, Sequence("start_id_seq"), primary_key=True)
-    result = relationship("Result", uselist=False, back_populates="start")
+    start_id: Mapped[int] = mapped_column(Sequence("start_id_seq"), primary_key=True)
+    result: Mapped[Result] = relationship("Result", uselist=False, back_populates="start")
 
-    category_id = Column(Integer, ForeignKey(Category.category_id), nullable=False)
-    category = relationship(Category, back_populates="starts")
-    entry_id = Column(Integer, ForeignKey(Entry.entry_id), nullable=False)
-    entry = relationship(Entry, back_populates="starts")
+    category_id: Mapped[int] = mapped_column(ForeignKey(Category.category_id))
+    category: Mapped[Category] = relationship(Category, back_populates="starts")
+    entry_id: Mapped[int] = mapped_column(ForeignKey(Entry.entry_id))
+    entry: Mapped[Entry] = relationship(Entry, back_populates="starts")
 
-    competitive = Column(
-        Boolean,
+    competitive: Mapped[bool] = mapped_column(
         default=True,
         doc="Whether the starter is to be considered for the official ranking. \
         This can be set to `False` for example if the starter does not fulfill some entry requirement.",
     )
-    time_offset = Column(Interval, doc="Start time offset from category start time")
+    time_offset: Mapped[timedelta | None] = mapped_column(doc="Start time offset from category start time")
 
-    competitor_starts = relationship("CompetitorStart", back_populates="start")
+    competitor_starts: Mapped[list[CompetitorStart]] = relationship("CompetitorStart", back_populates="start")
 
 
 class CompetitorStart(Base):
-    competitor_start_id = Column(Integer, Sequence("competitor_start_id_seq"), primary_key=True)
-    competitor_result = relationship("CompetitorResult", uselist=False, back_populates="competitor_start")
+    competitor_start_id: Mapped[int] = mapped_column(Sequence("competitor_start_id_seq"), primary_key=True)
+    competitor_result: Mapped[CompetitorResult] = relationship(
+        "CompetitorResult",
+        uselist=False,
+        back_populates="competitor_start",
+    )
 
-    start_id = Column(Integer, ForeignKey(Start.start_id), nullable=False)
-    start = relationship(Start, back_populates="competitor_starts")
-    competitor_id = Column(Integer, ForeignKey(Competitor.competitor_id), nullable=False)
-    competitor = relationship(Competitor, back_populates="starts")
+    start_id: Mapped[int] = mapped_column(ForeignKey(Start.start_id))
+    start: Mapped[Start] = relationship(Start, back_populates="competitor_starts")
+    competitor_id: Mapped[int] = mapped_column(ForeignKey(Competitor.competitor_id))
+    competitor: Mapped[Competitor] = relationship(Competitor, back_populates="starts")
 
-    time_offset = Column(Interval, doc="Start time offset from entry start time")
-    control_card_id = Column(Integer, ForeignKey(ControlCard.control_card_id))
-    control_card = relationship(ControlCard)
+    time_offset: Mapped[timedelta | None] = mapped_column(doc="Start time offset from entry start time")
+    control_card_id: Mapped[int | None] = mapped_column(ForeignKey(ControlCard.control_card_id))
+    control_card: Mapped[ControlCard | None] = relationship(ControlCard)
 
 
 ### Results ###
 
-ResultStatus = auto_enum(
+ResultStatus = enum.StrEnum(
     "ResultStatus",
     [
         "OK",
@@ -596,30 +628,33 @@ ResultStatus = auto_enum(
 
 
 class Result(Base):
-    result_id = Column(Integer, ForeignKey(Start.start_id), primary_key=True)
-    start = relationship(Start, back_populates="result")
+    result_id: Mapped[int] = mapped_column(ForeignKey(Start.start_id), primary_key=True)
+    start: Mapped[Start] = relationship(Start, back_populates="result")
 
-    start_time = Column(DateTime, doc="Actual start time used for placement")
-    finish_time = Column(DateTime, doc="Actual finish time used for placement")
+    start_time: Mapped[datetime | None] = mapped_column(doc="Actual start time used for placement")
+    finish_time: Mapped[datetime | None] = mapped_column(doc="Actual finish time used for placement")
 
-    time_adjustment = Column(Interval, doc="Time bonus or penalty", nullable=False)
-    time = Column(Interval)
+    time_adjustment: Mapped[timedelta] = mapped_column(doc="Time bonus or penalty")
+    time: Mapped[timedelta | None]
 
-    status = Column(Enum(ResultStatus))
-    position = Column(Integer, doc="Position in the category")
+    status: Mapped[ResultStatus | None] = mapped_column(Enum(ResultStatus))
+    position: Mapped[int | None] = mapped_column(doc="Position in the category")
 
 
 class CompetitorResult(Base):
-    competitor_result_id = Column(Integer, ForeignKey(CompetitorStart.competitor_start_id), primary_key=True)
-    competitor_start = relationship(CompetitorStart, back_populates="competitor_result")
+    competitor_result_id: Mapped[int] = mapped_column(
+        ForeignKey(CompetitorStart.competitor_start_id),
+        primary_key=True,
+    )
+    competitor_start: Mapped[CompetitorStart] = relationship(CompetitorStart, back_populates="competitor_result")
 
-    start_time = Column(DateTime, doc="Actual start time used for placement")
-    finish_time = Column(DateTime, doc="Actual finish time used for placement")
+    start_time: Mapped[datetime | None] = mapped_column(doc="Actual start time used for placement")
+    finish_time: Mapped[datetime | None] = mapped_column(doc="Actual finish time used for placement")
 
-    time_adjustment = Column(Interval, doc="Time bonus or penalty", nullable=False)
-    time = Column(Interval)
+    time_adjustment: Mapped[timedelta] = mapped_column(doc="Time bonus or penalty")
+    time: Mapped[timedelta | None]
 
-    status = Column(Enum(ResultStatus))
+    status: Mapped[ResultStatus | None] = mapped_column(Enum(ResultStatus))
 
 
 # additional types in IOF XML:
