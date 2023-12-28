@@ -17,11 +17,12 @@
       <!-- Cable -->
       <path
         v-if="state"
-        class="stroke-black stroke-[5]"
-        :class="{
-          'stroke-ash-semidark':
-            state === 'disconnected' || state === 'connecting',
-        }"
+        class="stroke-[5]"
+        :class="
+          state === 'disconnected' || state === 'connecting'
+            ? 'stroke-ash-semidark'
+            : 'stroke-black'
+        "
         style="stroke-linecap: butt; fill: none"
         d="m 25,99.967126 c 0,6.017754 -1.022531,26.318054 0.114653,31.987934 2.243446,11.18559 17.47742,7.34517 19.717228,3.83429 2.613092,-4.096 2.388496,-9.26041 -0.272594,-13.06082 -1.542121,-2.20236 -5.351453,-5.40907 -12.350029,-3.7997 -6.768655,1.5565 -16.677956,3.66023 -32.09737263,3.66023"
       />
