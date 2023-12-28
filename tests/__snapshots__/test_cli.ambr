@@ -1,11 +1,17 @@
 # serializer version: 1
 # name: test_create_event
   '''
-  A new event “event.test-name.1” was created successfully with number #1.
+  Initialized hOLper database.
   
   '''
 # ---
 # name: test_create_event.1
+  '''
+  A new event “event.test-name.1” was created successfully with number #1.
+  
+  '''
+# ---
+# name: test_create_event.2
   '''
   #1 2024-02-29 10:00:00 - 2024-03-01 10:00:00: event.test-name.1, 1 races, 0 categories, 0 entries
   
@@ -13,35 +19,41 @@
 # ---
 # name: test_imports_and_startlist[event0]
   '''
-  A new event “HerbstOL2022” was created successfully with number #1.
+  Initialized hOLper database.
   
   '''
 # ---
 # name: test_imports_and_startlist[event0].1
   '''
-  Imported 36 categories
+  A new event “HerbstOL2022” was created successfully with number #1.
   
   '''
 # ---
 # name: test_imports_and_startlist[event0].2
   '''
-  Imported 16 courses
+  Imported 36 categories
   
   '''
 # ---
 # name: test_imports_and_startlist[event0].3
   '''
-  Imported 157 entries
+  Imported 16 courses
   
   '''
 # ---
 # name: test_imports_and_startlist[event0].4
   '''
-  #1 2024-02-29 10:00:00 - 2024-03-01 10:00:00: HerbstOL2022, 1 races, 36 categories, 157 entries
+  Imported 157 entries
   
   '''
 # ---
 # name: test_imports_and_startlist[event0].5
+  '''
+  #1 2024-02-29 10:00:00 - 2024-03-01 10:00:00: HerbstOL2022, 1 races, 36 categories, 157 entries
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event0].6
   '''
   Name: HerbstOL2022
   Period: 2024-02-29 10:00:00 - 2024-03-01 10:00:00
@@ -52,7 +64,7 @@
   
   '''
 # ---
-# name: test_imports_and_startlist[event0].6
+# name: test_imports_and_startlist[event0].7
   '''
   Katja Lahm: D50-
   Marlene Ullmann: D-12
@@ -214,7 +226,7 @@
   
   '''
 # ---
-# name: test_imports_and_startlist[event0].7
+# name: test_imports_and_startlist[event0].8
   '''
   Competitor Anna borodina has not provided a control card
   Competitor Dimitry borodin has not provided a control card
@@ -257,35 +269,41 @@
 # ---
 # name: test_imports_and_startlist[event1]
   '''
-  A new event “WinterOL2023” was created successfully with number #1.
+  Initialized hOLper database.
   
   '''
 # ---
 # name: test_imports_and_startlist[event1].1
   '''
-  Imported 35 categories
+  A new event “WinterOL2023” was created successfully with number #1.
   
   '''
 # ---
 # name: test_imports_and_startlist[event1].2
   '''
-  Imported 18 courses
+  Imported 35 categories
   
   '''
 # ---
 # name: test_imports_and_startlist[event1].3
   '''
-  Imported 156 entries
+  Imported 18 courses
   
   '''
 # ---
 # name: test_imports_and_startlist[event1].4
   '''
-  #1 2024-02-29 10:00:00 - 2024-03-01 10:00:00: WinterOL2023, 1 races, 35 categories, 156 entries
+  Imported 156 entries
   
   '''
 # ---
 # name: test_imports_and_startlist[event1].5
+  '''
+  #1 2024-02-29 10:00:00 - 2024-03-01 10:00:00: WinterOL2023, 1 races, 35 categories, 156 entries
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event1].6
   '''
   Name: WinterOL2023
   Period: 2024-02-29 10:00:00 - 2024-03-01 10:00:00
@@ -296,7 +314,7 @@
   
   '''
 # ---
-# name: test_imports_and_startlist[event1].6
+# name: test_imports_and_startlist[event1].7
   '''
   Katja Lahm: D55-
   Wolfgang Kössler: H65-
@@ -457,7 +475,7 @@
   
   '''
 # ---
-# name: test_imports_and_startlist[event1].7
+# name: test_imports_and_startlist[event1].8
   '''
   Course 1 (D19-L, H19-K):
   3n+2 [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35]
@@ -500,35 +518,41 @@
 # ---
 # name: test_imports_and_startlist[event2]
   '''
-  A new event “BBMSprint2022” was created successfully with number #1.
+  Initialized hOLper database.
   
   '''
 # ---
 # name: test_imports_and_startlist[event2].1
   '''
-  Imported 24 categories
+  A new event “BBMSprint2022” was created successfully with number #1.
   
   '''
 # ---
 # name: test_imports_and_startlist[event2].2
   '''
-  Imported 21 courses
+  Imported 24 categories
   
   '''
 # ---
 # name: test_imports_and_startlist[event2].3
   '''
-  Imported 135 entries
+  Imported 21 courses
   
   '''
 # ---
 # name: test_imports_and_startlist[event2].4
   '''
-  #1 2024-02-29 10:00:00 - 2024-03-01 10:00:00: BBMSprint2022, 1 races, 24 categories, 135 entries
+  Imported 135 entries
   
   '''
 # ---
 # name: test_imports_and_startlist[event2].5
+  '''
+  #1 2024-02-29 10:00:00 - 2024-03-01 10:00:00: BBMSprint2022, 1 races, 24 categories, 135 entries
+  
+  '''
+# ---
+# name: test_imports_and_startlist[event2].6
   '''
   Name: BBMSprint2022
   Period: 2024-02-29 10:00:00 - 2024-03-01 10:00:00
@@ -539,7 +563,7 @@
   
   '''
 # ---
-# name: test_imports_and_startlist[event2].6
+# name: test_imports_and_startlist[event2].7
   '''
   Erika Polgar: D45-
   Wolfgang Kössler: H65-
@@ -679,7 +703,7 @@
   
   '''
 # ---
-# name: test_imports_and_startlist[event2].7
+# name: test_imports_and_startlist[event2].8
   '''
   Competitor Andrea Naß has not provided a control card
   Competitor Ulrike Thieme has not provided a control card

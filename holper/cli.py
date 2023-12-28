@@ -2,6 +2,7 @@
 """Command line interface to the holper tool"""
 
 from datetime import datetime, timedelta
+from importlib.resources import files
 from pathlib import Path
 from typing import Annotated, Optional
 
@@ -9,7 +10,7 @@ import sqlalchemy
 import typer
 from xdg import xdg_data_home
 
-from holper import core, iof, model, sportsoftware, start
+from holper import core, iof, model, resources, sportsoftware, start
 
 app = typer.Typer()
 
@@ -23,9 +24,20 @@ ExportFileOpt = Annotated[Path, typer.Argument(dir_okay=False, readable=True, al
 
 
 @app.command()
+def init(*, db_file: DbFileOpt = default_db) -> None:
+    """Initialize database with country data."""
+    Path(db_file).parent.mkdir(parents=True, exist_ok=True)
+
+    with core.open_session(f"sqlite:///{db_file}") as session:
+        session.execute(sqlalchemy.text((files(resources) / "Country.sql").read_text()))
+        session.commit()
+
+    typer.echo("Initialized hOLper database.")
+
+
+@app.command()
 def events(*, db_file: DbFileOpt = default_db) -> None:
     """Show list of all events"""
-    Path(db_file).parent.mkdir(parents=True, exist_ok=True)
     with core.open_session(f"sqlite:///{db_file}") as session:
         event_list = [evt for (evt,) in session.execute(sqlalchemy.select(model.Event))]
 
@@ -75,7 +87,6 @@ def event(event_id: int, *, db_file: DbFileOpt = default_db) -> None:
 @app.command()
 def new_event(name: str, date: datetime, *, db_file: DbFileOpt = default_db) -> None:
     """Create a new single-race solo event"""
-    Path(db_file).parent.mkdir(parents=True, exist_ok=True)
     with core.open_session(f"sqlite:///{db_file}") as session:
         evt = model.Event(name=name, start_time=date, end_time=date + timedelta(days=1))
         race = model.Race(first_start=date)

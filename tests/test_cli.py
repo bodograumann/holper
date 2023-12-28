@@ -29,6 +29,7 @@ def cli_snapshot(db_file_opt, snapshot):
 
 
 def test_create_event(cli_snapshot):
+    cli_snapshot("init")
     cli_snapshot("new-event", "event.test-name.1", "2024-02-29 10:00:00")
     cli_snapshot("events")
 
@@ -36,6 +37,7 @@ def test_create_event(cli_snapshot):
 @pytest.mark.parametrize("event", files(events).iterdir())
 def test_imports_and_startlist(event, cli_snapshot):
     with as_file(event) as event_dir:
+        cli_snapshot("init")
         cli_snapshot("new-event", event.name, "2024-02-29 10:00:00")
         cli_snapshot("import-categories", "1", str(event_dir / "ClassList.xml"))
         cli_snapshot("import-courses", "-s", "1", str(event_dir / "CourseData.xml"))
