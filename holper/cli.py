@@ -8,7 +8,7 @@ from typing import Annotated, Optional
 
 import sqlalchemy
 import typer
-from xdg import xdg_data_home
+from xdg_base_dirs import xdg_data_home
 
 from holper import core, iof, model, resources, sportsoftware, start
 
