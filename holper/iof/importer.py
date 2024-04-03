@@ -11,6 +11,18 @@ from .entry_list import PersonEntry, StartTimeAllocationRequest, TeamEntry, Team
 EntityWithId = TypeVar("EntityWithId", bound=model.HasExternalIds)
 
 
+class NoSuchEntityError(Exception):
+    def __init__(self, issuer: str, external_id: str, scope: set[str]) -> None:
+        super().__init__(
+            f"Unable to find entity in list with id {issuer} and issuer {external_id}\n"
+            "Possible values: "
+            + (", ".join(scope)),
+        )
+        self.issuer = issuer
+        self.external_id = external_id
+        self.scope = scope
+
+
 class IdArgs(TypedDict):
     issuer: str
     external_id: str
@@ -30,14 +42,25 @@ class Importer:
 
     def find_by_id(self, entities: list[EntityWithId], id_: Id) -> EntityWithId:
         args = self.extract_id(id_)
-        return next(
-            entity
-            for entity in entities
-            if any(
-                entity_id.issuer == args["issuer"] and entity_id.external_id == args["external_id"]
-                for entity_id in entity.external_ids
+        try:
+            return next(
+                entity
+                for entity in entities
+                if any(
+                    entity_id.issuer == args["issuer"] and entity_id.external_id == args["external_id"]
+                    for entity_id in entity.external_ids
+                )
             )
-        )
+        except StopIteration as error:
+            raise NoSuchEntityError(
+                args["issuer"],
+                args["external_id"],
+                {
+                    f"{entity_id.issuer}/{entity_id.external_id}"
+                    for entity in entities
+                    for entity_id in entity.external_ids
+                },
+            ) from error
 
     def find_country(self, ioc_code: str) -> model.Country | None:
         try:
@@ -143,7 +166,7 @@ class Importer:
         if organisation is None:
             return None
         if organisation.id is not None:
-            with suppress(StopIteration):
+            with suppress(NoSuchEntityError):
                 return self.find_by_id(self.organisations, organisation.id)
 
         imported = model.Organisation(
