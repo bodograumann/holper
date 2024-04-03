@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """Command line interface to the holper tool"""
 
+import logging
 from datetime import datetime, timedelta
 from importlib.resources import files
 from pathlib import Path
@@ -32,8 +33,15 @@ ExportFileOpt = Annotated[Path, typer.Argument(dir_okay=False, readable=True, al
 
 
 @app.callback()
-def main(*, db_file: Annotated[Path, typer.Option()] = default_db) -> None:
+def main(
+    *,
+    db_file: Annotated[Path, typer.Option()] = default_db,
+    debug: Annotated[bool, typer.Option()] = False,
+) -> None:
     cli_ctx["db_file"] = db_file
+    logging.basicConfig(level=logging.DEBUG if debug else logging.WARNING)
+    if debug:
+        logging.debug("Debug logging enabled!")
 
 
 @app.command()
