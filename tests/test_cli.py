@@ -20,7 +20,7 @@ def db_file_opt():
 @pytest.fixture()
 def cli_snapshot(db_file_opt, snapshot):
     def _cli_snapshot(*args, exit_code=0):
-        result = runner.invoke(cli.app, [*args, *db_file_opt])
+        result = runner.invoke(cli.app, [*db_file_opt, *args])
         assert result.exit_code == exit_code, f"Unexpected exit code. Output: \n{result.stdout}"
         assert result.stdout == snapshot
         return result

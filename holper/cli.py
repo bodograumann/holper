@@ -14,8 +14,16 @@ from holper import core, iof, model, resources, sportsoftware, start
 
 app = typer.Typer()
 
-DbFileOpt = Annotated[Path, typer.Option()]
 default_db = xdg_data_home() / "holper" / "data.sqlite"
+cli_ctx = {
+    "db_file": default_db,
+}
+
+
+def db_session() -> sqlalchemy.orm.Session:
+    return core.open_session(f"sqlite:///{cli_ctx['db_file']}")
+
+
 ImportFileOpt = Annotated[
     Path,
     typer.Argument(exists=True, file_okay=True, dir_okay=False, readable=True, allow_dash=True),
@@ -23,12 +31,17 @@ ImportFileOpt = Annotated[
 ExportFileOpt = Annotated[Path, typer.Argument(dir_okay=False, readable=True, allow_dash=True)]
 
 
-@app.command()
-def init(*, db_file: DbFileOpt = default_db) -> None:
-    """Initialize database with country data."""
-    Path(db_file).parent.mkdir(parents=True, exist_ok=True)
+@app.callback()
+def main(*, db_file: Annotated[Path, typer.Option()] = default_db) -> None:
+    cli_ctx["db_file"] = db_file
 
-    with core.open_session(f"sqlite:///{db_file}") as session:
+
+@app.command()
+def init() -> None:
+    """Initialize database with country data."""
+    Path(cli_ctx["db_file"]).parent.mkdir(parents=True, exist_ok=True)
+
+    with db_session() as session:
         session.execute(sqlalchemy.text((files(resources) / "Country.sql").read_text()))
         session.commit()
 
@@ -36,9 +49,9 @@ def init(*, db_file: DbFileOpt = default_db) -> None:
 
 
 @app.command()
-def events(*, db_file: DbFileOpt = default_db) -> None:
+def events() -> None:
     """Show list of all events"""
-    with core.open_session(f"sqlite:///{db_file}") as session:
+    with db_session() as session:
         event_list = [evt for (evt,) in session.execute(sqlalchemy.select(model.Event))]
 
         if not event_list:
@@ -54,9 +67,9 @@ def events(*, db_file: DbFileOpt = default_db) -> None:
 
 
 @app.command()
-def event(event_id: int, *, db_file: DbFileOpt = default_db) -> None:
+def event(event_id: int) -> None:
     """Show details of an event"""
-    with core.open_session(f"sqlite:///{db_file}") as session:
+    with db_session() as session:
         evt = core.get_event(session, event_id)
         if not evt:
             typer.echo("Event could not be found.")
@@ -85,9 +98,9 @@ def event(event_id: int, *, db_file: DbFileOpt = default_db) -> None:
 
 
 @app.command()
-def new_event(name: str, date: datetime, *, db_file: DbFileOpt = default_db) -> None:
+def new_event(name: str, date: datetime) -> None:
     """Create a new single-race solo event"""
-    with core.open_session(f"sqlite:///{db_file}") as session:
+    with db_session() as session:
         evt = model.Event(name=name, start_time=date, end_time=date + timedelta(days=1))
         race = model.Race(first_start=date)
         evt.races.append(race)
@@ -99,9 +112,9 @@ def new_event(name: str, date: datetime, *, db_file: DbFileOpt = default_db) -> 
 
 
 @app.command()
-def import_categories(event_id: int, category_file: ImportFileOpt, *, db_file: DbFileOpt = default_db) -> None:
+def import_categories(event_id: int, category_file: ImportFileOpt) -> None:
     """Import event categories in IOF XML v3 format"""
-    with core.open_session(f"sqlite:///{db_file}") as session:
+    with db_session() as session:
         evt = core.get_event(session, event_id)
         if not evt:
             typer.echo("Event could not be found.")
@@ -127,9 +140,9 @@ def import_categories(event_id: int, category_file: ImportFileOpt, *, db_file: D
 
 
 @app.command()
-def courses(race_id: int, *, db_file: DbFileOpt = default_db) -> None:
+def courses(race_id: int) -> None:
     """Show courses for a race"""
-    with core.open_session(f"sqlite:///{db_file}") as session:
+    with db_session() as session:
         race = core.get_race(session, race_id)
         if not race:
             typer.echo("Race could not be found.")
@@ -171,10 +184,9 @@ def import_courses(
             help="Use the short category name to match category assignments.",
         ),
     ] = False,
-    db_file: DbFileOpt = default_db,
 ) -> None:
     """Import event courses in IOF XML v3 format"""
-    with core.open_session(f"sqlite:///{db_file}") as session:
+    with db_session() as session:
         evt = core.get_event(session, event_id)
         if not evt:
             typer.echo("Event could not be found.")
@@ -216,9 +228,9 @@ def import_courses(
 
 
 @app.command()
-def entries(event_id: int, *, db_file: DbFileOpt = default_db) -> None:
+def entries(event_id: int) -> None:
     """Show all entries of an event"""
-    with core.open_session(f"sqlite:///{db_file}") as session:
+    with db_session() as session:
         evt = core.get_event(session, event_id)
         if not evt:
             typer.echo("Event could not be found.")
@@ -232,9 +244,9 @@ def entries(event_id: int, *, db_file: DbFileOpt = default_db) -> None:
 
 
 @app.command()
-def import_entries(event_id: int, entry_file: ImportFileOpt, *, db_file: DbFileOpt = default_db) -> None:
+def import_entries(event_id: int, entry_file: ImportFileOpt) -> None:
     """Import race entries in IOF XML v3 format"""
-    with core.open_session(f"sqlite:///{db_file}") as session:
+    with db_session() as session:
         evt = core.get_event(session, event_id)
         if not evt:
             typer.echo("Event could not be found.")
@@ -269,10 +281,9 @@ def startlist(
     parallel_max: Optional[int] = None,
     *,
     greedy: bool = False,
-    db_file: DbFileOpt = default_db,
 ) -> None:
     """Assign start times for all starters"""
-    with core.open_session(f"sqlite:///{db_file}") as session:
+    with db_session() as session:
         race = core.get_race(session, race_id)
         if not race:
             typer.echo("Race could not be found.")
@@ -343,11 +354,9 @@ def startlist(
 def export(
     race_id: int,
     target: ExportFileOpt,
-    *,
-    db_file: DbFileOpt = default_db,
 ) -> None:
     """Export entries as SportSoftware csv file"""
-    with core.open_session(f"sqlite:///{db_file}") as session:
+    with db_session() as session:
         race = core.get_race(session, race_id)
         if not race:
             typer.echo("Race could not be found.")
