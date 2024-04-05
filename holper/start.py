@@ -14,6 +14,7 @@ the same course.
 .. _WKB: https://o-sport.de/dokumente/wettkampfwesen/
 """
 
+import logging
 import operator
 import random
 from collections import Counter, defaultdict
@@ -75,6 +76,9 @@ class StartConstraints:
 
     def add_race_courses(self, race: Race) -> None:
         for category in race.categories:
+            if not category.courses:
+                logging.error("Category %s has no course assigned!", category.name)
+                continue
             self.order[category.courses[0].course.course_id].append(category)
 
         for categories in self.order.values():
