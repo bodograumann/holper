@@ -487,7 +487,7 @@ def detect(input_file: IO[bytes]) -> bool:
 
 
 @contextmanager
-def _wrap_binary_stream(io_buffer: IO[bytes], encoding: str = "latin1") -> Generator[TextIOWrapper, None, None]:
+def _wrap_binary_stream(io_buffer: IO[bytes], encoding: str = "latin1") -> Generator[TextIOWrapper]:
     """Access the given stream with the correct format
 
     Usually when a `io.TextIOWrapper` is destroyed, the underlying stream is
@@ -517,7 +517,7 @@ def _detect_type(input_file: IO[bytes], encoding: str = "latin1") -> str | None:
         return None
 
 
-def read(input_file: IO[bytes], encoding: str = "latin1") -> Generator[model.Entry, None, None]:
+def read(input_file: IO[bytes], encoding: str = "latin1") -> Generator[model.Entry]:
     file_type = _detect_type(input_file, encoding=encoding)
     input_file.seek(0)
 
@@ -562,7 +562,7 @@ class CSVReader:
         *,
         with_seconds: bool = True,
         encoding: str = "latin1",
-    ) -> Generator[model.Entry, None, None]:
+    ) -> Generator[model.Entry]:
         """Read a SportSoftware OE2010 csv export file"""
         self.race.event.form = model.EventForm.INDIVIDUAL
 
@@ -649,7 +649,7 @@ class CSVReader:
         *,
         with_seconds: bool = True,
         encoding: str = "latin1",
-    ) -> Generator[model.Entry, None, None]:
+    ) -> Generator[model.Entry]:
         """Read a SportSoftware OS2010 csv export file"""
         self.race.event.form = model.EventForm.RELAY
 
@@ -712,7 +712,7 @@ class CSVReader:
         *,
         with_seconds: bool = True,
         encoding: str = "latin1",
-    ) -> Generator[model.Entry, None, None]:
+    ) -> Generator[model.Entry]:
         """Read a SportSoftware OT2003 csv export file"""
         self.race.event.form = model.EventForm.TEAM
 
@@ -947,7 +947,7 @@ class CSVWriter:
                 if entry.category_requests:
                     row[12:16] = self.write_category(entry.category_requests[0].event_category)[:4]
 
-                for (competitor_nr, competitor) in enumerate(entry.competitors):
+                for competitor_nr, competitor in enumerate(entry.competitors):
                     offset = 24 + competitor_nr * 7
                     row[offset : offset + 5] = self.write_competitor(competitor)[:5]
 
@@ -964,9 +964,11 @@ class CSVWriter:
         return [
             next(external_id.external_id for external_id in club.external_ids if external_id.issuer == "SportSoftware"),
             club.short_name or "",
-            club.name[len(club.short_name) + 1 :]
-            if club.short_name and club.name.startswith(club.short_name + " ")
-            else club.name,
+            (
+                club.name[len(club.short_name) + 1 :]
+                if club.short_name and club.name.startswith(club.short_name + " ")
+                else club.name
+            ),
             (club.country.ioc_code or "") if club.country else "",
             "",
             "",
@@ -1009,9 +1011,11 @@ class CSVWriter:
     def write_start_and_result(self, start: model.Start) -> list[str]:
         return [
             "" if start.competitive else "X",
-            format_time((start.category.time_offset or timedelta()) + start.time_offset)
-            if start.time_offset is not None
-            else "",
+            (
+                format_time((start.category.time_offset or timedelta()) + start.time_offset)
+                if start.time_offset is not None
+                else ""
+            ),
             "",
             "",
             "",

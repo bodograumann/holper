@@ -12,16 +12,15 @@ packages = [{include = "holper"}]
 holper = "holper.cli:app"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.13"
 PyYAML = "^6.0"
-iso8601 = "^1.0.2"
-lxml = "^4.9.1"
-more-itertools = "^8.13.0"
+iso8601 = "^2.1.0"
+lxml = "^5.4.0"
+more-itertools = "^10.7.0"
 ortools = "^9.3.10497"
 pystache = "^0.6.0"
-python-iconv = "^1.1"
 sqlalchemy = "^2.0.23"
-typer = "^0.9.0"
+typer = "^0.15.4"
 xdg-base-dirs = "^6.0.1"
 pydantic = "^2.5.0"
 pydantic-xml = "^2.4.0"
@@ -30,13 +29,12 @@ pydantic-xml = "^2.4.0"
 psycopg = { version  = "^3.0", optional = true }
 
 [tool.poetry.group.dev.dependencies]
-black = "^22.8.0"
-sphinx = "^5.1.1"
-sphinxcontrib-mermaid = "^0.7.1"
-ruff = "^0.1.5"
+sphinx = "^8.2.3"
+sphinxcontrib-mermaid = "^1.0.0"
+ruff = "^0.11.10"
 mypy = "^1.7.0"
-pytest = "^7.4.3"
-pytest-subtests = "^0.11.0"
+pytest = "^8.3.5"
+pytest-subtests = "^0.14.1"
 syrupy = "^4.6.0"
 
 
@@ -45,38 +43,39 @@ postgres = ["psycopg"]
 
 
 [tool.ruff]
+line-length = 120
+target-version = "py313"
+
 extend-exclude = [
     "docs/conf.py",  # Auto-generated
 ]
 
+[tool.ruff.lint]
+
 select = ["ALL"]
 ignore = [
     "A00",  # This is ok in context of dataclasses, pydantic and sqlalchemy
-    "ANN101",  # Conflicting with mypy in places and due to be removed upstream
     "D203",  # Conflicts with D211
     "D213",  # Conflicts with D212
     "D",  # TODO: Improve doc strings later
     "DTZ",  # We work in local timezone for now. This should be configurable later.
+    "LOG015",  # Root logger is fine for the time being.
     "PLR2004",  # Not useful
-    "TCH003",  # Type annotation are required at run-time for sqlalchemy
+    "TC003",  # Type annotation are required at run-time for sqlalchemy
     "TD", "FIX",  # This project is very much a work in progress.
 ]
-
-line-length = 120
-
-target-version = "py310"
 
 allowed-confusables = [
     "’",  # This is proper typography. Cf. https://github.com/astral-sh/ruff/issues/1040
 ]
 
-[tool.ruff.pep8-naming]
+[tool.ruff.lint.pep8-naming]
 classmethod-decorators = [
     "sqlalchemy.ext.declarative.declared_attr",
     "sqlalchemy.ext.declarative.declared_attr.directive",
 ]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "holper/sportsoftware.py" = [
     "PLR0913",  # Let’s keep it simple.
 ]
@@ -94,11 +93,6 @@ classmethod-decorators = [
     "SLF001",  # Unit testing private methods is fine
     "S101",  # We use assert for assertions
 ]
-
-
-[tool.black]
-line-length = 120
-target-version = ["py310", "py311"]
 
 
 [tool.mypy]

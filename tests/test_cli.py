@@ -11,13 +11,13 @@ from . import events
 runner = CliRunner()
 
 
-@pytest.fixture()
+@pytest.fixture
 def db_file_opt():
     with NamedTemporaryFile() as db_file:
         yield ("--db-file", db_file.name)
 
 
-@pytest.fixture()
+@pytest.fixture
 def cli_snapshot(db_file_opt, snapshot):
     def _cli_snapshot(*args, exit_code=0):
         result = runner.invoke(cli.app, [*db_file_opt, *args])
@@ -34,7 +34,10 @@ def test_create_event(cli_snapshot):
     cli_snapshot("events")
 
 
-@pytest.mark.parametrize("event", files(events).iterdir())
+test_events = sorted(files(events).iterdir(), key=lambda event: event.name)
+
+
+@pytest.mark.parametrize("event", test_events)
 def test_imports_and_startlist(event, cli_snapshot):
     with as_file(event) as event_dir:
         cli_snapshot("init")

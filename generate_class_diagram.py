@@ -30,7 +30,7 @@ def card(prop: RelationshipProperty | MapperProperty) -> str:
 visited_as_reverse = set()
 
 
-def yield_mapper_mermaid(mapper: Mapper) -> Generator[str, None, None]:
+def yield_mapper_mermaid(mapper: Mapper) -> Generator[str]:
     name = mapper.class_.__name__
     yield f"{INDENT}class {name} {{"
 

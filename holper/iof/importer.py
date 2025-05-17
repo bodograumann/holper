@@ -15,8 +15,7 @@ class NoSuchEntityError(Exception):
     def __init__(self, issuer: str, external_id: str, scope: set[str]) -> None:
         super().__init__(
             f"Unable to find entity in list with id {issuer} and issuer {external_id}\n"
-            "Possible values: "
-            + (", ".join(scope)),
+            "Possible values: " + (", ".join(scope)),
         )
         self.issuer = issuer
         self.external_id = external_id
@@ -92,9 +91,9 @@ class Importer:
     def import_person_entry(self, person_entry: PersonEntry, categories: list[model.EventCategory]) -> model.Entry:
         organisation = self.import_organisation(person_entry.organisation)
         competitor = model.Competitor(
-            external_ids=[model.CompetitorXID(**self.extract_id(person_entry.id))]
-            if person_entry.id is not None
-            else [],
+            external_ids=(
+                [model.CompetitorXID(**self.extract_id(person_entry.id))] if person_entry.id is not None else []
+            ),
             person=self.import_person(person_entry.person),
             organisation=organisation,
             control_cards=[self.import_control_card(control_card) for control_card in person_entry.control_cards],
@@ -107,11 +106,13 @@ class Importer:
                 for request in person_entry.classes
                 if request.id is not None
             ],
-            start_time_allocation_requests=[
-                self.import_start_time_allocation_request(person_entry.start_time_allocation_request),
-            ]
-            if person_entry.start_time_allocation_request is not None
-            else [],
+            start_time_allocation_requests=(
+                [
+                    self.import_start_time_allocation_request(person_entry.start_time_allocation_request),
+                ]
+                if person_entry.start_time_allocation_request is not None
+                else []
+            ),
         )
 
     def import_team_entry(self, entry: TeamEntry, categories: list[model.EventCategory]) -> model.Entry:
@@ -127,11 +128,13 @@ class Importer:
                 for request in entry.classes
                 if request.id is not None
             ],
-            start_time_allocation_requests=[
-                self.import_start_time_allocation_request(entry.start_time_allocation_request),
-            ]
-            if entry.start_time_allocation_request is not None
-            else [],
+            start_time_allocation_requests=(
+                [
+                    self.import_start_time_allocation_request(entry.start_time_allocation_request),
+                ]
+                if entry.start_time_allocation_request is not None
+                else []
+            ),
         )
 
     def import_team_entry_person(self, entry: TeamEntryPerson) -> model.Competitor:
@@ -170,15 +173,17 @@ class Importer:
                 return self.find_by_id(self.organisations, organisation.id)
 
         imported = model.Organisation(
-            external_ids=[model.OrganisationXID(**self.extract_id(organisation.id))]
-            if organisation.id is not None
-            else [],
+            external_ids=(
+                [model.OrganisationXID(**self.extract_id(organisation.id))] if organisation.id is not None else []
+            ),
             name=organisation.name,
             short_name=organisation.short_name,
             country=self.import_country(organisation.country),
-            type=model.OrganisationType(tools.camelcase_to_snakecase(organisation.type))
-            if organisation.type is not None
-            else None,
+            type=(
+                model.OrganisationType(tools.camelcase_to_snakecase(organisation.type))
+                if organisation.type is not None
+                else None
+            ),
         )
         self.organisations.append(imported)
         return imported
@@ -273,8 +278,7 @@ class Importer:
                 category
                 for category in categories
                 if category.name == assignment.class_name
-                or use_short_category_name
-                and category.short_name == assignment.class_name
+                or (use_short_category_name and category.short_name == assignment.class_name)
             )
         except StopIteration:
             logging.warning(

@@ -62,11 +62,11 @@ Backend
 Make sure you have poetry installed. Then install the project dependencies::
 
     poetry install
-    poetry shell
+    $(poetry env activate)
 
-Run tests with ``pytest`` and the linter with ``ruff .``.
+Run tests with ``pytest``, the linter with ``ruff check .`` and type checks with ``mypy .``.
 
-The code can be auto-formatted with ``black .``.
+The code should be auto-formatted with ``ruff format .``.
 
 To generate documentation, use the following commands::
 

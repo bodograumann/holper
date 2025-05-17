@@ -18,7 +18,7 @@ affine_sequence_re = re.compile(r"(?P<interval>[0-9]*)n(?:\+(?P<offset>[0-9]+))?
 
 
 class AffineSeq:
-    __slots__ = ["start", "stop", "step"]
+    __slots__ = ["start", "step", "stop"]
 
     def __init__(self, start: int | str, stop: int, step: int = 1) -> None:
         if isinstance(start, str):
@@ -66,7 +66,6 @@ class AffineSeq:
         return type(self)(self.start - steps * self.step, self.stop - steps * self.step, self.step)
 
     def __rshift__(self, steps: int) -> Self:
-
         return type(self)(self.start + steps * self.step, self.stop + steps * self.step, self.step)
 
     def __and__(self, other: Self) -> Self:

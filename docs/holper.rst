@@ -34,7 +34,7 @@ holper.invoice module
 holper.iofxml3 module
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: holper.iofxml3
+.. automodule:: holper.iof
     :members:
     :undoc-members:
     :show-inheritance:

@@ -22,9 +22,7 @@ from collections.abc import Iterable, Iterator, Mapping
 from datetime import timedelta
 
 from more_itertools import peekable
-
-# Cf. https://github.com/google/or-tools/issues/3993
-from ortools.sat.python import cp_model  # type: ignore [import-untyped]
+from ortools.sat.python import cp_model
 
 from .affine_seq import AffineSeq
 from .model import Category, Course, Race, Start, StartTimeAllocationRequestType
@@ -243,7 +241,7 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
 
     for idx, starters in course_starters:
         for starter in range(starters):
-            model.AddMapDomain(slot_variables[idx][starter], indicators[idx][starter])
+            model.add_map_domain(slot_variables[idx][starter], indicators[idx][starter])
 
     parallel = [
         sum(indicators[idx][starter][time] for idx, starters in course_starters for starter in range(starters))
@@ -371,7 +369,7 @@ def _assign_entries_randomly(starts: Iterable[Start], slot_iter: Iterator[int]) 
 
 class Statistics:
     def __init__(self, race: Race) -> None:
-        starts = sum((list(category.starts) for category in race.categories), [])
+        starts = [start for category in race.categories for start in category.starts]
         total = len(starts)
         offsets = [
             start.category.time_offset + start.time_offset

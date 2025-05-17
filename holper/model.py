@@ -11,39 +11,39 @@ from __future__ import annotations
 
 __all__ = [
     "Base",
-    "Country",
-    "EventForm",
-    "Event",
-    "EventXID",
-    "Sex",
-    "EventCategoryStatus",
-    "EventCategory",
-    "EventCategoryXID",
-    "Race",
-    "RaceCategoryStatus",
-    "Leg",
+    "Category",
+    "Competitor",
+    "CompetitorResult",
+    "CompetitorStart",
     "Control",
+    "ControlCard",
+    "ControlType",
+    "Country",
     "Course",
     "CourseControl",
-    "ControlType",
-    "Category",
-    "Person",
-    "PersonXID",
-    "OrganisationType",
-    "Organisation",
-    "OrganisationXID",
     "Entry",
     "EntryCategoryRequest",
+    "Event",
+    "EventCategory",
+    "EventCategoryStatus",
+    "EventCategoryXID",
+    "EventForm",
+    "EventXID",
+    "Leg",
+    "Organisation",
+    "OrganisationType",
+    "OrganisationXID",
+    "Person",
+    "PersonXID",
+    "PunchingSystem",
+    "Race",
+    "RaceCategoryStatus",
+    "Result",
+    "ResultStatus",
+    "Sex",
+    "Start",
     "StartTimeAllocationRequest",
     "StartTimeAllocationRequestType",
-    "PunchingSystem",
-    "ControlCard",
-    "Competitor",
-    "Start",
-    "CompetitorStart",
-    "Result",
-    "CompetitorResult",
-    "ResultStatus",
 ]
 
 import enum
@@ -105,8 +105,7 @@ class HasExternalIds:
 
     @property
     @abstractmethod
-    def external_ids(self) -> Mapped[Any]:
-        ...
+    def external_ids(self) -> Mapped[Any]: ...
 
 
 class Country(Base):

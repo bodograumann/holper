@@ -1,4 +1,5 @@
 """Miscellaneous helper functions"""
+
 import re
 from collections.abc import Callable
 from datetime import date

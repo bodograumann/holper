@@ -215,7 +215,8 @@ class Route(IOFBaseModel):
     - otherwise, full storage mode is used
     The position of the first waypoint of a route is always stored in full storage mode.
 
-    Code libraries for reading and writing route data are found at http://www.orienteering.org/datastandard/3.0/Libraries.zip."""
+    Code libraries for reading and writing route data are found at http://www.orienteering.org/datastandard/3.0/Libraries.zip.
+    """
 
     base64: Annotated[bytes, constr(strip_whitespace=True)]
 
