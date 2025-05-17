@@ -17,7 +17,7 @@ class TestIndividual:
                 assert sportsoftware.detect(file)
                 assert not file.closed
 
-    def test_read_oe_entries(self):
+    def test_read_oe11_entries(self):
         with Path("tests/SportSoftware/OE_11.0_EntryList1.csv").open("rb") as file:
             generator = sportsoftware.read(file)
             entries = list(generator)
@@ -36,7 +36,17 @@ class TestIndividual:
                 minutes=36,
             )
 
-    def test_write_oe_entries(self):
+    def test_write_oe11_entries(self):
+        event = model.Event(form=model.EventForm.INDIVIDUAL)
+        race = model.Race(event=event)
+
+        buffer = io.BytesIO()
+        sportsoftware.write(buffer, race, legacy=True)
+
+        buffer.seek(0)
+        assert sportsoftware._detect_type(buffer) == "OE11"
+
+    def test_write_oe12_entries(self):
         event = model.Event(form=model.EventForm.INDIVIDUAL)
         race = model.Race(event=event)
 
@@ -44,7 +54,7 @@ class TestIndividual:
         sportsoftware.write(buffer, race)
 
         buffer.seek(0)
-        assert sportsoftware._detect_type(buffer) == "OE11"
+        assert sportsoftware._detect_type(buffer) == "OE12"
 
 
 class TestRelay:

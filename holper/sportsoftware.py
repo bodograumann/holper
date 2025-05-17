@@ -9,7 +9,7 @@ from typing import IO
 
 from . import model, tools
 
-_csv_header_oe_de = (
+_csv_header_oe11_de = (
     "OE0001",
     "Stnr",
     "XStnr",
@@ -69,7 +69,72 @@ _csv_header_oe_de = (
     "Bahn Posten",
     "Platz",
 )
-_csv_header_os_de = (
+_csv_header_oe12_de = (
+    "OE0001_V12",
+    "Melde Id",
+    "Stnr",
+    "XStnr",
+    "Chipnr",
+    "Datenbank Id",
+    "IOF Id",
+    "Nachname",
+    "Vorname",
+    "Geburtsdatum",
+    "Jg",
+    "G",
+    "Block",
+    "AK",
+    "Start",
+    "Ziel",
+    "Zeit",
+    "Wertung",
+    "Gutschrift -",
+    "Zuschlag +",
+    "Kommentar",
+    "Club-Nr.",
+    "Abk",
+    "Ort",
+    "Nat",
+    "Sitz",
+    "Region",
+    "Katnr",
+    "Kurz",
+    "Lang",
+    "MeldeKat. Nr",
+    "MeldeKat. (kurz)",
+    "MeldeKat. (lang)",
+    "Rang",
+    "Ranglistenpunkte",
+    "Num1",
+    "Num2",
+    "Num3",
+    "Text1",
+    "Text2",
+    "Text3",
+    "Adr. Nachname",
+    "Adr. Vorname",
+    "Straße",
+    "Zeile2",
+    "PLZ",
+    "Adr. Ort",
+    "Tel",
+    "Mobil",
+    "Fax",
+    "EMail",
+    "Gemietet",
+    "Startgeld",
+    "Bezahlt",
+    "Team Idnr",
+    "Team Name",
+    "Person Nat",
+    "Bahnnummer",
+    "Bahn",
+    "km",
+    "Hm",
+    "Bahn Posten",
+    "Platz",
+)
+_csv_header_os11_de = (
     "OS0012",
     "Stnr",
     "Melde Id",
@@ -384,7 +449,7 @@ _csv_header_os_de = (
     "Platz",
     "",
 )
-_csv_header_ot_de = (
+_csv_header_ot10_de = (
     "Stnr",
     "Mannschaft",
     "Block",
@@ -508,6 +573,8 @@ def _detect_type(input_file: IO[bytes], encoding: str = "latin1") -> str | None:
         except StopIteration:
             return None
 
+        if header.startswith(("OE0001_V12;", "OE0012_V12;")):
+            return "OE12"
         if header.startswith(("OE0001;", "OE0012;")):
             return "OE11"
         if header.startswith("OS0012;"):
@@ -535,11 +602,14 @@ def read(input_file: IO[bytes], encoding: str = "latin1") -> Generator[model.Ent
         raise NotImplementedError
 
 
-def write(output_file: IO[bytes], race: model.Race, encoding: str = "latin1") -> None:
+def write(output_file: IO[bytes], race: model.Race, *, encoding: str = "latin1", legacy: bool = False) -> None:
     csv_writer = CSVWriter(race)
 
     if race.event.form is model.EventForm.INDIVIDUAL:
-        csv_writer.write_solo_v11(output_file, encoding=encoding)
+        if legacy:
+            csv_writer.write_solo_v11(output_file, encoding=encoding)
+        else:
+            csv_writer.write_solo_v12(output_file, encoding=encoding)
     elif race.event.form is model.EventForm.RELAY:
         csv_writer.write_relay_v11(output_file, encoding=encoding)
     elif race.event.form is model.EventForm.TEAM:
@@ -898,10 +968,10 @@ class CSVWriter:
         with _wrap_binary_stream(output_file, encoding=encoding) as csvfile:
             csv_writer = csv.writer(csvfile, delimiter=";", doublequote=False)
 
-            csv_writer.writerow(_csv_header_oe_de)
+            csv_writer.writerow(_csv_header_oe11_de)
 
             for entry in self.race.entries:
-                row = [""] * len(_csv_header_oe_de)
+                row = [""] * len(_csv_header_oe11_de)
 
                 if entry.number:
                     row[1] = str(entry.number)
@@ -919,6 +989,31 @@ class CSVWriter:
 
                 csv_writer.writerow(row)
 
+    def write_solo_v12(self, output_file: IO[bytes], encoding: str = "latin1") -> None:
+        with _wrap_binary_stream(output_file, encoding=encoding) as csvfile:
+            csv_writer = csv.writer(csvfile, delimiter=";", doublequote=False)
+
+            csv_writer.writerow(_csv_header_oe12_de)
+
+            for entry in self.race.entries:
+                row = [""] * len(_csv_header_oe12_de)
+
+                if entry.number:
+                    row[2] = str(entry.number)
+
+                row[7], row[8], row[10], row[11], row[4] = self.write_competitor(entry.competitors[0])
+
+                if entry.starts:
+                    row[13:20] = self.write_start_and_result(entry.starts[0])[:7]
+
+                if entry.organisation and entry.organisation.type == model.OrganisationType.CLUB:
+                    row[21:27] = self.write_club(entry.organisation)[:6]
+
+                if entry.category_requests:
+                    row[27:30] = self.write_category(entry.category_requests[0].event_category)[:3]
+
+                csv_writer.writerow(row)
+
     def write_relay_v11(self, output_file: IO[bytes], encoding: str = "latin1") -> None:
         raise NotImplementedError
 
@@ -926,10 +1021,10 @@ class CSVWriter:
         with _wrap_binary_stream(output_file, encoding=encoding) as csvfile:
             csv_writer = csv.writer(csvfile, delimiter=";", doublequote=False)
 
-            csv_writer.writerow(_csv_header_ot_de)
+            csv_writer.writerow(_csv_header_ot10_de)
 
             for entry in self.race.entries:
-                row = [""] * len(_csv_header_ot_de)
+                row = [""] * len(_csv_header_ot10_de)
 
                 if entry.number:
                     row[0] = str(entry.number)
