@@ -1012,6 +1012,9 @@ class CSVWriter:
                 if entry.category_requests:
                     row[27:30] = self.write_category(entry.category_requests[0].event_category)[:3]
 
+                if entry.competitors and entry.competitors[0].score is not None:
+                    row[34] = str(entry.competitors[0].score)
+
                 csv_writer.writerow(row)
 
     def write_relay_v11(self, output_file: IO[bytes], encoding: str = "latin1") -> None:
