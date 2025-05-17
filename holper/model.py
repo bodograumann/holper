@@ -530,6 +530,7 @@ class Competitor(Base, HasExternalIds):
 
     person_id: Mapped[int] = mapped_column(ForeignKey(Person.person_id))
     person: Mapped[Person] = relationship(Person)
+    score: Mapped[float | None]
 
     organisation_id: Mapped[int | None] = mapped_column(ForeignKey(Organisation.organisation_id))
     organisation: Mapped[Organisation | None] = relationship(Organisation)

@@ -95,6 +95,7 @@ class Importer:
                 [model.CompetitorXID(**self.extract_id(person_entry.id))] if person_entry.id is not None else []
             ),
             person=self.import_person(person_entry.person),
+            score=next((score.value for score in person_entry.scores), None),
             organisation=organisation,
             control_cards=[self.import_control_card(control_card) for control_card in person_entry.control_cards],
         )
