@@ -2,6 +2,7 @@
 """Command line interface to the holper tool"""
 
 import logging
+import re
 from datetime import datetime, timedelta
 from importlib.resources import files
 from pathlib import Path
@@ -9,6 +10,7 @@ from typing import Annotated, Optional
 
 import sqlalchemy
 import typer
+from typing_extensions import Doc
 from xdg_base_dirs import xdg_data_home
 
 from holper import core, iof, model, resources, sportsoftware, start
@@ -280,6 +282,37 @@ def import_entries(event_id: int, entry_file: ImportFileOpt) -> None:
         session.commit()
 
         typer.echo(f"Imported {len(entries)} entries")
+
+
+@app.command()
+def configure_start(
+    race_id: int,
+    *,
+    include: Annotated[str | None, Doc("Regular expression to include categories")] = None,
+    exclude: Annotated[str | None, Doc("Regular expression to include categories")] = None,
+    by_score: bool = False,
+) -> None:
+    """Define a manual start organization for some categories"""
+    with db_session() as session:
+        race = core.get_race(session, race_id)
+        if not race:
+            typer.echo("Race could not be found.")
+            raise typer.Abort
+
+        include_pattern = re.compile(include) if include else None
+        exclude_pattern = re.compile(exclude) if exclude else None
+        for category in race.categories:
+            if include_pattern and not include_pattern.search(category.short_name):
+                continue
+            if exclude_pattern and exclude_pattern.search(category.short_name):
+                continue
+
+            if by_score is not None:
+                category.order_competitors_by_score = by_score
+
+            typer.echo(f"Applied configuration to {category.short_name}")
+
+        session.commit()
 
 
 @app.command()

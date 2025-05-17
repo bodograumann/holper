@@ -325,7 +325,10 @@ def _fill_course_slots(categories: list[Category], slots_iter: Iterable[int]) ->
 
         for competitive in [True, False]:
             if starts[competitive]:
-                _assign_entries_randomly(starts[competitive], slots)
+                if competitive and category.order_competitors_by_score:
+                    _assign_entries_by_score(starts[competitive], slots)
+                else:
+                    _assign_entries_randomly(starts[competitive], slots)
 
                 # After each category there has to be one slot left empty
                 try:  # noqa: SIM105
@@ -357,7 +360,19 @@ def _assign_entries_randomly(starts: Iterable[Start], slot_iter: Iterator[int]) 
         random.shuffle(preferences[pref])
 
     sequence = preferences[1] + preferences[0] + preferences[2]
+    _apply_start_order(sequence, slot_iter)
 
+
+def _assign_entries_by_score(starts: Iterable[Start], slot_iter: Iterator[int]) -> None:
+    sequence = sorted(
+        starts,
+        key=lambda start: sum(competitor.score or 0 for competitor in start.entry.competitors)
+        / max(len(start.entry.competitors), 1),
+    )
+    _apply_start_order(sequence, slot_iter)
+
+
+def _apply_start_order(sequence: list[Start], slot_iter: Iterator[int]) -> None:
     disjoin(sequence, lambda start: start.entry.organisation)
 
     for start in sequence:

@@ -349,6 +349,7 @@ class Category(Base):
     )
 
     time_offset: Mapped[timedelta | None] = mapped_column(doc="Start time offset from race start time")
+    order_competitors_by_score: Mapped[bool] = mapped_column(default=False)
     starts: Mapped[list[Start]] = relationship("Start", back_populates="category")
     vacancies_before: Mapped[int] = mapped_column(SmallInteger, default=0)
     vacancies_after: Mapped[int] = mapped_column(SmallInteger, default=0)
