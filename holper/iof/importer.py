@@ -14,7 +14,7 @@ EntityWithId = TypeVar("EntityWithId", bound=model.HasExternalIds)
 class NoSuchEntityError(Exception):
     def __init__(self, issuer: str, external_id: str, scope: set[str]) -> None:
         super().__init__(
-            f"Unable to find entity in list with id {issuer} and issuer {external_id}\n"
+            f"Unable to find entity in list with id {external_id} and issuer {issuer}\n"
             "Possible values: " + (", ".join(scope)),
         )
         self.issuer = issuer
