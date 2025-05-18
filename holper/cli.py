@@ -415,7 +415,7 @@ def export(
                 club_id += 1
 
         with target.open("wb") as output_file:
-            sportsoftware.write(output_file, race)
+            sportsoftware.write(output_file, race, encoding="utf-8")
 
 
 @app.command()
