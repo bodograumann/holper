@@ -594,6 +594,8 @@ def read(input_file: IO[bytes], encoding: str = "latin1") -> Generator[model.Ent
     csv_reader = CSVReader(race)
     if file_type == "OE11":
         yield from csv_reader.read_solo_v11(input_file, encoding=encoding)
+    elif file_type == "OE12":
+        yield from csv_reader.read_solo_v12(input_file, encoding=encoding)
     elif file_type == "OS11":
         yield from csv_reader.read_relay_v11(input_file, encoding=encoding)
     elif file_type == "OT10":
@@ -641,40 +643,6 @@ class CSVReader:
             # skip header:
             next(csv_reader, None)
 
-            # Currently unmapped fields:
-            # 0: OE0001
-            # 2: XStnr
-            # 4: Datenbank Id
-            # 9: Block
-            # 17: Kommentar
-            # 22: Sitz
-            # 23: Region
-            # 27: MeldeKat. Nr
-            # 28: MeldeKat. (kurz)
-            # 29: MeldeKat. (lang)
-            # 30: Rang
-            # 31: Ranglistenpunkte
-            # 32: Num1
-            # 33: Num2
-            # 34: Num3
-            # 35: Text1
-            # 36: Text2
-            # 37: Text3
-            # 38: Adr. Nachname
-            # 39: Adr. Vorname
-            # 40: Straße
-            # 41: Zeile2
-            # 42: PLZ
-            # 43: Adr. Ort
-            # 44: Tel
-            # 45: Mobil
-            # 46: Fax
-            # 47: EMail
-            # 48: Gemietet
-            # 49: Startgeld
-            # 50: Bezahlt
-            # 51: Mannschaft
-
             for row in csv_reader:
                 entry = model.Entry(event=self.race.event)
 
@@ -697,7 +665,7 @@ class CSVReader:
                     entry.category_requests.append(model.EntryCategoryRequest(event_category=category.event_category))
                     start.category = category
 
-                # Note: we can only assing courses to categories
+                # Note: we do not use indiviual courses here
                 if row[52] and start.category:
                     course_id = int(row[52])
                     try:
@@ -707,6 +675,59 @@ class CSVReader:
                             name=row[53],
                             length=parse_float(row[54]),
                             climb=parse_float(row[55]),
+                        )
+                        self.courses[course_id] = course
+                    # TODO: This fails: start.category.courses = [course]
+
+                yield entry
+
+    def read_solo_v12(
+        self,
+        input_file: IO[bytes],
+        *,
+        with_seconds: bool = True,
+        encoding: str = "latin1",
+    ) -> Generator[model.Entry]:
+        """Read a SportSoftware OE12 csv export file"""
+        self.race.event.form = model.EventForm.INDIVIDUAL
+
+        with _wrap_binary_stream(input_file, encoding=encoding) as csvfile:
+            csv_reader = csv.reader(csvfile, delimiter=";", doublequote=False)
+            # skip header:
+            next(csv_reader, None)
+
+            for row in csv_reader:
+                entry = model.Entry(event=self.race.event)
+
+                with suppress(ValueError):
+                    entry.number = int(row[2])
+
+                entry.competitors.append(self.read_competitor(row[7], row[8], row[10], row[11], row[3]))
+
+                start = self.read_start_and_result(*row[13:20], with_seconds=with_seconds)
+                start.entry = entry
+
+                if start.result is not None and row[62]:
+                    start.result.position = int(row[62])
+
+                if row[21]:
+                    entry.organisation = self.read_club(*row[21:27])
+
+                if row[27]:
+                    category = self.read_category(*row[27:30])
+                    entry.category_requests.append(model.EntryCategoryRequest(event_category=category.event_category))
+                    start.category = category
+
+                # Note: we do not use indiviual courses here
+                if row[57] and start.category:
+                    course_id = int(row[57])
+                    try:
+                        course = self.courses[course_id]
+                    except KeyError:
+                        course = model.Course(
+                            name=row[58],
+                            length=parse_float(row[59]),
+                            climb=parse_float(row[60]),
                         )
                         self.courses[course_id] = course
                     # TODO: This fails: start.category.courses = [course]
