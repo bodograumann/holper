@@ -599,6 +599,9 @@ class CompetitorStart(Base):
     competitor_id: Mapped[int] = mapped_column(ForeignKey(Competitor.competitor_id))
     competitor: Mapped[Competitor] = relationship(Competitor, back_populates="starts")
 
+    course_id: Mapped[int | None] = mapped_column(ForeignKey(Course.course_id))
+    course: Mapped[Course | None] = relationship(Course, doc="Individual course for this competitor")
+
     time_offset: Mapped[timedelta | None] = mapped_column(doc="Start time offset from entry start time")
     control_card_id: Mapped[int | None] = mapped_column(ForeignKey(ControlCard.control_card_id))
     control_card: Mapped[ControlCard | None] = relationship(ControlCard)

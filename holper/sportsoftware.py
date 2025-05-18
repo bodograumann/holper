@@ -1006,6 +1006,9 @@ class CSVWriter:
                 if entry.starts:
                     row[13:20] = self.write_start_and_result(entry.starts[0])[:7]
 
+                    if (individual_course := entry.starts[0].competitor_starts[0].course) is not None:
+                        row[57:62] = self.write_course(individual_course)
+
                 if entry.organisation and entry.organisation.type == model.OrganisationType.CLUB:
                     row[21:27] = self.write_club(entry.organisation)[:6]
 
@@ -1090,6 +1093,15 @@ class CSVWriter:
             category.short_name or category.name,
             category.name,
             str(category.max_number_of_team_members),
+        ]
+
+    def write_course(self, course: model.Course) -> list[str]:
+        return [
+            "",
+            course.name,
+            str(course.length),
+            str(course.climb),
+            str(len(course.controls)),
         ]
 
     def write_competitor(self, competitor: model.Competitor) -> list[str]:
