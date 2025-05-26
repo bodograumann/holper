@@ -111,12 +111,13 @@ class StartConstraints:
     @property
     def course_slot_counts(self) -> dict[int, int]:
         return {
-            course_id: len(categories)
-            - 1
-            + sum(
-                len(category.starts) + (category.vacancies_before or 0) + (category.vacancies_after or 0)
+            course_id: sum(
+                len(category.starts)
+                + (category.vacancies_before or 0)
+                + (category.vacancies_after or 0)
+                + len({start.competitive for start in category.starts})
                 for category in categories
-            )
+            ) - 1
             for course_id, categories in self.order.items()
         }
 
