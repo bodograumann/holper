@@ -290,9 +290,15 @@ def configure_start(
     *,
     include: Annotated[str | None, Doc("Regular expression to include categories")] = None,
     exclude: Annotated[str | None, Doc("Regular expression to include categories")] = None,
-    by_score: bool = False,
+    order_by_score: bool = False,
+    order_open: bool = False,
 ) -> None:
     """Define a manual start organization for some categories"""
+
+    if order_by_score and order_open:
+        typer.echo("You must select at most one of the start order options.")
+        raise typer.Abort
+
     with db_session() as session:
         race = core.get_race(session, race_id)
         if not race:
@@ -307,8 +313,10 @@ def configure_start(
             if exclude_pattern and exclude_pattern.search(category.short_name):
                 continue
 
-            if by_score is not None:
-                category.order_competitors_by_score = by_score
+            if order_by_score:
+                category.competitor_start_order = model.StartOrder.BY_SCORE
+            if order_open:
+                category.competitor_start_order = model.StartOrder.OPEN
 
             typer.echo(f"Applied configuration to {category.short_name}")
 

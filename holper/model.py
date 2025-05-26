@@ -328,6 +328,12 @@ class CourseControl(Base):
     )
 
 
+StartOrder = enum.StrEnum(
+    "StartOrder",
+    ["RANDOM", "BY_SCORE", "OPEN"],
+)
+
+
 class Category(Base):
     """Realize an EventCategory for one specific race of that event"""
 
@@ -349,7 +355,7 @@ class Category(Base):
     )
 
     time_offset: Mapped[timedelta | None] = mapped_column(doc="Start time offset from race start time")
-    order_competitors_by_score: Mapped[bool] = mapped_column(default=False)
+    competitor_start_order: Mapped[StartOrder] = mapped_column(default=StartOrder.RANDOM)
     starts: Mapped[list[Start]] = relationship("Start", back_populates="category")
     vacancies_before: Mapped[int] = mapped_column(SmallInteger, default=0)
     vacancies_after: Mapped[int] = mapped_column(SmallInteger, default=0)

@@ -25,7 +25,7 @@ from more_itertools import peekable
 from ortools.sat.python import cp_model
 
 from .affine_seq import AffineSeq
-from .model import Category, Course, Race, Start, StartTimeAllocationRequestType
+from .model import Category, Course, Race, Start, StartOrder, StartTimeAllocationRequestType
 from .tools import disjoin
 
 
@@ -77,7 +77,8 @@ class StartConstraints:
             if not category.courses:
                 logging.error("Category %s has no course assigned!", category.name)
                 continue
-            self.order[category.courses[0].course.course_id].append(category)
+            if category.competitor_start_order is not StartOrder.OPEN:
+                self.order[category.courses[0].course.course_id].append(category)
 
         for categories in self.order.values():
             categories.sort(key=_category_order_key)
@@ -325,7 +326,7 @@ def _fill_course_slots(categories: list[Category], slots_iter: Iterable[int]) ->
 
         for competitive in [True, False]:
             if starts[competitive]:
-                if competitive and category.order_competitors_by_score:
+                if competitive and category.competitor_start_order is StartOrder.BY_SCORE:
                     _assign_entries_by_score(starts[competitive], slots)
                 else:
                     _assign_entries_randomly(starts[competitive], slots)
@@ -385,18 +386,14 @@ def _apply_start_order(sequence: list[Start], slot_iter: Iterator[int]) -> None:
 class Statistics:
     def __init__(self, race: Race) -> None:
         starts = [start for category in race.categories for start in category.starts]
-        total = len(starts)
         offsets = [
             start.category.time_offset + start.time_offset
             for start in starts
             if start.category.time_offset is not None and start.time_offset is not None
         ]
+        total = len(offsets)
 
-        if len(offsets) < total:
-            msg = f"Only {len(offsets)} of {total} starts have valid times."
-            raise ValueError(msg)
-
-        last_slot = max(offsets)
+        last_slot = max(offsets) if offsets else timedelta(0)
         mean = total / ((last_slot + timedelta(minutes=1)).total_seconds() / 60)
         counts = Counter(offsets)
         stats = Counter(counts.values())
@@ -407,4 +404,4 @@ class Statistics:
         self.entries_per_slot_avg = mean
         self.entries_per_slot_var = (
             sum(counts[slot] ** 2 for slot in counts) / (last_slot.total_seconds() / 60 + 1) - mean**2
-        )
+        ) if last_slot else float("inf")
