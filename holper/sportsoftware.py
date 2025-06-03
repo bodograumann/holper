@@ -702,7 +702,7 @@ class CSVReader:
                 with suppress(ValueError):
                     entry.number = int(row[2])
 
-                entry.competitors.append(self.read_competitor(row[7], row[8], row[10], row[11], row[3]))
+                entry.competitors.append(self.read_competitor(row[7], row[8], row[10], row[11], row[4]))
 
                 start = self.read_start_and_result(*row[13:20], with_seconds=with_seconds)
                 start.entry = entry
