@@ -330,6 +330,7 @@ def startlist(
     parallel_max: Optional[int] = None,
     *,
     greedy: bool = False,
+    noncompetitive: typer.FileText | None = None,
 ) -> None:
     """Assign start times for all starters"""
     with db_session() as session:
@@ -337,6 +338,8 @@ def startlist(
         if not race:
             typer.echo("Race could not be found.")
             raise typer.Abort
+
+        noncompetitive_names = [name.strip().lower() for name in noncompetitive] if noncompetitive is not None else []
 
         # generate starts in race
         for category in race.categories:
@@ -350,6 +353,8 @@ def startlist(
 
                 for competitor in request.entry.competitors:
                     name = f"{competitor.person.given_name} {competitor.person.family_name}"
+                    if name.lower() in noncompetitive_names:
+                        entry_start.competitive = False
                     competitor_start = model.CompetitorStart(
                         start=entry_start,
                         competitor=competitor,
