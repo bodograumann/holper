@@ -258,8 +258,8 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
     # Step 1: Find the shortest possible start duration
     model.Minimize(last_start)
 
-    # Not setting time limit, because this step is usually extremely fast
     solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = timeout
     status = solver.Solve(model)
 
     if status == cp_model.INFEASIBLE:
