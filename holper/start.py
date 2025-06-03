@@ -230,7 +230,8 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
 
     # Forbid conflicting courses to start at the same time. E.g. when they have the same first control.
     for course_group in no_common_slots:
-        model.AddAllDifferent([slot for idx in course_group for slot in slot_variables[idx]])
+        if len(course_group) > 1:
+            model.AddAllDifferent([slot for idx in course_group for slot in slot_variables[idx]])
 
     # Limit number of starts at the same time using indicator variables for each start time.
     indicators = [
