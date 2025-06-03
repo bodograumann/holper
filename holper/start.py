@@ -20,6 +20,7 @@ import random
 from collections import Counter, defaultdict
 from collections.abc import Iterable, Iterator, Mapping
 from datetime import timedelta
+from typing import Self
 
 from more_itertools import peekable
 from ortools.sat.python import cp_model
@@ -169,6 +170,101 @@ def generate_slots_greedily(constraints: StartConstraints, time_max: int = 12 * 
     return slots
 
 
+class StartModel(cp_model.CpModel):
+    def __init__(
+        self: Self,
+        constraints: StartConstraints,
+        *,
+        time_max: int | None = None,
+        interval_max: int = 12,
+        interval_common_factor: int = 1,
+    ) -> None:
+        interval_min = constraints.interval
+        parallel_max = constraints.parallel_max
+        self.interval_common_factor = interval_common_factor
+
+        # Courses are identified by their index in the model
+        self.course_slot_counts = list(constraints.course_slot_counts.values())
+        self.course_starters = list(enumerate(self.course_slot_counts))
+        self.course_ids = list(constraints.course_slot_counts.keys())
+
+        if time_max is None:
+            time_max = sum(self.course_slot_counts) * interval_common_factor
+
+        course_idx_by_id = {course_id: idx for idx, course_id in enumerate(self.course_ids)}
+        no_common_slots = [
+            [course_idx_by_id[course_id] for course_id in course_group if course_id in course_idx_by_id]
+            for course_group in constraints.conflicts
+        ]
+
+        # start intervals per course, up to the common factor
+        self.intervals = [
+            self.NewIntVar(
+                interval_min,
+                min(interval_max, time_max // (starters - 1) if starters > 1 else time_max) // interval_common_factor,
+                f"interval_{idx}",
+            )
+            for (idx, starters) in self.course_starters
+        ]
+
+        # Offsets of first start per course
+        self.offsets = [
+            self.NewIntVar(0, time_max - (starters - 1) * interval_min, f"offset_{idx}")
+            for idx, starters in self.course_starters
+        ]
+
+        # variables for each starter
+        slot_variables = [
+            [self.NewIntVar(0, time_max, f"slot_{idx}_{starter}") for starter in range(starters)]
+            for idx, starters in self.course_starters
+        ]
+        for idx, starters in self.course_starters:
+            for starter in range(starters):
+                self.Add(
+                    self.offsets[idx] + self.intervals[idx] * interval_common_factor * starter
+                    == slot_variables[idx][starter],
+                )
+
+        # Limit total start length
+        self.last_start = self.NewIntVar(0, time_max, "last_start")
+        self.AddMaxEquality(self.last_start, (vars[-1] for vars in slot_variables if vars))
+
+        # Forbid conflicting courses to start at the same time. E.g. when they have the same first control.
+        for course_group in no_common_slots:
+            if len(course_group) > 1:
+                self.AddAllDifferent([slot for idx in course_group for slot in slot_variables[idx]])
+
+        # Limit number of starts at the same time using indicator variables for each start time.
+        indicators = [
+            [
+                [self.NewBoolVar(f"assign_{idx}_{starter}_{time}") for time in range(time_max + 1)]
+                for starter in range(starters)
+            ]
+            for idx, starters in self.course_starters
+        ]
+
+        for idx, starters in self.course_starters:
+            for starter in range(starters):
+                self.add_map_domain(slot_variables[idx][starter], indicators[idx][starter])
+
+        parallel = [
+            sum(indicators[idx][starter][time] for idx, starters in self.course_starters for starter in range(starters))
+            for time in range(time_max + 1)
+        ]
+
+        if parallel_max is not None:
+            for time in range(time_max + 1):
+                self.Add(parallel[time] <= parallel_max)
+
+    def get_slots(self: Self, course_idx: int, offset: int, interval: int) -> AffineSeq:
+        return AffineSeq(
+            offset,
+            offset + interval * self.interval_common_factor * self.course_slot_counts[course_idx],
+            interval * self.interval_common_factor,
+        )
+
+
+
 def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> dict[int, AffineSeq]:
     """Tries to find the optimal compact start slot scheme
 
@@ -176,119 +272,45 @@ def generate_slots_optimal(constraints: StartConstraints, timeout: int = 30) -> 
     :param timeout: Number of seconds after which to stop the optimization.
     :return: Start slots object for each course id
     """
-
-    interval_min = constraints.interval
-    interval_max = 12
-    interval_common_factor = 1
-    parallel_max = constraints.parallel_max
-
-    # Courses are identified by their index in the model
-    course_slot_counts = list(constraints.course_slot_counts.values())
-    course_starters = list(enumerate(course_slot_counts))
-    course_ids = list(constraints.course_slot_counts.keys())
-
-    course_idx_by_id = {course_id: idx for idx, course_id in enumerate(course_ids)}
-    no_common_slots = [
-        [course_idx_by_id[course_id] for course_id in course_group if course_id in course_idx_by_id]
-        for course_group in constraints.conflicts
-    ]
-
-    # Time range to consider
-    time_max = sum(course_slot_counts) * interval_common_factor
-
-    # Model and Constraints
-    model = cp_model.CpModel()
-
-    # start intervals per course, up to the common factor
-    intervals = [
-        model.NewIntVar(
-            interval_min,
-            min(interval_max, time_max // (starters - 1) if starters > 1 else time_max) // interval_common_factor,
-            f"interval_{idx}",
-        )
-        for (idx, starters) in course_starters
-    ]
-
-    # Offsets of first start per course
-    offsets = [
-        model.NewIntVar(0, time_max - (starters - 1) * interval_min, f"offset_{idx}")
-        for idx, starters in course_starters
-    ]
-
-    # variables for each starter
-    slot_variables = [
-        [model.NewIntVar(0, time_max, f"slot_{idx}_{starter}") for starter in range(starters)]
-        for idx, starters in course_starters
-    ]
-    for idx, starters in course_starters:
-        for starter in range(starters):
-            model.Add(offsets[idx] + intervals[idx] * interval_common_factor * starter == slot_variables[idx][starter])
-
-    # Limit total start length
-    last_start = model.NewIntVar(0, time_max, "last_start")
-    model.AddMaxEquality(last_start, (vars[-1] for vars in slot_variables if vars))
-
-    # Forbid conflicting courses to start at the same time. E.g. when they have the same first control.
-    for course_group in no_common_slots:
-        if len(course_group) > 1:
-            model.AddAllDifferent([slot for idx in course_group for slot in slot_variables[idx]])
-
-    # Limit number of starts at the same time using indicator variables for each start time.
-    indicators = [
-        [
-            [model.NewBoolVar(f"assign_{idx}_{starter}_{time}") for time in range(time_max + 1)]
-            for starter in range(starters)
-        ]
-        for idx, starters in course_starters
-    ]
-
-    for idx, starters in course_starters:
-        for starter in range(starters):
-            model.add_map_domain(slot_variables[idx][starter], indicators[idx][starter])
-
-    parallel = [
-        sum(indicators[idx][starter][time] for idx, starters in course_starters for starter in range(starters))
-        for time in range(time_max + 1)
-    ]
-
-    if parallel_max is not None:
-        for time in range(time_max + 1):
-            model.Add(parallel[time] <= parallel_max)
+    model1 = StartModel(constraints)
 
     # Step 1: Find the shortest possible start duration
-    model.Minimize(last_start)
+    model1.Minimize(model1.last_start)
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = timeout
-    status = solver.Solve(model)
+    status = solver.Solve(model1)
 
     if status == cp_model.INFEASIBLE:
         raise InfeasibleError
 
-    time_max = solver.Value(last_start)
-    model.Add(last_start == time_max)
+    time_max = int(solver.BestObjectiveBound())
+    model2 = StartModel(constraints, time_max=time_max)
+    # Hint previous solution for  second step
+    for var1, var2 in [
+            *zip(model1.offsets, model2.offsets, strict=True),
+            *zip(model1.intervals, model2.intervals, strict=True),
+    ]:
+        model2.AddHint(var2, solver.Value(var1))
+
+    model2.Add(model2.last_start == time_max)
 
     # Step 2: Find the optimal solution
-    model.Maximize(
-        sum((starters - 1) * intervals[idx] for idx, starters in course_starters)  # Maximize intervals
-        - sum(offsets),  # Minimize offsets
+    model2.Maximize(
+        sum((starters - 1) * model2.intervals[idx] for idx, starters in model2.course_starters)  # Maximize intervals
+        - sum(model2.offsets),  # Minimize offsets
     )
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = timeout
-    status = solver.Solve(model)
+    status = solver.Solve(model2)
 
     if status == cp_model.INFEASIBLE:
         raise InfeasibleError
 
     return {
-        course_id: AffineSeq(
-            solver.Value(offsets[idx]),
-            solver.Value(offsets[idx])
-            + solver.Value(intervals[idx]) * interval_common_factor * course_slot_counts[idx],
-            solver.Value(intervals[idx]) * interval_common_factor,
-        )
-        for idx, course_id in enumerate(course_ids)
+        course_id: model2.get_slots(idx, solver.Value(model2.offsets[idx]), solver.Value(model2.intervals[idx]))
+        for idx, course_id in enumerate(model2.course_ids)
     }
 
 
