@@ -301,10 +301,13 @@ def fill_slots(
     There already has to be a :py:class:`Start <.model.Start>` object
     which defines the category the entry is assigned to.
     """
-    for category in race.categories:
-        category.time_offset = None
-
     for course in race.courses:
+        if course.course_id not in constraints.order:
+            continue
+
+        for category_assignment in course.categories:
+            category_assignment.category.time_offset = None
+
         _fill_course_slots(constraints.order[course.course_id], start_slots.get(course.course_id, []))
 
 
