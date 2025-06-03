@@ -405,6 +405,23 @@ def startlist(
 
 
 @app.command()
+def statistics(race_id: int) -> None:
+    """Assign start times for all starters"""
+    with db_session() as session:
+        race = core.get_race(session, race_id)
+        if not race:
+            typer.echo("Race could not be found.")
+            raise typer.Abort
+
+        stats = start.Statistics(race)
+        typer.echo(f"Starter number: {stats.entries_total}")
+        typer.echo(f"Last start: {stats.last_start}")
+        typer.echo(f"Starters per start time: {stats.entries_per_slot_avg:.2f} ±{stats.entries_per_slot_var:.2f}")
+        for count in sorted(stats.entries_per_slot):
+            typer.echo(f"{count} parallel starters: {stats.entries_per_slot[count]} times")
+
+
+@app.command()
 def export(
     race_id: int,
     target: ExportFileOpt,
