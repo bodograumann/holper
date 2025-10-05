@@ -577,7 +577,7 @@ def _detect_type(input_file: IO[bytes], encoding: str = "latin1") -> str | None:
             return "OE12"
         if header.startswith(("OE0001;", "OE0012;")):
             return "OE11"
-        if header.startswith("OS0012;"):
+        if header.startswith(("OS0001;", "OS0012;")):
             return "OS11"
         if sum(1 for c in header if c == ";") == 58 and header.startswith("Stnr;Mannschaft;"):
             return "OT10"
@@ -768,10 +768,13 @@ class CSVReader:
                 start.entry = entry
                 start.category = category
 
-                if start.result is not None and row[-2]:
-                    start.result.position = int(row[-2])
+                competitor_count = category.event_category.max_number_of_team_members
 
-                for competitor_nr in range(category.event_category.max_number_of_team_members):
+                place_idx = 31 + competitor_count * 14
+                if start.result is not None and row[place_idx]:
+                    start.result.position = int(row[place_idx])
+
+                for competitor_nr in range(competitor_count):
                     offset = 31 + competitor_nr * 14
                     competitor = self.read_competitor(*(*row[offset + 3 : offset + 7], row[offset + 11]))
                     entry.competitors.append(competitor)
