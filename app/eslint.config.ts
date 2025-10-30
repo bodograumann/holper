@@ -1,4 +1,5 @@
 import { globalIgnores } from "eslint/config";
+import storybook from "eslint-plugin-storybook";
 import {
   defineConfigWithVueTs,
   vueTsConfigs,
@@ -28,5 +29,6 @@ export default defineConfigWithVueTs(
     ...pluginVitest.configs.recommended,
     files: ["src/**/__tests__/*"],
   },
+  ...storybook.configs["flat/recommended"],
   prettierConfig,
 );
