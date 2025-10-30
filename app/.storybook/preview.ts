@@ -8,5 +8,5 @@ export const parameters = {
       date: /Date$/,
     },
   },
-}
+};
 export const tags = ["autodocs"];
