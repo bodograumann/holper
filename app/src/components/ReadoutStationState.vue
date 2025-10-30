@@ -17,7 +17,7 @@
       <!-- Cable -->
       <path
         v-if="state"
-        class="stroke-[5]"
+        class="stroke-5"
         :class="
           state === 'disconnected' || state === 'connecting'
             ? 'stroke-ash-semidark'
@@ -29,7 +29,7 @@
       <!-- Data -->
       <path
         v-if="state === 'reading'"
-        class="stroke-gras-superlight stroke-[2] data-flow"
+        class="stroke-gras-superlight stroke-2 data-flow"
         d="m 25.005732,99.967126 c 0,6.017754 -1.022531,26.318054 0.114653,31.987934 2.243446,11.18559 17.47742,7.34517 19.717228,3.83429 2.613092,-4.096 2.388496,-9.26041 -0.272594,-13.06082 -1.542121,-2.20236 -4.601981,-5.55839 -11.600557,-3.94902 -1.313406,0.30203 -3.910511,0.81548 -5.670565,1.16896 m -6.006686,1.15338 c -5.664128,0.88326 -12.3303867,1.48721 -21.1695941,1.48721"
       />
     </svg>

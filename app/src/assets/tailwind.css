@@ -1,63 +1,181 @@
-/* Source:
- * - https://google-webfonts-helper.herokuapp.com/fonts/cantora-one?subsets=latin
- * - https://google-webfonts-helper.herokuapp.com/fonts/laila?subsets=latin
+@import 'tailwindcss';
 
-/* cantora-one-regular - latin */
-@font-face {
-  font-family: 'Cantora One';
-  font-style: normal;
-  font-weight: 400;
-  src: local(''),
-       url('./fonts/cantora-one-v17-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('./fonts/cantora-one-v17-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+@theme {
+  --color-*: initial;
+  --color-white: #fdfef8; /* Lch(0.995, 0.03, 2) */
+  --color-black: #10110b; /* Lch(0.05, 0.03, 2) */
+
+  --color-gras-superlight: #c2e053; /* Lch(0.85, 0.7, 2) */
+  --color-gras-light: #a0bf31; /* Lch(0.73, 0.7, 2) */
+  --color-gras-semilight: #7e9e00; /* Lch(0.61, 0.7, 2) */
+  --color-gras: #688300; /* Lch(0.51, 0.61, 2) */
+  --color-gras-semidark: #526800; /* Lch(0.41, 0.52, 2) */
+  --color-gras-dark: #3d4f00; /* Lch(0.31, 0.43, 2) */
+
+  --color-forest-superlight: #d0d9a0; /* Lch(0.85, 0.3, 2) */
+  --color-forest-light: #afb880; /* Lch(0.73, 0.3, 2) */
+  --color-forest-semilight: #8e9862; /* Lch(0.61, 0.3, 2) */
+  --color-forest: #747e4a; /* Lch(0.51, 0.3, 2) */
+  --color-forest-semidark: #5b6532; /* Lch(0.41, 0.3, 2) */
+  --color-forest-dark: #434d1c; /* Lch(0.31, 0.3, 2) */
+  --color-forest-superdark: #293401; /* Lch(0.2, 0.3, 2) */
+
+  --color-pale-forest-superlight: #d3d6c3; /* Lch(0.85, 0.1, 2) */
+  --color-pale-forest-light: #b2b4a2; /* Lch(0.73, 0.1, 2) */
+  --color-pale-forest-semilight: #929483; /* Lch(0.61, 0.1, 2) */
+  --color-pale-forest: #787b69; /* Lch(0.51, 0.1, 2) */
+  --color-pale-forest-semidark: #5f6251; /* Lch(0.41, 0.1, 2) */
+  --color-pale-forest-dark: #484a3a; /* Lch(0.31, 0.1, 2) */
+  --color-pale-forest-superdark: #2f3122; /* Lch(0.2, 0.1, 2) */
+
+  --color-ash-superlight: #d4d4cf; /* Lch(0.85, 0.03, 2) */
+  --color-ash-light: #b3b3ae; /* Lch(0.73, 0.03, 2) */
+  --color-ash-semilight: #93938e; /* Lch(0.61, 0.03, 2) */
+  --color-ash: #797974; /* Lch(0.51, 0.03, 2) */
+  --color-ash-semidark: #60615c; /* Lch(0.41, 0.03, 2) */
+  --color-ash-dark: #484944; /* Lch(0.31, 0.03, 2) */
+  --color-ash-superdark: #30302c; /* Lch(0.2, 0.03, 2) */
+
+  --color-sun-light: #ff9957; /* Lch(0.73, 0.6, 1) */
+  --color-sun-semilight: #e47627; /* Lch(0.61, 0.7, 1) */
+  --color-sun: #c25a03; /* Lch(0.51, 0.7, 1) */
+  --color-sun-semidark: #9e4700; /* Lch(0.41, 0.61, 1) */
+  --color-sun-dark: #793500; /* Lch(0.31, 0.5, 1) */
+
+  --color-sand-superlight: #ffc8a5; /* Lch(0.85, 0.3, 1) */
+  --color-sand-light: #dea785; /* Lch(0.73, 0.3, 1) */
+  --color-sand-semilight: #bc8767; /* Lch(0.61, 0.3, 1) */
+  --color-sand: #a06e4f; /* Lch(0.51, 0.3, 1) */
+  --color-sand-semidark: #845537; /* Lch(0.41, 0.3, 1) */
+  --color-sand-dark: #693e21; /* Lch(0.31, 0.3, 1) */
+  --color-sand-superdark: #4d2509; /* Lch(0.2, 0.3, 1) */
+
+  --color-pale-sand-superlight: #e5d0c4; /* Lch(0.85, 0.1, 1) */
+  --color-pale-sand-light: #c3afa4; /* Lch(0.73, 0.1, 1) */
+  --color-pale-sand-semilight: #a28f84; /* Lch(0.61, 0.1, 1) */
+  --color-pale-sand: #88756b; /* Lch(0.51, 0.1, 1) */
+  --color-pale-sand-semidark: #6e5d53; /* Lch(0.41, 0.1, 1) */
+  --color-pale-sand-dark: #56453c; /* Lch(0.31, 0.1, 1) */
+  --color-pale-sand-superdark: #3c2d24; /* Lch(0.2, 0.1, 1) */
+
+  --color-sky-superlight: #82e3f6; /* Lch(0.85, 0.3, -2.5) */
+  --color-sky-light: #5cc0d2; /* Lch(0.73, 0.3, -2.5) */
+  --color-sky-semilight: #37a1b2; /* Lch(0.61, 0.3, -2.5) */
+  --color-sky: #008596; /* Lch(0.51, 0.3, -2.5) */
+  --color-sky-semidark: #006b7c; /* Lch(0.41, 0.3, -2.5) */
+  --color-sky-dark: #005363; /* Lch(0.31, 0.3, -2.5) */
+  --color-sky-superdark: #003a4a; /* Lch(0.2, 0.3, -2.5) */
+
+  --color-pale-sky-superlight: #bedae0; /* Lch(0.85, 0.1, -2.5) */
+  --color-pale-sky-light: #9cb7bd; /* Lch(0.73, 0.1, -2.5) */
+  --color-pale-sky-semilight: #7e989e; /* Lch(0.61, 0.1, -2.5) */
+  --color-pale-sky: #637d82; /* Lch(0.51, 0.1, -2.5) */
+  --color-pale-sky-semidark: #4a6469; /* Lch(0.41, 0.1, -2.5) */
+  --color-pale-sky-dark: #334c51; /* Lch(0.31, 0.1, -2.5) */
+  --color-pale-sky-superdark: #1b3438; /* Lch(0.2, 0.1, -2.5), */
+
+  --color-dawn-superlight: #ffc1d6; /* Lch(0.85, 0.3, 0) */
+  --color-dawn-light: #e79eb3; /* Lch(0.73, 0.3, 0) */
+  --color-dawn-semilight: #c67f95; /* Lch(0.61, 0.3, 0) */
+  --color-dawn: #a86479; /* Lch(0.51, 0.3, 0) */
+  --color-dawn-semidark: #8c4b60; /* Lch(0.41, 0.3, 0) */
+  --color-dawn-dark: #723349; /* Lch(0.31, 0.3, 0) */
+  --color-dawn-superdark: #561a31; /* Lch(0.2, 0.3, 0) */
+
+  --color-pale-dawn-superlight: #e8cfd5; /* Lch(0.85, 0.1, 0) */
+  --color-pale-dawn-light: #c5acb3; /* Lch(0.73, 0.1, 0) */
+  --color-pale-dawn-semilight: #a58e94; /* Lch(0.61, 0.1, 0) */
+  --color-pale-dawn: #897278; /* Lch(0.51, 0.1, 0) */
+  --color-pale-dawn-semidark: #705a60; /* Lch(0.41, 0.1, 0) */
+  --color-pale-dawn-dark: #574248; /* Lch(0.31, 0.1, 0) */
+  --color-pale-dawn-superdark: #3e2b30; /* Lch(0.2, 0.1, 0) */
+
+  --font-*: initial;
+  --font-sans: Laila, sans-serif;
+  --font-display: Cantora One, sans-serif;
+
+  --text-*: initial;
+  --text-xs: 0.64rem;
+  --text-sm: 0.8rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5625rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.5rem;
+  --text-4xl: 3rem;
+
+  --font-weight-*: initial;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 500;
+  --font-weight-bold: 700;
 }
 
-/* laila-300 - latin */
-@font-face {
-  font-family: 'Laila';
-  font-style: normal;
-  font-weight: 300;
-  src: local(''),
-       url('./fonts/laila-v13-latin-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('./fonts/laila-v13-latin-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* laila-regular - latin */
-@font-face {
-  font-family: 'Laila';
-  font-style: normal;
-  font-weight: 400;
-  src: local(''),
-       url('./fonts/laila-v13-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('./fonts/laila-v13-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* laila-500 - latin */
-@font-face {
-  font-family: 'Laila';
-  font-style: normal;
-  font-weight: 500;
-  src: local(''),
-       url('./fonts/laila-v13-latin-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('./fonts/laila-v13-latin-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* laila-600 - latin */
-@font-face {
-  font-family: 'Laila';
-  font-style: normal;
-  font-weight: 600;
-  src: local(''),
-       url('./fonts/laila-v13-latin-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('./fonts/laila-v13-latin-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* laila-700 - latin */
-@font-face {
-  font-family: 'Laila';
-  font-style: normal;
-  font-weight: 700;
-  src: local(''),
-       url('./fonts/laila-v13-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('./fonts/laila-v13-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
+@layer base {
+  /* Source:
+   * - https://google-webfonts-helper.herokuapp.com/fonts/cantora-one?subsets=latin
+   * - https://google-webfonts-helper.herokuapp.com/fonts/laila?subsets=latin
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+  /* cantora-one-regular - latin */
+  @font-face {
+    font-family: 'Cantora One';
+    font-style: normal;
+    font-weight: 400;
+    src:
+      local(''),
+      url('./fonts/cantora-one-v17-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('./fonts/cantora-one-v17-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+
+  /* laila-300 - latin */
+  @font-face {
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 300;
+    src:
+      local(''),
+      url('./fonts/laila-v13-latin-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('./fonts/laila-v13-latin-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* laila-regular - latin */
+  @font-face {
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 400;
+    src:
+      local(''),
+      url('./fonts/laila-v13-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('./fonts/laila-v13-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* laila-500 - latin */
+  @font-face {
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 500;
+    src:
+      local(''),
+      url('./fonts/laila-v13-latin-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('./fonts/laila-v13-latin-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* laila-600 - latin */
+  @font-face {
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 600;
+    src:
+      local(''),
+      url('./fonts/laila-v13-latin-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('./fonts/laila-v13-latin-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* laila-700 - latin */
+  @font-face {
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 700;
+    src:
+      local(''),
+      url('./fonts/laila-v13-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('./fonts/laila-v13-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+}
