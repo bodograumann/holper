@@ -73,5 +73,4 @@ with Path("docs/class_diagram.mmd").open("w") as output:
     output.write(f"{INDENT}direction LR\n")
     for cls in classes:
         output.write("\n")
-        for line in yield_mapper_mermaid(class_mapper(cls)):
-            output.write(line + "\n")
+        output.writelines(line + "\n" for line in yield_mapper_mermaid(class_mapper(cls)))

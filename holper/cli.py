@@ -6,7 +6,7 @@ import re
 from datetime import datetime, timedelta
 from importlib.resources import files
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import Annotated
 
 import sqlalchemy
 import typer
@@ -327,7 +327,7 @@ def configure_start(
 def startlist(
     race_id: int,
     interval: int,
-    parallel_max: Optional[int] = None,
+    parallel_max: int | None = None,
     *,
     greedy: bool = False,
     noncompetitive: typer.FileText | None = None,
